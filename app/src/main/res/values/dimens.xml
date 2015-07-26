@@ -9,4 +9,7 @@
     <dimen name="dimens_22">22dp</dimen>
     <dimen name="dimens_20">20dp</dimen>
     <dimen name="dimens_40">40dp</dimen>
+    <dimen name="login_top_dimens">200dp</dimen>
+    <dimen name="dimens_120">120dp</dimen>
+    <dimen name="dimens_60">60dp</dimen>
 </resources>

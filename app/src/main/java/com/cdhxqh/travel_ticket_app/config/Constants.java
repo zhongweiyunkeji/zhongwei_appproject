@@ -11,11 +11,15 @@ public class Constants {
      */
 
     //服务端IP
-    public static final String BASE_URL = "http://192.168.1.101:8080";
+    public static final String BASE_URL = "http://172.25.124.1:8080/qdm/ecsusers/";
 
 
+    /**登录用户接口**/
+    public static final String LOGIN_URL = BASE_URL+"login";
 
+    /**用户注册**/
 
+    public static final String REG_URL = BASE_URL+"doCheck";
 
     /**
      ******************************************* 接口参数设置信息结束 ******************************************
@@ -94,4 +98,23 @@ public class Constants {
 	/**
 	 ******************************************* 参数设置信息结束 ******************************************
 	 */
+
+
+    /**
+     * ********************状态参数信息设置开始*************************************
+     */
+
+     //登录成功
+
+    public static final String SUCCESS_LOGIN = "ZWTICKET-USER-S-101";
+
+
+
+
+
+
+    /**
+     * ********************状态参数信息设置结束*************************************
+     */
+
 }
