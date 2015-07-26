@@ -38,7 +38,7 @@ public class RegisterActivity extends BaseActivity {
     private static final String TAG4="RegisterActivity";
     private static final String TAG5="RegisterActivity";
     private static final String TAG6="RegisterActivity";
-    private static final String TAG7="RegisterActivity";
+    private static final String TAG7="RegisterActivity1";
 
     private static final String TAG8="RegisterActivity";
 
