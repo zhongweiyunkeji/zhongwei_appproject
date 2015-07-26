@@ -36,6 +36,7 @@ public class RegisterActivity extends BaseActivity {
     private static final String TA2G="RegisterActivity";
     private static final String TAG3="RegisterActivity";
     private static final String TAG4="RegisterActivity";
+    private static final String TAG5="RegisterActivity";
 
     ImageView reg_top_left_icon;
 
