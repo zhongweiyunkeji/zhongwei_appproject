@@ -33,6 +33,7 @@ import org.json.JSONObject;
 public class RegisterActivity extends BaseActivity {
 
     private static final String TAG="RegisterActivity";
+    private static final String TAG1="RegisterActivity";
 
     ImageView reg_top_left_icon;
 
