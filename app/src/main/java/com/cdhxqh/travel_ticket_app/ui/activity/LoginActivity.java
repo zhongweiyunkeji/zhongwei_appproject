@@ -16,7 +16,7 @@ import com.cdhxqh.travel_ticket_app.R;
 
 
 public class LoginActivity extends BaseActivity {
-    private static final String TAG="LoginActivity2";
+    private static final String TAG="LoginActivity3";
 
     private TextView TextViewPassWord;
     private ImageView image_view_id1;
