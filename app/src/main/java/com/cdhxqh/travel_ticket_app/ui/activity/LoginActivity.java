@@ -26,7 +26,7 @@ import java.util.HashMap;
 
 
 public class LoginActivity extends BaseActivity {
-    private static final String TAG="LoginActivity1";
+    private static final String TAG="LoginActivity2";
 
     private TextView TextViewPassWord;      //忘记密码
     private LinearLayout LinearLayout_id;   //注册用户
