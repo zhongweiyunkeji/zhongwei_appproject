@@ -14,13 +14,18 @@ import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
 
-
+/**登录界面**/
 public class LoginActivity extends BaseActivity {
     private static final String TAG="LoginActivity3";
 
+
+    /**密码**/
     private TextView TextViewPassWord;
-    private ImageView image_view_id1;
+    /**登录**/
     private Button button_id1;
+
+
+
     private LinearLayout LinearLayout_id;
 
     @Override
@@ -45,14 +50,6 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
-//        image_view_id1 = (ImageView) findViewById(R.id.image_view_id1);
-//        image_view_id1.setOnClickListener(new View.OnClickListener(){
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setClass(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
         LinearLayout_id = (LinearLayout) findViewById(R.id.LinearLayout_id);
         LinearLayout_id.setOnClickListener(new View.OnClickListener(){
