@@ -1,0 +1,122 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+        <FrameLayout
+            android:id="@+id/framelayout_id"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="@drawable/login_edit_pic">
+        </FrameLayout>
+        <LinearLayout
+            android:id="@+id/linearlayout_1"
+            android:layout_below="@+id/framelayout_id"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/login_edit_text"
+            android:layout_margin="30dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_marginLeft="5dp"
+                android:drawableRight="@drawable/login_icon_user"
+                android:hint="@string/please_user_name_text" />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:layout_marginLeft="5dp"
+                android:background="@android:color/transparent"
+                android:drawableRight="@drawable/login_icon_lock"
+                android:hint="@string/please_pass_word_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_2"
+            android:layout_below="@+id/linearlayout_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_id1"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/login_button_login"
+                android:hint="@string/login_text"
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:id="@+id/TextViewPassWord"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="@string/forget_pass_word"
+
+                android:textSize="15sp"
+                />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_below="@+id/linearlayout_2"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/login_footbg_f"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="40dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:id="@+id/LinearLayout_id"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:background="@drawable/login_button1_a"
+                >
+                <TextView
+                    android:id="@+id/button_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/registered_new_user"
+                    android:textColor="@color/write"
+                    />
+                <ImageView
+                    android:id="@+id/image_view_id"
+                    android:layout_toRightOf="@+id/button_id"
+                    android:layout_width="@dimen/dimens_40"
+                    android:layout_height="@dimen/dimens_40"
+                    android:src="@drawable/login_icon_add"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
+

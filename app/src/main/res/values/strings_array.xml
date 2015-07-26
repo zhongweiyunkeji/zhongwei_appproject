@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="user_name_arrays">
+        <item>收货地址</item>
+        <item>常用旅客信息</item>
+        <item>发票把头</item>
+        <item>设置</item>
+        <item>关于我们</item>
+    </string-array>
+
+</resources>

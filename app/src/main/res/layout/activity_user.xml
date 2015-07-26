@@ -1,0 +1,118 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cdhxqh.travel_ticket_app.ui.activity.UserActivity">
+
+    <RelativeLayout
+        android:id="@+id/profile_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@dimen/dimens_10"
+        android:background="@color/green_color"
+
+        android:paddingTop="@dimen/dimens_10">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/img_member"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_avatar" />
+
+        <TextView
+            android:id="@+id/txt_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_member"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dimens_10"
+            android:layout_marginTop="@dimen/dimens_10"
+            android:text="@string/please_login_hint"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/user_re_layout_id"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/profile_layout"
+        android:background="@color/light_green">
+
+
+        <TextView
+            android:id="@+id/user_not_pay_id"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimens_30"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:drawableLeft="@drawable/ic_wait_pay"
+            android:gravity="center_vertical"
+            android:text="@string/wait_pay_text"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="@dimen/dimens_30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimens_30"
+            android:layout_toRightOf="@+id/user_not_pay_id"
+            android:background="@color/list_item_read"></View>
+
+        <TextView
+            android:id="@+id/user_not_travel_id"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimens_30"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:drawableLeft="@drawable/ic_wait_travel"
+
+            android:gravity="center_vertical"
+            android:text="@string/wait_travel_text"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="@dimen/dimens_30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimens_30"
+            android:layout_toRightOf="@+id/user_not_travel_id"
+            android:background="@drawable/ic_line"></View>
+
+
+        <TextView
+            android:id="@+id/user_not_review_id"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimens_30"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="@dimen/dimens_30"
+            android:drawableLeft="@drawable/ic_wait_review"
+            android:gravity="center_vertical"
+            android:text="@string/wait_review_text"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+
+    <include layout="@layout/user_middle_linearlayout"></include>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/user_layout_bj"
+        android:layout_margin="20dp"
+        android:fadingEdge="none" />
+
+
+</RelativeLayout>

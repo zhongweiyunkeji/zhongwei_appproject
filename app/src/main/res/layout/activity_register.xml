@@ -1,0 +1,257 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#F2FBFA"
+    tools:context="com.cdhxqh.travel_ticket_app.ui.activity.RegisterActivity">
+
+    <FrameLayout
+        android:id="@+id/reg_top_fl"
+        android:layout_width="fill_parent"
+        android:background="@drawable/register_top_1_bar"
+        android:layout_height="wrap_content" >
+        <ImageView
+            android:id="@+id/reg_top_back_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/reg_top_left_icon"
+            />
+        <TextView
+            android:id="@+id/reg_title_text_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_reg_activity"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textSize="45px"
+            />
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/register_top_2_bar"
+        />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+        <TableRow >
+            <TextView
+                android:id="@+id/write_phone"
+                android:layout_column="0"
+                android:layout_weight="2"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textColor="#EEBA63"
+                android:textSize="25px"
+                android:text="1.填写手机号" />
+            <ImageView
+                android:layout_column="1"
+                android:layout_weight="2"
+                android:src="@drawable/reg_nav_icon_ight" />
+            <TextView
+                android:id="@+id/write_pwd"
+                android:layout_column="2"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textColor="#000000"
+                android:textSize="25px"
+                android:text="2.设置密码" />
+            <ImageView
+                android:layout_column="3"
+                android:layout_weight="2"
+                android:src="@drawable/reg_nav_icon_ight" />
+            <TextView
+                android:id="@+id/write_sendmsg"
+                android:layout_column="4"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:textSize="25px"
+                android:text="3.短信验证" />
+        </TableRow>
+    </TableLayout>
+
+    <!--  填写手机号  -->
+    <LinearLayout
+        android:id="@+id/reg_layou_1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <EditText
+            android:id="@+id/reg_phone_text"
+            android:singleLine="true"
+            android:maxLength="11"
+            android:numeric="integer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="40px"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/reg_background_input"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:layout_gravity="left"
+            android:textColor="#B9B9B9"
+            android:hint="请输入11位手机号"
+            android:drawableRight="@drawable/reg_input_mobile_img"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#B9B9B9"
+            android:layout_marginBottom="20dp"
+            android:text="已同意《智慧旅游票务云服务条款》，点击“下一步”"
+            />
+
+        <Button
+            android:id="@+id/reg_phone_next_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:text="下一步"
+            android:textSize="40px"
+            android:textColor="@color/white"
+            android:background="@drawable/reg_bottom_button"
+            />
+    </LinearLayout>
+
+
+    <!--  设置密码  -->
+    <LinearLayout
+        android:id="@+id/reg_layou_2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        >
+        <EditText
+            android:id="@+id/reg_pwd_input"
+            android:singleLine="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="40px"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/reg_background_input"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:layout_gravity="left"
+            android:textColor="#B9B9B9"
+            android:hint="请输入密码"
+            android:maxLength="25"
+            android:password="true"
+            android:drawableRight="#D7D9D8"
+            />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@drawable/reg_line_x"
+            />
+        <EditText
+            android:id="@+id/reg_repwd_input"
+            android:singleLine="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="40px"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/reg_background_input"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:layout_gravity="left"
+            android:textColor="#B9B9B9"
+            android:maxLength="25"
+            android:password="true"
+            android:hint="请重复密码"
+            android:drawableRight="@drawable/reg_icon_lock"
+            />
+
+        <Button
+            android:id="@+id/reg_pwd_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:text="下一步"
+            android:textSize="40px"
+            android:textColor="@color/white"
+            android:background="@drawable/reg_bottom_button"
+            />
+    </LinearLayout>
+
+
+    <!--  短信验证  -->
+    <LinearLayout
+        android:id="@+id/reg_layou_3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <EditText
+                android:id="@+id/reg_msg_input"
+                android:singleLine="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="40px"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/reg_background_input"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:maxLength="6"
+                android:layout_gravity="left"
+                android:textColor="#B9B9B9"
+                android:hint="验证码"
+                />
+            <Button
+                android:id="@+id/reg_senmsg_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="重新发送"
+                android:layout_alignBaseline="@+id/reg_msg_input"
+                android:layout_alignRight="@+id/reg_msg_input"
+                android:textSize="25px"
+                android:textColor="#000000"
+                android:background="#f6f6f6"
+                />
+        </RelativeLayout >
+
+        <Button
+            android:id="@+id/reg_msg_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:text="注册"
+            android:textSize="40px"
+            android:textColor="@color/white"
+            android:background="@drawable/reg_bottom_button"
+            />
+    </LinearLayout>
+</LinearLayout>

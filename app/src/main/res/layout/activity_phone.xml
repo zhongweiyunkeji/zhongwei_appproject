@@ -1,0 +1,254 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/phone_top_1">
+
+            <ImageButton
+                android:id="@+id/ImageButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@android:color/transparent"
+                android:src="@drawable/phone_icon_left"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center|center_horizontal"
+                android:gravity="center"
+                android:text="找回密码"
+                android:textSize="20sp"
+                android:textColor="@color/write"
+                />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/phone_top_bar1"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/phone_line_x"
+            />
+        </FrameLayout>
+
+        <!--手机找回-->
+        <LinearLayout
+            android:id="@+id/reg_layou_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/phone_tabs_list"
+                android:layout_margin="28dp"
+                android:layout_gravity="center|center_horizontal"
+                android:gravity="center"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:gravity="center"
+                    android:textColor="@color/write"
+                    android:text="手机找回"
+                    />
+
+                <TextView
+                    android:id="@+id/TextViewMail"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="邮箱找回"
+                    />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/phone_input_text"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/EditText1"
+                android:maxLength="11"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableRight="@drawable/button_phone_bm"
+                android:hint="注册手机号"
+                />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                >
+
+                <EditText
+                    android:id="@+id/button_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent"
+                    android:hint="短信验证码"
+                    />
+
+                <Button
+                    android:id="@+id/info_button_id"
+                    android:layout_gravity="right|center_vertical"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:text="获取验证码"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/phone_test_on"
+                    android:textSize="12dp"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:text="新密码以短信形式发送到该手机号，请注意查收"
+            android:textSize="11sp"
+            />
+
+        <Button
+            android:id="@+id/restart_passworld_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/button_login_phone"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:text="获取密码"
+            android:textSize="20sp"
+            android:textColor="@color/write"
+            />
+        </LinearLayout>
+
+        <!--邮箱找回-->
+        <LinearLayout
+            android:id="@+id/reg_layou_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/mail_tabs_list"
+                android:layout_margin="28dp"
+                android:layout_gravity="center|center_horizontal"
+                android:gravity="center"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/ImageButton2"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal"
+                    android:gravity="center"
+                    android:text="手机找回"
+                    />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/write"
+                    android:text="邮箱找回"
+                    />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/mail_s_1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/EditTextMail"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableRight="@drawable/icon_mail_a"
+                android:hint="注册邮箱号"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:text="新密码以短信形式发送到该手机号，请注意查收"
+            android:textSize="11sp"
+            />
+
+        <Button
+            android:id="@+id/restart_passworld_mail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/button_login_mail"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:text="获取新密码"
+            android:textSize="20sp"
+            android:textColor="@color/write"
+            />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

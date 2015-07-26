@@ -1,0 +1,58 @@
+1、SVN使用说明
+  修改文件前请先更新，更新有冲突时，先解决冲突然后将文件标记为已解决最后再提交， 提交时只需要提交：mainifests、java、res这3个文件及其子文件，其他文件不需要提交
+
+2、Android Studio集成SVN后，通过不同颜色将变化的文件区分，下面是文件操作与颜色的对应表
+    修改文件       蓝色
+    新增文件       绿色
+    未修改文件     黑色
+
+3、 项目目录说明
+mainifests   --->
+
+java
+  app        --->  存放管理相关的类
+  config     --->  存放配置文件
+  module     --->  存放javabean类
+  task       --->  存放线程类
+  ui         --->  存放Activity等界面类
+  utils      --->  存放工具类文件
+
+res
+  anim       --->  存放动画
+  drawable   --->  存放图片
+  layout     --->  存放布局文件
+  menu       --->  存放menu文件
+  values     --->  存放颜色、样式、字符串常量等文件
+
+
+
+
+
+
+
+
+
+常用快捷键：
+
+    首先改为Eclipse快捷键（然后大部分快捷键都会跟Eclipse一致了）
+    Settings->IDE Settings->Keymap->Keymaps选择Eclipse
+
+     1.像Eclipse那样快速跳出括号
+    Keymap->Editor Actions->Complete Current Statement：默认是Ctrl+Shift+Enter；Shift+Enter则不管现在光标在哪个位置,直接新开一行
+
+    2.代码提示列表（Eclipse中的Content Assist，Alt+/）
+    Keymap->Main Menu->Code->Completion->Basic：默认是Ctrl+Space
+
+     3.错误修正提示列表（Eclipse中的Quick Fix，Ctrl+1）
+    Keymap->Other->Show Intention Action：默认是Alt+Enter
+
+     4.快速Overried方法
+    Keymap->Main menu->Code->Override Methods：需要自己设定
+
+    5.Eclipse中的outline
+     Keymap->Main Menu->Navigate->File Structure：默认是Ctrl+F3
+
+     6.版本控制中Diff的Next和Prev
+     Keymap->Other->Move to the next difference：默认是Ctrl+f7
+     Keymap->Other->Move to the previous difference：默认是Shift+f7
+
