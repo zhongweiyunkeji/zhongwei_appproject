@@ -56,5 +56,8 @@
     <string name="login_text">登录</string>
     <string name="forget_pass_word">忘记密码</string>
     <string name="registered_new_user">注册新用户</string>
+    <string name="username_get_err">用户名为空</string>
+    <string name="password_get_err">密码为空</string>
+    <string name="phone_mail_tittle">找回密码</string>
 
 </resources>
