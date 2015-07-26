@@ -32,6 +32,8 @@ import org.json.JSONObject;
  */
 public class RegisterActivity extends BaseActivity {
 
+    private static final String TAG="RegisterActivity";
+
     ImageView reg_top_left_icon;
 
     TextView write_phone;
@@ -84,6 +86,8 @@ public class RegisterActivity extends BaseActivity {
     private ProgressDialog  progressDialog;
 
 
+
+
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -95,6 +99,9 @@ public class RegisterActivity extends BaseActivity {
         //EditTextActionUtils.regFocusChange(reg_pwd_input, this);
         //EditTextActionUtils.regFocusChange(reg_repwd_input, this);
         //EditTextActionUtils.regFocusChange(reg_msg_input, this);
+
+
+
 
         // 填写手机号按钮事件
         reg_phone_next_btn.setOnClickListener(new View.OnClickListener() {
