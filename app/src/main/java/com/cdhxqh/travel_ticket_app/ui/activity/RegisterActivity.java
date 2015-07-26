@@ -90,18 +90,78 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
         setContentView(R.layout.activity_register);
+        super.onCreate(bundle);
+        findViewById();
         initView();
+    }
 
-        // 注册光标变化事件
+    @Override
+    protected void findViewById() {
+        if(this.progressDialog == null){
+            progressDialog = new ProgressDialog(RegisterActivity.this);
+        }
+
+        this.reg_top_left_icon =  (ImageView)findViewById(R.id.reg_top_back_icon);
+
+        this.write_phone =        (TextView)findViewById(R.id.write_phone);
+        this.reg_phone_text =     (EditText)findViewById(R.id.reg_phone_text);
+        this.reg_phone_next_btn = (Button)findViewById(R.id.reg_phone_next_btn);
+        this.reg_layou_1 =        (ViewGroup)findViewById(R.id.reg_layou_1);
+
+        this.write_pwd =       (TextView)findViewById(R.id.write_pwd);
+        this.reg_pwd_input =   (EditText)findViewById(R.id.reg_pwd_input);
+        this.reg_repwd_input = (EditText)findViewById(R.id.reg_repwd_input);
+        this.reg_pwd_btn =     (Button)findViewById(R.id.reg_pwd_btn);
+        this.reg_layou_2 =     (ViewGroup)findViewById(R.id.reg_layou_2);
+
+        this.write_sendmsg =  (TextView)findViewById(R.id.write_sendmsg);
+        this.reg_msg_input =  (EditText)findViewById(R.id.reg_msg_input);
+        this.reg_senmsg_btn = (Button)findViewById(R.id.reg_senmsg_btn);
+        this.reg_msg_btn    = (Button)findViewById(R.id.reg_msg_btn);
+        this.reg_layou_3 =    (ViewGroup)findViewById(R.id.reg_layou_3);
+    }
+
+    public boolean vilidPwd(String pwd, String repwd){
+        boolean flag = false;
+        if(!"".equals(pwd) && pwd.equals(repwd)){
+            flag = true;
+        } else
+        if("".equals(pwd) || "".equals(repwd)){
+            Toast toast = Toast.makeText(getApplicationContext(), "密码不能为空", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(), "两次密码不一致", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+
+        return flag;
+    }
+    /**
+     * 验证手机号格式
+     * @param mobiles
+     * @return
+     */
+    public static boolean isMobileNO(String mobiles){
+        mobiles = (mobiles==null? "" : mobiles);
+        return Pattern.compile("^[1][3,4,5,8][0-9]{9}$").matcher(mobiles).matches();
+    }
+
+
+    @Override
+    protected void initView() {
+        // 注册EditText点击事件
+        regOnClick(reg_phone_text);
+        regOnClick(reg_pwd_input);
+        regOnClick(reg_repwd_input);
+        regOnClick(reg_msg_input);
+
         //EditTextActionUtils.regFocusChange(reg_phone_text, this);
         //EditTextActionUtils.regFocusChange(reg_pwd_input, this);
         //EditTextActionUtils.regFocusChange(reg_repwd_input, this);
         //EditTextActionUtils.regFocusChange(reg_msg_input, this);
-
-
-
 
         // 填写手机号按钮事件
         reg_phone_next_btn.setOnClickListener(new View.OnClickListener() {
@@ -233,64 +293,17 @@ public class RegisterActivity extends BaseActivity {
         });
     }
 
-    @Override
-    protected void findViewById() {
-
-    }
-
-    public boolean vilidPwd(String pwd, String repwd){
-        boolean flag = false;
-        if(!"".equals(pwd) && pwd.equals(repwd)){
-            flag = true;
-        } else
-        if("".equals(pwd) || "".equals(repwd)){
-            Toast toast = Toast.makeText(getApplicationContext(), "密码不能为空", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-        } else {
-            Toast toast = Toast.makeText(getApplicationContext(), "两次密码不一致", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-        }
-
-        return flag;
-    }
-    /**
-     * 验证手机号格式
-     * @param mobiles
-     * @return
-     */
-    public static boolean isMobileNO(String mobiles){
-        mobiles = (mobiles==null? "" : mobiles);
-        return Pattern.compile("^[1][3,4,5,8][0-9]{9}$").matcher(mobiles).matches();
-    }
-
-
-    @Override
-    protected void initView() {
-
-        if(this.progressDialog == null){
-            progressDialog = new ProgressDialog(RegisterActivity.this);
-        }
-
-        this.reg_top_left_icon =  (ImageView)findViewById(R.id.reg_top_back_icon);
-
-        this.write_phone =           (TextView)findViewById(R.id.write_phone);
-        this.reg_phone_text =      (EditText)findViewById(R.id.reg_phone_text);
-        this.reg_phone_next_btn = (Button)findViewById(R.id.reg_phone_next_btn);
-        this.reg_layou_1 =         (ViewGroup)findViewById(R.id.reg_layou_1);
-
-        this.write_pwd =       (TextView)findViewById(R.id.write_pwd);
-        this.reg_pwd_input =    (EditText)findViewById(R.id.reg_pwd_input);
-        this.reg_repwd_input = (EditText)findViewById(R.id.reg_repwd_input);
-        this.reg_pwd_btn =     (Button)findViewById(R.id.reg_pwd_btn);
-        this.reg_layou_2 =     (ViewGroup)findViewById(R.id.reg_layou_2);
-
-        this.write_sendmsg =     (TextView)findViewById(R.id.write_sendmsg);
-        this.reg_msg_input =  (EditText)findViewById(R.id.reg_msg_input);
-        this.reg_senmsg_btn = (Button)findViewById(R.id.reg_senmsg_btn);
-        this.reg_msg_btn     = (Button)findViewById(R.id.reg_msg_btn);
-        this.reg_layou_3 =    (ViewGroup)findViewById(R.id.reg_layou_3);
+    public void regOnClick(EditText text){
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText text = (EditText)v;
+                text.setFocusable(true);
+                text.setFocusableInTouchMode(true);
+                text.requestFocus();
+                text.setHint("");
+            }
+        });
 
     }
 }
