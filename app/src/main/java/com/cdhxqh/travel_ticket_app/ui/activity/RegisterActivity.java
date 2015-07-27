@@ -3,27 +3,29 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
+import android.util.Log;
 import android.view.Gravity;
-import android.widget.Button;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import android.widget.TextView;
-import java.util.regex.Pattern;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.cdhxqh.travel_ticket_app.R;
-import com.cdhxqh.travel_ticket_app.utils.HttpUtil;
+import com.cdhxqh.travel_ticket_app.api.HttpManager;
+import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
+import com.cdhxqh.travel_ticket_app.config.Constants;
+import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.cdhxqh.travel_ticket_app.utils.TimeCountUtil;
 
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by hx on 2015/7/24.
@@ -34,6 +36,7 @@ public class RegisterActivity extends BaseActivity {
 
     ImageView backImageviewId;
 
+    TextView titleText;
     TextView writePhone;
     TextView writeWwd;
     TextView writeSendmsg;
@@ -52,34 +55,9 @@ public class RegisterActivity extends BaseActivity {
     //  --------------   短信验证  ---------------------------
     EditText reg_msg_input; // 验证码
     Button regSenmsgBtn;    // 验证码
+    TextView reg_hint_text;
     Button regMsgBtn;       // 下一步按钮
     ViewGroup regLayou3;    // 短信验证
-
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg){   // 接收消息
-            progressDialog.dismiss(); // 关闭进度条
-            String str = (String)msg.obj;
-            try {
-                JSONObject jsonObject = new JSONObject(str);
-                String errcode = (String)jsonObject.get("errcode");
-                if(null != errcode && errcode.length() > 0){
-                    if("ZWTICKET-GLOBAE-S-14".equals(errcode)){
-                        Bundle bundle = new Bundle();
-                        String phone = reg_phone_text.getText().toString();
-                        bundle.putCharSequence("RegisterActivity",  phone);
-                        openActivity(LoginActivity.class, bundle);
-                    }else{
-                        Toast toast = Toast.makeText(getApplicationContext(), (String)jsonObject.get("errmsg"), Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                    }
-                }
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
 
     private ProgressDialog  progressDialog;
 
@@ -88,8 +66,8 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle bundle) {
-        setContentView(R.layout.activity_register);
         super.onCreate(bundle);
+        setContentView(R.layout.activity_register);
         findViewById();
         initView();
     }
@@ -99,6 +77,7 @@ public class RegisterActivity extends BaseActivity {
 
         this.backImageviewId =  (ImageView)findViewById(R.id.back_imageview_id);
 
+        this.titleText =        (TextView)findViewById(R.id.title_text_id);
         this.writePhone =        (TextView)findViewById(R.id.write_phone);
         this.reg_phone_text =     (EditText)findViewById(R.id.reg_phone_text);
         this.regPhoneNextBtn = (Button)findViewById(R.id.reg_phone_next_btn);
@@ -111,39 +90,12 @@ public class RegisterActivity extends BaseActivity {
         this.regLayou2 =     (ViewGroup)findViewById(R.id.reg_layou_2);
 
         this.writeSendmsg =  (TextView)findViewById(R.id.write_sendmsg);
-        this.reg_msg_input =  (EditText)findViewById(R.id.reg_msg_input);
-        this.regSenmsgBtn = (Button)findViewById(R.id.reg_senmsg_btn);
-        this.regMsgBtn = (Button)findViewById(R.id.reg_msg_btn);
-        this.regLayou3 =    (ViewGroup)findViewById(R.id.reg_layou_3);
+        this.reg_msg_input = (EditText)findViewById(R.id.reg_msg_input);
+        this.reg_hint_text = (TextView)findViewById(R.id.reg_hint_text);
+        this.regSenmsgBtn =  (Button)findViewById(R.id.reg_senmsg_btn);
+        this.regMsgBtn =     (Button)findViewById(R.id.reg_msg_btn);
+        this.regLayou3 =     (ViewGroup)findViewById(R.id.reg_layou_3);
     }
-
-    public boolean vilidPwd(String pwd, String repwd){
-        boolean flag = false;
-        if(!"".equals(pwd) && pwd.equals(repwd)){
-            flag = true;
-        } else
-        if("".equals(pwd) || "".equals(repwd)){
-            Toast toast = Toast.makeText(getApplicationContext(), "密码不能为空", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-        } else {
-            Toast toast = Toast.makeText(getApplicationContext(), "两次密码不一致", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-        }
-
-        return flag;
-    }
-    /**
-     * 验证手机号格式
-     * @param mobiles
-     * @return
-     */
-    public static boolean isMobileNO(String mobiles){
-        mobiles = (mobiles==null? "" : mobiles);
-        return Pattern.compile("^[1][3,4,5,8][0-9]{9}$").matcher(mobiles).matches();
-    }
-
 
     @Override
     protected void initView() {
@@ -153,6 +105,8 @@ public class RegisterActivity extends BaseActivity {
         regOnClick(reg_repwd_input);
         regOnClick(reg_msg_input);
 
+        titleText.setText("手机号注册");
+
         // 填写手机号按钮事件
         regPhoneNextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,13 +115,8 @@ public class RegisterActivity extends BaseActivity {
                 boolean flag = RegisterActivity.this.isMobileNO(phone);
                 if (flag) {
                     if (phone.length() == 11) {
-                        // 隐藏控件
-                        invisibleAllLayout(); // 隐藏全部Layout, 下面根据实际情况显示控件
-                        RegisterActivity.this.regLayou2.setVisibility(View.VISIBLE);
-
-                        writePhone.setTextColor(0xFF000000);
-                        writeWwd.setTextColor(0xFFEEBA63);
-                        writeSendmsg.setTextColor(0xFF000000);
+                        showLayout(RegisterActivity.this.regLayou2); // 显示regLayou2
+                        setTextViewBackground(writeWwd);              // 设置背景颜色
                     } else {
                         Toast toast = Toast.makeText(getApplicationContext(), "请输入11位的手机号", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
@@ -178,9 +127,7 @@ public class RegisterActivity extends BaseActivity {
                     if (phone.length() == 0) {
                         msg = "请输入手机号";
                     }
-                    Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                    MessageUtils.showMiddleToast(RegisterActivity.this, msg);
                 }
             }
         });
@@ -193,14 +140,8 @@ public class RegisterActivity extends BaseActivity {
                 String repwd = RegisterActivity.this.reg_repwd_input.getText().toString();
                 boolean flag = RegisterActivity.this.vilidPwd(pwd, repwd);  // 教研2次密码是否一致
                 if (flag) {
-                    // 隐藏控件   View常亮介绍 ---> GONE：隐藏且释放空间, INVISIBLE: 隐藏但不释放空间， VISIBLE显示控件
-                    RegisterActivity.this.regLayou1.setVisibility(View.GONE);
-                    RegisterActivity.this.regLayou2.setVisibility(View.GONE);
-                    RegisterActivity.this.regLayou3.setVisibility(View.VISIBLE);
-
-                    writePhone.setTextColor(0xFF000000);
-                    writeWwd.setTextColor(0xFF000000);
-                    writeSendmsg.setTextColor(0xFFEEBA63);
+                    showLayout(RegisterActivity.this.regLayou3); // 显示regLayou2
+                    setTextViewBackground(writeSendmsg);         // 设置背景颜色
                 }
             }
         });
@@ -209,38 +150,20 @@ public class RegisterActivity extends BaseActivity {
         regSenmsgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog = ProgressDialog.show(RegisterActivity.this, null, getString(R.string.reg_loaing), true, true); // 显示进度条
                 Button button = (Button) v;
 
                 TimeCountUtil timeCountUtil = new TimeCountUtil(RegisterActivity.this, 60000, 1000, button, R.drawable.phone_test_on); // 更新按钮状态
                 timeCountUtil.start(); // 启动线程
-
-                HttpUtil util = new HttpUtil();
-                String url = "http://10.0.2.21:8080/qdm/ecsusers/check";  // 请求服务端返回验证码
-                String phone = reg_phone_text.getText().toString();  // 获取手机
-                String pwd = reg_pwd_input.getText().toString();   // 获取密码
-                Map param = new HashMap();
-                param.put("mobilePhone", phone); // 手机验证方式
-                param.put("password", pwd);
-                util.post(url, param, handler);
+                loadTokenCode();   // 获取验证码
             }
         });
 
-        // 下一步按钮
+        // 注册按钮
         regMsgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressDialog = ProgressDialog.show(RegisterActivity.this, null, getString(R.string.reg_loaing), true, true); // 显示进度条
-                String verifyCode = reg_msg_input.getText().toString();
-
-                HttpUtil util = new HttpUtil();
-                String url = "http://10.0.2.21:8080/qdm/ecsusers/doCheck";  // 请求服务端创建用户
-                String msg = reg_msg_input.getText().toString();                  // 获取验证码
-
-                Map<String, String> param = new HashMap<String, String>(0);
-                param.put("authstring", msg);
-
-                util.post(url, param, handler);
+                newUserRegister();     // 新注册用户
             }
         });
 
@@ -258,20 +181,14 @@ public class RegisterActivity extends BaseActivity {
                 }
                 if (View.VISIBLE == visible_layout1) {
                     finish();
-                } else if (View.VISIBLE == visible_layout2) {
-                    RegisterActivity.this.regLayou1.setVisibility(View.VISIBLE);
-                    RegisterActivity.this.regLayou2.setVisibility(View.GONE);
-                    RegisterActivity.this.regLayou3.setVisibility(View.GONE);
-                    writePhone.setTextColor(0xFFEEBA63);
-                    writeWwd.setTextColor(0xFF000000);
-                    writeSendmsg.setTextColor(0xFF000000);
-                } else if (View.VISIBLE == visible_layout3) {
-                    writePhone.setTextColor(0xFF000000);
-                    writeWwd.setTextColor(0xFFEEBA63);
-                    writeSendmsg.setTextColor(0xFF000000);
-                    RegisterActivity.this.regLayou1.setVisibility(View.GONE);
-                    RegisterActivity.this.regLayou2.setVisibility(View.VISIBLE);
-                    RegisterActivity.this.regLayou3.setVisibility(View.GONE);
+                } else
+                if (View.VISIBLE == visible_layout2) {
+                    showLayout(RegisterActivity.this.regLayou1); // 显示regLayou2
+                    setTextViewBackground(writePhone);           // 设置背景颜色
+                } else
+                if (View.VISIBLE == visible_layout3) {
+                    showLayout(RegisterActivity.this.regLayou2); // 显示regLayou2
+                    setTextViewBackground(writeWwd);              // 设置背景颜色
                 }
 
             }
@@ -279,22 +196,60 @@ public class RegisterActivity extends BaseActivity {
     }
 
     /**
-     * 隐藏：填写手机号、设置密码和短信验证
+    * 验证2次密码是否一致
      */
-    public void invisibleAllLayout(){
+    private boolean vilidPwd(String pwd, String repwd){
+        boolean flag = false;
+        if(!"".equals(pwd) && pwd.equals(repwd)){
+            flag = true;
+        } else
+        if("".equals(pwd) || "".equals(repwd)){
+            MessageUtils.showMiddleToast(RegisterActivity.this, "密码不能为空");
+        } else {
+            MessageUtils.showMiddleToast(RegisterActivity.this, "两次密码不一致");
+        }
+
+        return flag;
+    }
+
+    /**
+     * 验证手机号格式
+     * @param mobiles
+     * @return
+     */
+    public static boolean isMobileNO(String mobiles){
+        mobiles = (mobiles==null? "" : mobiles);
+        return Pattern.compile("^[1][3,4,5,8][0-9]{9}$").matcher(mobiles).matches();
+    }
+
+    /**
+     * 隐藏：填写手机号、设置密码和短信验证Layout
+     */
+    public void showLayout(ViewGroup viewGroup){
         // 隐藏控件
-        RegisterActivity.this.regLayou1.setVisibility(View.GONE);
-        RegisterActivity.this.regLayou2.setVisibility(View.GONE);
-        RegisterActivity.this.regLayou3.setVisibility(View.GONE);
+        regLayou1.setVisibility(View.GONE);
+        regLayou2.setVisibility(View.GONE);
+        regLayou3.setVisibility(View.GONE);
 
+        viewGroup.setVisibility(View.VISIBLE);
+    }
 
+    /**
+     * 传入参数为需要更改Label
+     * 更改填写手机号、设置密码和短信验证的TextView背景颜色
+     */
+    public void setTextViewBackground(TextView textView){
+        writePhone.setTextColor(0xFF000000);
+        writeWwd.setTextColor(0xFF000000);
+        writeSendmsg.setTextColor(0xFF000000);
+        textView.setTextColor(0xFFEEBA63);
     }
 
     public void regOnClick(EditText text){
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText text = (EditText)v;
+                EditText text = (EditText) v;
                 text.setFocusable(true);
                 text.setFocusableInTouchMode(true);
                 text.requestFocus();
@@ -303,4 +258,96 @@ public class RegisterActivity extends BaseActivity {
         });
 
     }
+
+    /**
+     * 注册新用户
+     */
+    private void newUserRegister(){
+        String phone = reg_phone_text.getText().toString();  // 获取手机
+        String pwd = reg_pwd_input.getText().toString();     // 获取密码
+        Map<String, String> mapparams=new HashMap<String,String>(0);
+        mapparams.put("mobilePhone",phone);                  // 手机验证方式
+        mapparams.put("password", pwd);
+        HttpManager.requestOnceWithURLString(Constants.REG_CODE_URL, this, mapparams, new HttpRequestHandler<String>() {
+            @Override
+            public void onSuccess(String data) {
+                Log.i(TAG, "data=" + data);
+                try {
+                    JSONObject jsonObject = new JSONObject(data);
+                    String errcode = (String) jsonObject.get("errcode");
+                    if (null != errcode && errcode.length() > 0) {
+                        if ("ZWTICKET-GLOBAE-S-14".equals(errcode)) {
+                            Bundle bundle = new Bundle();
+                            String phone = reg_phone_text.getText().toString();
+                            bundle.putCharSequence("RegisterActivity", phone);
+                            openActivity(LoginActivity.class, bundle);
+                            finish();
+                        } else {
+                            MessageUtils.showMiddleToast(RegisterActivity.this, (String) jsonObject.get("errmsg"));
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onSuccess(String data, int totalPages, int currentPage) {
+                Log.i(TAG, "data=" + data);
+            }
+
+            @Override
+            public void onFailure(String error) {
+                progressDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(error);
+                    String errcode = (String) jsonObject.get("errcode");
+                    if (null != errcode && errcode.length() > 0) {
+                        MessageUtils.showMiddleToast(RegisterActivity.this, (String) jsonObject.get("errmsg"));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * 验证用户输入的验证码是否正确
+     */
+    private void loadTokenCode() {
+        String verifyCode = reg_msg_input.getText().toString();   // 获取输入的验证码
+        Map<String, String> mapparams = new HashMap<String, String>(0);
+        mapparams.put("authstring", verifyCode);
+        HttpManager.requestOnceWithURLString(Constants.REG_URL, this, mapparams, new HttpRequestHandler<String>() {
+            @Override
+            public void onSuccess(String data) {
+                Log.i(TAG, "data=" + data);
+                String msg = "已发送短信验证码到";
+                String phone = reg_phone_text.getText().toString();
+                phone = phone.substring(0, 3) + "****" + phone.substring(7);
+                msg = msg + phone;
+                reg_hint_text.setText(msg);
+            }
+
+            @Override
+            public void onSuccess(String data, int totalPages, int currentPage) {
+                Log.i(TAG, "data=" + data);
+            }
+
+            @Override
+            public void onFailure(String error) {
+                try {
+                    JSONObject jsonObject = new JSONObject(error);
+                    String errcode = (String) jsonObject.get("errcode");
+                    if (null != errcode && errcode.length() > 0) {
+                        MessageUtils.showMiddleToast(RegisterActivity.this, (String) jsonObject.get("errmsg"));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 }

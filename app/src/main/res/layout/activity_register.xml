@@ -233,6 +233,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="15dp"
+            android:textColor="#C8D1D0"
             android:text="已发送短信验证码到182****5217"
             />
 
