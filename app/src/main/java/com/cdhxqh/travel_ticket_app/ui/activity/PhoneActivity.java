@@ -85,31 +85,6 @@ public class PhoneActivity extends BaseActivity {
     private HashMap<String, String> map;    //传入访问参数及值
     private ProgressDialog progressDialog;
     HttpUtil httpUtil;
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) { // 接收消息
-            progressDialog.dismiss();   // 关闭进度条
-            String str = (String) msg.obj;
-            try {
-                JSONObject jsonObject = new JSONObject(str);
-                String errcode = (String) jsonObject.get("errcode");
-                if (null != errcode && errcode.length() > 0) {
-                    if ("ZWTICKET-GLOBAE-S-14".equals(errcode)) {
-                        Bundle bundle = new Bundle();
-//                        String phone = reg_phone_text.getText().toString();
-//                        bundle.putCharSequence("RegisterActivity",  phone);
-                        openActivity(LoginActivity.class, bundle);
-                    } else {
-                        Toast toast = Toast.makeText(getApplicationContext(), (String) jsonObject.get("errmsg"), Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
