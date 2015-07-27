@@ -35,6 +35,7 @@ public class RegisterActivity extends BaseActivity {
     private static final String TAG="RegisterActivity";
 
     ImageView backImageviewId;
+    ImageView titleSearchId;
 
     TextView titleText;
     TextView writePhone;
@@ -76,25 +77,26 @@ public class RegisterActivity extends BaseActivity {
     protected void findViewById() {
 
         this.backImageviewId =  (ImageView)findViewById(R.id.back_imageview_id);
+        this.titleSearchId =    (ImageView)findViewById(R.id.title_search_id);
 
         this.titleText =        (TextView)findViewById(R.id.title_text_id);
-        this.writePhone =        (TextView)findViewById(R.id.write_phone);
-        this.reg_phone_text =     (EditText)findViewById(R.id.reg_phone_text);
+        this.writePhone =       (TextView)findViewById(R.id.write_phone);
+        this.reg_phone_text =  (EditText)findViewById(R.id.reg_phone_text);
         this.regPhoneNextBtn = (Button)findViewById(R.id.reg_phone_next_btn);
         this.regLayou1 =        (ViewGroup)findViewById(R.id.reg_layou_1);
 
-        this.writeWwd =       (TextView)findViewById(R.id.write_pwd);
+        this.writeWwd =         (TextView)findViewById(R.id.write_pwd);
         this.reg_pwd_input =   (EditText)findViewById(R.id.reg_pwd_input);
         this.reg_repwd_input = (EditText)findViewById(R.id.reg_repwd_input);
-        this.regPwdBtn =     (Button)findViewById(R.id.reg_pwd_btn);
-        this.regLayou2 =     (ViewGroup)findViewById(R.id.reg_layou_2);
+        this.regPwdBtn =        (Button)findViewById(R.id.reg_pwd_btn);
+        this.regLayou2 =        (ViewGroup)findViewById(R.id.reg_layou_2);
 
         this.writeSendmsg =  (TextView)findViewById(R.id.write_sendmsg);
         this.reg_msg_input = (EditText)findViewById(R.id.reg_msg_input);
         this.reg_hint_text = (TextView)findViewById(R.id.reg_hint_text);
         this.regSenmsgBtn =  (Button)findViewById(R.id.reg_senmsg_btn);
-        this.regMsgBtn =     (Button)findViewById(R.id.reg_msg_btn);
-        this.regLayou3 =     (ViewGroup)findViewById(R.id.reg_layou_3);
+        this.regMsgBtn =      (Button)findViewById(R.id.reg_msg_btn);
+        this.regLayou3 =      (ViewGroup)findViewById(R.id.reg_layou_3);
     }
 
     @Override
@@ -106,6 +108,8 @@ public class RegisterActivity extends BaseActivity {
         regOnClick(reg_msg_input);
 
         titleText.setText("手机号注册");
+        backImageviewId.setVisibility(View.VISIBLE);
+        titleSearchId.setVisibility(View.GONE);
 
         // 填写手机号按钮事件
         regPhoneNextBtn.setOnClickListener(new View.OnClickListener() {
@@ -152,9 +156,7 @@ public class RegisterActivity extends BaseActivity {
             public void onClick(View v) {
                 Button button = (Button) v;
 
-                TimeCountUtil timeCountUtil = new TimeCountUtil(RegisterActivity.this, 60000, 1000, button, R.drawable.phone_test_on); // 更新按钮状态
-                timeCountUtil.start(); // 启动线程
-                loadTokenCode();   // 获取验证码
+                loadTokenCode(button);   // 获取验证码
             }
         });
 
@@ -268,10 +270,11 @@ public class RegisterActivity extends BaseActivity {
         Map<String, String> mapparams=new HashMap<String,String>(0);
         mapparams.put("mobilePhone",phone);                  // 手机验证方式
         mapparams.put("password", pwd);
-        HttpManager.requestOnceWithURLString(Constants.REG_CODE_URL, this, mapparams, new HttpRequestHandler<String>() {
+        HttpManager.requestOnceWithURLString(Constants.REG_URL, this, mapparams, new HttpRequestHandler<String>() {
             @Override
             public void onSuccess(String data) {
                 Log.i(TAG, "data=" + data);
+                progressDialog.dismiss(); // 关闭进度条
                 try {
                     JSONObject jsonObject = new JSONObject(data);
                     String errcode = (String) jsonObject.get("errcode");
@@ -294,19 +297,16 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onSuccess(String data, int totalPages, int currentPage) {
                 Log.i(TAG, "data=" + data);
+                progressDialog.dismiss(); // 关闭进度条
             }
 
             @Override
             public void onFailure(String error) {
-                progressDialog.dismiss();
-                try {
-                    JSONObject jsonObject = new JSONObject(error);
-                    String errcode = (String) jsonObject.get("errcode");
-                    if (null != errcode && errcode.length() > 0) {
-                        MessageUtils.showMiddleToast(RegisterActivity.this, (String) jsonObject.get("errmsg"));
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                progressDialog.dismiss();  // 关闭进度条
+                if (null != error && error.length() > 0) {
+                    MessageUtils.showErrorMessage(RegisterActivity.this, error);
+                } else {
+                    MessageUtils.showErrorMessage(RegisterActivity.this, "服务器未响应");
                 }
             }
         });
@@ -315,13 +315,15 @@ public class RegisterActivity extends BaseActivity {
     /**
      * 验证用户输入的验证码是否正确
      */
-    private void loadTokenCode() {
+    private void loadTokenCode(final Button button) {
         String verifyCode = reg_msg_input.getText().toString();   // 获取输入的验证码
         Map<String, String> mapparams = new HashMap<String, String>(0);
         mapparams.put("authstring", verifyCode);
-        HttpManager.requestOnceWithURLString(Constants.REG_URL, this, mapparams, new HttpRequestHandler<String>() {
+        HttpManager.requestOnceWithURLString(Constants.REG_CODE_URL, this, mapparams, new HttpRequestHandler<String>() {
             @Override
             public void onSuccess(String data) {
+                TimeCountUtil timeCountUtil = new TimeCountUtil(RegisterActivity.this, 60000, 1000, button, R.drawable.phone_test_on); // 更新按钮状态
+                timeCountUtil.start(); // 启动线程
                 Log.i(TAG, "data=" + data);
                 String msg = "已发送短信验证码到";
                 String phone = reg_phone_text.getText().toString();
@@ -337,14 +339,10 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onFailure(String error) {
-                try {
-                    JSONObject jsonObject = new JSONObject(error);
-                    String errcode = (String) jsonObject.get("errcode");
-                    if (null != errcode && errcode.length() > 0) {
-                        MessageUtils.showMiddleToast(RegisterActivity.this, (String) jsonObject.get("errmsg"));
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (null != error && error.length() > 0) {
+                    MessageUtils.showErrorMessage(RegisterActivity.this, error);
+                } else {
+                    MessageUtils.showErrorMessage(RegisterActivity.this, "服务器未响应");
                 }
             }
         });
