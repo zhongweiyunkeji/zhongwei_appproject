@@ -270,7 +270,7 @@ public class RegisterActivity extends BaseActivity {
         Map<String, String> mapparams=new HashMap<String,String>(0);
         mapparams.put("mobilePhone",phone);                  // 手机验证方式
         mapparams.put("password", pwd);
-        HttpManager.requestOnceWithURLString(Constants.REG_URL, this, mapparams, new HttpRequestHandler<String>() {
+        HttpManager.requestOnceWithURLString(this, Constants.REG_URL, mapparams, new HttpRequestHandler<String>() {
             @Override
             public void onSuccess(String data) {
                 Log.i(TAG, "data=" + data);
@@ -319,7 +319,7 @@ public class RegisterActivity extends BaseActivity {
         String verifyCode = reg_msg_input.getText().toString();   // 获取输入的验证码
         Map<String, String> mapparams = new HashMap<String, String>(0);
         mapparams.put("authstring", verifyCode);
-        HttpManager.requestOnceWithURLString(Constants.REG_CODE_URL, this, mapparams, new HttpRequestHandler<String>() {
+        HttpManager.requestOnceWithURLString(this, Constants.REG_CODE_URL, mapparams, new HttpRequestHandler<String>() {
             @Override
             public void onSuccess(String data) {
                 TimeCountUtil timeCountUtil = new TimeCountUtil(RegisterActivity.this, 60000, 1000, button, R.drawable.phone_test_on); // 更新按钮状态
