@@ -102,6 +102,7 @@ public class PhoneActivity extends BaseActivity {
         return Pattern.compile("^[1][3,4,5,8][0-9]{9}$").matcher(mobiles).matches();
     }
 
+
     public int A(){
         return 1;
     }
