@@ -65,6 +65,7 @@
                     android:background="@android:color/transparent"
                     android:drawableRight="@drawable/button_phone_bm"
                     android:hint="@string/please_in_phone_number_text"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:cursorVisible="true"
                     android:inputType="phone" />
 
@@ -79,6 +80,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
                         android:background="@android:color/transparent"
+                        android:textCursorDrawable="@drawable/color_cursor"
                         android:hint="短信验证码" />
 
                     <Button
