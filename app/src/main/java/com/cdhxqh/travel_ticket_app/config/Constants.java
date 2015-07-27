@@ -23,11 +23,15 @@ public class Constants {
 	/**验证码密码接口**/
 	public static final String PHONELINE_URL = BASE_URL+"doReset";
 
+	/**用户注册验证码 **/
+
+	public static final String REG_CODE_URL = BASE_URL+"doCheck";
+
     /**用户注册**/
 
-    public static final String REG_URL = BASE_URL+"doCheck";
+    public static final String REG_URL = BASE_URL+"check";
 
-    /**
+	/**
      ******************************************* 接口参数设置信息结束 ******************************************
      *
      */
