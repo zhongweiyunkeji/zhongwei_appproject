@@ -13,6 +13,7 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import org.apache.http.Header;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -195,7 +196,7 @@ public class HttpManager {
      * @param handler *
      */
 
-    private static void requestOnceWithURLString(final Context cxt, String url, Map<String, String> mapparams,
+    public static void requestOnceWithURLString(final Context cxt, final String url, final Map<String, String> mapparams,
                                                  final HttpRequestHandler<String> handler) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
