@@ -271,7 +271,7 @@ public class RegisterActivity extends BaseActivity {
                     inputmanger.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
                 if(View.VISIBLE == visible_layout1){
-                    openActivity(LoginActivity.class);  // 跳转到登录Activity
+                    finish();
                 } else
                 if(View.VISIBLE == visible_layout2){
                     RegisterActivity.this.reg_layou_1.setVisibility(View.VISIBLE);
