@@ -16,6 +16,5 @@
     <dimen name="reg_dimens_margin_left_20">20dp</dimen>
     <dimen name="reg_dimens_margin_right_20">20dp</dimen>
     <dimen name="reg_dimens_textsize_01">40px</dimen>
-    <dimen name="reg_dimens_textsize_02"></dimen>
 
 </resources>
