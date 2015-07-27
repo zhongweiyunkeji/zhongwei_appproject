@@ -8,38 +8,6 @@
 
     <include layout="@layout/activity_title" />
 
-    <!--
-    <FrameLayout
-        android:id="@+id/reg_top_fl"
-        android:layout_width="fill_parent"
-        android:background="@drawable/register_top_1_bar"
-        android:layout_height="wrap_content" >
-        <ImageView
-            android:id="@+id/reg_top_back_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/reg_top_left_icon"
-            />
-        <TextView
-            android:id="@+id/reg_title_text_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_reg_activity"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:textSize="45px"
-            />
-    </FrameLayout>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/register_top_2_bar"
-        />
-    -->
-
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
