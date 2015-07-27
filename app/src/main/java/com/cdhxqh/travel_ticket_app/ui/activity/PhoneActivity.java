@@ -122,7 +122,7 @@ public class PhoneActivity extends BaseActivity {
         seachImageView = (ImageView) findViewById(R.id.title_search_id);
 
         /**
-         * 找回方式标签id
+         * 找回方式标签idk
          */
         reg_layou_1 = (LinearLayout) findViewById(R.id.reg_layou_1);
         reg_layou_2 = (LinearLayout) findViewById(R.id.reg_layou_2);
