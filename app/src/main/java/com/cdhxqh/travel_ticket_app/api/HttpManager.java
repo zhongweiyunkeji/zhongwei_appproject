@@ -12,10 +12,15 @@ import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.apache.http.Header;
 
-/**用于与服务端进行网络交互的类**/
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * 用于与服务端进行网络交互的类*
+ */
 public class HttpManager {
 
-    private static final String TAG="HttpManager";
+    private static final String TAG = "HttpManager";
 
     /**
      * 使用用户名密码登录
@@ -27,10 +32,15 @@ public class HttpManager {
      */
     public static void loginWithUsername(final Context cxt, final String username, final String password,
                                          final HttpRequestHandler<Integer> handler) {
-        requestOnceWithURLString(cxt, username, password, new HttpRequestHandler<String>() {
+        Map<String, String> mapparams=new HashMap<String,String>();
+        mapparams.put("loginName",username);
+        mapparams.put("password",password);
+
+
+        requestOnceWithURLString(cxt, mapparams, new HttpRequestHandler<String>() {
             @Override
             public void onSuccess(String data, int totalPages, int currentPage) {
-            Log.i(TAG,"data="+data);
+                Log.i(TAG, "data=" + data);
             }
 
             @Override
@@ -56,12 +66,22 @@ public class HttpManager {
     }
 
 
-    private static void requestOnceWithURLString(final Context cxt, final String username, final String password,
+    /**
+     * 公用的URl连接
+     *
+     * @param cxt
+     * @param mapparams
+     * @param handler *
+     */
+
+    private static void requestOnceWithURLString(final Context cxt, Map<String, String> mapparams,
                                                  final HttpRequestHandler<String> handler) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        params.put("loginName", username);
-        params.put("password", password);
+        for (Map.Entry<String, String> entry : mapparams.entrySet()){
+            params.put(entry.getKey(),entry.getValue());
+        }
+
         client.post(Constants.LOGIN_URL, params, new TextHttpResponseHandler() {
 
 
