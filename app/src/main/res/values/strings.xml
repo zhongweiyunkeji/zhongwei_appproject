@@ -68,11 +68,14 @@
 
 
     <string name="login_loging">登录中...</string>
+    <string name="loading">正在加载...</string>
 
     <!--找回密码界面-->
     <string name="find_pwd_text">找回密码</string>
     <string name="phone_find_back_text">手机找回</string>
     <string name="email_find_back_text">邮箱找回</string>
+    <string name="email_style_err">邮箱格式不正确</string>
+    <string name="email_code_null">请输入邮箱号</string>
     <string name="please_in_phone_number_text">请输入手机号</string>
 
 

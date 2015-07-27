@@ -19,14 +19,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cdhxqh.travel_ticket_app.api.HttpManager;
+import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
 import com.cdhxqh.travel_ticket_app.utils.HttpUtil;
+import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.cdhxqh.travel_ticket_app.utils.TimeCountUtil;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.cdhxqh.travel_ticket_app.utils.EditTextActionUtils;
-
-import org.apache.http.Header;
 import org.json.JSONObject;
 
 import com.cdhxqh.travel_ticket_app.R;
@@ -120,156 +117,6 @@ public class PhoneActivity extends BaseActivity {
         setContentView(R.layout.activity_phone);
         findViewById();
         initView();
-
-        //跳转至邮箱找回界面事件
-        TextViewMail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PhoneActivity.this.reg_layou_1.setVisibility(View.GONE);
-                PhoneActivity.this.reg_layou_2.setVisibility(View.VISIBLE);
-            }
-        });
-
-
-        //手机获取密码
-        restart_passworld_id.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressDialog.setMessage(getResources().getString(R.string.phone_get_message));
-                progressDialog.show();   // 显示进度条
-                /*
-                发送请求获取密码
-                 */
-                Log.i(TAG, "****4");
-                url = "http://192.168.2.119:8080/qdm/ecsusers/doReset";
-                String str = button_id.getText().toString(), style = "authstring";
-                if (isMobileNO(str)) {
-                    map = new HashMap<String, String>();
-                    map.put(style, str);
-                    httpUtil.post(url, map, handler);
-                } else {
-                    String msg = "手机号格式不正确";
-                    if (str == null || "".equals(str)) {
-                        msg = "请输入手机号";
-                    }
-                    progressDialog.dismiss();   // 关闭进度条
-                    Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-                /*
-                返回值上一层
-                 */
-                Intent intent = new Intent();
-                intent.setClass(PhoneActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //设置按下时按钮效果事件
-        restart_passworld_id.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    v.setBackgroundResource(R.drawable.phone_button_get);
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    v.setBackgroundResource(R.drawable.phone_button_login);
-                }
-                return false;
-            }
-        });
-
-        //验证码按钮按下效果
-        info_button_id.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    v.setBackgroundResource(R.drawable.phone_a_down);
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    v.setBackgroundResource(R.drawable.phone_a_on);
-                }
-                return false;
-            }
-        });
-
-        //获取验证码
-        info_button_id.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressDialog.setMessage("正在加载...");
-                progressDialog.show();   // 显示进度条
-                /*
-                发送请求获取验证码
-                 */
-                TimeCountUtil timeCountUtil = new TimeCountUtil(PhoneActivity.this, 60000, 1000, info_button_id, R.drawable.phone_test_on);
-                timeCountUtil.start();
-                Log.i(TAG, "****4");
-                url = "http://192.168.2.119:8080/qdm/ecsusers/reset";
-                String style = "mobilePhone";
-                String str = EditText1.getText().toString();
-                if (isMobileNO(str)) {
-                    map = new HashMap<String, String>();
-                    map.put(style, str);
-                    httpUtil.post(url, map, handler);
-                } else {
-                    String msg = "手机号格式不正确";
-                    if (str == null || "".equals(str)) {
-                        msg = "请输入手机号";
-                    }
-                    progressDialog.dismiss();   // 关闭进度条
-                    Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-            }
-        });
-
-        //手机找回标签页
-        imageButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PhoneActivity.this.reg_layou_1.setVisibility(View.VISIBLE);
-                PhoneActivity.this.reg_layou_2.setVisibility(View.GONE);
-            }
-        });
-
-        //邮箱获取密码按钮效果
-        restart_passworld_mail.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    v.setBackgroundResource(R.drawable.button_on_mail);
-                } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    v.setBackgroundResource(R.drawable.button_login_mail);
-                }
-                return false;
-            }
-        });
-
-        //根据邮箱号获取新密码
-        restart_passworld_mail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressDialog.setMessage("正在加载...");
-                progressDialog.show();   // 显示进度条
-                String url = "http://192.168.2.119:8080/qdm/ecsusers/reset";
-                String str = EditTextMail.getText().toString(), style = "email";
-                if (isMailNo(str)) {
-                    map = new HashMap<String, String>();
-                    map.put(style, str);
-                    httpUtil.post(url, map, handler);
-                } else {
-                    String msg = "邮箱号格式不正确";
-                    if (str == null || "".equals(str)) {
-                        msg = "请输入邮箱号";
-                    }
-                    progressDialog.dismiss();   // 关闭进度条
-                    Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-            }
-        });
     }
 
     /*
@@ -292,12 +139,16 @@ public class PhoneActivity extends BaseActivity {
      * 绑定控件id
      */
     protected void findViewById() {
-
+        /**
+         * 标题标签相关id
+         */
         backImageView = (ImageView) findViewById(R.id.back_imageview_id);
         titleTextView = (TextView) findViewById(R.id.title_text_id);
         seachImageView = (ImageView) findViewById(R.id.title_search_id);
 
-
+        /**
+         * 找回方式标签id
+         */
         reg_layou_1 = (LinearLayout) findViewById(R.id.reg_layou_1);
         reg_layou_2 = (LinearLayout) findViewById(R.id.reg_layou_2);
 
@@ -314,34 +165,50 @@ public class PhoneActivity extends BaseActivity {
         button_id = (EditText) findViewById(R.id.button_id);
     }
 
-    ;
+
 
     /**
      * 初始化控件
      */
     protected void initView() {
-
+        //设置标签页显示方式
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
         titleTextView.setText(getResources().getString(R.string.find_pwd_text));
-
-        if (this.progressDialog == null) {
-            progressDialog = new ProgressDialog(PhoneActivity.this);
-        }
-
-
         //返回至登录界面事件
         backImageView.setOnClickListener(backImageViewOnClickListener);
 
-
+        //
         backImageView.setOnTouchListener(backImageViewOnTouchListener);
+
+        //跳转至邮箱找回界面事件
+        TextViewMail.setOnClickListener(backImageMailOnTouchListener);
+
+        //设置密码按钮（手机找回）按下时按钮效果事件
+        restart_passworld_id.setOnTouchListener(passwordMailOnTouchListener);
+
+        //验证码按钮按下效果
+        info_button_id.setOnTouchListener(inspectCodeOnTouchListener);
+
+        //获取验证码
+        info_button_id.setOnClickListener(inspectCodeOnClickListener);
+
+        //跳转至手机找回界面事件
+        imageButton2.setOnClickListener(backImagephoneClickListener);
+
+        //跳转至手机找回界面事件
+        restart_passworld_mail.setOnTouchListener(getMailPassOnTouchListener);
+
+        //根据邮箱号获取新密码
+        restart_passworld_mail.setOnClickListener(getMailPassClickListener);
+
+        //根据手机号获取新密码
+        restart_passworld_id.setOnClickListener(getPhonePassClickListener);
     }
 
     /**
      * 返回事件的监听*
      */
-
-
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -361,5 +228,213 @@ public class PhoneActivity extends BaseActivity {
         }
     };
 
+    //跳转至邮箱找回界面事件
+    private View.OnClickListener backImageMailOnTouchListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            PhoneActivity.this.reg_layou_1.setVisibility(View.GONE);
+            PhoneActivity.this.reg_layou_2.setVisibility(View.VISIBLE);
+        }
+    };
 
+    //设置密码按钮（手机找回）按下时按钮效果事件
+    private View.OnTouchListener passwordMailOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundResource(R.drawable.phone_button_get);
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundResource(R.drawable.phone_button_login);
+            }
+            return false;
+        }
+    };
+
+    //验证码按钮按下效果
+    private View.OnTouchListener inspectCodeOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundResource(R.drawable.phone_a_down);
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundResource(R.drawable.phone_a_on);
+            }
+            return false;
+        }
+    };
+
+    //获取验证码
+    private View.OnClickListener inspectCodeOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            /**
+             * 加载中
+             */
+            progressDialog = ProgressDialog.show(PhoneActivity.this, null,
+                    getString(R.string.loading), true, true);
+                /*
+                发送请求获取验证码
+                 */
+            String str = EditText1.getText().toString();
+            if (str == null || "".equals(str)) {
+                EditText1.setError(getString(R.string.please_in_phone_number_text));
+                EditText1.requestFocus();
+            }else  if (!isMobileNO(str)) {
+                EditText1.setError(getString(R.string.phone_get_err));
+                EditText1.requestFocus();
+            }else {
+                getPhoneCode ();
+            }
+        }
+    };
+
+    //手机找回标签页
+    private View.OnClickListener backImagephoneClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            PhoneActivity.this.reg_layou_1.setVisibility(View.VISIBLE);
+            PhoneActivity.this.reg_layou_2.setVisibility(View.GONE);
+        }
+    };
+
+    //邮箱获取密码按钮效果
+    private View.OnTouchListener getMailPassOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundResource(R.drawable.button_on_mail);
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundResource(R.drawable.button_login_mail);
+            }
+            return false;
+        }
+    };
+
+    //根据邮箱号获取新密码
+    private View.OnClickListener getMailPassClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String str = EditTextMail.getText().toString();
+            if (str == null || "".equals(str)) {
+                EditTextMail.setError(getString(R.string.email_code_null));
+                EditTextMail.requestFocus();
+            } else if(!isMailNo(str)) {
+                EditTextMail.setError(getString(R.string.email_style_err));
+                EditTextMail.requestFocus();
+            } else {
+                getMailPassWord();
+            }
+        }
+    };
+
+    //手机获取密码
+    private View.OnClickListener getPhonePassClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+                /*
+                发送请求获取密码
+                 */
+            getPhonePass ();
+        }
+    };
+
+    /**
+     * 根据邮箱号获取密码
+     */
+    private void getMailPassWord () {
+        /**
+         * 加载中
+         */
+        progressDialog = ProgressDialog.show(PhoneActivity.this, null,
+                getString(R.string.loading), true, true);
+
+        HttpManager.getMailPassword(this,
+                EditTextMail.getText().toString(),
+                new HttpRequestHandler<Integer>() {
+                    @Override
+                    public void onSuccess(Integer data) {
+                        MessageUtils.showMiddleToast(PhoneActivity.this, "邮箱发送成功");
+                        progressDialog.dismiss();
+                        finish();
+                    }
+
+                    @Override
+                    public void onSuccess(Integer data, int totalPages, int currentPage) {
+                        Log.i(TAG, "22222");
+                    }
+
+                    @Override
+                    public void onFailure(String error) {
+                        MessageUtils.showErrorMessage(PhoneActivity.this, error);
+                        progressDialog.dismiss();
+                    }
+                });
+    }
+
+    /**
+     * 根据手机号获取验证码
+     */
+    private void getPhoneCode () {
+        /**
+         * 加载中
+         */
+        progressDialog = ProgressDialog.show(PhoneActivity.this, null,
+                getString(R.string.loading), true, true);
+
+        HttpManager.getPhoneCode(this,
+                EditText1.getText().toString(),
+                new HttpRequestHandler<Integer>() {
+                    @Override
+                    public void onSuccess(Integer data) {
+                        MessageUtils.showMiddleToast(PhoneActivity.this, "验证码发送成功");
+                        progressDialog.dismiss();
+                        TimeCountUtil timeCountUtil = new TimeCountUtil(PhoneActivity.this, 60000, 1000, info_button_id, R.drawable.phone_test_on);
+                        timeCountUtil.start();
+                    }
+
+                    @Override
+                    public void onSuccess(Integer data, int totalPages, int currentPage) {
+                        Log.i(TAG, "22222");
+                    }
+
+                    @Override
+                    public void onFailure(String error) {
+                        MessageUtils.showErrorMessage(PhoneActivity.this, error);
+                        progressDialog.dismiss();
+                    }
+                });
+    }
+
+    /**
+     * 根据手机号重置密码
+     */
+    private void getPhonePass () {
+        /**
+         * 加载中
+         */
+        progressDialog = ProgressDialog.show(PhoneActivity.this, null,
+                getString(R.string.loading), true, true);
+
+        HttpManager.getPhonePass(this,
+                button_id.getText().toString(),
+                new HttpRequestHandler<Integer>() {
+                    @Override
+                    public void onSuccess(Integer data) {
+                        MessageUtils.showMiddleToast(PhoneActivity.this, "密码重置成功");
+                        progressDialog.dismiss();
+                        finish();
+                    }
+
+                    @Override
+                    public void onSuccess(Integer data, int totalPages, int currentPage) {
+                        Log.i(TAG, "22222");
+                    }
+
+                    @Override
+                    public void onFailure(String error) {
+                        MessageUtils.showErrorMessage(PhoneActivity.this, error);
+                        progressDialog.dismiss();
+                    }
+                });
+    }
 }
