@@ -176,6 +176,7 @@
                     android:hint="注册邮箱号" />
 
 
+
             </LinearLayout>
 
             <TextView
