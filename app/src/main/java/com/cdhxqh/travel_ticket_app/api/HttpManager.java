@@ -209,7 +209,7 @@ public class HttpManager {
             @Override
                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.i(TAG, "FstatusCode=" + statusCode);
-                SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorLoginFailure));
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorApiForbidden));
             }
 
             @Override
