@@ -91,4 +91,6 @@
     <string name="error_unknown">未知错误</string>
     <string name="error_obtain_once">无法获取ONCE</string>
 
+    <string name="reg_loaing">正在努力加载...</string>
+
 </resources>
