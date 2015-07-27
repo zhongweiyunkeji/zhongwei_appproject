@@ -11,11 +11,17 @@ public class Constants {
      */
 
     //服务端IP
-    public static final String BASE_URL = "http://172.25.124.1:8080/qdm/ecsusers/";
+    public static final String BASE_URL = "http://192.168.1.106:8080/qdm/ecsusers/";
 
 
     /**登录用户接口**/
     public static final String LOGIN_URL = BASE_URL+"login";
+
+	/**邮箱获取密码接口**/
+	public static final String PHONEPASS_URL = BASE_URL+"reset";
+
+	/**验证码密码接口**/
+	public static final String PHONELINE_URL = BASE_URL+"doReset";
 
     /**用户注册**/
 
@@ -108,6 +114,23 @@ public class Constants {
 
     public static final String SUCCESS_LOGIN = "ZWTICKET-USER-S-101";
 
+	//邮箱发送成功
+	public static final String SUCCESS_EMAIL = "ZWTICKET-GLOBAL-S-6";
+
+	//邮箱未注册
+	public static final String FAILURE_EMAIL = "ZWTICKET-GLOBAL-E-7";
+
+	//短信发送成功
+	public static final String SUCCESS_LINE = "ZWTICKET-GLOBAL-S-10";
+
+	//验证码验证成功
+	public static final String SUCCESS_LINE_PASS = "ZWTICKET-GLOBAL-S-14";
+
+	//验证码验证失败
+	public static final String FAILURE_LINE_PASS = "ZWTICKET-GLOBAL-E-13";
+
+	//验证码验证失效
+	public static final String RUNTIME_LINE_PASS = "ZWTICKET-GLOBAL-S-15";
 
 
 
