@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
     android:background="@color/bj_color"
+    android:orientation="vertical"
     tools:context="com.cdhxqh.travel_ticket_app.ui.activity.RegisterActivity">
 
     <include layout="@layout/activity_title" />
@@ -11,243 +11,64 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        >
-        <TableRow >
+        android:gravity="center">
+
+        <TableRow>
+
             <TextView
                 android:id="@+id/write_phone"
                 android:layout_column="0"
-                android:layout_weight="2"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
                 android:layout_gravity="center_vertical"
-                android:textColor="#EEBA63"
-                android:textSize="25px"
-                android:text="1.填写手机号" />
+                android:layout_marginLeft="10dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/fill_in_the_phone_number_text"
+                android:textColor="@color/orange_color"
+                android:textSize="14dp" />
+
             <ImageView
                 android:layout_column="1"
                 android:layout_weight="2"
                 android:src="@drawable/reg_nav_icon_ight" />
+
             <TextView
                 android:id="@+id/write_pwd"
                 android:layout_column="2"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:layout_gravity="center_vertical"
-                android:textColor="#000000"
-                android:textSize="25px"
-                android:text="2.设置密码" />
+                android:text="@string/seting_passwprd_text"
+                android:textColor="@color/balck_color"
+                android:textSize="14dp" />
+
             <ImageView
                 android:layout_column="3"
                 android:layout_weight="2"
                 android:src="@drawable/reg_nav_icon_ight" />
+
             <TextView
                 android:id="@+id/write_sendmsg"
                 android:layout_column="4"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:textColor="#000000"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
-                android:textSize="25px"
-                android:text="3.短信验证" />
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/message_auth_text"
+                android:textColor="@color/balck_color"
+                android:textSize="14dp" />
         </TableRow>
     </TableLayout>
 
     <!--  填写手机号  -->
-    <LinearLayout
-        android:id="@+id/reg_layou_1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <EditText
-            android:id="@+id/reg_phone_text"
-            android:singleLine="true"
-            android:maxLength="11"
-            android:numeric="integer"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/dimens_60"
-            android:textSize="@dimen/reg_dimens_textsize_01"
-            android:layout_marginLeft="@dimen/reg_dimens_margin_left_20"
-            android:layout_marginRight="@dimen/reg_dimens_margin_right_20"
-            android:textCursorDrawable="@drawable/color_cursor"
-            android:background="@drawable/user_middle_bj"
-            android:drawableRight="@drawable/reg_input_mobile_img"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:layout_gravity="left"
-            android:textColor="#B9B9B9"
-            android:hint="请输入11位手机号"
-            android:text="18205155217"
-            />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/dimens_60"
-            android:paddingLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:textColor="#B9B9B9"
-            android:layout_marginBottom="20dp"
-            android:text="已同意《智慧旅游票务云服务条款》，点击“下一步”"
-            />
-
-        <Button
-            android:id="@+id/reg_phone_next_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:text="下一步"
-            android:textSize="40px"
-            android:textColor="@color/white"
-            android:background="@drawable/reg_bottom_button"
-            />
-    </LinearLayout>
+    <include layout="@layout/reg_phone_number_text"></include>
 
 
     <!--  设置密码  -->
-    <LinearLayout
-        android:id="@+id/reg_layou_2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone"
-        >
-        <EditText
-            android:id="@+id/reg_pwd_input"
-            android:singleLine="true"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/dimens_60"
-            android:textSize="@dimen/reg_dimens_textsize_01"
-            android:layout_marginLeft="@dimen/reg_dimens_margin_left_20"
-            android:layout_marginRight="@dimen/reg_dimens_margin_right_20"
-            android:textCursorDrawable="@drawable/color_cursor"
-            android:background="@drawable/user_middle_bj"
-            android:drawableRight="@drawable/reg_icon_lock"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:layout_gravity="left"
-            android:textColor="#B9B9B9"
-            android:hint="请输入密码"
-            android:maxLength="25"
-            android:password="true"
-            android:text="1"
-            />
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1px"
-            android:background="@drawable/reg_line_x"
-            />
-        <EditText
-            android:id="@+id/reg_repwd_input"
-            android:singleLine="true"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/dimens_60"
-            android:textSize="@dimen/reg_dimens_textsize_01"
-            android:layout_marginLeft="@dimen/reg_dimens_margin_left_20"
-            android:layout_marginRight="@dimen/reg_dimens_margin_right_20"
-            android:textCursorDrawable="@drawable/color_cursor"
-            android:background="@drawable/user_middle_bj"
-            android:drawableRight="@drawable/reg_icon_lock"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:layout_gravity="left"
-            android:textColor="#B9B9B9"
-            android:maxLength="25"
-            android:password="true"
-            android:hint="请重复密码"
-            android:text="1"
-            android:layout_marginBottom="20dp"
-            />
-
-        <Button
-            android:id="@+id/reg_pwd_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:text="下一步"
-            android:textSize="40px"
-            android:textColor="@color/white"
-            android:background="@drawable/reg_bottom_button"
-            />
-    </LinearLayout>
+    <include layout="@layout/setting_password"></include>
 
 
     <!--  短信验证  -->
-    <LinearLayout
-        android:id="@+id/reg_layou_3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone" >
+    <include layout="@layout/message_auth"></include>
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <EditText
-                android:id="@+id/reg_msg_input"
-                android:singleLine="true"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/dimens_60"
-                android:textSize="@dimen/reg_dimens_textsize_01"
-                android:layout_marginLeft="@dimen/reg_dimens_margin_left_20"
-                android:layout_marginRight="@dimen/reg_dimens_margin_right_20"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:background="@drawable/user_middle_bj"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:maxLength="6"
-                android:layout_gravity="left"
-                android:textColor="#B9B9B9"
-                android:hint="验证码"
-                android:layout_marginBottom="20dp"
-                android:text="1"
-                />
-            <Button
-                android:id="@+id/reg_senmsg_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimens_35"
-                android:layout_marginRight="10dp"
-                android:padding="10dp"
-                android:text="获取验证码"
-                android:layout_alignBaseline="@+id/reg_msg_input"
-                android:layout_alignRight="@+id/reg_msg_input"
-                android:background="@drawable/phone_test_on"
-                android:textSize="25px"
-                android:textColor="#000000"
-                />
-        </RelativeLayout >
 
-        <TextView
-            android:id="@+id/reg_hint_text"
-            android:singleLine="true"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/dimens_60"
-            android:textSize="25px"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="15dp"
-            android:textColor="#C8D1D0"
-            android:text="已发送短信验证码到182****5217"
-            />
-
-        <Button
-            android:id="@+id/reg_msg_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:text="注册"
-            android:textSize="40px"
-            android:textColor="@color/white"
-            android:background="@drawable/reg_bottom_button"
-            />
-    </LinearLayout>
 </LinearLayout>

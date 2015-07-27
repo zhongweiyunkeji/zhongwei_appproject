@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cdhxqh.travel_ticket_app" >
+    package="com.cdhxqh.travel_ticket_app">
+
+    <!-- 百度地图权限开始 -->
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- 百度地图权限结束 -->
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,10 +30,14 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="iTIOC0GE1Xe5uiPysSpmm4EZ" />
+
         <activity
             android:name=".ui.activity.StartActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,52 +47,56 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/title_activity_start"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.BaseActivity"
             android:label="@string/title_activity_base_activty"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.HomeActivity"
             android:label="@string/title_activity_home"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.ClassActivity"
             android:label="@string/title_activity_class"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.OrderActivity"
             android:label="@string/title_activity_order"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.UserActivity"
             android:label="@string/title_activity_user"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.PhoneActivity"
             android:label="@string/title_activity_user"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.LoginActivity"
             android:label="@string/title_activity_register"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.Scenic_Tickets_Activity"
             android:label="@string/title_activity_scenic__tickets_"
-            android:screenOrientation="portrait"></activity>
-    </application>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.Listen_ZhongWei_Activity"
+            android:label="@string/title_activity_scenic__tickets_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ScenicMapActivity"
+            android:label="@string/title_activity_scenic_map"></activity>
 
+    </application>
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="false"
+        android:resizeable="true"
+        android:smallScreens="true" />
 </manifest>

@@ -28,12 +28,6 @@
     <string name="user_review_text">我的点评</string>
     <string name="phone_send_number">秒后可重新发送</string>
     <string name="phone_get_number">重新获取验证码</string>
-    <string name="scenic_spot_text">景区门票</string>
-    <string name="today_offer_text">今日特价</string>
-    <string name="listen_zhongwen">听中卫</string>
-    <string name="look_zhongwei_text">看中卫</string>
-    <string name="swim_around_text">周边游</string>
-    <string name="interested_in_text">猜你喜欢</string>
     <string name="class_title_text">分类</string>
     <string name="class_seach_scenic_text"><![CDATA[查看所有景点门票>]]></string>
     <string name="hot_attractions_text">热门景点</string>
@@ -46,31 +40,32 @@
     <string name="mail_get_err">邮箱号格式不正确</string>
     <string name="phone_get_miss">请输入手机号</string>
     <string name="phone_get_err">手机号格式不正确</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="goods_order_time">订购时间:</string>
     <string name="tickets_number_text">门票数量:</string>
     <string name="order_delete_text">删除</string>
 
+    <!-- 首页 -->
+    <string name="scenic_spot_text">景区门票</string>
+    <string name="today_offer_text">今日特价</string>
+    <string name="listen_zhongwen">听中卫</string>
+    <string name="look_zhongwei_text">看中卫</string>
+    <string name="swim_around_text">周边游</string>
+    <string name="interested_in_text">猜你喜欢</string>
 
-    <!--登录界面-->
+    <!-- 登录界面 -->
     <string name="password_get_err">密码不能为空</string>
-
     <string name="please_user_name_text">用户名/手机号/邮箱</string>
     <string name="please_pass_word_text">请输入密码</string>
     <string name="login_text">登 录</string>
     <string name="forget_pass_word">忘记密码?</string>
     <string name="registered_new_user">注册新用户</string>
-
-
     <string name="login_error_empty_user">用户名不能为空</string>
     <string name="login_error_empty_passwd">密码不能为空</string>
-
-
     <string name="login_loging">登录中...</string>
     <string name="loading">正在加载...</string>
 
-    <!--找回密码界面-->
+    <!-- 找回密码界面 -->
     <string name="find_pwd_text">找回密码</string>
     <string name="phone_find_back_text">手机找回</string>
     <string name="email_find_back_text">邮箱找回</string>
@@ -78,19 +73,25 @@
     <string name="email_code_null">请输入邮箱号</string>
     <string name="please_in_phone_number_text">请输入手机号</string>
 
-
-    <!--用户提示-->
+    <!-- 用户提示 -->
     <string name="error_network_exception">网络通信异常，请稍后重试</string>
     <string name="error_network_disconnect">网络不可达,请开启Wifi或者移动数据网络</string>
     <string name="error_reply">无法回复</string>
     <string name="error_create_topic">无法点评</string>
     <string name="error_login">无法登录</string>
     <string name="error_fav_nodes">无法收藏</string>
-    <string name="error_fav_topic">无法收藏</string>
+    <string name="error_fav_topic">无法连接服务器</string>
     <string name="error_get_profile">无法获取用户个人资料</string>
     <string name="error_unknown">未知错误</string>
     <string name="error_obtain_once">无法获取ONCE</string>
-
+    <string name="title_activity_scenic__tickets_">Scenic_Tickets_Activity</string>
     <string name="reg_loaing">正在努力加载...</string>
+    <string name="please_loading_hint">请稍后...</string>
+    <string name="title_activity_scenic_map">ScenicMapActivity</string>
+    <string name="fill_in_the_phone_number_text">1.填写手机号</string>
+    <string name="seting_passwprd_text">2.设置密码</string>
+    <string name="message_auth_text">3.短信验证</string>
+    <string name="please_input_phone_number_text">请输入11位手机号</string>
+    <string name="next_button_text">下一步</string>
 
 </resources>

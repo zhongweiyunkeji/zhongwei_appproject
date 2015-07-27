@@ -1,5 +1,6 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.ui.adapter.Bee_PageAdapter;
@@ -32,6 +34,15 @@ public class HomeActivity extends BaseActivity {
     private int[] images = {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4};
 
 
+    /**
+     * 景区门票*
+     */
+    private LinearLayout scenic_spot_layout;
+    /**
+     * 听中卫*
+     */
+    private LinearLayout listen_zhongwei_layout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +56,8 @@ public class HomeActivity extends BaseActivity {
     protected void findViewById() {
         bannerViewPager = (ViewPager) findViewById(R.id.banner_viewpager);
         mIndicator = (PageIndicator) findViewById(R.id.indicator);
+        scenic_spot_layout = (LinearLayout) findViewById(R.id.scenic_spot_id);
+        listen_zhongwei_layout = (LinearLayout) findViewById(R.id.listen_zhongwei_layout_id);
 
     }
 
@@ -68,8 +81,28 @@ public class HomeActivity extends BaseActivity {
 
         bannerViewPager.setOnPageChangeListener(bannerViewPagerOnPageChangeListener);
 
+        scenic_spot_layout.setOnClickListener(senic_spot_layoutOnClickListener);
+        listen_zhongwei_layout.setOnClickListener(listen_zhongweiOnClickListener);
+
 
     }
+
+    private View.OnClickListener senic_spot_layoutOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(HomeActivity.this, Scenic_Tickets_Activity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
+    private View.OnClickListener listen_zhongweiOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(HomeActivity.this, Listen_ZhongWei_Activity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
 
 
     private ViewPager.OnPageChangeListener bannerViewPagerOnPageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -104,7 +137,7 @@ public class HomeActivity extends BaseActivity {
 
             mPreviousState = state;
 
-            Log.i(TAG,"mPreviousState="+mPreviousState);
+            Log.i(TAG, "mPreviousState=" + mPreviousState);
         }
     };
 
@@ -163,7 +196,6 @@ public class HomeActivity extends BaseActivity {
 //        super.onBackPressed();
 //        exit(HomeActivity.this);
 //    }
-
 
 
     @Override
