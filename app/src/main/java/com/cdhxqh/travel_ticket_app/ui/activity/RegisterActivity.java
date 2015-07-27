@@ -73,6 +73,12 @@ public class RegisterActivity extends BaseActivity {
         initView();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle bundle) {// 保存状态
+        super.onSaveInstanceState(bundle);
+    }
+
+
     @Override 
     protected void findViewById() {
 
