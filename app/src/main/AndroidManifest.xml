@@ -35,39 +35,53 @@
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"
-            android:label="@string/title_activity_start" >
+            android:label="@string/title_activity_start"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.activity.BaseActivity"
-            android:label="@string/title_activity_base_activty" >
+            android:label="@string/title_activity_base_activty"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.activity.HomeActivity"
-            android:label="@string/title_activity_home" >
+            android:label="@string/title_activity_home"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.activity.ClassActivity"
-            android:label="@string/title_activity_class" >
+            android:label="@string/title_activity_class"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.activity.OrderActivity"
-            android:label="@string/title_activity_order" >
+            android:label="@string/title_activity_order"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.activity.UserActivity"
-            android:label="@string/title_activity_user" >
+            android:label="@string/title_activity_user"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.activity.RegisterActivity"
-            android:label="@string/title_activity_register" >
+            android:label="@string/title_activity_register"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.activity.PhoneActivity"
-            android:label="@string/title_activity_user" >
+            android:label="@string/title_activity_user"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:label="@string/title_activity_register" >
+            android:label="@string/title_activity_register"
+            android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".ui.activity.Scenic_Tickets_Activity"
+            android:label="@string/title_activity_scenic__tickets_"
+            android:screenOrientation="portrait"></activity>
     </application>
+
 </manifest>
