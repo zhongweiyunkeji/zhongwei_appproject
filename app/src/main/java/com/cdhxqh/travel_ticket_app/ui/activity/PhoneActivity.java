@@ -165,7 +165,7 @@ public class PhoneActivity extends BaseActivity {
         button_id = (EditText) findViewById(R.id.button_id);
     }
 
-    ;
+
 
     /**
      * 初始化控件
@@ -175,7 +175,6 @@ public class PhoneActivity extends BaseActivity {
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
         titleTextView.setText(getResources().getString(R.string.find_pwd_text));
-        EditTextMail.setText("425767281@qq.com");
         //返回至登录界面事件
         backImageView.setOnClickListener(backImageViewOnClickListener);
 
