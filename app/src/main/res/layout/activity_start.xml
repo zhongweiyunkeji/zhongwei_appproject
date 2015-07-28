@@ -11,10 +11,6 @@
         android:src="@drawable/splash0"
         android:id="@+id/iv_entry"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/ban_shadow"/>
 
     <TextView
         android:layout_width="match_parent"

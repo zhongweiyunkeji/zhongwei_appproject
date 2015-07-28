@@ -11,25 +11,30 @@ public class Constants {
      */
 
     //服务端IP
-    public static final String BASE_URL = "http://192.168.1.106:8080/qdm/ecsusers/";
+
+    public static final String BASE_URL = "http://172.25.124.1:8080/qdm/";
 
 
     /**登录用户接口**/
-    public static final String LOGIN_URL = BASE_URL+"login";
+    public static final String LOGIN_URL = BASE_URL+"ecsusers/login";
 
 	/**邮箱获取密码接口**/
-	public static final String PHONEPASS_URL = BASE_URL+"reset";
+	public static final String PHONEPASS_URL = BASE_URL+"ecsusers/reset";
 
 	/**验证码密码接口**/
-	public static final String PHONELINE_URL = BASE_URL+"doReset";
+	public static final String PHONELINE_URL = BASE_URL+"ecsusers/doReset";
 
 	/**用户注册验证码 **/
 
-	public static final String REG_CODE_URL = BASE_URL+"doCheck";
+	public static final String REG_CODE_URL = BASE_URL+"ecsusers/doCheck";
 
     /**用户注册**/
 
-    public static final String REG_URL = BASE_URL+"check";
+    public static final String REG_URL = BASE_URL+"ecsusers/doCheck";
+
+
+    /**听中卫_景区列表**/
+    public static final String TICKETS_URL = BASE_URL+"ecsbrand/brandlist";
 
 	/**
      ******************************************* 接口参数设置信息结束 ******************************************

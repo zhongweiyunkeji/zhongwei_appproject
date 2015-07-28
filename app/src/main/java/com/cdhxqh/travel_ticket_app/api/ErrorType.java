@@ -22,6 +22,7 @@ public enum ErrorType {
     ErrorFavTopicFailure,
     ErrorGetProfileFailure;
 
+
     public static String errorMessage(Context cxt, ErrorType type) {
         boolean isNetAvailable = NetWorkHelper.isNetAvailable(cxt);
         if (!isNetAvailable)

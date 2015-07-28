@@ -172,7 +172,10 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:drawableRight="@drawable/icon_mail_a"
+                    android:textCursorDrawable="@drawable/color_cursor"
                     android:hint="注册邮箱号" />
+
+
 
             </LinearLayout>
 

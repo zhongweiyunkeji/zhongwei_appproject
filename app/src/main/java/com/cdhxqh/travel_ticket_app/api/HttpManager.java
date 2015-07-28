@@ -1,9 +1,13 @@
 package com.cdhxqh.travel_ticket_app.api;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import com.cdhxqh.travel_ticket_app.config.Constants;
+import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
+import com.cdhxqh.travel_ticket_app.model.PersistenceHelper;
+import com.cdhxqh.travel_ticket_app.ui.activity.Listen_ZhongWei_Activity;
 import com.cdhxqh.travel_ticket_app.utils.JsonUtils;
 import com.cdhxqh.travel_ticket_app.utils.SafeHandler;
 import com.loopj.android.http.AsyncHttpClient;
@@ -12,6 +16,7 @@ import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.apache.http.Header;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -23,6 +28,21 @@ public class HttpManager {
 
     private static final String TAG = "HttpManager";
 
+
+    //景区门票
+    public static void getEcs_Brands_list(Context cxt, String brand_name, String showCount, String currentPage, boolean refresh,
+                                    HttpRequestHandler<ArrayList<Ecs_brand>> handler) {
+        String urlString;
+
+        if (brand_name.equals("")) {
+            urlString = Constants.TICKETS_URL + "?" + "showCount=" + showCount + "&" + "currentPage=" + currentPage;
+        } else {
+            urlString = Constants.TICKETS_URL + "?" + "brand_name=" + brand_name + "showCount=" + showCount + "&" + "currentPage=" + currentPage;
+        }
+        getEcs_Brands(cxt, urlString, refresh, handler);
+    }
+
+
     /**
      * 使用用户名密码登录
      *
@@ -33,9 +53,9 @@ public class HttpManager {
      */
     public static void loginWithUsername(final Context cxt, final String username, final String password,
                                          final HttpRequestHandler<Integer> handler) {
-        Map<String, String> mapparams=new HashMap<String,String>();
-        mapparams.put("loginName",username);
-        mapparams.put("password",password);
+        Map<String, String> mapparams = new HashMap<String, String>();
+        mapparams.put("loginName", username);
+        mapparams.put("password", password);
 
 
         requestOnceWithURLString(cxt, Constants.LOGIN_URL, mapparams, new HttpRequestHandler<String>() {
@@ -189,19 +209,52 @@ public class HttpManager {
 
 
     /**
+     * 景区列表
+     *
+     * @param ctx;
+     * @param url;
+     * @param handler; *
+     */
+
+    public static void getEcs_Brands(Context ctx, String url, boolean refresh,
+                                     final HttpRequestHandler<ArrayList<Ecs_brand>> handler) {
+
+
+        Uri uri = Uri.parse(Constants.TICKETS_URL);
+        String path = uri.getLastPathSegment();
+        String param = uri.getEncodedQuery();
+        String key = path;
+        if (param != null)
+            key += param;
+
+        if (!refresh) {
+            //尝试从缓存中加载
+            ArrayList<Ecs_brand> topics = PersistenceHelper.loadModelList(ctx, key);
+            if (topics != null && topics.size() > 0) {
+                SafeHandler.onSuccess(handler, topics);
+                return;
+            }
+        }
+
+        new AsyncHttpClient().get(ctx, Constants.TICKETS_URL,
+                new WrappedJsonHttpResponseHandler<Ecs_brand>(ctx, Ecs_brand.class, key, handler));
+    }
+
+
+    /**
      * 公用的URl连接
      *
      * @param cxt
      * @param mapparams
-     * @param handler *
+     * @param handler   *
      */
 
     public static void requestOnceWithURLString(final Context cxt, final String url, final Map<String, String> mapparams,
                                                  final HttpRequestHandler<String> handler) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        for (Map.Entry<String, String> entry : mapparams.entrySet()){
-            params.put(entry.getKey(),entry.getValue());
+        for (Map.Entry<String, String> entry : mapparams.entrySet()) {
+            params.put(entry.getKey(), entry.getValue());
         }
 
         client.post(url, params, new TextHttpResponseHandler() {

@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.cdhxqh.travel_ticket_app.app.AppManager;
 import com.cdhxqh.travel_ticket_app.task.AsyncCallable;
 import com.cdhxqh.travel_ticket_app.task.Callback;
@@ -43,6 +44,7 @@ public abstract class BaseActivity extends Activity {
 //        if (!ImageLoader.getInstance().isInited()) {
 //            ImageLoaderConfig.initImageLoader(this, Constants.BASE_IMAGE_CACHE);
 //        }
+        SDKInitializer.initialize(getApplicationContext());
         tManager=(TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         imm=(InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
     }
