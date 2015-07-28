@@ -79,7 +79,7 @@
             android:layout_gravity="left"
             android:textColor="#B9B9B9"
             android:hint="请输入11位手机号"
-            android:text="18205155217"
+            android:text="18208155217"
             />
 
         <TextView
@@ -234,7 +234,6 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="15dp"
             android:textColor="#C8D1D0"
-            android:text="已发送短信验证码到182****5217"
             />
 
         <Button
