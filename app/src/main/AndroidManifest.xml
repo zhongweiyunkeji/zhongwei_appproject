@@ -92,7 +92,18 @@
             android:name=".ui.activity.ScenicMapActivity"
             android:label="@string/title_activity_scenic_map"></activity>
 
+        <activity
+            android:name=".ui.activity.IntroductionActivity"
+            android:label="@string/title_activity_scenic_map"></activity>
+
+        <activity
+            android:name=".ui.activity.ReservationActivity"
+            android:label="@string/title_activity_scenic_map"></activity>
+
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
