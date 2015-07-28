@@ -59,6 +59,8 @@
         </TableRow>
     </TableLayout>
 
+
+
     <!--  填写手机号  -->
     <include layout="@layout/reg_phone_number_text"></include>
 
