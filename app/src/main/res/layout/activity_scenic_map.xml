@@ -1,10 +1,44 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.cdhxqh.travel_ticket_app.ui.activity.ScenicMapActivity">
 
-    <include layout="@layout/activity_title"></include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/title_top_bj">
+
+        <ImageView
+            android:id="@+id/back_imageview_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/title_back_btn"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/title_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="标题"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimens_22"/>
+
+        <ImageView
+            android:id="@+id/title_search_id"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_menu" />
+
+
+    </RelativeLayout>
 
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
@@ -12,4 +46,4 @@
         android:layout_height="fill_parent"
         android:clickable="true" />
 
-</RelativeLayout>
+</LinearLayout>
