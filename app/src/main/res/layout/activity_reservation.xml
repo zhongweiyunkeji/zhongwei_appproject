@@ -15,26 +15,68 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
                 android:text="沙坡头成人票（下单立减5元）"
-                android:textColor="#2f4f4f"/>
+                android:textSize="17sp"
+                android:textColor="#2e8b57"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="到期时间  2015-12-31 17:00:00"
-                android:textColor="#2f4f4f"/>
+                android:layout_marginRight="10dp"
+                android:text="到期时间" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2015-12-31 17:00:00"
+                    android:textColor="#a9a9a9"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="￥"
+                    android:textColor="#ffa500"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$64 /张"
-                android:textColor="#2f4f4f"/>
+                android:layout_marginRight="10dp"
+                android:text="64"
+                android:textColor="#ffa500"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="/张"
+                    android:textColor="#2f4f4f"/>
+
+                </LinearLayout>
 
             <!--出行时间-->
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/out_time_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp">
 
             <TextView
                 android:id="@+id/time_out_id"
@@ -46,31 +88,50 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
                 android:text="请选择出行时间"
                 android:textColor="#2f4f4f"/>
 
-              </LinearLayout>
+              </RelativeLayout >
 
             <!--数量-->
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/ticket_num_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:text="数量"
                 android:textColor="#2f4f4f"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="数量框"
-                android:textColor="#2f4f4f"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="#2f4f4f"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <!--填单框-->
             <LinearLayout
@@ -79,35 +140,119 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:background="@drawable/reservation_input_1"
+                        android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="数量框"
-                        android:textColor="#2f4f4f"/>
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center"
+                        android:text="取票人"
+                        android:textSize="16sp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="数量框"
-                        android:textColor="#2f4f4f"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:background="@android:color/transparent"
+                        android:textSize="14sp"
+                        />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="数量框"
-                        android:textColor="#2f4f4f"/>
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:background="@drawable/reservation_input_2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center"
+                            android:text="手机号"
+                            android:textSize="16sp"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:background="@android:color/transparent"
+                        android:textSize="14sp"
+                        />
+
+                        </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="6dp"
+                        android:background="@drawable/reservation_input_3"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center"
+                            android:text="身份证"
+                            android:textSize="16sp"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:background="@android:color/transparent"
+                        android:hint="用于景点的入园凭证"
+                        android:textSize="14sp"
+                        />
+
+                        </LinearLayout>
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <FrameLayout
                     android:layout_height="match_parent"
-                    android:text="数量框"
-                    android:textColor="#2f4f4f"/>
+                    android:layout_width="0dp"
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/reservation_select_1"
+                        android:textColor="#2f4f4f"/>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center">
+                    <ImageView
+                        android:id="@+id/guest_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/reservation_guest_icon"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_toRightOf="@id/guest_icon"
+                        android:text="请选择\n常用旅客"
+                        android:textSize="11sp"/>
+                    </RelativeLayout>
+                </FrameLayout>
 
             </LinearLayout>
 
@@ -115,6 +260,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
                 android:text="订单总额  ￥138"
                 android:textColor="#2f4f4f"/>
 
@@ -129,8 +276,9 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="35dp"
-            android:layout_centerInparent="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/button_login_mail"
             android:text="提交订单"
             />
 
