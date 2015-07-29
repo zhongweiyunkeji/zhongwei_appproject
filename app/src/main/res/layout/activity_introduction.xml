@@ -6,24 +6,21 @@
 
     <include layout="@layout/activity_title"></include>
 
-    <ScrollView
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <WebView
+        android:id="@+id/spot_webView_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:scrollbars="vertical"></WebView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="标题"
-                android:textColor="#2e8b57"/>
+</LinearLayout>
 
-        </LinearLayout>
-
-    </ScrollView>
 
 </LinearLayout>
