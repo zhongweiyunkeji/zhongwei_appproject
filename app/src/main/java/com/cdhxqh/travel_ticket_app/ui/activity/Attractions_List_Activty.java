@@ -15,16 +15,22 @@ import android.widget.TextView;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
+import com.cdhxqh.travel_ticket_app.model.Attractions;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
+import com.cdhxqh.travel_ticket_app.ui.adapter.AttractionsListAdapter;
 import com.cdhxqh.travel_ticket_app.ui.adapter.BrandListAdapter;
 import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 
 import java.util.ArrayList;
 
-public class Listen_ZhongWei_Activity extends BaseActivity {
+/**景点列表**
+ *
+ */
 
-    private static final String TAG="Listen_ZhongWei_Activity";
+public class Attractions_List_Activty extends BaseActivity {
+
+    private static final String TAG="Attractions_List_Activty";
     /**
      * 返回按钮*
      */
@@ -44,28 +50,32 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
     /****/
     RecyclerView mRecyclerView;
 
+    /**attractionsListAdapter**/
+    AttractionsListAdapter attractionsListAdapter;
 
-    BrandListAdapter brandListAdapter;
+    ArrayList<Attractions> attractionses;
+    /**景区名称**/
+    String brandName;
 
 
-    private ProgressDialog progressDialog;
-
-
-    /**显示条数**/
-    private static final int showCount=10;
-    /**当前页数**/
-    private static final int currentPage=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scenic__tickets_);
+        setContentView(R.layout.activity_distance);
+        getData();
         findViewById();
         initView();
 
-        createProgressDialog();
-        requestEcsBrands(true);
 
+    }
+
+
+    /**获取数据**/
+    private void getData() {
+        brandName=getIntent().getExtras().getString("brandName");
+        attractionses=getIntent().getParcelableArrayListExtra("attractionses");
+        Log.i(TAG,"brandName="+brandName+",attractionses="+attractionses);
     }
 
     @Override
@@ -75,13 +85,13 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
         searchImageView = (ImageView) findViewById(R.id.title_search_id);
 
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.list_tickets);
+        mRecyclerView = (RecyclerView) findViewById(R.id.list_distance);
 
     }
 
     @Override
     protected void initView() {
-        titleText.setText(getResources().getString(R.string.listen_zhongwen));
+        titleText.setText(brandName);
         backImage.setOnClickListener(backImageOnClickListener);
         backImage.setVisibility(View.VISIBLE);
 
@@ -95,10 +105,10 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
                 ItemDivider.VERTICAL_LIST));
 
 
-        brandListAdapter = new BrandListAdapter(this);
+        attractionsListAdapter = new AttractionsListAdapter(this);
 
-        mRecyclerView.setAdapter(brandListAdapter);
-//        brandListAdapter.update(addGoods(), true);
+        mRecyclerView.setAdapter(attractionsListAdapter);
+        attractionsListAdapter.update(attractionses, true);
     }
 
 
@@ -151,44 +161,5 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
     }
 
 
-    /**
-     * 创建progressDialog*
-     */
-    private void createProgressDialog() {
-        progressDialog = ProgressDialog.show(Listen_ZhongWei_Activity.this, null, getString(R.string.please_loading_hint), true, true);
-    }
-
-    private void requestEcsBrands(boolean refresh) {
-        HttpManager.getEcs_Brands_list(Listen_ZhongWei_Activity.this, "", showCount+"", currentPage+"", true, handler);
-    }
-
-
-
-    private HttpRequestHandler<ArrayList<Ecs_brand>> handler = new HttpRequestHandler<ArrayList<Ecs_brand>>() {
-
-
-        @Override
-        public void onSuccess(ArrayList<Ecs_brand> data) {
-
-            Log.i(TAG,"data="+data);
-            brandListAdapter.update(data, true);
-            progressDialog.dismiss();
-//            MessageUtils.showErrorMessage(Listen_ZhongWei_Activity.this,"加载成功");
-
-        }
-
-        @Override
-        public void onSuccess(ArrayList<Ecs_brand> data, int totalPages, int currentPage) {
-            progressDialog.dismiss();
-            Log.i(TAG,"222222");
-
-        }
-
-        @Override
-        public void onFailure(String error) {
-            Log.i(TAG,"333333");
-            MessageUtils.showErrorMessage(Listen_ZhongWei_Activity.this,error);
-            progressDialog.dismiss();
-        }
-    };
+    
 }

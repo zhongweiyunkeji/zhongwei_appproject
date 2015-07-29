@@ -42,6 +42,14 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
 
     public String is_show;
 
+    /**开放时间**/
+    public String valid_date;
+    /**经度**/
+    public String longitude;
+    /**纬度**/
+    public String latitude;
+
+
 
     public void parse(JSONObject jsonObject) throws JSONException {
         Log.i(TAG, "jsonObject=" + jsonObject.toString());
@@ -52,6 +60,9 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
         site_url = jsonObject.getString("site_url");
         sort_order = jsonObject.getString("sort_order");
         is_show = jsonObject.getString("is_show");
+        valid_date = jsonObject.getString("valid_date");
+        longitude = jsonObject.getString("longitude");
+        latitude = jsonObject.getString("latitude");
 
     }
 
@@ -66,6 +77,9 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
         site_url = in.readString();
         sort_order = in.readString();
         is_show = in.readString();
+        valid_date = in.readString();
+        longitude = in.readString();
+        latitude = in.readString();
     }
 
     @Override
@@ -82,6 +96,9 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
         dest.writeString(site_url);
         dest.writeString(sort_order);
         dest.writeString(is_show);
+        dest.writeString(valid_date);
+        dest.writeString(longitude);
+        dest.writeString(latitude);
     }
 
     public static final Creator<Ecs_brand> CREATOR = new Creator<Ecs_brand>() {
@@ -150,5 +167,29 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
 
     public void setIs_show(String is_show) {
         this.is_show = is_show;
+    }
+
+    public String getValid_date() {
+        return valid_date;
+    }
+
+    public void setValid_date(String valid_date) {
+        this.valid_date = valid_date;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 }
