@@ -14,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_avatar" />
+        android:src="@drawable/not_image_bj" />
 
     <LinearLayout
         android:layout_width="wrap_content"

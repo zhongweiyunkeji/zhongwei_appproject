@@ -62,7 +62,7 @@ public class BaseApplication extends Application {
                 .imageScaleType(ImageScaleType.EXACTLY)
                 .cacheOnDisc(true)
                 .displayer(new FadeInBitmapDisplayer(200))
-                .showImageOnLoading(R.drawable.ic_avatar)
+                .showImageOnLoading(R.drawable.not_image_bj)
                 .build();
 
         File cacheDir;

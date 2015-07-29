@@ -1,9 +1,11 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,34 +13,30 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
+import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
 import com.cdhxqh.travel_ticket_app.model.Attractions;
-import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
-import com.cdhxqh.travel_ticket_app.ui.adapter.PopWinAdapter;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 地图显示的Activity*
@@ -88,11 +86,10 @@ public class ScenicMapActivity extends BaseActivity {
 
     BaiduMap mBaiduMap;
 
-
+    private List<Marker> mMarkerList;
     private Marker mMarkerA;
     // 初始化全局 bitmap 信息，不用时及时 recycle
-    BitmapDescriptor bdA = BitmapDescriptorFactory
-            .fromResource(R.drawable.icon_marka);
+    ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
 
     private InfoWindow mInfoWindow;
 
@@ -112,6 +109,8 @@ public class ScenicMapActivity extends BaseActivity {
 
     /****/
     private ArrayList<Attractions> attractionses;
+
+    Context mContext = ScenicMapActivity.this;
 
 
     @Override
@@ -168,23 +167,70 @@ public class ScenicMapActivity extends BaseActivity {
 
         mBaiduMap = mMapView.getMap();
         initLocation();
-        initOverlay();
+//        initOverlay();
 
 
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             public boolean onMarkerClick(final Marker marker) {
-                Button button = new Button(getApplicationContext());
-                button.setBackgroundResource(R.drawable.popup);
-                InfoWindow.OnInfoWindowClickListener listener = null;
-                if (marker == mMarkerA) {
-                    button.setText("沙漠博物馆");
-                    LatLng ll = marker.getPosition();
-                    mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(button), ll, -47, listener);
-                    mBaiduMap.showInfoWindow(mInfoWindow);
+                for (int i = 0; i < mMarkerList.size(); i++) {
+                    View view = customView();
+
+                    if (marker == mMarkerList.get(i)) {
+                        InfoWindow.OnInfoWindowClickListener listener = null;
+                        TextView t = (TextView) view.findViewById(R.id.arrtactions_title_id);
+                        t.setText(attractionses.get(i).title);
+                        final int finalI = i;
+
+
+                        listener=new InfoWindow.OnInfoWindowClickListener() {
+                            @Override
+                            public void onInfoWindowClick() {
+                                Log.i(TAG,"******7777");
+                                Intent intent = new Intent();
+                                intent.setClass(ScenicMapActivity.this, Attractions_details_Activity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelable("attractions", attractionses.get(finalI));
+                                intent.putExtras(bundle);
+                                startActivityForResult(intent, 0);
+                            }
+                        };
+
+
+
+                        LatLng ll = marker.getPosition();
+                        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(view), ll, -60,listener);
+                        mBaiduMap.showInfoWindow(mInfoWindow);
+                    }
                 }
                 return true;
             }
         });
+
+        mBaiduMap.setOnMapClickListener(new BaiduMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                mBaiduMap.hideInfoWindow();
+            }
+
+            @Override
+            public boolean onMapPoiClick(MapPoi mapPoi) {
+                return false;
+            }
+        });
+    }
+
+
+    /**
+     * 自定义布局*
+     */
+    private View customView() {
+
+        LayoutInflater inflater = (LayoutInflater) mContext
+                .getSystemService(LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.cover_infowindow, null);
+
+
+        return view;
     }
 
 
@@ -210,19 +256,6 @@ public class ScenicMapActivity extends BaseActivity {
     }
 
 
-    /**
-     * 覆盖物*
-     */
-    public void initOverlay() {
-        LatLng llA = new LatLng(37.46976, 105.004958);
-
-        OverlayOptions ooA = new MarkerOptions().position(llA).icon(bdA)
-                .zIndex(9).draggable(true);
-        mMarkerA = (Marker) (mBaiduMap.addOverlay(ooA));
-        ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
-        giflist.add(bdA);
-
-    }
 
 
     /**
@@ -253,21 +286,6 @@ public class ScenicMapActivity extends BaseActivity {
     };
 
 
-    /**
-     * 计算ListView的高度 *
-     */
-    private int setPullLvHeight(ListView pull) {
-        int totalHeight = 0;
-        ListAdapter adapter = pull.getAdapter();
-        for (int i = 0, len = adapter.getCount(); i < len; i++) { // listAdapter.getCount()返回数据项的数目
-            View listItem = adapter.getView(i, null, pull);
-            listItem.measure(0, 0); // 计算子项View 的宽高
-            totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
-        }
-        return totalHeight;
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_scenic_map, menu);
@@ -291,7 +309,7 @@ public class ScenicMapActivity extends BaseActivity {
         super.onDestroy();
         mMapView.onDestroy();
         mMapView = null;
-        bdA.recycle();
+//        bdA.recycle();
     }
 
     @Override
@@ -332,10 +350,10 @@ public class ScenicMapActivity extends BaseActivity {
         @Override
         public void onSuccess(ArrayList<Attractions> data) {
 
-            Log.i(TAG, "data=" + data);
             if (data != null && data.size() != 0) {
                 attractionses = data;
-
+                //获取经纬度
+                getCoordinates(attractionses);
             }
             progressDialog.dismiss();
 
@@ -344,16 +362,55 @@ public class ScenicMapActivity extends BaseActivity {
         @Override
         public void onSuccess(ArrayList<Attractions> data, int totalPages, int currentPage) {
             progressDialog.dismiss();
-            Log.i(TAG, "222222");
 
         }
 
         @Override
         public void onFailure(String error) {
-            Log.i(TAG, "333333");
-            MessageUtils.showErrorMessage(ScenicMapActivity.this, error);
+            MessageUtils.showErrorMessage(ScenicMapActivity.this, "暂无相关景点信息");
             progressDialog.dismiss();
         }
     };
+
+
+    /**
+     * 获取经纬度*
+     */
+    private void getCoordinates(ArrayList<Attractions> alist) {
+        giflist = new ArrayList<BitmapDescriptor>();
+        mMarkerList = new ArrayList<Marker>();
+        if (alist != null) {
+            for (int i = 0; i < alist.size(); i++) {
+                String latitude = alist.get(i).latitude; //纬度
+                String longitude = alist.get(i).longitude;//经度
+                if (!latitude.equals("") && !longitude.equals("")) {
+                    LatLng llA = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+                    BitmapDescriptor bd = BitmapDescriptorFactory
+                            .fromView(cusBitmapDescripyorView(i + 1 + ""));
+                    OverlayOptions oo = new MarkerOptions().position(llA).icon(bd)
+                            .zIndex(9).draggable(true);
+                    Marker mMarker = (Marker) (mBaiduMap.addOverlay(oo));
+                    mMarkerList.add(mMarker);
+                    giflist.add(bd);
+                }
+            }
+        }
+
+
+    }
+
+
+    /**
+     * 设置Marker显示信息*
+     */
+    private View cusBitmapDescripyorView(String str) {
+        LayoutInflater inflater = (LayoutInflater) mContext
+                .getSystemService(LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.cover_marker, null);
+        TextView textView = (TextView) view.findViewById(R.id.marker_text_id);
+        textView.setText(str);
+        return view;
+    }
+
 
 }

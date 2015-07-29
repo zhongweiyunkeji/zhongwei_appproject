@@ -85,8 +85,6 @@
     <string name="error_unknown">未知错误</string>
     <string name="error_obtain_once">无法获取ONCE</string>
     <string name="get_info_mation_text">获取信息失败</string>
-
-
     <string name="title_activity_scenic__tickets_">Scenic_Tickets_Activity</string>
     <string name="reg_loaing">正在努力加载...</string>
     <string name="please_loading_hint">请稍后...</string>
@@ -97,11 +95,11 @@
     <string name="please_input_phone_number_text">请输入11位手机号</string>
     <string name="next_button_text">下一步</string>
 
-
-
-    <!--听中卫-->
+    <!-- 听中卫 -->
     <string name="open_time_text">开放时间</string>
     <string name="distance_text">距离:</string>
     <string name="attractions_activity">景点列表</string>
+    <string name="title_activity_attractions_details_">Attractions_details_Activity</string>
+    <string name="not_music_file_text">暂无音频介绍</string>
 
 </resources>

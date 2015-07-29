@@ -12,12 +12,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.model.Attractions;
-import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
-import com.cdhxqh.travel_ticket_app.ui.activity.ScenicMapActivity;
+import com.cdhxqh.travel_ticket_app.ui.activity.Attractions_details_Activity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -30,9 +32,15 @@ public class AttractionsListAdapter extends RecyclerView.Adapter<AttractionsList
 
     ArrayList<Attractions> attractionses = new ArrayList<Attractions>();
 
+    private String latitude;
+
+    private String longitude;
+
 
     public AttractionsListAdapter(Context context) {
         mContext = context;
+
+
     }
 
     @Override
@@ -43,25 +51,29 @@ public class AttractionsListAdapter extends RecyclerView.Adapter<AttractionsList
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        final Attractions attractions= attractionses.get(i);
-        Log.i(TAG,"attractions.image="+attractions.image);
+        final Attractions attractions = attractionses.get(i);
+        String latitude1=attractions.latitude;
+        String longitude2=attractions.longitude;
 
-        ImageLoader.getInstance().displayImage(attractions.image,viewHolder.imageView);
+        String distance="暂无";
+
+        if(!latitude1.equals("")&&!longitude2.equals("")){
+             distance=distance("37.523379","105.181925",latitude1,longitude2);
+        }
+
+        ImageLoader.getInstance().displayImage(attractions.image, viewHolder.imageView);
         viewHolder.nameText.setText(attractions.title);
-//        viewHolder.distanceText.setText(attractions.);
+        viewHolder.distanceText.setText(distance.equals("")?"暂无":distance+"公里");
 
         viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent();
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("brand_id", ecs_brand.brand_id);
-//                bundle.putString("brand_name", ecs_brand.brand_name);
-//                bundle.putString("longitude", ecs_brand.longitude);
-//                bundle.putString("latitude", ecs_brand.latitude);
-//                intent.putExtras(bundle);
-//                intent.setClass(mContext, ScenicMapActivity.class);
-//                mContext.startActivity(intent);
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("attractions", attractions);
+                intent.putExtras(bundle);
+                intent.setClass(mContext, Attractions_details_Activity.class);
+                mContext.startActivity(intent);
             }
         });
 
@@ -125,5 +137,42 @@ public class AttractionsListAdapter extends RecyclerView.Adapter<AttractionsList
         notifyDataSetChanged();
     }
 
+
+    /**
+     * 更新定位的经纬度
+     *
+     * @param latitude
+     * @param longitude *
+     */
+
+
+    public void updateDis(String latitude, String longitude) {
+        Log.i(TAG, "latitude=" + latitude + ",longitude=" + longitude);
+
+        this.latitude = latitude;
+        this.longitude = longitude;
+        notifyDataSetChanged();
+    }
+
+
+    /**
+     * 计算距离*
+     */
+    private String distance(String latitude1, String longitude1, String latitude2, String longitude2) {
+        Log.i(TAG, "latitude1=" + latitude1 + ",longitude1=" + longitude1+",latitude2="+latitude2+",longitude2="+longitude2);
+        LatLng p1 = new LatLng(Double.parseDouble(latitude1), Double.parseDouble(longitude1));
+        LatLng p2 = new LatLng(Double.parseDouble(latitude2), Double.parseDouble(longitude2));
+
+
+
+        double distance = DistanceUtil.getDistance(p1, p2);
+
+        /**保留2位小数**/
+        DecimalFormat df   = new DecimalFormat("######0.00");
+        //转换成公里
+        String dkm=(df.format(distance/1000.0)) + "";
+
+        return dkm;
+    }
 
 }

@@ -108,7 +108,7 @@ public class JsonUtils {
 
 
     /**
-     * 获取景区门票信息*
+     * 获取景区信息*
      */
     public static ArrayList<Ecs_brand> parsingBrandsInfo(String result) {
 
@@ -121,7 +121,6 @@ public class JsonUtils {
 
             JSONArray brandlist = json.getJSONArray("brandlist");
 
-            Log.i(TAG, "logourl=" + logourl + ",brandlist=" + brandlist.toString());
             for (int i = 0; i < brandlist.length(); i++) {
                 JSONObject jsonObject = (JSONObject) brandlist.get(i);
                 Ecs_brand ecs_brand = new Ecs_brand();
@@ -133,7 +132,6 @@ public class JsonUtils {
                 ecs_brand.setSite_url(jsonObject.getString("site_url"));
                 ecs_brand.setBrand_logo(logourl+jsonObject.getString("brand_logo"));
                 ecs_brand.setValid_date(jsonObject.getString("valid_date"));
-
                 ecs_brand.setLongitude(jsonObject.getString("longitude"));
                 ecs_brand.setLatitude(jsonObject.getString("latitude"));
                 models.add(ecs_brand);
@@ -165,7 +163,6 @@ public class JsonUtils {
 
             JSONArray attractionslist = json.getJSONArray("attractionslist");
 
-            Log.i(TAG, "serverurl=" + serverurl + ",attractionslist=" + attractionslist.toString());
             for (int i = 0; i < attractionslist.length(); i++) {
                 JSONObject jsonObject = (JSONObject) attractionslist.get(i);
                 Attractions attractions = new Attractions();
@@ -175,7 +172,12 @@ public class JsonUtils {
                 attractions.setDescription(jsonObject.getString("description"));
                 attractions.setLatitude(jsonObject.getString("latitude"));
                 attractions.setLongitude(jsonObject.getString("longitude"));
-                attractions.setFile_url(serverurl+jsonObject.get("file_url"));
+
+                String file_url=jsonObject.get("file_url").toString().trim();
+
+                if(!file_url.equals("")) {
+                    attractions.setFile_url(serverurl + file_url);
+                }
                 attractions.setImage(jsonObject.getString("image"));
 
                 models.add(attractions);

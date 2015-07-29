@@ -12,6 +12,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.SDKInitializer;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
@@ -23,14 +28,15 @@ import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/**景点列表**
- *
+/**
+ * 景点列表**
  */
 
 public class Attractions_List_Activty extends BaseActivity {
 
-    private static final String TAG="Attractions_List_Activty";
+    private static final String TAG = "Attractions_List_Activty";
     /**
      * 返回按钮*
      */
@@ -50,19 +56,36 @@ public class Attractions_List_Activty extends BaseActivity {
     /****/
     RecyclerView mRecyclerView;
 
-    /**attractionsListAdapter**/
+    /**
+     * attractionsListAdapter*
+     */
     AttractionsListAdapter attractionsListAdapter;
 
     ArrayList<Attractions> attractionses;
-    /**景区名称**/
+    /**
+     * 景区名称*
+     */
     String brandName;
+
+
+    /**
+     * 定位相关*
+     */
+    public LocationClient mLocationClient;
+
+    public MyLocationListener mMyLocationListener;
+
+
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_distance);
+        /**定位相关**/
+        locationData();
         getData();
         findViewById();
         initView();
@@ -71,11 +94,13 @@ public class Attractions_List_Activty extends BaseActivity {
     }
 
 
-    /**获取数据**/
+    /**
+     * 获取数据*
+     */
     private void getData() {
-        brandName=getIntent().getExtras().getString("brandName");
-        attractionses=getIntent().getParcelableArrayListExtra("attractionses");
-        Log.i(TAG,"brandName="+brandName+",attractionses="+attractionses);
+        brandName = getIntent().getExtras().getString("brandName");
+        attractionses = getIntent().getParcelableArrayListExtra("attractionses");
+        Log.i(TAG, "brandName=" + brandName + ",attractionses=" + attractionses);
     }
 
     @Override
@@ -109,6 +134,24 @@ public class Attractions_List_Activty extends BaseActivity {
 
         mRecyclerView.setAdapter(attractionsListAdapter);
         attractionsListAdapter.update(attractionses, true);
+
+
+    }
+
+    /**
+     * 定位相关*
+     */
+    private void locationData() {
+        Log.i(TAG, "定位");
+        mLocationClient = new LocationClient(Attractions_List_Activty.this);
+        mMyLocationListener = new MyLocationListener();
+        mLocationClient.registerLocationListener(mMyLocationListener);
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);// 打开gps
+        option.setCoorType("bd09ll"); // 设置坐标类型
+//        option.setScanSpan(5000);
+        mLocationClient.setLocOption(option);
+        mLocationClient.start();
     }
 
 
@@ -140,19 +183,14 @@ public class Attractions_List_Activty extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_scenic__tickets_, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -160,6 +198,37 @@ public class Attractions_List_Activty extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * 实现实时位置回调监听
+     */
+    public class MyLocationListener implements BDLocationListener {
 
-    
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            Log.i(TAG, "定位开始＝" + location.getLocType());
+//            if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
+
+            String latitude = location.getLatitude() + "";
+
+            String longitude = location.getLongitude() + "";
+
+            String speed = location.getSpeed() + "";
+
+            String altitude = location.getAltitude() + "";
+
+            attractionsListAdapter.updateDis(latitude, longitude);
+            Log.i(TAG, "latitude=" + latitude + ",Longitude=" + longitude + ",speed=" + speed + ",altitude=" + altitude);
+
+
+//            }
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        // 退出时销毁定位
+        mLocationClient.stop();
+        super.onDestroy();
+    }
 }
