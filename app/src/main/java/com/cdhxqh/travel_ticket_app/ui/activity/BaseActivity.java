@@ -44,7 +44,7 @@ public abstract class BaseActivity extends Activity {
 //        if (!ImageLoader.getInstance().isInited()) {
 //            ImageLoaderConfig.initImageLoader(this, Constants.BASE_IMAGE_CACHE);
 //        }
-        SDKInitializer.initialize(getApplicationContext());
+//        SDKInitializer.initialize(getApplicationContext());
         tManager=(TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         imm=(InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
     }

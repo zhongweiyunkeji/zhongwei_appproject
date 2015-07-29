@@ -10,10 +10,14 @@ public class Constants {
      * 这里编写与服务器交互需要的url
      */
 
-    //服务端IP
+    //酒店服务端IP
 
-    public static final String BASE_URL = "http://172.25.124.1:8080/qdm/";
+//    public static final String BASE_URL = "http://172.25.124.1:8080/qdm/";
+    //公司服务端Ip
+//    public static final String BASE_URL = "http://192.168.1.106:8080/qdm/";
+    //远程服务器地址
 
+    public static final String BASE_URL = "http://182.92.158.158:8080/qdm/";
 
     /**登录用户接口**/
     public static final String LOGIN_URL = BASE_URL+"ecsusers/login";
@@ -35,6 +39,10 @@ public class Constants {
 
     /**听中卫_景区列表**/
     public static final String TICKETS_URL = BASE_URL+"ecsbrand/brandlist";
+
+    /**根据景区ID获取景点列表接口**/
+    public static final String ATTRACTIONS_URL = BASE_URL+"ecsbrand/articlelist";
+
 
 	/**
      ******************************************* 接口参数设置信息结束 ******************************************
@@ -141,6 +149,9 @@ public class Constants {
 	//验证码验证失效
 	public static final String RUNTIME_LINE_PASS = "ZWTICKET-GLOBAL-S-15";
 
+
+    //请求成功
+    public static final String REQUEST_SUCCESS = "ZWTICKET-GLOBAL-S-0";
 
 
 

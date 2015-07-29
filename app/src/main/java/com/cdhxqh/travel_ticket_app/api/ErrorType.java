@@ -42,7 +42,7 @@ public enum ErrorType {
                 return cxt.getResources().getString(R.string.error_reply);
 
             case ErrorGetNotificationFailure:
-                return cxt.getResources().getString(R.string.error_reply);
+                return cxt.getString(R.string.get_info_mation_text);
 
             case ErrorCreateNewFailure:
                 return cxt.getResources().getString(R.string.error_create_topic);
