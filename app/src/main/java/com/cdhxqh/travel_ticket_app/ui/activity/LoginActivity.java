@@ -114,12 +114,11 @@ public class LoginActivity extends BaseActivity {
         loginBtn.setOnClickListener(loginBtnOnClickListener);
 
 
-        userEditText.setText("721236969@qq.com");
-        pwdEditText.setText("111111");
-
-
         forgetPwd.setOnClickListener(forgetPwdOnClickListener);
         linearLayout_id.setOnClickListener(linearLayout_idOnClickListener);
+        if(mIsLogin){
+            userEditText.setText(ec_user.userName);
+        }
 
     }
 
@@ -177,6 +176,7 @@ public class LoginActivity extends BaseActivity {
 
                         MessageUtils.showMiddleToast(LoginActivity.this, "登陆成功");
                         progressDialog.dismiss();
+                        setResult(Constants.STATUS_CODE_1000);
                         finish();
 
 

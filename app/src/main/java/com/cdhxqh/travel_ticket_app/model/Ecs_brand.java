@@ -49,6 +49,15 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
     /**纬度**/
     public String latitude;
 
+    /**景区地址**/
+    public String address;
+
+    /**预定须知**/
+    public String po_notice;
+
+    /**最低票价**/
+    public double minprice;
+
 
 
     public void parse(JSONObject jsonObject) throws JSONException {
@@ -63,6 +72,9 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
         valid_date = jsonObject.getString("valid_date");
         longitude = jsonObject.getString("longitude");
         latitude = jsonObject.getString("latitude");
+        address = jsonObject.getString("address");
+        po_notice = jsonObject.getString("po_notice");
+        minprice = jsonObject.getDouble("minprice");
 
     }
 
@@ -80,6 +92,9 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
         valid_date = in.readString();
         longitude = in.readString();
         latitude = in.readString();
+        address = in.readString();
+        po_notice = in.readString();
+        minprice = in.readDouble();
     }
 
     @Override
@@ -99,6 +114,10 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
         dest.writeString(valid_date);
         dest.writeString(longitude);
         dest.writeString(latitude);
+        dest.writeString(address);
+        dest.writeString(po_notice);
+        dest.writeDouble(minprice);
+
     }
 
     public static final Creator<Ecs_brand> CREATOR = new Creator<Ecs_brand>() {
@@ -191,5 +210,30 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
 
     public void setLatitude(String latitude) {
         this.latitude = latitude;
+    }
+
+    public String getPo_notice() {
+        return po_notice;
+    }
+
+    public void setPo_notice(String po_notice) {
+        this.po_notice = po_notice;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
+    public double getMinprice() {
+        return minprice;
+    }
+
+    public void setMinprice(double minprice) {
+        this.minprice = minprice;
     }
 }

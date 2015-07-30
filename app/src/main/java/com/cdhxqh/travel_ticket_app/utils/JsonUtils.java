@@ -5,7 +5,9 @@ import android.util.Log;
 
 import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.Attractions;
+import com.cdhxqh.travel_ticket_app.model.Ec_user;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
+import com.cdhxqh.travel_ticket_app.model.PersistenceHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,8 +31,20 @@ public class JsonUtils {
         try {
             JSONObject json = new JSONObject(data);
             String errcode = json.getString("errcode");
-            Log.i(TAG, "errcode=" + errcode);
             if (errcode.equals(Constants.SUCCESS_LOGIN)) {
+                JSONObject result=json.getJSONObject("result");
+
+                Ec_user ec_user=new Ec_user();
+                int userId=result.getInt("userId");
+                ec_user.setUserId(userId);
+                ec_user.setEmail(result.getString("email"));
+                ec_user.setUserName(result.getString("userName"));
+                ec_user.setPassword(result.getString("password"));
+                ec_user.setMobilePhone(result.getString("mobilePhone"));
+
+//                PersistenceHelper.saveModel(cxt, ec_user, Constants.USER_CACHE+userId);
+                AccountUtils.writeLoginMember(cxt, ec_user);
+
                 return true;
             } else {
                 return false;
@@ -130,22 +144,26 @@ public class JsonUtils {
                 ecs_brand.setBrand_desc(jsonObject.getString("brand_desc"));
                 ecs_brand.setSort_order(jsonObject.getString("sort_order"));
                 ecs_brand.setSite_url(jsonObject.getString("site_url"));
-                ecs_brand.setBrand_logo(logourl+jsonObject.getString("brand_logo"));
+                ecs_brand.setBrand_logo(logourl + jsonObject.getString("brand_logo"));
                 ecs_brand.setValid_date(jsonObject.getString("valid_date"));
                 ecs_brand.setLongitude(jsonObject.getString("longitude"));
                 ecs_brand.setLatitude(jsonObject.getString("latitude"));
+
+                ecs_brand.setAddress(jsonObject.getString("address"));
+                ecs_brand.setPo_notice(jsonObject.getString("po_notice"));
+                ecs_brand.setMinprice(jsonObject.getDouble("minprice"));
                 models.add(ecs_brand);
             }
 
 
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.i(TAG, "eeeeee");
             return null;
         }
-         Log.i(TAG,"*****1");
+        Log.i(TAG, "*****1");
         return models;
     }
-
 
 
     /**
@@ -173,9 +191,9 @@ public class JsonUtils {
                 attractions.setLatitude(jsonObject.getString("latitude"));
                 attractions.setLongitude(jsonObject.getString("longitude"));
 
-                String file_url=jsonObject.get("file_url").toString().trim();
+                String file_url = jsonObject.get("file_url").toString().trim();
 
-                if(!file_url.equals("")) {
+                if (!file_url.equals("")) {
                     attractions.setFile_url(serverurl + file_url);
                 }
                 attractions.setImage(jsonObject.getString("image"));
@@ -188,15 +206,9 @@ public class JsonUtils {
             e.printStackTrace();
             return null;
         }
-        Log.i(TAG,"*****1");
+        Log.i(TAG, "*****1");
         return models;
     }
-
-
-
-
-
-
 
 
 }

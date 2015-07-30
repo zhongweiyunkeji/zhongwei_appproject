@@ -33,14 +33,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/not_data_hint"
-                android:text="沙坡头"
+                android:singleLine="true"
                 android:textColor="@color/text_color_1" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimens_5"
+            android:layout_marginTop="@dimen/dimens_10"
             android:orientation="horizontal">
 
             <TextView
@@ -54,6 +54,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimens_5"
                 android:hint="@string/not_data_hint" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearlayout_price_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/brand_price_di"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/orange_color"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimens_5"
+                android:hint="起" />
 
         </LinearLayout>
 

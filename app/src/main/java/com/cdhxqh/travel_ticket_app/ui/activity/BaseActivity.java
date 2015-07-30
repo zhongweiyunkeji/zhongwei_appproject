@@ -17,15 +17,17 @@ import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.cdhxqh.travel_ticket_app.app.AppManager;
+import com.cdhxqh.travel_ticket_app.model.Ec_user;
 import com.cdhxqh.travel_ticket_app.task.AsyncCallable;
 import com.cdhxqh.travel_ticket_app.task.Callback;
 import com.cdhxqh.travel_ticket_app.task.EMobileTask;
 import com.cdhxqh.travel_ticket_app.task.ProgressCallable;
+import com.cdhxqh.travel_ticket_app.utils.AccountUtils;
 
 import java.util.Locale;
 import java.util.concurrent.Callable;
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends Activity implements AccountUtils.OnAccountListener {
 
     public static final String TAG = BaseActivity.class.getSimpleName();
 
@@ -33,57 +35,38 @@ public abstract class BaseActivity extends Activity {
     protected InputMethodManager imm;
     private TelephonyManager tManager;
 
+    protected boolean mIsLogin;
+    protected Ec_user ec_user;
+
 
     private long exitTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         AppManager.getInstance().addActivity(this);
-//        if (!ImageLoader.getInstance().isInited()) {
-//            ImageLoaderConfig.initImageLoader(this, Constants.BASE_IMAGE_CACHE);
-//        }
+        mIsLogin = AccountUtils.isLogined(this);
+        if (mIsLogin)
+            ec_user = AccountUtils.readLoginMember(this);
+        AccountUtils.registerAccountListener(this);
+
         SDKInitializer.initialize(getApplicationContext());
-        tManager=(TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-        imm=(InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        tManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+    }
+
+
+    @Override
+    public void onLogout() {
+        mIsLogin = false;
     }
 
     @Override
-    protected void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
+    public void onLogin(Ec_user member) {
+        mIsLogin = true;
+        ec_user = member;
     }
 
-    @Override
-    protected void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-    }
-
-    @Override
-    protected void onRestart() {
-        // TODO Auto-generated method stub
-        super.onRestart();
-    }
-
-    @Override
-    protected void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
-    }
-
-    @Override
-    protected void onStart() {
-        // TODO Auto-generated method stub
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        // TODO Auto-generated method stub
-        super.onStop();
-    }
 
     /**
      * 绑定控件id
@@ -141,18 +124,17 @@ public abstract class BaseActivity extends Activity {
         startActivity(intent);
     }
 
-//    protected void DisPlay(String content){
-//        Toast.makeText(this, content, 1).show();
-//    }
 
-    /**加载进度条*/
+    /**
+     * 加载进度条
+     */
     public void showProgressDialog() {
         ProgressDialog progressDialog = null;
 
-        if(progressDialog!=null){
+        if (progressDialog != null) {
             progressDialog.cancel();
         }
-        progressDialog=new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
 //        Drawable drawable=getResources().getDrawable(R.drawable.loading_animation);
 //        progressDialog.setIndeterminateDrawable(drawable);
         progressDialog.setIndeterminate(true);
@@ -166,10 +148,10 @@ public abstract class BaseActivity extends Activity {
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
-    protected void hideOrShowSoftInput(boolean isShowSoft,EditText editText) {
+    protected void hideOrShowSoftInput(boolean isShowSoft, EditText editText) {
         if (isShowSoft) {
             imm.showSoftInput(editText, 0);
-        }else {
+        } else {
             imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
         }
     }
@@ -186,54 +168,24 @@ public abstract class BaseActivity extends Activity {
 
     //獲得設備信息
     protected String getDeviceId() throws Exception {
-        String deviceId=tManager.getDeviceId();
+        String deviceId = tManager.getDeviceId();
 
         return deviceId;
 
     }
 
-    /**
-     * 获取SIM卡序列号
-     *
-     * @return
-     */
-    protected String getToken() {
-        return tManager.getSimSerialNumber();
-    }
-
-	/*獲得系統版本*/
-
-    protected String getClientOs() {
-        return android.os.Build.ID;
-    }
-
-    /*獲得系統版本號*/
-    protected String getClientOsVer() {
-        return android.os.Build.VERSION.RELEASE;
-    }
-
-    //獲得系統語言包
-    protected String getLanguage() {
-        return Locale.getDefault().getLanguage();
-    }
-
-    protected String getCountry() {
-
-        return Locale.getDefault().getCountry();
-    }
 
     /**
-     *
-     * @param <T> 模板参数，操作时要返回的内容
+     * @param <T>       模板参数，操作时要返回的内容
      * @param pCallable 需要异步调用的操作
      * @param pCallback 回调
      */
-    protected <T> void doAsync(final Callable<T> pCallable, final Callback<T> pCallback, final Callback<Exception> pExceptionCallback,final boolean showDialog, String message) {
+    protected <T> void doAsync(final Callable<T> pCallable, final Callback<T> pCallback, final Callback<Exception> pExceptionCallback, final boolean showDialog, String message) {
         EMobileTask.doAsync(this, null, message, pCallable, pCallback, pExceptionCallback, false, showDialog);
     }
 
-    protected <T> void doAsync(final CharSequence pTitle,final CharSequence pMessage, final Callable<T> pCallable, final Callback<T> pCallback, final boolean showDialog) {
-        EMobileTask.doAsync(this, pTitle, pMessage, pCallable, pCallback, null,false, showDialog);
+    protected <T> void doAsync(final CharSequence pTitle, final CharSequence pMessage, final Callable<T> pCallable, final Callback<T> pCallback, final boolean showDialog) {
+        EMobileTask.doAsync(this, pTitle, pMessage, pCallable, pCallback, null, false, showDialog);
     }
 
     /**
@@ -286,7 +238,7 @@ public abstract class BaseActivity extends Activity {
      * @param pCallback
      * @param pExceptionCallback
      */
-    protected <T> void doProgressAsync(final int pTitleResID, final ProgressCallable<T> pCallable, final Callback<T> pCallback,	final Callback<Exception> pExceptionCallback) {
+    protected <T> void doProgressAsync(final int pTitleResID, final ProgressCallable<T> pCallable, final Callback<T> pCallback, final Callback<Exception> pExceptionCallback) {
         EMobileTask.doProgressAsync(this, pTitleResID, pCallable, pCallback, pExceptionCallback);
     }
 
@@ -307,13 +259,10 @@ public abstract class BaseActivity extends Activity {
     }
 
 
-
-
     /**
      * 退出登陆*
      */
     public void exit(Context context) {
-        Log.i(TAG, "123");
         if ((System.currentTimeMillis() - exitTime) > 2000) {
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
             exitTime = System.currentTimeMillis();

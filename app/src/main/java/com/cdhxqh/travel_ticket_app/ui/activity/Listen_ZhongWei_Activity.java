@@ -25,6 +25,11 @@ import java.util.ArrayList;
 public class Listen_ZhongWei_Activity extends BaseActivity {
 
     private static final String TAG="Listen_ZhongWei_Activity";
+
+    /**景区地图的标识**/
+    private static final int Map_TAG=1001;
+
+
     /**
      * 返回按钮*
      */
@@ -95,28 +100,13 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
                 ItemDivider.VERTICAL_LIST));
 
 
-        brandListAdapter = new BrandListAdapter(this);
+        brandListAdapter = new BrandListAdapter(this,Map_TAG);
 
         mRecyclerView.setAdapter(brandListAdapter);
-//        brandListAdapter.update(addGoods(), true);
     }
 
 
-    /**
-     * 添加商品测试数据*
-     */
-    private ArrayList<Ecs_brand> addGoods() {
-        ArrayList<Ecs_brand> brand_List = new ArrayList<Ecs_brand>();
 
-        for (int i = 0; i < 10; i++) {
-            Ecs_brand ecs_brands = new Ecs_brand();
-            ecs_brands.setBrand_name("沙坡头");
-            ecs_brands.setBrand_desc("这里是一望无际.烟波浩瀚的大沙漠，而且脚下则是我们的母亲河黄河...");
-            brand_List.add(ecs_brands);
-        }
-
-        return brand_List;
-    }
 
     /**
      * 返回事件*
@@ -130,19 +120,14 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_scenic__tickets_, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }

@@ -136,7 +136,6 @@ public class ScenicMapActivity extends BaseActivity {
         brandName = getIntent().getExtras().getString("brand_name");
         longitude = getIntent().getExtras().getString("longitude");
         latitude = getIntent().getExtras().getString("latitude");
-        Log.i(TAG, "brand_id=" + brand_id + "brandName=" + brandName + ",longitude=" + longitude + ",latitude=" + latitude);
     }
 
     @Override
@@ -167,7 +166,6 @@ public class ScenicMapActivity extends BaseActivity {
 
         mBaiduMap = mMapView.getMap();
         initLocation();
-//        initOverlay();
 
 
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
@@ -185,7 +183,6 @@ public class ScenicMapActivity extends BaseActivity {
                         listener=new InfoWindow.OnInfoWindowClickListener() {
                             @Override
                             public void onInfoWindowClick() {
-                                Log.i(TAG,"******7777");
                                 Intent intent = new Intent();
                                 intent.setClass(ScenicMapActivity.this, Attractions_details_Activity.class);
                                 Bundle bundle = new Bundle();
@@ -275,13 +272,17 @@ public class ScenicMapActivity extends BaseActivity {
     private View.OnClickListener menuTextViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.setClass(ScenicMapActivity.this, Attractions_List_Activty.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("brandName", brandName);
-            bundle.putParcelableArrayList("attractionses", attractionses);
-            intent.putExtras(bundle);
-            startActivityForResult(intent, 0);
+            if(attractionses!=null) {
+                Intent intent = new Intent();
+                intent.setClass(ScenicMapActivity.this, Attractions_List_Activty.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("brandName", brandName);
+                bundle.putParcelableArrayList("attractionses", attractionses);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 0);
+            }else{
+                MessageUtils.showMiddleToast(ScenicMapActivity.this,getString(R.string.not_hava_arrt_info));
+            }
         }
     };
 
@@ -367,7 +368,7 @@ public class ScenicMapActivity extends BaseActivity {
 
         @Override
         public void onFailure(String error) {
-            MessageUtils.showErrorMessage(ScenicMapActivity.this, "暂无相关景点信息");
+            MessageUtils.showMiddleToast(ScenicMapActivity.this,getString(R.string.not_hava_arrt_info));
             progressDialog.dismiss();
         }
     };

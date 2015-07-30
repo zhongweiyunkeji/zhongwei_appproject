@@ -15,7 +15,7 @@
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/img_member"
-            android:layout_marginTop="@dimen/dimens_10"
+            android:layout_marginTop="@dimen/dimens_5"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
@@ -27,12 +27,22 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/img_member"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/dimens_10"
-            android:layout_marginTop="@dimen/dimens_10"
+            android:layout_marginBottom="@dimen/dimens_5"
+            android:layout_marginTop="@dimen/dimens_5"
             android:text="@string/please_login_hint"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:textSize="18sp" />
-
+        <TextView
+            android:id="@+id/switch_account_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_member"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dimens_5"
+            android:text="@string/switch_account_text"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textSize="16sp" />
 
     </RelativeLayout>
 

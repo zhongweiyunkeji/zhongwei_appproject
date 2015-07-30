@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,9 +31,13 @@ public class BrandListAdapter extends RecyclerView.Adapter<BrandListAdapter.View
 
     ArrayList<Ecs_brand> ecs_brands = new ArrayList<Ecs_brand>();
 
+    int mark;
 
-    public BrandListAdapter(Context context) {
-        mContext = context;
+
+    public BrandListAdapter(Context context, int mark) {
+
+        this.mContext = context;
+        this.mark = mark;
     }
 
     @Override
@@ -45,22 +50,41 @@ public class BrandListAdapter extends RecyclerView.Adapter<BrandListAdapter.View
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         final Ecs_brand ecs_brand = ecs_brands.get(i);
 
-        ImageLoader.getInstance().displayImage(ecs_brand.brand_logo,viewHolder.imageView);
+        ImageLoader.getInstance().displayImage(ecs_brand.brand_logo, viewHolder.imageView);
         viewHolder.nameText.setText(ecs_brand.brand_name);
         viewHolder.timeText.setText(ecs_brand.valid_date);
+        if (mark == 1000) {
+            viewHolder.linearLayout.setVisibility(View.VISIBLE);
+            viewHolder.priceText.setText(getprice(ecs_brand.minprice));
+
+        } else {
+            viewHolder.linearLayout.setVisibility(View.GONE);
+        }
 
         viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
-                bundle.putInt("brand_id", ecs_brand.brand_id);
-                bundle.putString("brand_name", ecs_brand.brand_name);
-                bundle.putString("longitude", ecs_brand.longitude);
-                bundle.putString("latitude", ecs_brand.latitude);
-                intent.putExtras(bundle);
-                intent.setClass(mContext, ScenicMapActivity.class);
-                mContext.startActivity(intent);
+
+                if (mark == 1000) { //门票详情
+//                    bundle.putInt("brand_id", ecs_brand.brand_id);
+//                    bundle.putString("brand_name", ecs_brand.brand_name);
+//                    intent.putExtras(bundle);
+//                    intent.setClass(mContext, ScenicMapActivity.class);
+//                    mContext.startActivity(intent);
+
+                } else if (mark == 1001) { //地图详情
+
+                    bundle.putInt("brand_id", ecs_brand.brand_id);
+                    bundle.putString("brand_name", ecs_brand.brand_name);
+                    bundle.putString("longitude", ecs_brand.longitude);
+                    bundle.putString("latitude", ecs_brand.latitude);
+                    intent.putExtras(bundle);
+                    intent.setClass(mContext, ScenicMapActivity.class);
+                    mContext.startActivity(intent);
+                }
             }
         });
 
@@ -91,6 +115,15 @@ public class BrandListAdapter extends RecyclerView.Adapter<BrandListAdapter.View
          */
         public TextView timeText;
 
+        /**
+         * 价格布局*
+         */
+        LinearLayout linearLayout;
+        /**
+         * 价格表*
+         */
+        TextView priceText;
+
         public ViewHolder(View view) {
             super(view);
 
@@ -98,6 +131,8 @@ public class BrandListAdapter extends RecyclerView.Adapter<BrandListAdapter.View
             imageView = (ImageView) view.findViewById(R.id.brand_image_id);
             nameText = (TextView) view.findViewById(R.id.brand_name_id);
             timeText = (TextView) view.findViewById(R.id.brand_time_id);
+            linearLayout = (LinearLayout) view.findViewById(R.id.linearlayout_price_id);
+            priceText = (TextView) view.findViewById(R.id.brand_price_di);
 
         }
     }
@@ -122,6 +157,20 @@ public class BrandListAdapter extends RecyclerView.Adapter<BrandListAdapter.View
         ecs_brands = data;
 
         notifyDataSetChanged();
+    }
+
+
+    /**
+     * 价格去掉小数位*
+     */
+    private String getprice(double p) {
+        String newP="0";
+        if (p != 0) {
+            if (p % 1.0 == 0) {
+                newP = (long) p + "";
+            }
+        }
+        return newP;
     }
 
 

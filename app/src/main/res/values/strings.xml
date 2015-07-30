@@ -101,5 +101,7 @@
     <string name="attractions_activity">景点列表</string>
     <string name="title_activity_attractions_details_">Attractions_details_Activity</string>
     <string name="not_music_file_text">暂无音频介绍</string>
+    <string name="not_hava_arrt_info">暂无相关景点信息</string>
+    <string name="switch_account_text">切换账号</string>
 
 </resources>

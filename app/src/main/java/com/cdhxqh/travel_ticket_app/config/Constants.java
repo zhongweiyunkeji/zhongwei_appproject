@@ -36,8 +36,19 @@ public class Constants {
 
     public static final String REG_URL = BASE_URL+"ecsusers/doCheck";
 
+    /**获取游客中心**/
 
-    /**听中卫_景区列表**/
+    public static final String USER_URL = BASE_URL+"ecsusers/info";
+
+
+    /**获取景点门票**/
+    public static final String Goods_URL = BASE_URL+"ecscategory/goodspage";
+
+
+
+
+
+    /**景区列表**/
     public static final String TICKETS_URL = BASE_URL+"ecsbrand/brandlist";
 
     /**根据景区ID获取景点列表接口**/
@@ -159,5 +170,17 @@ public class Constants {
     /**
      * ********************状态参数信息设置结束*************************************
      */
+
+
+    /**缓存参数设置开始**/
+    public static final String USER_CACHE = "userId";
+
+    /**缓存参数设置结束**/
+
+    /**返回状态标识设置开始**/
+
+    public static final int STATUS_CODE_1000 =1000;
+
+    /**返回状态标识设置结束**/
 
 }

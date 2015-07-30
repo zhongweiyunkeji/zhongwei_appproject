@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.ui.adapter.UserSetingAdapter;
 import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
 
@@ -40,6 +41,16 @@ public class UserActivity extends BaseActivity {
 
     String[] names;
 
+
+    /**
+     * 请登录*
+     */
+    TextView txt_member;
+
+    /**切换账号**/
+    TextView switch_account_text;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,23 +58,37 @@ public class UserActivity extends BaseActivity {
         findViewById();
         initView();
 
-        img_member = (CircleImageView) findViewById(R.id.img_member);
-        img_member.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(UserActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
     @Override
     protected void findViewById() {
         recyclerView = (RecyclerView) findViewById(R.id.list_recyclerView);
+
+        img_member = (CircleImageView) findViewById(R.id.img_member);
+        txt_member = (TextView) findViewById(R.id.txt_member);
+        switch_account_text = (TextView) findViewById(R.id.switch_account_id);
+
     }
 
     @Override
     protected void initView() {
+
+
+
+        Log.i(TAG, "mIsLogin=" + mIsLogin);
+        if (mIsLogin) {
+            txt_member.setText(ec_user.userName);
+            switch_account_text.setVisibility(View.VISIBLE);
+            switch_account_text.setOnClickListener(img_memberOnClickListener);
+
+        } else {
+            switch_account_text.setVisibility(View.GONE);
+            txt_member.setOnClickListener(img_memberOnClickListener);
+            img_member.setOnClickListener(img_memberOnClickListener);
+        }
+
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(UserActivity.this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);
@@ -77,10 +102,18 @@ public class UserActivity extends BaseActivity {
 
         userSetingAdapter = new UserSetingAdapter(UserActivity.this, addStrings(names));
         recyclerView.setAdapter(userSetingAdapter);
-//        Log.i(TAG,"names="+names);
-//        userSetingAdapter.update(getResources().getStringArray(R.array.user_name_arrays), true);
 
     }
+
+
+    private View.OnClickListener img_memberOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(UserActivity.this, LoginActivity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
 
 
     private ArrayList<String> addStrings(String[] names) {
@@ -126,5 +159,17 @@ public class UserActivity extends BaseActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode) {
+            case Constants.STATUS_CODE_1000:
+                txt_member.setText(ec_user.userName);
+                break;
+        }
     }
 }
