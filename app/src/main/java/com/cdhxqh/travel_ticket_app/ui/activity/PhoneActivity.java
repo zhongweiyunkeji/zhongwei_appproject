@@ -186,10 +186,7 @@ public class PhoneActivity extends BaseActivity {
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            finish();
-            Intent intent = new Intent();
-            intent.setClass(PhoneActivity.this, IntroductionActivity.class);
-            startActivityForResult(intent, 0);
+            finish();
         }
     };
 
