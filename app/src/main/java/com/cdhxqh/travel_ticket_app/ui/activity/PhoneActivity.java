@@ -84,7 +84,6 @@ public class PhoneActivity extends BaseActivity {
     private static String url = null;                  //访问地址
     private HashMap<String, String> map;    //传入访问参数及值
     private ProgressDialog progressDialog;
-    HttpUtil httpUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,7 +186,10 @@ public class PhoneActivity extends BaseActivity {
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            finish();
+//            finish();
+            Intent intent = new Intent();
+            intent.setClass(PhoneActivity.this, IntroductionActivity.class);
+            startActivityForResult(intent, 0);
         }
     };
 
@@ -242,11 +244,6 @@ public class PhoneActivity extends BaseActivity {
     private View.OnClickListener inspectCodeOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            /**
-             * 加载中
-             */
-            progressDialog = ProgressDialog.show(PhoneActivity.this, null,
-                    getString(R.string.loading), true, true);
                 /*
                 发送请求获取验证码
                  */
