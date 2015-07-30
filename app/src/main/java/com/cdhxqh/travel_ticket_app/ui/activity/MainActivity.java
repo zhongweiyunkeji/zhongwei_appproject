@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.app.AppManager;
 import com.cdhxqh.travel_ticket_app.ui.activity.BaseActivity;
+import com.umeng.update.UmengUpdateAgent;
 
 
 public class MainActivity extends TabActivity {

@@ -45,9 +45,19 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <!--百度地图key-->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="iTIOC0GE1Xe5uiPysSpmm4EZ" />
+        <!--友盟自动更新-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="55ba056b67e58ea7540004d4" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="play" />
+
 
         <activity
             android:name=".ui.activity.StartActivity"
@@ -126,6 +136,19 @@
         <activity
             android:name=".ui.activity.Attractions_details_Activity"
             android:label="@string/title_activity_attractions_details_" >
+        </activity>
+
+        <!--友盟自动更新-->
+
+        <!-- umeng自动更新 -->
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
     </application>
 

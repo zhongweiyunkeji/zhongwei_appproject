@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.ui.adapter.Bee_PageAdapter;
 import com.cdhxqh.travel_ticket_app.viewpagerindicator.PageIndicator;
+import com.umeng.update.UmengUpdateAgent;
 
 import java.util.ArrayList;
 
@@ -47,6 +48,9 @@ public class HomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        UmengUpdateAgent.setUpdateOnlyWifi(false);
+        UmengUpdateAgent.update(this);
         findViewById();
         initView();
 

@@ -410,7 +410,7 @@ public class HttpManager {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         for (Map.Entry<String, String> entry : mapparams.entrySet()) {
-            params.put(entry.getKey(), entry.getValue());
+            params.put(entry .getKey(), entry.getValue());
         }
 
         client.post(url, params, new TextHttpResponseHandler() {

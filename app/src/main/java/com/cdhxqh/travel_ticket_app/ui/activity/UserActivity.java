@@ -168,7 +168,9 @@ public class UserActivity extends BaseActivity {
 
         switch (resultCode) {
             case Constants.STATUS_CODE_1000:
-                txt_member.setText(ec_user.userName);
+                if(mIsLogin) {
+                    txt_member.setText(ec_user.userName);
+                }
                 break;
         }
     }

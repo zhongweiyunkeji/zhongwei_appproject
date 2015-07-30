@@ -8,8 +8,8 @@ android {
         applicationId "com.cdhxqh.travel_ticket_app"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.2"
     }
     buildTypes {
         release {
@@ -29,4 +29,5 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.6'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/libs/umeng-update-v2.6.0.1.jar')
 }
