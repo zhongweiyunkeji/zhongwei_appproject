@@ -17,6 +17,7 @@ import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.model.Ec_goods;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.ui.activity.ScenicMapActivity;
+import com.cdhxqh.travel_ticket_app.ui.activity.Tickets_Detail_Activity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -69,11 +70,12 @@ public class BrandListAdapter extends RecyclerView.Adapter<BrandListAdapter.View
                 Bundle bundle = new Bundle();
 
                 if (mark == 1000) { //门票详情
-//                    bundle.putInt("brand_id", ecs_brand.brand_id);
-//                    bundle.putString("brand_name", ecs_brand.brand_name);
-//                    intent.putExtras(bundle);
-//                    intent.setClass(mContext, ScenicMapActivity.class);
-//                    mContext.startActivity(intent);
+                    bundle.putInt("brand_id", ecs_brand.brand_id);
+                    bundle.putString("brand_name", ecs_brand.brand_name);
+                    bundle.putParcelable("ecs_brand",ecs_brand);
+                    intent.putExtras(bundle);
+                    intent.setClass(mContext, Tickets_Detail_Activity.class);
+                    mContext.startActivity(intent);
 
                 } else if (mark == 1001) { //地图详情
 
@@ -139,7 +141,6 @@ public class BrandListAdapter extends RecyclerView.Adapter<BrandListAdapter.View
 
 
     public void update(ArrayList<Ecs_brand> data, boolean merge) {
-        Log.i(TAG, "mItems=" + ecs_brands.size());
         if (merge && ecs_brands.size() > 0) {
             for (int i = 0; i < ecs_brands.size(); i++) {
                 Ecs_brand obj = ecs_brands.get(i);

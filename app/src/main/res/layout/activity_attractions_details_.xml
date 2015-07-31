@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@drawable/image_1" />
+            android:background="@drawable/not_image_bj"
+             />
 
         <ImageView
             android:id="@+id/music_play_id"

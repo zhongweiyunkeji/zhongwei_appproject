@@ -52,6 +52,7 @@
     <string name="look_zhongwei_text">看中卫</string>
     <string name="swim_around_text">周边游</string>
     <string name="interested_in_text">猜你喜欢</string>
+    <string name="the_w_tourism_text">智慧旅游</string>
 
     <!-- 登录界面 -->
     <string name="password_get_err">密码不能为空</string>
@@ -103,5 +104,9 @@
     <string name="not_music_file_text">暂无音频介绍</string>
     <string name="not_hava_arrt_info">暂无相关景点信息</string>
     <string name="switch_account_text">切换账号</string>
+    <string name="title_activity_tickets__detail_">Tickets_Detail_Activity</string>
 
+
+    <!--景区门票详情-->
+    <string name="tickets_info_text">景区简介</string>
 </resources>
