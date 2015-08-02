@@ -2,9 +2,11 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,8 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.api.HttpManager;
+import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
+import com.cdhxqh.travel_ticket_app.model.OrderModel;
 import com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeInFragment;
 import com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeOutFragment;
+import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
+
+import java.util.ArrayList;
 
 
 /**
@@ -55,6 +63,8 @@ public class OrderActivity extends BaseActivity {
      */
     TextView outtextView;
 
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +72,9 @@ public class OrderActivity extends BaseActivity {
         setContentView(R.layout.activity_order);
         findViewById();
         initView();
+
+        createProgressDialog();
+        requestOrderList(true);
     }
 
     @Override
@@ -171,4 +184,41 @@ public class OrderActivity extends BaseActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    /**
+     * 创建progressDialog*
+     */
+    private void createProgressDialog() {
+        progressDialog = ProgressDialog.show(OrderActivity.this, null, getString(R.string.please_loading_hint), true, true);
+    }
+
+    private void requestOrderList(boolean refersh) {
+        HttpManager.getOrder_list(this, "http://182.92.158.158:8080/qdm/ecsorder/list", "before", "10", "1", handler);
+    }
+
+    private HttpRequestHandler<ArrayList<OrderModel>> handler = new HttpRequestHandler<ArrayList<OrderModel>>() {
+        @Override
+        public void onSuccess(ArrayList<OrderModel> data) {
+
+            Log.i(TAG, "data=" + data);
+//            brandListAdapter.update(data, true);
+            progressDialog.dismiss();
+//            MessageUtils.showErrorMessage(Listen_ZhongWei_Activity.this,"加载成功");
+
+        }
+
+        @Override
+        public void onSuccess(ArrayList<OrderModel> data, int totalPages, int currentPage) {
+            progressDialog.dismiss();
+            Log.i(TAG,"222222");
+
+        }
+
+        @Override
+        public void onFailure(String error) {
+            Log.i(TAG,"333333");
+            MessageUtils.showErrorMessage(OrderActivity.this, error);
+            progressDialog.dismiss();
+        }
+    };
 }

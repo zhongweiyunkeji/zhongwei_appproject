@@ -128,7 +128,8 @@
             android:label="@string/title_activity_scenic_map" />
         <activity
             android:name=".ui.activity.ReservationActivity"
-            android:label="@string/title_activity_scenic_map" />
+            android:label="@string/title_activity_scenic_map"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.Book_Informtion_Activity"
             android:label="@string/title_activity_scenic_map" />

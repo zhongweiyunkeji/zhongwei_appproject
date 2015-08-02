@@ -6,21 +6,42 @@
 
     <include layout="@layout/activity_title"></include>
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="20dp"
         android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/image_introduction_id"
+            android:layout_marginTop="10dp"
+            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            />
 
-    <WebView
-        android:id="@+id/spot_webView_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"></WebView>
+        <TextView
+            android:id="@+id/text_introduction_tittle"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#2e8b57"/>
 
+        <TextView
+            android:id="@+id/text_introduction_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#a9a9a9"/>
 
-</LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>
