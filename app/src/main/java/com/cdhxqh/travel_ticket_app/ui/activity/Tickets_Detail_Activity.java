@@ -1,5 +1,6 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +33,9 @@ public class Tickets_Detail_Activity extends BaseActivity {
     /**可扩展的**/
     ExpandableListView expandableListView;
 
+    /**景区介绍**/
+    private TextView tickets_detail_introduce_text_id;
+
     Tickets_ExpandableListAdapter tickets_expandableListAdapter;
 
 
@@ -59,6 +63,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
         backImageView=(ImageView)findViewById(R.id.ticket_detail_back_id);
         titleTextView=(TextView)findViewById(R.id.ticket_detail_title_id);
         expandableListView=(ExpandableListView)findViewById(R.id.expandableListView);
+        tickets_detail_introduce_text_id = (TextView) findViewById(R.id.tickets_detail_introduce_text_id);
     }
 
     @Override
@@ -71,6 +76,8 @@ public class Tickets_Detail_Activity extends BaseActivity {
         initData();
         tickets_expandableListAdapter=new Tickets_ExpandableListAdapter(Tickets_Detail_Activity.this,group,child);
         expandableListView.setAdapter(tickets_expandableListAdapter);
+
+        tickets_detail_introduce_text_id.setOnClickListener(ticketsIntroduceOnClickListener);
     }
 
 
@@ -78,6 +85,20 @@ public class Tickets_Detail_Activity extends BaseActivity {
         @Override
         public void onClick(View v) {
             finish();
+        }
+    };
+
+    private View.OnClickListener ticketsIntroduceOnClickListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putString("spotId", ecs_brand.getBrand_name());
+            bundle.putString("spotLogo", ecs_brand.getBrand_logo());
+            bundle.putString("spotDesc", ecs_brand.getBrand_desc());
+            intent.putExtras(bundle);
+            intent.setClass(Tickets_Detail_Activity.this, IntroductionActivity.class);
+            startActivity(intent);
         }
     };
 
