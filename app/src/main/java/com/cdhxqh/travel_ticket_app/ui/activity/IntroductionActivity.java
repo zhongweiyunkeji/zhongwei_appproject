@@ -39,9 +39,9 @@ public class IntroductionActivity extends BaseActivity{
      */
     private TextView text_introduction_desc;
 
-    private ProgressDialog progressDialog;
-
-    ArrayList<SpotBookModel> datas = new ArrayList<SpotBookModel>();
+//    private ProgressDialog progressDialog;
+//
+//    ArrayList<SpotBookModel> datas = new ArrayList<SpotBookModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class IntroductionActivity extends BaseActivity{
         setContentView(R.layout.activity_introduction);
         findViewById();
         initView();
-        text();
+//        text();
     }
 
     /**
@@ -67,53 +67,57 @@ public class IntroductionActivity extends BaseActivity{
      */
     @Override
     protected void initView() {
-
+        Bundle bundle = new Bundle();
+        bundle = this.getIntent().getExtras();
+        text_introduction_tittle.setText(bundle.getString("spotId"));
+        ImageLoader.getInstance().displayImage(bundle.getString("spotLogo"), image_introduction_id);
+        text_introduction_desc.setText(bundle.getString("spotDesc"));
     }
 
-    BrandListAdapter brandListAdapter;
+//    BrandListAdapter brandListAdapter;
 
 
 
 
-    private HttpRequestHandler<ArrayList<SpotBookModel>> handler = new HttpRequestHandler<ArrayList<SpotBookModel>>() {
-
-
-        @Override
-        public void onSuccess(ArrayList<SpotBookModel> data) {
-
-            Log.i(TAG, "data=" + data);
-            datas = data;
-            String spotImage = datas.get(0).getSpotImage();
-            ImageLoader.getInstance().displayImage(spotImage, image_introduction_id);
-
-
-            String spotTittle = datas.get(0).getSpotTittle();
-            text_introduction_tittle.setText(spotTittle);
-
-            String spotDesc = datas.get(0).getSpotDesc();
-            text_introduction_desc.setText(spotDesc);
-        }
-
-        @Override
-        public void onSuccess(ArrayList<SpotBookModel> data, int totalPages, int currentPage) {
-            progressDialog.dismiss();
-            Log.i(TAG,"222222");
-
-        }
-
-        @Override
-        public void onFailure(String error) {
-            Log.i(TAG,"333333");
-            MessageUtils.showErrorMessage(IntroductionActivity.this,error);
-            progressDialog.dismiss();
-        }
-    };
-
-
-
-    public void text() {
-        HttpManager.getSpotBooking(this, "http://182.92.158.158:8080/qdm/ecsbrand/brandlist", null, "3", "1", handler);
-    }
+//    private HttpRequestHandler<ArrayList<SpotBookModel>> handler = new HttpRequestHandler<ArrayList<SpotBookModel>>() {
+//
+//
+//        @Override
+//        public void onSuccess(ArrayList<SpotBookModel> data) {
+//
+//            Log.i(TAG, "data=" + data);
+//            datas = data;
+//            String spotImage = datas.get(0).getSpotImage();
+//            ImageLoader.getInstance().displayImage(spotImage, image_introduction_id);
+//
+//
+//            String spotTittle = datas.get(0).getSpotTittle();
+//            text_introduction_tittle.setText(spotTittle);
+//
+//            String spotDesc = datas.get(0).getSpotDesc();
+//            text_introduction_desc.setText(spotDesc);
+//        }
+//
+//        @Override
+//        public void onSuccess(ArrayList<SpotBookModel> data, int totalPages, int currentPage) {
+//            progressDialog.dismiss();
+//            Log.i(TAG,"222222");
+//
+//        }
+//
+//        @Override
+//        public void onFailure(String error) {
+//            Log.i(TAG,"333333");
+//            MessageUtils.showErrorMessage(IntroductionActivity.this,error);
+//            progressDialog.dismiss();
+//        }
+//    };
+//
+//
+//
+//    public void text() {
+//        HttpManager.getSpotBooking(this, "http://182.92.158.158:8080/qdm/ecsbrand/brandlist", null, "3", "1", handler);
+//    }
 
 
 }
