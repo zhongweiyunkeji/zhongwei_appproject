@@ -1,24 +1,19 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
-import com.cdhxqh.travel_ticket_app.api.HttpManager;
-import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
-import com.cdhxqh.travel_ticket_app.model.CategoryModel;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
-import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
+import com.cdhxqh.travel_ticket_app.ui.adapter.Tickets_ExpandableListAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 景区门票详情
@@ -30,15 +25,19 @@ public class Tickets_Detail_Activity extends BaseActivity {
     ImageView backImageView;
     /**标题**/
     TextView titleTextView;
-    /**
-     * 预定
-     */
-    private Button btn_reservation_id;
-
-    private ProgressDialog progressDialog;
 
     /**Ecs_brand**/
     Ecs_brand ecs_brand;
+
+    /**可扩展的**/
+    ExpandableListView expandableListView;
+
+    Tickets_ExpandableListAdapter tickets_expandableListAdapter;
+
+
+    private List<String> group;
+    private List<List<String>> child;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,15 +46,11 @@ public class Tickets_Detail_Activity extends BaseActivity {
         getData();
         findViewById();
         initView();
-
-        createProgressDialog();
-        requestCategoryList();
     }
 
 
     /**获取上个界面的数据**/
     private void getData() {
-        Log.i(TAG,"rrrrrr");
         ecs_brand=getIntent().getExtras().getParcelable("ecs_brand");
     }
 
@@ -63,7 +58,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
     protected void findViewById() {
         backImageView=(ImageView)findViewById(R.id.ticket_detail_back_id);
         titleTextView=(TextView)findViewById(R.id.ticket_detail_title_id);
-        btn_reservation_id = (Button)findViewById(R.id.btn_reservation_id);
+        expandableListView=(ExpandableListView)findViewById(R.id.expandableListView);
     }
 
     @Override
@@ -73,27 +68,20 @@ public class Tickets_Detail_Activity extends BaseActivity {
         }
 
         backImageView.setOnClickListener(backImageViewOnClickListener);
-
-        btn_reservation_id.setOnClickListener(reservationOnClickListener);
+        initData();
+        tickets_expandableListAdapter=new Tickets_ExpandableListAdapter(Tickets_Detail_Activity.this,group,child);
+        expandableListView.setAdapter(tickets_expandableListAdapter);
     }
 
 
     private View.OnClickListener backImageViewOnClickListener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-                finish();
+            finish();
         }
     };
 
-    private View.OnClickListener reservationOnClickListener=new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putString("sort_order", ecs_brand.sort_order);
-            intent.putExtras(bundle);
-        }
-    };
+
 
 
     @Override
@@ -113,40 +101,25 @@ public class Tickets_Detail_Activity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * 创建progressDialog*
-     */
-    private void createProgressDialog() {
-        progressDialog = ProgressDialog.show(Tickets_Detail_Activity.this, null, getString(R.string.please_loading_hint), true, true);
+
+
+    private void initData() {
+        group = new ArrayList<String>();
+        child = new ArrayList<List<String>>();
+        addInfo("成人票",new String[]{"沙坡头1","沙坡头2","沙坡头3","沙坡头4"});
+        addInfo("儿童票", new String[]{"儿童票5","儿童票6","儿童票7̨"});
+        addInfo("优待票", new String[]{"儿童票8","儿童票","儿童票10"});
     }
 
-    private void requestCategoryList() {
-        HttpManager.getCategoryList_list(this, "ticket", handler);
+
+    private void addInfo(String g,String[] c) {
+        group.add(g);
+        List<String> list = new ArrayList<String>();
+        for (int i = 0; i < c.length; i++) {
+            list.add(c[i]);
+        }
+        child.add(list);
     }
 
-    private HttpRequestHandler<ArrayList<CategoryModel>> handler = new HttpRequestHandler<ArrayList<CategoryModel>>() {
-        @Override
-        public void onSuccess(ArrayList<CategoryModel> data) {
 
-            Log.i(TAG, "data=" + data);
-//            brandListAdapter.update(data, true);
-            progressDialog.dismiss();
-//            MessageUtils.showErrorMessage(Listen_ZhongWei_Activity.this,"加载成功");
-
-        }
-
-        @Override
-        public void onSuccess(ArrayList<CategoryModel> data, int totalPages, int currentPage) {
-            progressDialog.dismiss();
-            Log.i(TAG,"222222");
-
-        }
-
-        @Override
-        public void onFailure(String error) {
-            Log.i(TAG,"333333");
-            MessageUtils.showErrorMessage(Tickets_Detail_Activity.this, error);
-            progressDialog.dismiss();
-        }
-    };
 }
