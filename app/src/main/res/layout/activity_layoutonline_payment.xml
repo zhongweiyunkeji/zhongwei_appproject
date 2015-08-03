@@ -11,6 +11,7 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
+        <!--支付信息-->
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,12 +23,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="40dp"
-                android:text="支付总额"/>
+                android:text="支付总额"
+                />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="￥136"/>
+                android:text="￥136"
+                android:textColor="#ffa500"/>
         </TableRow>
 
         <TableRow
@@ -40,7 +43,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="沙坡头成人票（下单立减5元）"/>
+                android:text="沙坡头成人票（下单立减5元）"
+                android:textColor="#a9a9a9"/>
         </TableRow>
 
         <TableRow
@@ -53,7 +57,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2015-12-03 17:00:00"/>
+                android:text="2015-12-03 17:00:00"
+                android:textColor="#a9a9a9"/>
         </TableRow>
 
         <TableRow>
@@ -65,7 +70,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="在线支付"/>
+                android:text="在线支付"
+                android:textColor="#a9a9a9"/>
         </TableRow>
 
     </TableLayout>
@@ -77,6 +83,7 @@
         android:layout_marginBottom="10dp"
         android:src="@drawable/payment_line_x"/>
 
+        <!--支付界面-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -93,6 +100,7 @@
                     android:id="@+id/weixin_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/online_payment_03"/>
 
@@ -102,6 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/weixin_id"
+                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -141,6 +150,7 @@
                     android:id="@+id/zhifu_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/payment_online_06"/>
 
@@ -149,6 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/zhifu_id"
+                    android:layout_marginLeft="10dp"
                     android:orientation="vertical">
 
                     <TextView
