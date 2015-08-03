@@ -155,6 +155,8 @@
             android:name=".ui.activity.Tickets_Detail_Activity"
             android:label="@string/title_activity_tickets__detail_" >
         </activity>
+        <activity
+            android:name="com.cdhxqh.travel_ticket_app.ui.activity.SearchSecnicActivity" />
     </application>
 
 </manifest>
