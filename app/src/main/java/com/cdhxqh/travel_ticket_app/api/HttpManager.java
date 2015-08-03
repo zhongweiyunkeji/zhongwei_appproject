@@ -10,6 +10,7 @@ import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.model.PersistenceHelper;
 import com.cdhxqh.travel_ticket_app.ui.activity.Listen_ZhongWei_Activity;
 import com.cdhxqh.travel_ticket_app.utils.JsonUtils;
+import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.cdhxqh.travel_ticket_app.utils.SafeHandler;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.PersistentCookieStore;
@@ -35,6 +36,8 @@ public class HttpManager {
 
     private static AsyncHttpClient sClient = null;
 
+    private static String SESSIONID = "";
+
 
     /**
      * @param cxt         上下文
@@ -53,7 +56,7 @@ public class HttpManager {
         } else {
             urlString = Constants.TICKETS_URL + "?" + "brand_name=" + brand_name + "showCount=" + showCount + "&" + "currentPage=" + currentPage;
         }
-        getEcs_Brands(cxt, urlString, refresh, handler);
+        getEcs_Brands(cxt, urlString, refresh, handler, currentPage);
     }
 
 
@@ -252,8 +255,7 @@ public class HttpManager {
      * @param handler; *
      */
 
-    public static void getEcs_Brands(final Context ctx, String url, boolean refresh,
-                                     final HttpRequestHandler<ArrayList<Ecs_brand>> handler) {
+    public static void getEcs_Brands(final Context ctx, String url, boolean refresh,  final HttpRequestHandler<ArrayList<Ecs_brand>> handler, final String currentPage) {
         final String key = Uri.parse(url).getEncodedQuery();
         if (!refresh) {
             //尝试从缓存中加载
@@ -278,11 +280,11 @@ public class HttpManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
                 Log.i(TAG, "SstatusCode=" + statusCode + ",responseBody=" + responseBody);
-
                 /**解析实体类**/
                 try {
                     JSONObject jsonObject = new JSONObject(responseBody);
                     String errcode = jsonObject.getString("errcode");
+                    int totalPage = ((JSONObject)jsonObject.get("result")).getInt("totalPage");
                     if (errcode.equals(Constants.REQUEST_SUCCESS)) {
                         String errmsg = jsonObject.getString("errmsg");
 
@@ -291,6 +293,9 @@ public class HttpManager {
                         ArrayList<Ecs_brand> ecs_brands = JsonUtils.parsingBrandsInfo(result);
                         if (ecs_brands != null && ecs_brands.size() != 0) {
                             SafeHandler.onSuccess(handler, ecs_brands);
+                            if(((totalPage+1)+"").equals(currentPage) && !"0".equals(""+totalPage)){
+                                MessageUtils.showMiddleToast(ctx, "已没有数据可显示");
+                            }
                         } else {
                             SafeHandler.onFailure(handler, ErrorType.errorMessage(ctx, ErrorType.ErrorGetNotificationFailure));
                         }
@@ -413,6 +418,7 @@ public class HttpManager {
             params.put(entry .getKey(), entry.getValue());
         }
 
+
         client.post(url, params, new TextHttpResponseHandler() {
 
 
@@ -424,6 +430,15 @@ public class HttpManager {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                for(Header h : headers){
+                    String name = h.getName();
+                    if("Set-Cookie".equals(name)){
+                        String cookie = h.getValue();
+                        SESSIONID = cookie.split(";")[0].split("=")[1];
+                        // Log.e(TAG, " COOKIE----------------------------> "+cookie);
+                        break;
+                    }
+                }
                 Log.i(TAG, "SstatusCode=" + statusCode);
                 if (statusCode == 200) {
                     SafeHandler.onSuccess(handler, responseString);
@@ -431,6 +446,10 @@ public class HttpManager {
             }
         });
     }
+
+
+
+
 
 
 }
