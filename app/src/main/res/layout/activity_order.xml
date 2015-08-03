@@ -8,7 +8,19 @@
 
     <include layout="@layout/activity_title"></include>
 
-    <include layout="@layout/order_tabhost_layout"></include>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/order_swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"></android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <FrameLayout
         android:id="@+id/container"

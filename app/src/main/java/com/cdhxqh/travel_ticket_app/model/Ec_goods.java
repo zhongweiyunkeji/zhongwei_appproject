@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * 商品表*
+ * 景区门票表
  */
 public class Ec_goods extends Zw_Model implements Parcelable {
     private static final String TAG = "Ec_goods";

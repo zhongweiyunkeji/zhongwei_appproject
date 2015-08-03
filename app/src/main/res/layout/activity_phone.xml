@@ -175,8 +175,6 @@
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:hint="注册邮箱号" />
 
-
-
             </LinearLayout>
 
             <TextView

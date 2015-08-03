@@ -178,8 +178,6 @@ public class LoginActivity extends BaseActivity {
                         progressDialog.dismiss();
                         setResult(Constants.STATUS_CODE_1000);
                         finish();
-
-
                     }
 
                     @Override

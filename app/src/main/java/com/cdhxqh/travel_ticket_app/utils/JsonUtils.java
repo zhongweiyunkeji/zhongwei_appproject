@@ -8,6 +8,7 @@ import com.cdhxqh.travel_ticket_app.model.Attractions;
 import com.cdhxqh.travel_ticket_app.model.Ec_user;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.model.PersistenceHelper;
+import com.cdhxqh.travel_ticket_app.model.SpotBookModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +34,7 @@ public class JsonUtils {
             String errcode = json.getString("errcode");
             if (errcode.equals(Constants.SUCCESS_LOGIN)) {
                 JSONObject result=json.getJSONObject("result");
-
+                Log.i(TAG,"result="+result);
                 Ec_user ec_user=new Ec_user();
                 int userId=result.getInt("userId");
                 ec_user.setUserId(userId);
@@ -88,8 +89,10 @@ public class JsonUtils {
             Log.i(TAG, "errcode=" + errcode);
             if (errcode.equals(Constants.SUCCESS_LINE)) {
                 return 1; //成功
+            } else if(errcode.equals(Constants.SUCCESS_PHONE_CODE)){
+                return 2; //该手机未被注册
             } else {
-                return 0; //成功
+                return 3;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -98,20 +101,20 @@ public class JsonUtils {
     }
 
     /**
-     * 获取验证码*
+     * 手机设置密码*
      */
     public static int parsingLinePass(final Context cxt, String data) {
         try {
             JSONObject json = new JSONObject(data);
             String errcode = json.getString("errcode");
             Log.i(TAG, "errcode=" + errcode);
-            if (errcode.equals(Constants.SUCCESS_LINE_PASS)) {
+            if (errcode.equals(Constants.SUCCESSE_LINE_PASS)) {
                 return 1; //成功
             } else if (errcode.equals(Constants.RUNTIME_LINE_PASS)) {
                 return 2; //验证码失效
-            } else if (errcode.equals(Constants.RUNTIME_LINE_PASS)) {
-                return 3; //验证码验证失败
-            } else {
+            }  else if (errcode.equals(Constants.PHONE_LINE_PASS)) {
+                return 3; //密码重置失败
+            }else {
                 return 0;
             }
         } catch (JSONException e) {
@@ -209,6 +212,38 @@ public class JsonUtils {
         Log.i(TAG, "*****1");
         return models;
     }
+
+
+    /**
+     * 景点门票及介绍
+     */
+    public static ArrayList<SpotBookModel> parsingSpotBook(String result) {
+        ArrayList<SpotBookModel> model = new ArrayList<SpotBookModel>();
+
+        try{
+            JSONObject json = new JSONObject(result);
+
+            String logourl = json.getString("logourl");
+
+            JSONArray bookBook = json.getJSONArray("brandlist");
+
+            for(int i = 0; i< bookBook.length(); i++) {
+                JSONObject jsonObject = (JSONObject) bookBook.get(i);
+                SpotBookModel spotBookModel = new SpotBookModel();
+                spotBookModel.setSpotImage(logourl + jsonObject.getString("brand_logo"));
+                spotBookModel.setSpotDesc(jsonObject.getString("brand_desc"));
+                spotBookModel.setSpotTittle(jsonObject.getString("brand_name"));
+                model.add(spotBookModel);
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return model;
+    }
+
+
+
 
 
 }

@@ -36,7 +36,7 @@
             android:layout_marginRight="@dimen/dimens_10"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_menu" />
+             />
 
 
     </RelativeLayout>

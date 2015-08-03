@@ -2,6 +2,7 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -60,7 +61,7 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
     private static final int showCount=10;
     /**当前页数**/
     private static final int currentPage=1;
-
+    SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +79,7 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
         backImage = (ImageView) findViewById(R.id.back_imageview_id);
         titleText = (TextView) findViewById(R.id.title_text_id);
         searchImageView = (ImageView) findViewById(R.id.title_search_id);
-
+        swipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.swipe_container);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list_tickets);
 
@@ -90,6 +91,7 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
         backImage.setOnClickListener(backImageOnClickListener);
         backImage.setVisibility(View.VISIBLE);
 
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);
@@ -99,6 +101,7 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
         mRecyclerView.addItemDecoration(new ItemDivider(this,
                 ItemDivider.VERTICAL_LIST));
 
+//        swipeRefreshLayout.setOnRefreshListener();
 
         brandListAdapter = new BrandListAdapter(this,Map_TAG);
 

@@ -55,6 +55,9 @@ public class Constants {
     public static final String ATTRACTIONS_URL = BASE_URL+"ecsbrand/articlelist";
 
 
+	public static final String CATEGORY_URL = BASE_URL+"ecscategory/categorylist";
+
+
 	/**
      ******************************************* 接口参数设置信息结束 ******************************************
      *
@@ -151,6 +154,9 @@ public class Constants {
 	//短信发送成功
 	public static final String SUCCESS_LINE = "ZWTICKET-GLOBAL-S-10";
 
+	//短信发送成功
+	public static final String SUCCESS_PHONE_CODE = "ZWTICKET-GLOBAL-E-11";
+
 	//验证码验证成功
 	public static final String SUCCESS_LINE_PASS = "ZWTICKET-GLOBAL-S-14";
 
@@ -160,6 +166,11 @@ public class Constants {
 	//验证码验证失效
 	public static final String RUNTIME_LINE_PASS = "ZWTICKET-GLOBAL-S-15";
 
+	//密码重置成功
+	public static final String SUCCESSE_LINE_PASS = "ZWTICKET-GLOBAL-S-16";
+
+	//密码重置失败
+	public static final String PHONE_LINE_PASS = "ZWTICKET-GLOBAL-E-17";
 
     //请求成功
     public static final String REQUEST_SUCCESS = "ZWTICKET-GLOBAL-S-0";

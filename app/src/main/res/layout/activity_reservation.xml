@@ -17,14 +17,13 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="6dp"
                 android:paddingBottom="6dp"
-                android:text="沙坡头成人票（下单立减5元）"
+                android:text="@string/spot_discount"
                 android:textSize="17sp"
                 android:textColor="#2e8b57"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="6dp"
                 android:paddingBottom="6dp"
                 android:orientation="horizontal">
 
@@ -45,7 +44,6 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="6dp"
                 android:paddingBottom="6dp"
                 android:orientation="horizontal">
 
@@ -70,13 +68,16 @@
 
                 </LinearLayout>
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/line_x_reservation"/>
             <!--出行时间-->
             <RelativeLayout
                 android:id="@+id/out_time_id"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp">
+                android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/time_out_id"
@@ -90,17 +91,23 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="请选择出行时间"
-                android:textColor="#2f4f4f"/>
+                android:textColor="#a9a9a9"/>
 
               </RelativeLayout >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/line_x_reservation"/>
 
             <!--数量-->
             <RelativeLayout
                 android:id="@+id/ticket_num_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp">
+                >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -117,21 +124,38 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/reservation_reduce_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/button_subtraction_reservation"
                         />
                     <EditText
+                        android:id="@+id/reservation_display_num"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/button_margion_reservation"
+                        android:gravity="center"
                         android:text="1"
+                        android:cursorVisible="true"
+                        android:numeric="signed"
+                        android:maxLength="4"
                         android:textColor="#2f4f4f"/>
                     <Button
+                        android:id="@+id/reservation_add_button"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_addition_reservation"/>
 
                 </LinearLayout>
 
             </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/line_x_reservation"/>
 
             <!--填单框-->
             <LinearLayout
@@ -256,14 +280,38 @@
 
             </LinearLayout>
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/line_x_reservation"/>
             <!--订单总额-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
-                android:text="订单总额  ￥138"
+                android:text="订单总额  ￥"
                 android:textColor="#2f4f4f"/>
+
+            <TextView
+                android:id="@+id/total_fare_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="138"
+                android:textColor="#2f4f4f"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/line_x_reservation"/>
 
         </LinearLayout>
 
@@ -280,6 +328,7 @@
             android:layout_marginRight="30dp"
             android:background="@drawable/button_login_mail"
             android:text="提交订单"
+            android:textColor="#ffffff"
             />
 
     </LinearLayout>

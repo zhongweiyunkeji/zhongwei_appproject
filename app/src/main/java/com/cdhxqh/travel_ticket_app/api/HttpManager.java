@@ -6,8 +6,11 @@ import android.util.Log;
 
 import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.Attractions;
+import com.cdhxqh.travel_ticket_app.model.CategoryModel;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
+import com.cdhxqh.travel_ticket_app.model.OrderModel;
 import com.cdhxqh.travel_ticket_app.model.PersistenceHelper;
+import com.cdhxqh.travel_ticket_app.model.SpotBookModel;
 import com.cdhxqh.travel_ticket_app.ui.activity.Listen_ZhongWei_Activity;
 import com.cdhxqh.travel_ticket_app.utils.JsonUtils;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
@@ -78,6 +81,45 @@ public class HttpManager {
             urlString = Constants.ATTRACTIONS_URL + "?" + "title=" + title + "brandId=" + brandId + "&" + "showCount=" + showCount + "&" + "currentPage=" + currentPage;
         }
         getAttractions(cxt, urlString, refresh, handler);
+    }
+
+
+    public static void getCategoryList_list(final Context cxt, final String type, final HttpRequestHandler<ArrayList<CategoryModel>> handler) {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.put("type", type);
+        client.get(Constants.CATEGORY_URL, params, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String errcode = jsonObject.getString("errcode");
+                    if (errcode.equals(Constants.REQUEST_SUCCESS)) {
+                        String errmsg = jsonObject.getString("errmsg");
+
+                        String result = jsonObject.getString("result");
+
+                        ArrayList<CategoryModel> spotBookModel = null;
+                        if (spotBookModel != null && spotBookModel.size() != 0) {
+                            SafeHandler.onSuccess(handler, spotBookModel);
+                        } else {
+                            SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+                }
+            }
+        });
     }
 
 
@@ -193,7 +235,7 @@ public class HttpManager {
                 if (code == 1) {
                     SafeHandler.onSuccess(handler, 200);
                 } else if (code == 2) {
-                    SafeHandler.onFailure(handler, "验证码失效");
+                    SafeHandler.onFailure(handler, "该手机未被注册");
                 } else if (code == 3) {
                     SafeHandler.onFailure(handler, "验证失败");
                 }
@@ -234,6 +276,10 @@ public class HttpManager {
 //
                 if (code == 1) {
                     SafeHandler.onSuccess(handler, 200);
+                } else if (code == 2) {
+                    SafeHandler.onFailure(handler, "验证码失效");
+                } else if (code == 3) {
+                    SafeHandler.onFailure(handler, "密码重置失败");
                 }
 
             }
@@ -246,6 +292,106 @@ public class HttpManager {
         });
     }
 
+    /**
+     * 订单
+     * @param context
+     * @param url
+     * @param datenote
+     * @param showCount
+     * @param currentPage
+     * @param handler
+     */
+
+    public static void getOrder_list(final Context context, String url, String datenote, String showCount, String currentPage,
+                                     final HttpRequestHandler<ArrayList<OrderModel>> handler) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.put("datenote", datenote);
+        params.put("showCount", showCount);
+        params.put("currentPage", currentPage);
+        client.get(url, params, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String errcode = jsonObject.getString("errcode");
+                    if (errcode.equals(Constants.REQUEST_SUCCESS)) {
+                        String errmsg = jsonObject.getString("errmsg");
+
+                        String result = jsonObject.getString("result");
+
+                        ArrayList<SpotBookModel> spotBookModel = JsonUtils.parsingSpotBook(result);
+                        if (spotBookModel != null && spotBookModel.size() != 0) {
+//                            SafeHandler.onSuccess(handler, spotBookModel);
+                        } else {
+                            SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+                }
+            }
+        });
+    }
+
+
+    /**
+     *
+     *景区门票测试
+     *
+     * @param brandName
+     * @param showCount
+     * @param currentPage
+     */
+
+    public static void getSpotBooking(final Context context, String url, String brandName, String showCount, String currentPage,
+                                            final HttpRequestHandler<ArrayList<SpotBookModel>> handler) {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.put("brandName", brandName);
+        params.put("showCount", showCount);
+        params.put("currentPage", currentPage);
+        client.get(url, params, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String errcode = jsonObject.getString("errcode");
+                    if (errcode.equals(Constants.REQUEST_SUCCESS)) {
+                        String errmsg = jsonObject.getString("errmsg");
+
+                        String result = jsonObject.getString("result");
+
+                        ArrayList<SpotBookModel> spotBookModel = JsonUtils.parsingSpotBook(result);
+                        if (spotBookModel != null && spotBookModel.size() != 0) {
+                            SafeHandler.onSuccess(handler, spotBookModel);
+                        } else {
+                            SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+                }
+            }
+        });
+    }
 
     /**
      * 景区列表

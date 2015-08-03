@@ -12,12 +12,7 @@
 
     <include layout="@layout/tickets_detail_two_layout"></include>
 
-    <Button
-        android:id="@+id/btn_reservation_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="预定" />
+    <include layout="@layout/tickets_detail_three_layout"></include>
 </LinearLayout>
 
 
