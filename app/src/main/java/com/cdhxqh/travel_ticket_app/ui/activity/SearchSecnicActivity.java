@@ -75,6 +75,7 @@ public class SearchSecnicActivity extends BaseActivity  {
                                 adapter.getList().clear();
                             }
                             adapter.update(array);
+                            recyclerView.getLayoutManager().scrollToPosition(0);
                             currentPage++;
                         } else { // 搜索内容为空
                             hintLaout.setVisibility(View.VISIBLE);
@@ -130,7 +131,7 @@ public class SearchSecnicActivity extends BaseActivity  {
 
         // RecyclerView注册适配器
         if (adapter == null) {
-            adapter = new SearchScenicAdapter(this);
+            adapter = new SearchScenicAdapter(this, 1000);
             recyclerView.setAdapter(this.adapter);
         }
 

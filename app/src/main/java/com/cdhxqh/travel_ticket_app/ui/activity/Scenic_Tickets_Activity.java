@@ -2,7 +2,6 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,15 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
-import com.cdhxqh.travel_ticket_app.model.Ec_goods;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
-import com.cdhxqh.travel_ticket_app.ui.adapter.BrandListAdapter;
-import com.cdhxqh.travel_ticket_app.ui.adapter.Class_adapter;
-import com.cdhxqh.travel_ticket_app.ui.adapter.GoodsListAdapter;
+import com.cdhxqh.travel_ticket_app.ui.adapter.SearchScenicAdapter;
 import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.cdhxqh.travel_ticket_app.utils.NetWorkHelper;
@@ -32,6 +27,7 @@ import java.util.ArrayList;
  * 景区门票列表*
  */
 public class Scenic_Tickets_Activity extends BaseActivity {
+
     private static final String TAG="Scenic_Tickets_Activity";
 
     /**景区详情的标识**/
@@ -57,7 +53,7 @@ public class Scenic_Tickets_Activity extends BaseActivity {
     RecyclerView mRecyclerView;
 
 
-    BrandListAdapter brandListAdapter;
+    SearchScenicAdapter brandListAdapter;
 
     /**显示条数**/
     private static final int showCount=3;
@@ -74,6 +70,8 @@ public class Scenic_Tickets_Activity extends BaseActivity {
         setContentView(R.layout.activity_scenic__tickets_);
         findViewById();
         initView();
+
+        currentPage = 1;
 
         requestEcsBrands(true);
     }
@@ -109,7 +107,7 @@ public class Scenic_Tickets_Activity extends BaseActivity {
             }
         });
 
-        brandListAdapter = new BrandListAdapter(this,Goods_TAG);
+        brandListAdapter = new SearchScenicAdapter(this,Goods_TAG);
 
         mRecyclerView.setAdapter(brandListAdapter);
 
@@ -176,7 +174,7 @@ public class Scenic_Tickets_Activity extends BaseActivity {
         public void onSuccess(ArrayList<Ecs_brand> data) {
             Log.i(TAG, "data=" + data);
             currentPage++;
-            brandListAdapter.update(data, true);
+            brandListAdapter.update(data);
             progressDialog.dismiss();
         }
 

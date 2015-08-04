@@ -12,12 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
-import com.cdhxqh.travel_ticket_app.ui.adapter.BrandListAdapter;
+import com.cdhxqh.travel_ticket_app.ui.adapter.SearchScenicAdapter;
 import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.cdhxqh.travel_ticket_app.utils.NetWorkHelper;
@@ -56,7 +55,7 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
     RecyclerView mRecyclerView;
 
 
-    BrandListAdapter brandListAdapter;
+    SearchScenicAdapter brandListAdapter;
 
 
     private ProgressDialog progressDialog;
@@ -68,6 +67,9 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
     private static int currentPage=1;
 
     SwipeRefreshLayout swipeRefreshLayout;
+
+    ImageView searchImg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +79,7 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
         initView();
 
         currentPage = 1;
+        Log.e("111", "1111");
 
         requestEcsBrands(true);
 
@@ -88,7 +91,7 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
         titleText = (TextView) findViewById(R.id.title_text_id);
         searchImageView = (ImageView) findViewById(R.id.title_search_id);
         swipeRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.swipe_container);
-
+        searchImg =(ImageView)findViewById(R.id.title_search_id);
         mRecyclerView = (RecyclerView) findViewById(R.id.list_tickets);
 
     }
@@ -115,9 +118,16 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
            }
        });
 
-        brandListAdapter = new BrandListAdapter(this, Map_TAG);
+        brandListAdapter = new SearchScenicAdapter(this, Map_TAG);
 
         mRecyclerView.setAdapter(brandListAdapter);
+
+        searchImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivity(Listen_ZhongWei_Search_Activity.class);
+            }
+        });
     }
 
 
@@ -176,7 +186,7 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
         @Override
         public void onSuccess(ArrayList<Ecs_brand> data) {
             currentPage++;
-            brandListAdapter.update(data, true);
+            brandListAdapter.update(data);
             progressDialog.dismiss();
         }
 
