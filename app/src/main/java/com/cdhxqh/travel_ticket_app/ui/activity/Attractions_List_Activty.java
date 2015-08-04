@@ -1,6 +1,7 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -66,6 +67,9 @@ public class Attractions_List_Activty extends BaseActivity {
      */
     String brandName;
 
+    // 景区ID
+    int brandId;
+
 
     /**
      * 定位相关*
@@ -97,6 +101,7 @@ public class Attractions_List_Activty extends BaseActivity {
      * 获取数据*
      */
     private void getData() {
+        brandId = getIntent().getExtras().getInt("brandId");
         brandName = getIntent().getExtras().getString("brandName");
         attractionses = getIntent().getParcelableArrayListExtra("attractionses");
         // Log.i(TAG, "brandName=" + brandName + ",attractionses=" + attractionses);
@@ -134,6 +139,19 @@ public class Attractions_List_Activty extends BaseActivity {
         mRecyclerView.setAdapter(attractionsListAdapter);
         attractionsListAdapter.update(attractionses, true);
 
+        searchImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(Attractions_List_Activty.this, Attractions_Search_List_Activty.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("brandId", brandId);
+                bundle.putString("brandName", brandName);
+                bundle.putParcelableArrayList("attractionses", attractionses);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 0);
+            }
+        });
 
     }
 
@@ -204,7 +222,7 @@ public class Attractions_List_Activty extends BaseActivity {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
-            // Log.i(TAG, "定位开始＝" + location.getLocType());
+            Log.i(TAG, "定位开始＝" + location.getLocType());
 //            if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
 
             String latitude = location.getLatitude() + "";
@@ -216,7 +234,7 @@ public class Attractions_List_Activty extends BaseActivity {
             String altitude = location.getAltitude() + "";
 
             attractionsListAdapter.updateDis(latitude, longitude);
-            // Log.i(TAG, "latitude=" + latitude + ",Longitude=" + longitude + ",speed=" + speed + ",altitude=" + altitude);
+            Log.i(TAG, "latitude=" + latitude + ",Longitude=" + longitude + ",speed=" + speed + ",altitude=" + altitude);
 
 
 //            }
