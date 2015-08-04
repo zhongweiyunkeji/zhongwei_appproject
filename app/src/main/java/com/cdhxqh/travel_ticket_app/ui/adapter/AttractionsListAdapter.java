@@ -16,6 +16,7 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.model.Attractions;
+import com.cdhxqh.travel_ticket_app.ui.activity.Attractions_List_Activty;
 import com.cdhxqh.travel_ticket_app.ui.activity.Attractions_details_Activity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -175,4 +176,7 @@ public class AttractionsListAdapter extends RecyclerView.Adapter<AttractionsList
         return dkm;
     }
 
+    public ArrayList<Attractions> getList(){
+        return this.attractionses;
+    }
 }
