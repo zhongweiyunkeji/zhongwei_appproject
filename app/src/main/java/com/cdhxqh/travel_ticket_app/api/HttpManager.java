@@ -41,6 +41,8 @@ public class HttpManager {
 
     public static String SESSIONID = "";
 
+    public static ThreadLocal threadLocal = new ThreadLocal();
+
 
     /**
      * @param cxt         上下文
@@ -50,8 +52,7 @@ public class HttpManager {
      * @param refresh     是否刷新
      * @param handler     handler
      */
-    public static void getEcs_Brands_list(Context cxt, String brand_name, String showCount, String currentPage, boolean refresh,
-                                          HttpRequestHandler<ArrayList<Ecs_brand>> handler) {
+    public static void getEcs_Brands_list(Context cxt, String brand_name, String showCount, String currentPage, boolean refresh, HttpRequestHandler<ArrayList<Ecs_brand>> handler) {
         String urlString;
 
         if (brand_name.equals("")) {
@@ -59,7 +60,11 @@ public class HttpManager {
         } else {
             urlString = Constants.TICKETS_URL + "?" + "brand_name=" + brand_name + "showCount=" + showCount + "&" + "currentPage=" + currentPage;
         }
-        getEcs_Brands(cxt, urlString, refresh, handler, currentPage);
+        try {
+            Integer curPage = Integer.parseInt(currentPage);
+            threadLocal.set(curPage);
+        } catch (NumberFormatException e) { }
+        getEcs_Brands(cxt, urlString, refresh, handler);
     }
 
 
@@ -401,7 +406,8 @@ public class HttpManager {
      * @param handler; *
      */
 
-    public static void getEcs_Brands(final Context ctx, String url, boolean refresh,  final HttpRequestHandler<ArrayList<Ecs_brand>> handler, final String currentPage) {
+    public static void getEcs_Brands(final Context ctx, String url, boolean refresh,  final HttpRequestHandler<ArrayList<Ecs_brand>> handler) {
+        final Integer currentPage = (Integer)threadLocal.get();  // 从当前线程中取出当前页
         final String key = Uri.parse(url).getEncodedQuery();
         if (!refresh) {
             //尝试从缓存中加载
@@ -439,15 +445,15 @@ public class HttpManager {
                         ArrayList<Ecs_brand> ecs_brands = JsonUtils.parsingBrandsInfo(result);
                         if (ecs_brands != null && ecs_brands.size() != 0) {
                             SafeHandler.onSuccess(handler, ecs_brands);
-                            if(((totalPage+1)+"").equals(currentPage) && !"0".equals(""+totalPage)){
-                                MessageUtils.showMiddleToast(ctx, "已没有数据可显示");
+                            if(currentPage!=null){
+                                if((currentPage>totalPage) && (totalPage>0)){
+                                    MessageUtils.showMiddleToast(ctx, "已没有数据可显示");
+                                }
                             }
                         } else {
                             SafeHandler.onFailure(handler, ErrorType.errorMessage(ctx, ErrorType.ErrorGetNotificationFailure));
                         }
                     }
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     SafeHandler.onFailure(handler, ErrorType.errorMessage(ctx, ErrorType.ErrorGetNotificationFailure));

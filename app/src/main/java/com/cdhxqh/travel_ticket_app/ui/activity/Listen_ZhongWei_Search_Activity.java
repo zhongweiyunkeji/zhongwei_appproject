@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
@@ -21,13 +22,18 @@ import com.cdhxqh.travel_ticket_app.ui.widget.XEditText;
 import com.cdhxqh.travel_ticket_app.utils.JsonUtils;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.cdhxqh.travel_ticket_app.utils.NetWorkHelper;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SearchSecnicActivity extends BaseActivity  {
+/**
+ * Created by hexian on 2015/8/4.
+ */
+public class Listen_ZhongWei_Search_Activity extends BaseActivity {
 
     LinearLayout hintLaout;          // 提示框的值
 
@@ -53,7 +59,7 @@ public class SearchSecnicActivity extends BaseActivity  {
         @Override
         public void onFailure(String error) {
             progressDialog.dismiss();
-            MessageUtils.showErrorMessage(SearchSecnicActivity.this, error);
+            MessageUtils.showErrorMessage(Listen_ZhongWei_Search_Activity.this, error);
         }
 
         @Override
@@ -65,7 +71,7 @@ public class SearchSecnicActivity extends BaseActivity  {
                 int totalPage = ((JSONObject) jsonObject.get("result")).getInt("totalPage");
                 if("ZWTICKET-GLOBAL-S-0".equals(str)) {
                     if((currentPage > totalPage) && (totalPage > 0)) {// 已经没有课搜索的数据
-                        MessageUtils.showMiddleToast(SearchSecnicActivity.this, "已没有数据可显示");
+                        MessageUtils.showMiddleToast(Listen_ZhongWei_Search_Activity.this, "已没有数据可显示");
                     } else {
                         ArrayList<Ecs_brand> array = JsonUtils.parsingBrandsInfo(jsonObject.getString("result"));
                         if(array.size() > 0) { // 可搜索到内容
@@ -75,7 +81,6 @@ public class SearchSecnicActivity extends BaseActivity  {
                                 adapter.getList().clear();
                             }
                             adapter.update(array);
-                            recyclerView.getLayoutManager().scrollToPosition(0);
                             currentPage++;
                         } else { // 搜索内容为空
                             hintLaout.setVisibility(View.VISIBLE);
@@ -96,14 +101,15 @@ public class SearchSecnicActivity extends BaseActivity  {
     };
 
     @Override
-    public void onCreate(Bundle paramBundle) {
-        super.onCreate(paramBundle);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secnic_search);
 
         findViewById();
         initView();
 
         currentPage = 1;
+
     }
 
     private void createProgressDialog() {// 显示进度条
@@ -131,7 +137,7 @@ public class SearchSecnicActivity extends BaseActivity  {
 
         // RecyclerView注册适配器
         if (adapter == null) {
-            adapter = new SearchScenicAdapter(this, 1000);
+            adapter = new SearchScenicAdapter(this, 1001);
             recyclerView.setAdapter(this.adapter);
         }
 
@@ -194,5 +200,6 @@ public class SearchSecnicActivity extends BaseActivity  {
         this.params.put("showCount", this.showCount + "");
         loadData(params);
     }
+
 
 }

@@ -7,13 +7,11 @@ import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.model.SpotBookModel;
-import com.cdhxqh.travel_ticket_app.ui.adapter.BrandListAdapter;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.cdhxqh.travel_ticket_app.utils.TimeCountUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;

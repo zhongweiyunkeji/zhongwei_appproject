@@ -23,7 +23,6 @@ import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
 import com.cdhxqh.travel_ticket_app.model.Attractions;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.ui.adapter.AttractionsListAdapter;
-import com.cdhxqh.travel_ticket_app.ui.adapter.BrandListAdapter;
 import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 
@@ -100,7 +99,7 @@ public class Attractions_List_Activty extends BaseActivity {
     private void getData() {
         brandName = getIntent().getExtras().getString("brandName");
         attractionses = getIntent().getParcelableArrayListExtra("attractionses");
-        Log.i(TAG, "brandName=" + brandName + ",attractionses=" + attractionses);
+        // Log.i(TAG, "brandName=" + brandName + ",attractionses=" + attractionses);
     }
 
     @Override
@@ -142,7 +141,7 @@ public class Attractions_List_Activty extends BaseActivity {
      * 定位相关*
      */
     private void locationData() {
-        Log.i(TAG, "定位");
+        // Log.i(TAG, "定位");
         mLocationClient = new LocationClient(Attractions_List_Activty.this);
         mMyLocationListener = new MyLocationListener();
         mLocationClient.registerLocationListener(mMyLocationListener);
@@ -205,7 +204,7 @@ public class Attractions_List_Activty extends BaseActivity {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
-            Log.i(TAG, "定位开始＝" + location.getLocType());
+            // Log.i(TAG, "定位开始＝" + location.getLocType());
 //            if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
 
             String latitude = location.getLatitude() + "";
@@ -217,7 +216,7 @@ public class Attractions_List_Activty extends BaseActivity {
             String altitude = location.getAltitude() + "";
 
             attractionsListAdapter.updateDis(latitude, longitude);
-            Log.i(TAG, "latitude=" + latitude + ",Longitude=" + longitude + ",speed=" + speed + ",altitude=" + altitude);
+            // Log.i(TAG, "latitude=" + latitude + ",Longitude=" + longitude + ",speed=" + speed + ",altitude=" + altitude);
 
 
 //            }

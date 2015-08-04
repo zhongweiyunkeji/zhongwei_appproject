@@ -10,43 +10,47 @@
     <include layout="@layout/activity_search_title" />
 
     <!--  中间数据显示区域  -->
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/scenic_refresh_container"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <com.cdhxqh.travel_ticket_app.ui.widget.CustomLinearLayout
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:id="@+id/scenic_search_result_empty"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
-            <LinearLayout
-                android:id="@+id/scenic_search_result_empty"
-                android:layout_width="fill_parent"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_gravity="center"
+                android:src="@drawable/not_data_bj" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/not_data_bj" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="木有结果,再找找看!" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="木有结果,再找找看!" />
-            </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/scenic_ticket_list"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/scenic_refresh_container"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp" />
-        </com.cdhxqh.travel_ticket_app.ui.widget.CustomLinearLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
+                android:layout_height="fill_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/scenic_ticket_list"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp" />
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
 </LinearLayout>
