@@ -31,11 +31,12 @@
 
         <ImageView
             android:id="@+id/title_search_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dimens_10"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_menu" />
              />
 
 
