@@ -49,7 +49,7 @@
         <!-- 百度地图key -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="iTIOC0GE1Xe5uiPysSpmm4EZ" />
+            android:value="wDUm9rQ1XnK4XDfptA8PlRGp" />
         <!-- 友盟自动更新 -->
         <meta-data
             android:name="UMENG_APPKEY"
@@ -157,6 +157,10 @@
         </activity>
         <activity
             android:name="com.cdhxqh.travel_ticket_app.ui.activity.SearchSecnicActivity" />
+        <activity
+            android:name="com.cdhxqh.travel_ticket_app.ui.activity.Listen_ZhongWei_Search_Activity" />
+        <activity
+            android:name="com.cdhxqh.travel_ticket_app.ui.activity.Attractions_Search_List_Activty" />
     </application>
 
 </manifest>
