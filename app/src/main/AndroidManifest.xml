@@ -137,6 +137,10 @@
             android:name=".ui.activity.Attractions_details_Activity"
             android:label="@string/title_activity_attractions_details_" >
         </activity>
+        <activity
+            android:name=".ui.activity.Order_Tracking_Activity"
+            android:label="@string/title_activity_attractions_details_" >
+        </activity>
 
         <!-- 友盟自动更新 -->
 
