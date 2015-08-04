@@ -84,7 +84,7 @@ public class HttpManager {
     }
 
 
-    public static void getCategoryList_list(final Context cxt, final String type, final HttpRequestHandler<ArrayList<CategoryModel>> handler) {
+    public static void getCategoryList_list(final Context cxt, final int type, final HttpRequestHandler<ArrayList<CategoryModel>> handler) {
 
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
