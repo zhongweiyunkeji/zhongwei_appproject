@@ -125,7 +125,6 @@ public class ScenicMapActivity extends BaseActivity {
         createProgressDialog();
         requestAttractions(true);
 
-
     }
 
     /**
@@ -277,6 +276,7 @@ public class ScenicMapActivity extends BaseActivity {
                 intent.setClass(ScenicMapActivity.this, Attractions_List_Activty.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("brandName", brandName);
+                bundle.putInt("brandId", brand_id);
                 bundle.putParcelableArrayList("attractionses", attractionses);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, 0);

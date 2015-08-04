@@ -1,14 +1,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.cdhxqh.travel_ticket_app.ui.activity.ScenicMapActivity">
+    tools:context="com.cdhxqh.travel_ticket_app.ui.activity.ClassActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/green_color">
+        android:background="@drawable/title_top_bj">
 
         <ImageView
             android:id="@+id/back_imageview_id"
@@ -37,15 +37,13 @@
             android:layout_centerVertical="true"
             android:scaleType="center"
             android:src="@drawable/ic_menu" />
-             />
 
 
     </RelativeLayout>
 
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/bmapView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:clickable="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_top_follow_bj"></LinearLayout>
 
 </LinearLayout>

@@ -1,7 +1,9 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -20,14 +23,22 @@ import com.baidu.mapapi.SDKInitializer;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
+import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.Attractions;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.ui.adapter.AttractionsListAdapter;
 import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
+import com.cdhxqh.travel_ticket_app.utils.JsonUtils;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
+import com.cdhxqh.travel_ticket_app.utils.NetWorkHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 景点列表**
@@ -66,6 +77,9 @@ public class Attractions_List_Activty extends BaseActivity {
      */
     String brandName;
 
+    // 景区ID
+    int brandId;
+
 
     /**
      * 定位相关*
@@ -74,9 +88,14 @@ public class Attractions_List_Activty extends BaseActivity {
 
     public MyLocationListener mMyLocationListener;
 
+    SwipeRefreshLayout swipeRefreshLayout;  // 刷新控件
 
+    Map<String, String> params = new HashMap(0);  // 保存http请求的参数
 
+    private static final int showCount = 1;  // 显示条数
+    private static int currentPage = 1;   // 当前页
 
+    ProgressDialog progressDialog;  // 进度条
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +108,9 @@ public class Attractions_List_Activty extends BaseActivity {
         findViewById();
         initView();
 
+        currentPage = 1;
+
+        refreshData();
 
     }
 
@@ -97,6 +119,7 @@ public class Attractions_List_Activty extends BaseActivity {
      * 获取数据*
      */
     private void getData() {
+        brandId = getIntent().getExtras().getInt("brandId");
         brandName = getIntent().getExtras().getString("brandName");
         attractionses = getIntent().getParcelableArrayListExtra("attractionses");
         // Log.i(TAG, "brandName=" + brandName + ",attractionses=" + attractionses);
@@ -111,6 +134,9 @@ public class Attractions_List_Activty extends BaseActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list_distance);
 
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
+
+        attractionsListAdapter = new AttractionsListAdapter(this);
     }
 
     @Override
@@ -128,12 +154,29 @@ public class Attractions_List_Activty extends BaseActivity {
         mRecyclerView.addItemDecoration(new ItemDivider(this,
                 ItemDivider.VERTICAL_LIST));
 
-
-        attractionsListAdapter = new AttractionsListAdapter(this);
-
         mRecyclerView.setAdapter(attractionsListAdapter);
-        attractionsListAdapter.update(attractionses, true);
+        // attractionsListAdapter.update(attractionses, true);
 
+        searchImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(Attractions_List_Activty.this, Attractions_Search_List_Activty.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("brandId", brandId);
+                bundle.putString("brandName", brandName);
+                bundle.putParcelableArrayList("attractionses", attractionses);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData();
+            }
+        });
 
     }
 
@@ -204,7 +247,7 @@ public class Attractions_List_Activty extends BaseActivity {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
-            // Log.i(TAG, "定位开始＝" + location.getLocType());
+            Log.i(TAG, "定位开始＝" + location.getLocType());
 //            if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
 
             String latitude = location.getLatitude() + "";
@@ -216,7 +259,7 @@ public class Attractions_List_Activty extends BaseActivity {
             String altitude = location.getAltitude() + "";
 
             attractionsListAdapter.updateDis(latitude, longitude);
-            // Log.i(TAG, "latitude=" + latitude + ",Longitude=" + longitude + ",speed=" + speed + ",altitude=" + altitude);
+            Log.i(TAG, "latitude=" + latitude + ",Longitude=" + longitude + ",speed=" + speed + ",altitude=" + altitude);
 
 
 //            }
@@ -230,4 +273,70 @@ public class Attractions_List_Activty extends BaseActivity {
         mLocationClient.stop();
         super.onDestroy();
     }
+
+
+    public void refreshData() {
+        swipeRefreshLayout.setRefreshing(false);     // 完成刷新,隐藏搜索刷新旋转按钮
+        params.clear();
+        this.params.put("brandId", brandId + "");              // 景点ID
+        this.params.put("currentPage", this.currentPage + ""); // 当前页
+        this.params.put("showCount", this.showCount + "");    // 每页显示条数
+        loadData(params);
+    }
+
+    public void loadData(Map<String, String> params) {
+        if (NetWorkHelper.isNetAvailable(this)) {
+            createProgressDialog();
+            HttpManager.requestOnceWithURLString(this, Constants.ATTRACTIONS_SEARCH_URL, params, requestHandler);
+        } else {
+            MessageUtils.showErrorMessage(this, getResources().getString(R.string.error_network_exception));
+        }
+    }
+
+    private void createProgressDialog() {
+        progressDialog = ProgressDialog.show(this, null, getString(R.string.please_loading_hint), true, true);
+    }
+
+    HttpRequestHandler requestHandler = new HttpRequestHandler<String> (){ // 分页回调接口
+        @Override
+        public void onFailure(String error) {
+            progressDialog.dismiss();
+            MessageUtils.showErrorMessage(Attractions_List_Activty.this, error);
+        }
+
+        @Override
+        public void onSuccess(String data) {
+            progressDialog.dismiss();
+            try {
+                JSONObject jsonObject = new JSONObject(data);
+                String str = jsonObject.getString("errcode");
+                int totalPage = ((JSONObject) jsonObject.get("result")).getInt("totalPage");
+                if("ZWTICKET-GLOBAL-S-0".equals(str)) {
+                    if((currentPage > totalPage) && (totalPage > 0)) {// 已经没有课搜索的数据
+                        MessageUtils.showMiddleToast(Attractions_List_Activty.this, "已没有数据可显示");
+                    } else {
+                        ArrayList<Attractions> array = JsonUtils.parsingAttractions(jsonObject.getString("result"));
+                        if(array.size() > 0) { // 可搜索到内容
+                            if(currentPage == 1) {
+                                attractionsListAdapter.getList().clear();
+                            }
+                            attractionsListAdapter.update(array, true);
+                            currentPage++;
+                        } else { // 搜索内容为空
+                        }
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } finally {
+            }
+        }
+
+        @Override
+        public void onSuccess(String data, int totalPages, int currentPage) {
+            currentPage++;
+            progressDialog.dismiss();
+        }
+    };
+
 }

@@ -6,7 +6,7 @@
     tools:context="com.cdhxqh.travel_ticket_app.ui.activity.Attractions_details_Activity"
     >
 
-    <include layout="@layout/activity_title"></include>
+    <include layout="@layout/scenic_detail_title"></include>
 
 
     <FrameLayout

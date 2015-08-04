@@ -1,5 +1,6 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -61,6 +62,8 @@ public class Attractions_details_Activity extends BaseActivity {
 
     private Player_Music player;
 
+    ImageView settingsImg;
+
     /**
      * 播放状态*
      */
@@ -93,7 +96,7 @@ public class Attractions_details_Activity extends BaseActivity {
     private void getData() {
         attractions = getIntent().getParcelableExtra("attractions");
 
-        Log.i(TAG, "attractions=" + attractions.file_url);
+        // Log.i(TAG, "attractions=" + attractions.file_url);
     }
 
     @Override
@@ -108,7 +111,7 @@ public class Attractions_details_Activity extends BaseActivity {
         atitleText = (TextView) findViewById(R.id.attr_title_id);
         contentText = (TextView) findViewById(R.id.attr_content_id);
 
-
+        settingsImg = (ImageView) findViewById(R.id.title_search_id);
     }
 
     @Override
@@ -125,28 +128,27 @@ public class Attractions_details_Activity extends BaseActivity {
             contentText.setText(Html.fromHtml(attractions.content));
         }
 
-
     }
 
 
     private View.OnClickListener playImageOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.i(TAG, "play....");
+            //Log.i(TAG, "play....");
             String file_url = attractions.file_url;
             if (file_url == null) {
-                Log.i(TAG, "mei_you");
+                //Log.i(TAG, "mei_you");
                 MessageUtils.showMiddleToast(Attractions_details_Activity.this, getString(R.string.not_music_file_text));
             } else {
 
                 if (playstaus == 0) { //未播放
-                    Log.i(TAG, "开始播放");
+                    //Log.i(TAG, "开始播放");
                     playstaus = 1;
                     player.playUrl(file_url);
                     player.play();
                     playImage.setImageResource(R.drawable.music_playing);
                 } else if (playstaus == 1) { //暂停
-                    Log.i(TAG, "暂停");
+                    //Log.i(TAG, "暂停");
                     playstaus = 2;
                     player.pause();
                     playImage.setImageResource(R.drawable.music_play);
