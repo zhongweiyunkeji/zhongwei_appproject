@@ -72,7 +72,7 @@ public class Attractions_Search_List_Activty extends BaseActivity {
 
         getData();
         findViewById();
-        initView();;
+        initView();
     }
 
     /**
