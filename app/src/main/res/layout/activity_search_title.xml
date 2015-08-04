@@ -11,7 +11,7 @@
         android:background="@drawable/title_top_bj">
 
         <ImageView
-            android:id="@id/back_imageview_id"
+            android:id="@+id/back_imageview_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -20,7 +20,7 @@
             android:visibility="visible" />
 
         <com.cdhxqh.travel_ticket_app.ui.widget.XEditText
-            android:id="@id/title_text_id"
+            android:id="@+id/title_text_id"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -35,7 +35,7 @@
             android:textSize="@dimen/dimens_22" />
 
         <ImageView
-            android:id="@id/title_search_id"
+            android:id="@+id/title_search_id"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentRight="true"

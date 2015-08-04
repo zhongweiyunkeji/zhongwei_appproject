@@ -6,8 +6,10 @@
     android:background="#fff1fbf9"
     android:orientation="vertical">.
 
+    <!--  搜索区域  -->
     <include layout="@layout/activity_search_title" />
 
+    <!--  中间数据显示区域  -->
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/scenic_refresh_container"
         android:layout_width="fill_parent"
@@ -20,7 +22,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@id/scenic_search_result_empty"
+                android:id="@+id/scenic_search_result_empty"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -40,7 +42,7 @@
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@id/scenic_ticket_list"
+                android:id="@+id/scenic_ticket_list"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="8dp"
