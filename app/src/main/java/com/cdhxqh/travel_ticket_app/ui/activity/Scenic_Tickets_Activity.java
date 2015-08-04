@@ -83,7 +83,6 @@ public class Scenic_Tickets_Activity extends BaseActivity {
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list_tickets);
-
     }
 
     @Override
@@ -98,9 +97,14 @@ public class Scenic_Tickets_Activity extends BaseActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         //添加分割线
-        mRecyclerView.addItemDecoration(new ItemDivider(this,
-                ItemDivider.VERTICAL_LIST));
+        mRecyclerView.addItemDecoration(new ItemDivider(this, ItemDivider.VERTICAL_LIST));
 
+        searchImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivity(SearchSecnicActivity.class);
+            }
+        });
 
         brandListAdapter = new BrandListAdapter(this,Goods_TAG);
 

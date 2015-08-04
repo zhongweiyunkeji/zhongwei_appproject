@@ -39,7 +39,7 @@ public class HttpManager {
 
     private static AsyncHttpClient sClient = null;
 
-    private static String SESSIONID = "";
+    public static String SESSIONID = "";
 
 
     /**
@@ -581,7 +581,6 @@ public class HttpManager {
                     if("Set-Cookie".equals(name)){
                         String cookie = h.getValue();
                         SESSIONID = cookie.split(";")[0].split("=")[1];
-                        Log.e(TAG, " COOKIE----------------------------> "+cookie);
                         break;
                     }
                 }
