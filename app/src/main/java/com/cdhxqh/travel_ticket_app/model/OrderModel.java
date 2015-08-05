@@ -8,20 +8,92 @@ import org.json.JSONObject;
 
 /**
  * Created by Administrator on 2015/7/31.
+ * 订单
  */
-public class OrderModel extends Zw_Model implements Parcelable {
+public class OrderModel implements Parcelable {
+
+    private String orderSn;   // 订单号
+    private int orderStatus; // 订单状态
+    private String addTime;     // 订购时间  (数据库中是以秒为单位)
+    private int shippingStatus;
+    private int payStatus;   // 支付状态
+    private String status;    // 订单状态
+
+    public OrderModel(){
+
+    }
+
+    public OrderModel( String orderSn, int orderStatus, int payStatus, int shippingStatus, String status, String addTime) {
+        this.orderSn = orderSn;
+        this.orderStatus = orderStatus;
+        this.payStatus = payStatus;
+        this.shippingStatus = shippingStatus;
+        this.status = status;
+        this.addTime = addTime;
+    }
+
+    public String getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
+    }
+
+    public String getOrderSn() {
+        return orderSn;
+    }
+
+    public void setOrderSn(String orderSn) {
+        this.orderSn = orderSn;
+    }
+
+    public int getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public int getPayStatus() {
+        return payStatus;
+    }
+
+    public void setPayStatus(int payStatus) {
+        this.payStatus = payStatus;
+    }
+
+    public int getShippingStatus() {
+        return shippingStatus;
+    }
+
+    public void setShippingStatus(int shippingStatus) {
+        this.shippingStatus = shippingStatus;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * Parcelable对象接口方法
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * Parcelable对象接口方法
+     */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
 
     }
 
-    @Override
-    public void parse(JSONObject jsonObject) throws JSONException {
-
-    }
 }
