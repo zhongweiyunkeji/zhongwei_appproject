@@ -1,9 +1,13 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.ui.adapter.OrdreTrackingAdapter;
@@ -15,14 +19,20 @@ import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
  */
 public class Order_Tracking_Activity extends BaseActivity{
     /**
-     * 列表显示
+     * 返回按钮*
      */
-    private RecyclerView order_tracking;
+    private ImageView backImageView;
 
     /**
-     * 订单详情
+     * 标题*
      */
-    private OrdreTrackingAdapter ordreTrackingAdapter;
+    private TextView titleTextView;
+
+
+    /**
+     * 搜索*
+     */
+    private ImageView seachImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,28 +42,36 @@ public class Order_Tracking_Activity extends BaseActivity{
         initView();
     }
 
+
     @Override
     protected void findViewById() {
-        order_tracking = (RecyclerView) findViewById(R.id.order_tracking);
+        /**
+         * 标题标签相关id
+         */
+        backImageView = (ImageView) findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView) findViewById(R.id.title_text_id);
+        seachImageView = (ImageView) findViewById(R.id.title_search_id);
     }
 
     @Override
     protected void initView() {
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layoutManager.scrollToPosition(0);
-        order_tracking.setLayoutManager(layoutManager);
-        order_tracking.setItemAnimator(new DefaultItemAnimator());
-        //添加分割线
-        order_tracking.addItemDecoration(new ItemDivider(this, ItemDivider.VERTICAL_LIST));
-
-        String[] dataset = new String[3];
-        for(int i = 0; i< dataset.length; i++) {
-            dataset[i] = "item" + i;
-        }
-        ordreTrackingAdapter = new OrdreTrackingAdapter(this, dataset);
-
-        order_tracking.setAdapter(ordreTrackingAdapter);
+        //设置标签页显示方式
+        backImageView.setVisibility(View.VISIBLE);
+        seachImageView.setVisibility(View.GONE);
+        titleTextView.setText("订单详情");
+        //返回至登录界面事件
+        backImageView.setOnClickListener(backImageViewOnClickListener);
     }
+
+    /**
+     * 返回事件的监听*
+     */
+    private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(Order_Tracking_Activity.this, Order_Tracking_Activity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
 }
