@@ -18,7 +18,7 @@
            android:layout_height="28dp"
            android:background="@drawable/order_three_in_item_footer_rtn_background"
            android:layout_toLeftOf="@+id/order_three_item_footer_can_btn"
-           android:visibility="visible"
+           android:visibility="gone"
            android:text="退票"/>
 
         <Button
@@ -33,7 +33,7 @@
             android:layout_height="28dp"
             android:background="@drawable/order_three_in_item_footer_can_background"
             android:layout_toLeftOf="@+id/order_three_item_footer_pay_btn"
-            android:visibility="visible"
+            android:visibility="gone"
             android:text="取消订单"/>
 
         <Button
@@ -48,7 +48,7 @@
             android:layout_height="28dp"
             android:background="@drawable/order_three_in_item_footer_pay_background"
             android:layout_toLeftOf="@+id/order_three_item_footer_del_btn"
-            android:visibility="visible"
+            android:visibility="gone"
             android:text="继续支付"/>
 
         <Button
@@ -63,7 +63,7 @@
             android:layout_height="28dp"
             android:background="@drawable/order_three_in_item_footer_del_background"
             android:layout_alignParentRight="true"
-            android:visibility="visible"
+            android:visibility="gone"
             android:text="删除订单"/>
 
 </RelativeLayout>
