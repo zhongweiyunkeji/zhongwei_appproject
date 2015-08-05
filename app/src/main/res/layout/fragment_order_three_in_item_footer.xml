@@ -1,0 +1,69 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:paddingBottom="10dp"
+    tools:context="com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeInFragment">
+
+       <Button
+           android:id="@+id/order_three_item_footer_ret_btn"
+           android:padding="3dp"
+           android:textSize="13dp"
+           android:layout_marginTop="10dp"
+           android:layout_marginBottom="10dp"
+           android:layout_marginRight="10dp"
+           android:textColor="#FFFFFF"
+           android:layout_width="65dp"
+           android:layout_height="28dp"
+           android:background="@drawable/order_three_in_item_footer_rtn_background"
+           android:layout_toLeftOf="@+id/order_three_item_footer_can_btn"
+           android:visibility="visible"
+           android:text="退票"/>
+
+        <Button
+            android:id="@+id/order_three_item_footer_can_btn"
+            android:padding="3dp"
+            android:textSize="13dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_width="65dp"
+            android:layout_height="28dp"
+            android:background="@drawable/order_three_in_item_footer_can_background"
+            android:layout_toLeftOf="@+id/order_three_item_footer_pay_btn"
+            android:visibility="visible"
+            android:text="取消订单"/>
+
+        <Button
+            android:id="@+id/order_three_item_footer_pay_btn"
+            android:padding="3dp"
+            android:textSize="13dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_width="65dp"
+            android:layout_height="28dp"
+            android:background="@drawable/order_three_in_item_footer_pay_background"
+            android:layout_toLeftOf="@+id/order_three_item_footer_del_btn"
+            android:visibility="visible"
+            android:text="继续支付"/>
+
+        <Button
+            android:id="@+id/order_three_item_footer_del_btn"
+            android:padding="3dp"
+            android:textSize="13dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_width="65dp"
+            android:layout_height="28dp"
+            android:background="@drawable/order_three_in_item_footer_del_background"
+            android:layout_alignParentRight="true"
+            android:visibility="visible"
+            android:text="删除订单"/>
+
+</RelativeLayout>
