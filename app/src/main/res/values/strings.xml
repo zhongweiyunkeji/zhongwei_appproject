@@ -95,6 +95,7 @@
     <string name="message_auth_text">3.短信验证</string>
     <string name="please_input_phone_number_text">请输入11位手机号</string>
     <string name="next_button_text">下一步</string>
+    <string name="login_time_out">已与服务器断开连接,请重新登录</string>
 
     <!-- 听中卫 -->
     <string name="open_time_text">开放时间</string>
