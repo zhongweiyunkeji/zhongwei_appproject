@@ -129,7 +129,7 @@ public class Constants {
 	// 动态加载数据
 	public static final int SET_DATA = 0X9000;
 
-	// 未登录
+	// 未
 	public static final int NONE_LOGIN = 0X10000;
 
 	/**
@@ -144,6 +144,9 @@ public class Constants {
      //登录成功
 
     public static final String SUCCESS_LOGIN = "ZWTICKET-USER-S-101";
+
+	// 登录超时
+	public static final String LOGIN_TIMEOUT = "ZWTICKET-GLOBAL-E-4";
 
 	//邮箱发送成功
 	public static final String SUCCESS_EMAIL = "ZWTICKET-GLOBAL-S-6";
