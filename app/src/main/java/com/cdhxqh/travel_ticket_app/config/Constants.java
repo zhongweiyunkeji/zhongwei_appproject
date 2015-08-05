@@ -44,11 +44,12 @@ public class Constants {
     /**获取景点门票**/
     public static final String Goods_URL = BASE_URL+"ecscategory/goodspage";
 
+	// 订单列表
+	public static final String OTDER_LIST_URL = BASE_URL+"ecsorder/list";
 
 
 
-
-    /**景区列表**/
+	/**景区列表**/
     public static final String TICKETS_URL = BASE_URL+"ecsbrand/brandlist";
 
     /**根据景区ID获取景点列表接口**/
@@ -129,7 +130,7 @@ public class Constants {
 	// 动态加载数据
 	public static final int SET_DATA = 0X9000;
 
-	// 未
+	// 未登录
 	public static final int NONE_LOGIN = 0X10000;
 
 	/**
@@ -144,9 +145,6 @@ public class Constants {
      //登录成功
 
     public static final String SUCCESS_LOGIN = "ZWTICKET-USER-S-101";
-
-	// 登录超时
-	public static final String LOGIN_TIMEOUT = "ZWTICKET-GLOBAL-E-4";
 
 	//邮箱发送成功
 	public static final String SUCCESS_EMAIL = "ZWTICKET-GLOBAL-S-6";
