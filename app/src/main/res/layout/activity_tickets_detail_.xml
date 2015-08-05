@@ -10,9 +10,29 @@
 
     <include layout="@layout/tickets_detail_top_text"></include>
 
-    <include layout="@layout/tickets_detail_two_layout"></include>
 
-    <include layout="@layout/tickets_detail_three_layout"></include>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/tickets_detail_two_layout"></include>
+
+            <include layout="@layout/tickets_detail_three_layout"></include>
+
+
+            <include layout="@layout/tickets_detail_four_layout"></include>
+
+            <include layout="@layout/tickets_detail_five_layout"></include>
+
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
 
 

@@ -113,6 +113,7 @@
     <!--景区门票详情-->
     <string name="tickets_info_text">景区简介</string>
     <string name="end_date_time_text">到期时间:</string>
+    <string name="need_know_text">预定需知</string>
 
 
 </resources>
