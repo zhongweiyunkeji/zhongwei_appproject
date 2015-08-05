@@ -77,7 +77,8 @@ public class OrderThreeInAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return itemList.get(groupList.get(groupPosition).getOrderSn()).size();
+        String orderSn = groupList.get(groupPosition).getOrderSn();
+        return itemList.get(orderSn).size();
     }
 
     @Override
@@ -123,7 +124,7 @@ public class OrderThreeInAdapter extends BaseExpandableListAdapter {
         if(isExpanded){
             icon.setImageResource(R.drawable.ic_up);  // 展开时时设置图标  ic_down
         } else {
-            icon.setImageResource(R.drawable.ic_up);  // 折叠时时设置图标  ic_up
+            icon.setImageResource(R.drawable.ic_down);  // 折叠时时设置图标  ic_up
         }
 
         OrderModel text = (OrderModel)getGroup(groupPosition);
@@ -155,7 +156,7 @@ public class OrderThreeInAdapter extends BaseExpandableListAdapter {
             viewHolder.order_three_in_item_title.setText(msg.getGoodsName());
             viewHolder.order_three_in_item_ordertime.setText(model.getAddTime());
             viewHolder.order_three_in_item_orderqty.setText(msg.getGoodsNumber()+"");
-            viewHolder.order_three_in_item_ordertotal.setText((msg.getGoodsNumber()*msg.getGoodsPrice())+"");
+            viewHolder.order_three_in_item_ordertotal.setText("￥"+(msg.getGoodsNumber()*msg.getGoodsPrice())+"");
             // viewHolder.expand_text_04.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);  // 设置中划线并加清晰
 
             return convertView;
@@ -169,6 +170,17 @@ public class OrderThreeInAdapter extends BaseExpandableListAdapter {
                 viewHolder = (FooterViewHolder)convertView.getTag();
             }
 
+           String status =  model.getStatus();
+            if("订单未确认".equals(status)){
+                viewHolder.canButton.setVisibility(View.VISIBLE);  // 显示取消按钮
+                viewHolder.payButton.setVisibility(View.VISIBLE);  // 显示支付按钮
+            } else
+            if("已取消".equals(status)){
+                viewHolder.delButton.setVisibility(View.VISIBLE);  // 显示删除按钮
+            } else
+            if("支付成功".equals(status)){
+                viewHolder.rtnButton.setVisibility(View.VISIBLE);  // 显示退票按钮
+            }
 
             return convertView;
         }
