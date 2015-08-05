@@ -16,40 +16,6 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
-        <!--订单跟踪-->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="242dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="订单跟踪"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/order_tracking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"></android.support.v7.widget.RecyclerView>
-
-            </LinearLayout>
-
-            </LinearLayout>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/line_x_reservation"/>
-
         <!--支付门票-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,14 +25,24 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="沙坡头成人票（下单立减5元）"/>
+                    android:text="沙坡头成人票（下单立减5元）"
+                    android:textColor="#2e8b57"
+                    android:textSize="16sp"/>
 
-
+                <Button
+                    android:layout_width="50dp"
+                    android:layout_height="22dp"
+                    android:layout_alignParentRight="true"
+                    android:text="在线支付"
+                    android:textSize="10sp"
+                    android:textColor="#FFB90F"
+                    android:background="@drawable/button_login_a"/>
 
             </RelativeLayout>
 
@@ -94,7 +70,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="2张"
-                            android:textColor="#a9a9a9"/>
+                            android:textColor="#00CED1"/>
 
                     </TableRow>
 
@@ -112,14 +88,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="￥136"
-                            android:textColor="#a9a9a9"/>
+                            android:textColor="#EEAD0E"/>
 
                     </TableRow>
 
                 </TableLayout>
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_right_s"
                     android:layout_alignParentRight="true"/>
@@ -337,7 +313,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="@drawable/button_login_mail"
-            android:text="提交订单"
+            android:text="继续预定"
             android:textColor="#ffffff"
             />
 

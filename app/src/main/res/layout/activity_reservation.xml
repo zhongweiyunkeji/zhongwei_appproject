@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="#f1fbf9"
     android:orientation="vertical">
 
     <include layout="@layout/activity_title"></include>
@@ -83,10 +84,20 @@
                 android:id="@+id/time_out_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
                 android:text="出行时间"
                 android:textColor="#2f4f4f"/>
 
+                <TextView
+                    android:id="@+id/out_date_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/time_out_id"
+                    android:text=""
+                    android:textColor="#a9a9a9"/>
+
             <TextView
+                android:id="@+id/outDate_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -125,14 +136,14 @@
 
                     <Button
                         android:id="@+id/reservation_reduce_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/button_subtraction_reservation"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/button_minus_t"
                         />
                     <EditText
                         android:id="@+id/reservation_display_num"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/button_margion_reservation"
                         android:gravity="center"
                         android:text="1"
@@ -142,9 +153,9 @@
                         android:textColor="#2f4f4f"/>
                     <Button
                         android:id="@+id/reservation_add_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/button_addition_reservation"/>
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/button_add_t"/>
 
                 </LinearLayout>
 
@@ -160,21 +171,22 @@
             <!--填单框-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="170dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/input_left_text"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:paddingTop="6dp"
                         android:paddingBottom="6dp"
-                        android:background="@drawable/reservation_input_1"
                         android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
@@ -197,9 +209,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:paddingTop="6dp"
                         android:paddingBottom="6dp"
-                        android:background="@drawable/reservation_input_2"
+
                         android:orientation="horizontal">
 
                         <TextView
@@ -223,9 +236,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:paddingTop="12dp"
                         android:paddingBottom="6dp"
-                        android:background="@drawable/reservation_input_3"
                         android:orientation="horizontal">
 
                         <TextView
@@ -256,26 +269,8 @@
                     <TextView
                         android:layout_height="match_parent"
                         android:layout_width="match_parent"
-                        android:background="@drawable/reservation_select_1"
+                        android:background="@drawable/button_right_t"
                         android:textColor="#2f4f4f"/>
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|center">
-                    <ImageView
-                        android:id="@+id/guest_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/reservation_guest_icon"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_toRightOf="@id/guest_icon"
-                        android:text="请选择\n常用旅客"
-                        android:textSize="11sp"/>
-                    </RelativeLayout>
                 </FrameLayout>
 
             </LinearLayout>
