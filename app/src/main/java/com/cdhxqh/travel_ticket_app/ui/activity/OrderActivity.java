@@ -273,7 +273,7 @@ public class OrderActivity extends BaseActivity {
                                 OrderGoods goods = new OrderGoods(goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl);
                                 goodList.add(goods);
                             }
-                            goodList.add(null);  // 添加末尾的按钮组(不能省略)
+                            goodList.add(new OrderGoods());  // 添加末尾的按钮组(不能省略)
                         }
                     }
                 }
