@@ -97,7 +97,9 @@ public class OrderThreeInFragment extends BaseFragment {
                 OrderGoods goods = new OrderGoods( "沙坡头"+i+""+"j", 0, 188.0, sn, "http://e.hiphotos.baidu.com/" + "image/pic/item/5fdf8db1cb134954b5a93c8d554e9258d0094aa0.jpg");
                 list.add(goods);
             }
-            list.add(null);
+            OrderGoods other = new OrderGoods();
+            other.setOrderSn("$$$$$$$$$$$$$$$$$$$$$$$$程序内部判断标示$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+            list.add(other);  // 添加末尾的按钮组(不能省略)
             itemMap.put(sn, list);
         }
 
@@ -137,7 +139,9 @@ public class OrderThreeInFragment extends BaseFragment {
                     OrderGoods goods = new OrderGoods("沙坡头"+i+""+"j", 0, 188.0, sn, "http://e.hiphotos.baidu.com/" + "image/pic/item/5fdf8db1cb134954b5a93c8d554e9258d0094aa0.jpg");
                     list.add(goods);
                 }
-                list.add(null);
+                OrderGoods other = new OrderGoods();
+                other.setOrderSn("$$$$$$$$$$$$$$$$$$$$$$$$程序内部判断标示$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+                list.add(other);  // 添加末尾的按钮组(不能省略)
                 itemMap.put(sn, list);
             }
 
