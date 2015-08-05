@@ -146,6 +146,9 @@ public class Constants {
 
     public static final String SUCCESS_LOGIN = "ZWTICKET-USER-S-101";
 
+	// 登录超时
+	public static final String LOGIN_TIMEOUT = "ZWTICKET-GLOBAL-E-4";
+
 	//邮箱发送成功
 	public static final String SUCCESS_EMAIL = "ZWTICKET-GLOBAL-S-6";
 
