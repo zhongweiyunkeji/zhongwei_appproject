@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
+import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.OrderGoods;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
 import com.cdhxqh.travel_ticket_app.ui.adapter.OrderThreeInAdapter;
@@ -216,10 +217,10 @@ public class OrderActivity extends BaseActivity {
     private void requestOrderList(boolean refersh, String type) {
         createProgressDialog();
         if("after".equals(type)){  // 3个月内
-            HttpManager.getOrder_list(this, "http://192.168.1.99:8080/qdm/ecsorder/list", type, showCountIn+"", currntPageIn+"", handlerIn);
+            HttpManager.getOrder_list(this, Constants.OTDER_LIST_URL, type, showCountIn+"", currntPageIn+"", handlerIn);
         } else
         if("before".equals(type)){// 3个月前
-            HttpManager.getOrder_list(this, "http://192.168.1.99:8080/qdm/ecsorder/list", type, showCountOut+"", currntPageOut+"", handlerOut);
+            HttpManager.getOrder_list(this, Constants.OTDER_LIST_URL, type, showCountOut+"", currntPageOut+"", handlerOut);
         }
     }
 
