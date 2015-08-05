@@ -14,6 +14,7 @@ public enum ErrorType {
     ErrorApiForbidden,
     ErrorNoOnceAndNext,
     ErrorLoginFailure,
+    ErrorLoginTimeOutFailure,
     ErrorCommentFailure,
     ErrorGetTopicListFailure,
     ErrorGetNotificationFailure,
@@ -55,6 +56,9 @@ public enum ErrorType {
 
             case ErrorGetProfileFailure:
                 return cxt.getResources().getString(R.string.error_get_profile);
+
+            case ErrorLoginTimeOutFailure:
+                return cxt.getResources().getString(R.string.login_time_out);
 
             default:
                 return cxt.getResources().getString(R.string.error_unknown);

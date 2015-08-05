@@ -307,10 +307,10 @@ public class HttpManager {
      * @param handler
      */
 
-    public static void getOrder_list(final Context context, String url, String datenote, String showCount, String currentPage,
-                                     final HttpRequestHandler<ArrayList<OrderModel>> handler) {
+    public static void getOrder_list(final Context context, String url, String datenote, String showCount, String currentPage,  final HttpRequestHandler<String> handler) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
+        client.addHeader("Cookie", "JSESSIONID="+HttpManager.SESSIONID);  // 添加Header
         params.put("datenote", datenote);
         params.put("showCount", showCount);
         params.put("currentPage", currentPage);
@@ -326,19 +326,19 @@ public class HttpManager {
                 try {
                     JSONObject jsonObject = new JSONObject(responseString);
                     String errcode = jsonObject.getString("errcode");
-                    if (errcode.equals(Constants.REQUEST_SUCCESS)) {
-                        String errmsg = jsonObject.getString("errmsg");
-
+                    if (Constants.REQUEST_SUCCESS.equals(errcode)) {
+                         SafeHandler.onSuccess(handler, responseString);
                         String result = jsonObject.getString("result");
-
-                        ArrayList<SpotBookModel> spotBookModel = JsonUtils.parsingSpotBook(result);
-                        if (spotBookModel != null && spotBookModel.size() != 0) {
-//                            SafeHandler.onSuccess(handler, spotBookModel);
+                        // ArrayList<SpotBookModel> spotBookModel = JsonUtils.parsingSpotBook(result);
+                        /*if (spotBookModel != null && spotBookModel.size() != 0) {
+                            SafeHandler.onSuccess(handler, spotBookModel);
                         } else {
                             SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
-                        }
+                        }*/
+                    } else
+                    if(Constants.LOGIN_TIMEOUT.equals(errcode)){
+                        SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorLoginTimeOutFailure));
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
@@ -570,6 +570,8 @@ public class HttpManager {
             params.put(entry .getKey(), entry.getValue());
         }
 
+        /*PersistentCookieStore myCookieStore = new PersistentCookieStore(cxt);
+        client.setCookieStore(myCookieStore);*/
 
         client.post(url, params, new TextHttpResponseHandler() {
 
@@ -584,7 +586,7 @@ public class HttpManager {
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 for(Header h : headers){
                     String name = h.getName();
-                    if("Set-Cookie".equals(name)){
+                    if("Set-Cookie".equals(name) && (-1 != url.indexOf(Constants.LOGIN_URL))){
                         String cookie = h.getValue();
                         SESSIONID = cookie.split(";")[0].split("=")[1];
                         break;
