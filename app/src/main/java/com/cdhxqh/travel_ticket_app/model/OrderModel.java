@@ -41,7 +41,7 @@ public class OrderModel implements Parcelable {
     }
 
     public String getOrderSn() {
-        return orderSn;
+        return "订单号:"+orderSn;
     }
 
     public void setOrderSn(String orderSn) {
@@ -73,6 +73,23 @@ public class OrderModel implements Parcelable {
     }
 
     public String getStatus() {
+        // 0： 订单未确认  1：已付款   2：已取消订单    3：无效订单   4：已退货
+        if("0".equals(status)){
+            return "订单未确认";
+        }
+        if("1".equals(status)){
+            return "已付款";
+        }
+        if("2".equals(status)){
+            return "已取消订单";
+        }
+        if("3".equals(status)){
+            return "无效订单";
+        }
+        if("4".equals(status)){
+            return "已退货";
+        }
+
         return status;
     }
 
