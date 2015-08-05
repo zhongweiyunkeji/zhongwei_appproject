@@ -16,17 +16,27 @@ import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
+import com.cdhxqh.travel_ticket_app.model.OrderGoods;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
+import com.cdhxqh.travel_ticket_app.ui.adapter.OrderThreeInAdapter;
 import com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeInFragment;
 import com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeOutFragment;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 
-import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.SimpleFormatter;
 
 /**
  * 订单列表*
@@ -65,6 +75,14 @@ public class OrderActivity extends BaseActivity {
 
     private ProgressDialog progressDialog;
 
+    // 3个月内
+    int currntPageIn = 1;
+    final static int showCountIn = 1;
+
+    // 3个月钱
+    int currntPageOut = 1;
+    final static int showCountOut = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +91,6 @@ public class OrderActivity extends BaseActivity {
         findViewById();
         initView();
 
-        createProgressDialog();
-        requestOrderList(true);
     }
 
     @Override
@@ -82,8 +98,6 @@ public class OrderActivity extends BaseActivity {
         titleTextView = (TextView) findViewById(R.id.title_text_id);
         inttextView = (TextView) findViewById(R.id.order_in_text);
         outtextView = (TextView) findViewById(R.id.order_out_text);
-
-
     }
 
     @Override
@@ -124,7 +138,7 @@ public class OrderActivity extends BaseActivity {
                 orderThreeInFragment = new OrderThreeInFragment();
             }
 
-            FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();
+            FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();  //
             localFragmentTransaction.replace(R.id.container, orderThreeInFragment, "three_in");
             localFragmentTransaction.commit();
 
@@ -145,6 +159,13 @@ public class OrderActivity extends BaseActivity {
             outtextView.setBackgroundColor(getResources().getColor(R.color.green_color));
 
 
+        }
+
+        if("three_in".equals(tabName)){
+            requestOrderList(true, "after");
+        } else
+        if("three_out".equals(tabName)){
+            requestOrderList(true, "before");
         }
 
     }
@@ -192,31 +213,103 @@ public class OrderActivity extends BaseActivity {
         progressDialog = ProgressDialog.show(OrderActivity.this, null, getString(R.string.please_loading_hint), true, true);
     }
 
-    private void requestOrderList(boolean refersh) {
-        HttpManager.getOrder_list(this, "http://182.92.158.158:8080/qdm/ecsorder/list", "before", "10", "1", handler);
+    private void requestOrderList(boolean refersh, String type) {
+        createProgressDialog();
+        if("after".equals(type)){  // 3个月内
+            HttpManager.getOrder_list(this, "http://192.168.1.99:8080/qdm/ecsorder/list", type, showCountIn+"", currntPageIn+"", handlerIn);
+        } else
+        if("before".equals(type)){// 3个月前
+            HttpManager.getOrder_list(this, "http://192.168.1.99:8080/qdm/ecsorder/list", type, showCountOut+"", currntPageOut+"", handlerOut);
+        }
     }
 
-    private HttpRequestHandler<ArrayList<OrderModel>> handler = new HttpRequestHandler<ArrayList<OrderModel>>() {
+    private HttpRequestHandler<String> handlerIn = new HttpRequestHandler<String>() {
         @Override
-        public void onSuccess(ArrayList<OrderModel> data) {
-
-            Log.i(TAG, "data=" + data);
-//            brandListAdapter.update(data, true);
+        public void onSuccess(String data) {
             progressDialog.dismiss();
-//            MessageUtils.showErrorMessage(Listen_ZhongWei_Activity.this,"加载成功");
+            JSONObject jsonObject = null;
+            currntPageIn++;
+            try {
+                SimpleDateFormat formart = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                jsonObject = new JSONObject(data);
+                JSONObject result = ((JSONObject)jsonObject.get("result"));
+                String serverurl = result.getString("serverurl");
+                int totalPage = result.getInt("totalPage");
+                JSONArray orderlist = result.getJSONArray("orderlist");
+                int length = orderlist.length();
 
+                List<OrderModel> groupList = new ArrayList<OrderModel>(0);
+                Map<String, List<OrderGoods>> itemList = new HashMap<String, List<OrderGoods>>(0);
+
+                for(int index=0; index<length; index++){
+                    JSONObject subObject = (JSONObject)orderlist.get(index);
+                    String orderSn = subObject.getString("orderSn");           // 订单号
+                    String orderStatus = subObject.getString("orderStatus");  // 订单状态
+                    Long addTime =       subObject.getLong("addTime");        // 购买时间
+                    String createTimt = "";
+                    try {
+                        createTimt = formart.format(new java.util.Date(addTime*1000));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    OrderModel orderModel = new OrderModel(orderSn, 0,0,0,orderStatus, createTimt);
+                    groupList.add(orderModel);
+
+                    JSONArray subArray = subObject.getJSONArray("orderGoods");
+                    // Log.e(TAG, " ----------------------------> "+subObject);
+                    if(subArray!=null){
+                        int size = subArray.length();
+                        if(size>0){
+                            List<OrderGoods> goodList = new ArrayList<OrderGoods>(0);
+                            itemList.put(orderSn, goodList);
+                            for(int k=0; k<size; k++){
+                                JSONObject obj = (JSONObject)subArray.get(k);
+                                String goodsName = obj.getString("goodsName");  // 景点标题
+                                int goodsNumber = obj.getInt("goodsNumber");   // 总数量
+                                int goodsPrice = obj.getInt("goodsPrice");     // 购买价格
+                                String status = obj.getString("status");        // 景点标题
+                                String imgurl = obj.getString("goodsAttr");    // 景点图片
+                                OrderGoods goods = new OrderGoods(goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl);
+                                goodList.add(goods);
+                            }
+                            goodList.add(null);  // 添加末尾的按钮组(不能省略)
+                        }
+                    }
+                }
+
+                OrderThreeInAdapter adapter = orderThreeInFragment.getAdapter();
+                adapter.update(groupList, itemList);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
-        public void onSuccess(ArrayList<OrderModel> data, int totalPages, int currentPage) {
+        public void onSuccess(String data, int totalPages, int currentPage) {
             progressDialog.dismiss();
-            Log.i(TAG,"222222");
-
         }
 
         @Override
         public void onFailure(String error) {
-            Log.i(TAG,"333333");
+            MessageUtils.showErrorMessage(OrderActivity.this, error);
+            progressDialog.dismiss();
+        }
+    };
+
+    private HttpRequestHandler<String> handlerOut = new HttpRequestHandler<String>() {
+        @Override
+        public void onSuccess(String data) {
+            progressDialog.dismiss();
+        }
+
+        @Override
+        public void onSuccess(String data, int totalPages, int currentPage) {
+            progressDialog.dismiss();
+        }
+
+        @Override
+        public void onFailure(String error) {
             MessageUtils.showErrorMessage(OrderActivity.this, error);
             progressDialog.dismiss();
         }
