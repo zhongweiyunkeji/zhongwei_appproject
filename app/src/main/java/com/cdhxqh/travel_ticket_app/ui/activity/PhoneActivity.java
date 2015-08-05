@@ -188,7 +188,7 @@ public class PhoneActivity extends BaseActivity {
         public void onClick(View v) {
 //            finish();
             Intent intent = new Intent();
-            intent.setClass(PhoneActivity.this, IntroductionActivity.class);
+            intent.setClass(PhoneActivity.this, Layoutonline_Payment_Activity.class);
             startActivityForResult(intent, 0);
         }
     };

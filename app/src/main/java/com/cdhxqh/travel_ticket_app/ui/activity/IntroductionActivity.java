@@ -1,9 +1,11 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +38,18 @@ public class IntroductionActivity extends BaseActivity{
      * 景区简介详情
      */
     private TextView text_introduction_desc;
+    /**
+     * 返回按钮*
+     */
+    private ImageView backImageView;
+    /**
+     * 标题*
+     */
+    private TextView titleTextView;
+    /**
+     * 搜索*
+     */
+    private ImageView seachImageView;
 
 //    private ProgressDialog progressDialog;
 //
@@ -58,6 +72,13 @@ public class IntroductionActivity extends BaseActivity{
         text_introduction_tittle = (TextView) findViewById(R.id.text_introduction_tittle);
         image_introduction_id = (ImageView) findViewById(R.id.image_introduction_id);
         text_introduction_desc= (TextView) findViewById(R.id.text_introduction_desc);
+
+        /**
+         * 标题标签相关id
+         */
+        backImageView = (ImageView) findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView) findViewById(R.id.title_text_id);
+        seachImageView = (ImageView) findViewById(R.id.title_search_id);
     }
 
     /**
@@ -65,57 +86,31 @@ public class IntroductionActivity extends BaseActivity{
      */
     @Override
     protected void initView() {
+        //设置标签页显示方式
+        backImageView.setVisibility(View.VISIBLE);
+        seachImageView.setVisibility(View.GONE);
+        titleTextView.setText("景区简介");
+
         Bundle bundle = new Bundle();
         bundle = this.getIntent().getExtras();
         text_introduction_tittle.setText(bundle.getString("spotId"));
         ImageLoader.getInstance().displayImage(bundle.getString("spotLogo"), image_introduction_id);
         text_introduction_desc.setText(bundle.getString("spotDesc"));
+
+        //返回至登录界面事件
+        backImageView.setOnClickListener(backImageViewOnClickListener);
     }
 
-//    BrandListAdapter brandListAdapter;
-
-
-
-
-//    private HttpRequestHandler<ArrayList<SpotBookModel>> handler = new HttpRequestHandler<ArrayList<SpotBookModel>>() {
-//
-//
-//        @Override
-//        public void onSuccess(ArrayList<SpotBookModel> data) {
-//
-//            Log.i(TAG, "data=" + data);
-//            datas = data;
-//            String spotImage = datas.get(0).getSpotImage();
-//            ImageLoader.getInstance().displayImage(spotImage, image_introduction_id);
-//
-//
-//            String spotTittle = datas.get(0).getSpotTittle();
-//            text_introduction_tittle.setText(spotTittle);
-//
-//            String spotDesc = datas.get(0).getSpotDesc();
-//            text_introduction_desc.setText(spotDesc);
-//        }
-//
-//        @Override
-//        public void onSuccess(ArrayList<SpotBookModel> data, int totalPages, int currentPage) {
-//            progressDialog.dismiss();
-//            Log.i(TAG,"222222");
-//
-//        }
-//
-//        @Override
-//        public void onFailure(String error) {
-//            Log.i(TAG,"333333");
-//            MessageUtils.showErrorMessage(IntroductionActivity.this,error);
-//            progressDialog.dismiss();
-//        }
-//    };
-//
-//
-//
-//    public void text() {
-//        HttpManager.getSpotBooking(this, "http://182.92.158.158:8080/qdm/ecsbrand/brandlist", null, "3", "1", handler);
-//    }
-
+    /**
+     * 返回事件的监听*
+     */
+    private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(IntroductionActivity.this, Tickets_Detail_Activity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
 
 }
