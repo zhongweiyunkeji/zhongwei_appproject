@@ -1,8 +1,12 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
 
@@ -15,6 +19,19 @@ import java.util.List;
  */
 public class Book_Informtion_Activity extends BaseActivity{
     private ListView listView_book_id;
+    /**
+     * 返回按钮*
+     */
+    private ImageView backImageView;
+
+    /**
+     * 标题*
+     */
+    private TextView titleTextView;
+    /**
+     * 搜索*
+     */
+    private ImageView seachImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +44,24 @@ public class Book_Informtion_Activity extends BaseActivity{
     @Override
     protected void findViewById() {
         listView_book_id = (ListView) this.findViewById(R.id.listView_book_id);
+
+        /**
+         * 标题标签相关id
+         */
+        backImageView = (ImageView) findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView) findViewById(R.id.title_text_id);
+        seachImageView = (ImageView) findViewById(R.id.title_search_id);
     }
 
     @Override
     protected void initView() {
+        //设置标签页显示方式
+        backImageView.setVisibility(View.VISIBLE);
+        seachImageView.setVisibility(View.GONE);
+        titleTextView.setText("预订须知");
+        //返回至登录界面事件
+        backImageView.setOnClickListener(backImageViewOnClickListener);
+
         List<HashMap<String, Object>> data = new ArrayList<HashMap<String,Object>>();
         HashMap<String, Object> item  = new HashMap<String, Object>();
         HashMap<String, Object> items  = new HashMap<String, Object>();
@@ -58,4 +89,16 @@ public class Book_Informtion_Activity extends BaseActivity{
         //实现列表的显示
         listView_book_id.setAdapter(adapter);
     }
+
+    /**
+     * 返回事件的监听*
+     */
+    private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(Book_Informtion_Activity.this, Tickets_Detail_Activity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
 }
