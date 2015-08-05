@@ -26,7 +26,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_down"
+                android:src="@drawable/ic_down"
                 android:visibility="invisible"
                 />
         </LinearLayout>
@@ -47,7 +47,7 @@
                 android:id="@+id/order_three_in_group_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_down"
+                android:src="@drawable/ic_down"
                 />
         </LinearLayout>
     </RelativeLayout>
