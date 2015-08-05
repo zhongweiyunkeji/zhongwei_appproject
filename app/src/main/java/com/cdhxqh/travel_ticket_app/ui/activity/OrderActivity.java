@@ -263,7 +263,7 @@ public class OrderActivity extends BaseActivity {
                         int size = subArray.length();
                         if(size>0){
                             List<OrderGoods> goodList = new ArrayList<OrderGoods>(0);
-                            itemList.put(orderSn, goodList);
+                            itemList.put(orderModel.getOrderSn(), goodList);   // 注意此处不能使用orderSn!!!!!!
                             for(int k=0; k<size; k++){
                                 JSONObject obj = (JSONObject)subArray.get(k);
                                 String goodsName = obj.getString("goodsName");  // 景点标题
@@ -274,7 +274,9 @@ public class OrderActivity extends BaseActivity {
                                 OrderGoods goods = new OrderGoods(goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl);
                                 goodList.add(goods);
                             }
-                            goodList.add(new OrderGoods());  // 添加末尾的按钮组(不能省略)
+                            OrderGoods other = new OrderGoods();
+                            //other.setOrderSn("$$$$$$$$$$$$$$$$$$$$$$$$程序内部判断标示$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+                            goodList.add(other);  // 添加末尾的按钮组(不能省略)
                         }
                     }
                 }
