@@ -91,7 +91,7 @@ public class OrderModel implements Parcelable {
             return "已付款";
         }
         if("2".equals(status)){
-            return "已取消订单";
+            return "已取消";
         }
         if("3".equals(status)){
             return "无效订单";
