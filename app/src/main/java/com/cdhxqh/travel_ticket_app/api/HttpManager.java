@@ -569,7 +569,9 @@ public class HttpManager {
         for (Map.Entry<String, String> entry : mapparams.entrySet()) {
             params.put(entry .getKey(), entry.getValue());
         }
-
+        if(null!=HttpManager.SESSIONID  && !"".equals(HttpManager.SESSIONID) && (-1 == Constants.LOGIN_URL.indexOf(url))){ // 登录后的所有URL自动添加Header
+            client.addHeader("Cookie", "JSESSIONID="+HttpManager.SESSIONID);
+        }
         /*PersistentCookieStore myCookieStore = new PersistentCookieStore(cxt);
         client.setCookieStore(myCookieStore);*/
 
