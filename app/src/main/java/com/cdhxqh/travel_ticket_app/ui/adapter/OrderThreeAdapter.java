@@ -1,19 +1,13 @@
 package com.cdhxqh.travel_ticket_app.ui.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.model.OrderGoods;
@@ -27,19 +21,19 @@ import java.util.Map;
 /**
  * Created by hexian on 2015/8/4.
  */
-public class OrderThreeInAdapter extends BaseExpandableListAdapter {
+public class OrderThreeAdapter extends BaseExpandableListAdapter {
 
     private List<OrderModel> groupList = new ArrayList<OrderModel>(0);
     private Map<String, List<OrderGoods>> itemList = new HashMap<String, List<OrderGoods>>(0);
     private Context context;
     private LayoutInflater inflater;
 
-    public OrderThreeInAdapter(Context context){
+    public OrderThreeAdapter(Context context){
         this.context = context;
         inflater = LayoutInflater.from(context);
     }
 
-    public OrderThreeInAdapter(Context context, List<OrderModel> groupList, Map<String, List<OrderGoods>> itemList){
+    public OrderThreeAdapter(Context context, List<OrderModel> groupList, Map<String, List<OrderGoods>> itemList){
         this(context);
         this.groupList = groupList;
         this.itemList = itemList;
