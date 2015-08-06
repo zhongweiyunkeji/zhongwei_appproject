@@ -70,6 +70,15 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
 
     private static final int SDK_CHECK_FLAG = 2;
 
+    /**
+     * 总金额
+     */
+    private String goodsAmount;
+
+    /**
+     * 封装的json
+     */
+    private String goodsIds;
 
 
 
@@ -79,6 +88,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layoutonline_payment);
         findViewById();
+        getdate();
         initView();
     }
 
@@ -125,6 +135,16 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
             ZhiFuManage.pay(v, Layoutonline_Payment_Activity.this, mHandler);
         }
     };
+
+    /**
+     * 获取数据
+     */
+    private void getdate() {
+        Bundle bundle = new Bundle();
+        bundle = this.getIntent().getExtras();
+        goodsAmount = bundle.getString("goodsAmount");
+        goodsIds = bundle.getString("goodsIds");
+    }
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
