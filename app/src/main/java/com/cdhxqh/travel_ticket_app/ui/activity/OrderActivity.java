@@ -151,7 +151,9 @@ public class OrderActivity extends BaseActivity {
             if(1 == currntPageIn){
                 requestOrderList(true, "after");
             }
-
+            if(orderThreeInFragment.getAdapter()!=null && orderThreeInFragment.getAdapter().getGroupList().size() == 0){
+                laout.setVisibility(View.VISIBLE);
+            }
         } else if (tabName == "three_out") {
             if(null == orderThreeOutFragment){
                 orderThreeOutFragment = new OrderThreeOutFragment();
@@ -166,6 +168,9 @@ public class OrderActivity extends BaseActivity {
 
             if(1 == currntPageOut){
                 requestOrderList(true, "before");
+            }
+            if(orderThreeOutFragment.getAdapter()!=null && orderThreeOutFragment.getAdapter().getGroupList().size() == 0){
+                laout.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -214,8 +219,11 @@ public class OrderActivity extends BaseActivity {
     }
 
     public void requestOrderList(boolean refersh, String type) {
-        if(orderThreeInFragment.getSwipeRefreshLayoutIn() != null){
+        if(orderThreeInFragment!=null && orderThreeInFragment.getSwipeRefreshLayoutIn() != null){
             orderThreeInFragment.getSwipeRefreshLayoutIn().setRefreshing(false);
+        }
+        if(orderThreeOutFragment!=null && orderThreeOutFragment.getSwipeRefreshLayoutOut() != null){
+            orderThreeOutFragment.getSwipeRefreshLayoutOut().setRefreshing(false);
         }
         createProgressDialog();
         if("after".equals(type)){  // 3个月内
@@ -309,6 +317,10 @@ public class OrderActivity extends BaseActivity {
             progressDialog.dismiss();
         }
     };
+
+    public LinearLayout getLaout() {
+        return laout;
+    }
 
     private HttpRequestHandler<String> handlerOut = new HttpRequestHandler<String>() {
         @Override
