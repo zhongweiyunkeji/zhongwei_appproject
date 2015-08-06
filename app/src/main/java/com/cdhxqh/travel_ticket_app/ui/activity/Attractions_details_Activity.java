@@ -111,7 +111,7 @@ public class Attractions_details_Activity extends BaseActivity {
         atitleText = (TextView) findViewById(R.id.attr_title_id);
         contentText = (TextView) findViewById(R.id.attr_content_id);
 
-        settingsImg = (ImageView) findViewById(R.id.title_search_id);
+
     }
 
     @Override
