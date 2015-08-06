@@ -113,7 +113,6 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
         tickets_detail_introduce_text_id.setOnClickListener(ticketsIntroduceOnClickListener);
 
-        setListViewHeight(expandableListView);
     }
 
 
