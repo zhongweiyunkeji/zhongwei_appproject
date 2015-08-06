@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
-
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
@@ -25,7 +24,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -266,9 +264,9 @@ public class OrderActivity extends BaseActivity {
                                 String goodsName = obj.getString("goodsName");  // 景点标题
                                 int goodsNumber = obj.getInt("goodsNumber");   // 总数量
                                 int goodsPrice = obj.getInt("goodsPrice");     // 购买价格
-                                String status = obj.getString("status");        // 景点标题
+                                String status = obj.getString("status");        // 景点状态
                                 String imgurl = obj.getString("goodsAttr");    // 景点图片
-                                OrderGoods goods = new OrderGoods(goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl);
+                                OrderGoods goods = new OrderGoods(goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status);
                                 goodList.add(goods);
                             }
                             OrderGoods other = new OrderGoods();
@@ -351,7 +349,7 @@ public class OrderActivity extends BaseActivity {
                                 int goodsPrice = obj.getInt("goodsPrice");     // 购买价格
                                 String status = obj.getString("status");        // 景点标题
                                 String imgurl = obj.getString("goodsAttr");    // 景点图片
-                                OrderGoods goods = new OrderGoods(goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl);
+                                OrderGoods goods = new OrderGoods(goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status);
                                 goodList.add(goods);
                             }
                             OrderGoods other = new OrderGoods();
