@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.model.Ec_goods;
 import com.cdhxqh.travel_ticket_app.model.OrderGoods;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
+import com.cdhxqh.travel_ticket_app.ui.activity.OrderActivity;
 import com.cdhxqh.travel_ticket_app.ui.adapter.OrderListAdapter;
 import com.cdhxqh.travel_ticket_app.ui.adapter.OrderThreeInAdapter;
 import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
@@ -40,6 +42,7 @@ public class OrderThreeInFragment extends BaseFragment {
     OrderThreeInAdapter adapter;
     TimerTask task;
     Timer timer = new Timer();
+    SwipeRefreshLayout swipeRefreshLayoutIn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,11 +60,9 @@ public class OrderThreeInFragment extends BaseFragment {
 
     private void findViewByIds(View view) {
         expandableListView = (ExpandableListView)view.findViewById(R.id.order_three_in_listview);
+        swipeRefreshLayoutIn = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
     }
 
-    /**
-     * 入口函数
-     */
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -78,12 +79,21 @@ public class OrderThreeInFragment extends BaseFragment {
         }
         expandableListView.setAdapter(adapter);
         expandableListView.setGroupIndicator(null);  // 去掉左边展开和关闭的图标
+
+        swipeRefreshLayoutIn.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {// 注册刷新监听
+            @Override
+            public void onRefresh() {
+               //  ((OrderActivity)getActivity()).requestOrderList(true, "after");
+                addGoods();
+            }
+        });
+
     }
 
     /**
      * 封装数据*
      */
-    private void addGoods() {
+    public void addGoods() {
 
         List<OrderModel> moduleList = new ArrayList<OrderModel>(0);
         Map<String, List<OrderGoods>> itemMap = new HashMap<String, List<OrderGoods>>(0);
@@ -149,5 +159,9 @@ public class OrderThreeInFragment extends BaseFragment {
 
     public OrderThreeInAdapter getAdapter() {
         return adapter;
+    }
+
+    public SwipeRefreshLayout getSwipeRefreshLayoutIn(){
+        return swipeRefreshLayoutIn;
     }
 }
