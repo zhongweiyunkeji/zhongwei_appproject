@@ -1,28 +1,23 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
 import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.OrderGoods;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
-import com.cdhxqh.travel_ticket_app.ui.adapter.OrderThreeInAdapter;
+import com.cdhxqh.travel_ticket_app.ui.adapter.OrderThreeAdapter;
 import com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeInFragment;
 import com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeOutFragment;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
@@ -30,13 +25,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.SimpleFormatter;
 
 /**
  * 订单列表*
@@ -84,6 +78,8 @@ public class OrderActivity extends BaseActivity {
     int currntPageOut = 1;
     final static int showCountOut = 1;
 
+    LinearLayout laout;  // 提示信息
+
     SimpleDateFormat formart = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     @Override
@@ -100,6 +96,7 @@ public class OrderActivity extends BaseActivity {
         titleTextView = (TextView) findViewById(R.id.title_text_id);
         inttextView = (TextView) findViewById(R.id.order_in_text);
         outtextView = (TextView) findViewById(R.id.order_out_text);
+        laout = (LinearLayout)findViewById(R.id.activity_order_hint_layout);
     }
 
     @Override
@@ -134,6 +131,7 @@ public class OrderActivity extends BaseActivity {
 
 
     void OnTabSelected(String tabName) {
+        laout.setVisibility(View.GONE);
         if (tabName == "three_in") {
             if (null == orderThreeInFragment) {
                 orderThreeInFragment = new OrderThreeInFragment();
@@ -230,7 +228,6 @@ public class OrderActivity extends BaseActivity {
         public void onSuccess(String data) {
             progressDialog.dismiss();
             JSONObject jsonObject = null;
-            currntPageIn++;
             try {
                 jsonObject = new JSONObject(data);
                 JSONObject result = ((JSONObject)jsonObject.get("result"));
@@ -281,8 +278,13 @@ public class OrderActivity extends BaseActivity {
                     }
                 }
 
-                OrderThreeInAdapter adapter = orderThreeInFragment.getAdapter();
+                OrderThreeAdapter adapter = orderThreeInFragment.getAdapter();
                 adapter.update(groupList, itemList);
+                if(adapter.getGroupList().size() == 0){
+                    // laout.setVisibility(View.VISIBLE);
+                } else {
+                    currntPageIn++;
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -295,6 +297,10 @@ public class OrderActivity extends BaseActivity {
 
         @Override
         public void onFailure(String error) {
+            OrderThreeAdapter adapter = orderThreeInFragment.getAdapter();
+            if(adapter.getGroupList().size() == 0){
+                //laout.setVisibility(View.VISIBLE);
+            }
             MessageUtils.showErrorMessage(OrderActivity.this, error);
             progressDialog.dismiss();
         }
@@ -305,7 +311,6 @@ public class OrderActivity extends BaseActivity {
         public void onSuccess(String data) {
             progressDialog.dismiss();
             JSONObject jsonObject = null;
-            currntPageOut++;
             try {
                 jsonObject = new JSONObject(data);
                 JSONObject result = ((JSONObject)jsonObject.get("result"));
@@ -356,8 +361,13 @@ public class OrderActivity extends BaseActivity {
                     }
                 }
 
-                OrderThreeInAdapter adapter = orderThreeOutFragment.getAdapter();
+                OrderThreeAdapter adapter = orderThreeOutFragment.getAdapter();
                 adapter.update(groupList, itemList);
+                if(adapter.getGroupList().size() == 0){
+                    //laout.setVisibility(View.VISIBLE);
+                } else {
+                    currntPageOut++;
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -370,6 +380,10 @@ public class OrderActivity extends BaseActivity {
 
         @Override
         public void onFailure(String error) {
+            OrderThreeAdapter adapter = orderThreeOutFragment.getAdapter();
+            if(adapter.getGroupList().size() == 0){
+                //laout.setVisibility(View.VISIBLE);
+            }
             MessageUtils.showErrorMessage(OrderActivity.this, error);
             progressDialog.dismiss();
         }
