@@ -1,6 +1,9 @@
 package com.cdhxqh.travel_ticket_app.ui.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.LayoutInflater;
@@ -18,6 +21,7 @@ import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
 import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.OrderGoods;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
+import com.cdhxqh.travel_ticket_app.ui.activity.Layoutonline_Payment_Activity;
 import com.cdhxqh.travel_ticket_app.ui.activity.OrderActivity;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -192,7 +196,32 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
             Spanned str = Html.fromHtml("订单总额: <font color=\"red\">"+model.getGoodsAmount()+"</font>");
             viewHolder.autTextView.setText(str);
 
-            // 注册删除按钮状态
+            // 注册继续支付按钮事件
+            viewHolder.payButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // PC端的订单可以包含多种票，所以无法给出具体的商品名称和商品详情，这里暂时使用商品编号代替这2个值
+                    final String orderSn = model.getOrderSn();           // 订单号
+                    final double amount = model.getGoodsAmount();       //  商品总额
+                    final String lastTime = "2015-10-03 17:00:00" ;  // 最晚出行时间
+                    final String payFun = "在线支付";                  // 支付方式
+                    final String goodsName = orderSn;                   // 商品名称
+                    final String goodsDetail = orderSn;                 // 商品详情
+
+                    Intent intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("out_trade_no", orderSn);  // 订单号
+                    bundle.putString("subject",  goodsName);     // 商品名称
+                    bundle.putString("body", goodsDetail);        // 商品详情
+                    bundle.putString("total_fee", amount + "");  // 商品金额
+                    intent.putExtras(bundle);
+                    intent.setClass(context, Layoutonline_Payment_Activity.class);
+                    context.startActivity(intent);
+                    ((Activity)context).finish();
+                }
+            });
+
+            // 注册删除按钮事件
             viewHolder.delButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
