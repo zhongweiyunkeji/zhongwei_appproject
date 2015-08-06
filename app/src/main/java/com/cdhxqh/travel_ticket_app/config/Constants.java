@@ -47,7 +47,11 @@ public class Constants {
 	// 订单列表
 	public static final String OTDER_LIST_URL = BASE_URL+"ecsorder/list";
 
+	// 取消订单号
+	public static final String OEDER_CANCEL_URL = BASE_URL+"ecsorder/cancel";
 
+	// 删除订单号
+	public static final String OEDER_DELETE_URL = BASE_URL+"ecsorder/change";
 
 	/**景区列表**/
     public static final String TICKETS_URL = BASE_URL+"ecsbrand/brandlist";
