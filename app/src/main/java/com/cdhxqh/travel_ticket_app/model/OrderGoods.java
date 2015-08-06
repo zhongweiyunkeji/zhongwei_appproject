@@ -14,17 +14,19 @@ public class OrderGoods implements Parcelable {
     private int goodsNumber;   // 电子票总数量
     private double goodsPrice; // 电子票单价
     private String imgurl;      // 图片
+    private String status;
 
     public OrderGoods(){
 
     }
 
-    public OrderGoods( String goodsName, int goodsNumber, double goodsPrice, String orderSn, String imgurl) {
+    public OrderGoods( String goodsName, int goodsNumber, double goodsPrice, String orderSn, String imgurl, String status) {
         this.goodsName = goodsName;
         this.goodsNumber = goodsNumber;
         this.goodsPrice = goodsPrice;
         this.orderSn = orderSn;
         this.imgurl = imgurl;
+        this.status = status;
     }
 
     public String getGoodsName() {
@@ -67,6 +69,28 @@ public class OrderGoods implements Parcelable {
         this.imgurl = imgurl;
     }
 
+    public String getStatus() {
+        // 0为其他；1为待出游；2为已出游；3为已点评
+        if("0".equals(status)){
+            return "其他";
+        } else
+        if("1".equals(status)){
+            return "待出游";
+        } else
+        if("2".equals(status)){
+            return "已出游";
+        } else
+        if("3".equals(status)){
+            return "已点评";
+        }
+
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -76,4 +100,5 @@ public class OrderGoods implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
 
     }
+
 }
