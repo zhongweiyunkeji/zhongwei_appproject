@@ -279,7 +279,7 @@ public class OrderActivity extends BaseActivity {
                 OrderThreeAdapter adapter = orderThreeInFragment.getAdapter();
                 adapter.update(groupList, itemList);
                 if(adapter.getGroupList().size() == 0){
-                    // laout.setVisibility(View.VISIBLE);
+                    laout.setVisibility(View.VISIBLE);
                 } else {
                     currntPageIn++;
                 }
@@ -297,7 +297,7 @@ public class OrderActivity extends BaseActivity {
         public void onFailure(String error) {
             OrderThreeAdapter adapter = orderThreeInFragment.getAdapter();
             if(adapter.getGroupList().size() == 0){
-                //laout.setVisibility(View.VISIBLE);
+                laout.setVisibility(View.VISIBLE);
             }
             MessageUtils.showErrorMessage(OrderActivity.this, error);
             progressDialog.dismiss();
@@ -362,7 +362,7 @@ public class OrderActivity extends BaseActivity {
                 OrderThreeAdapter adapter = orderThreeOutFragment.getAdapter();
                 adapter.update(groupList, itemList);
                 if(adapter.getGroupList().size() == 0){
-                    //laout.setVisibility(View.VISIBLE);
+                    laout.setVisibility(View.VISIBLE);
                 } else {
                     currntPageOut++;
                 }
@@ -380,7 +380,7 @@ public class OrderActivity extends BaseActivity {
         public void onFailure(String error) {
             OrderThreeAdapter adapter = orderThreeOutFragment.getAdapter();
             if(adapter.getGroupList().size() == 0){
-                //laout.setVisibility(View.VISIBLE);
+                laout.setVisibility(View.VISIBLE);
             }
             MessageUtils.showErrorMessage(OrderActivity.this, error);
             progressDialog.dismiss();
