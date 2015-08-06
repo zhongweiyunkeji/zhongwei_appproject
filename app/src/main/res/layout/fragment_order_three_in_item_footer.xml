@@ -6,6 +6,18 @@
     android:paddingBottom="10dp"
     tools:context="com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeInFragment">
 
+        <TextView
+            android:id="@+id/order_three_item_footer_goodsamount"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="订单总额: ￥500.00"
+         />
+
        <Button
            android:id="@+id/order_three_item_footer_ret_btn"
            android:padding="3dp"
