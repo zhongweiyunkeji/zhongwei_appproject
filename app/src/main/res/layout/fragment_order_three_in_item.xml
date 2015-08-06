@@ -30,11 +30,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:orientation="horizontal">
+                    <!--android:text="沙坡头"-->
                     <TextView
                         android:id="@+id/order_three_in_item_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="沙坡头"/>
+                        />
                     <!--<TextView
                         android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
@@ -52,12 +53,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="订购时间"/>
+                    <!--android:text="2015-06-16 11:23"-->
                     <TextView
                         android:id="@+id/order_three_in_item_ordertime"
                         android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2015-06-16 11:23"/>
+                        />
                 </LinearLayout>
             </TableRow>
             <TableRow>
@@ -70,27 +72,31 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="门票数量"/>
+                   <!-- android:text="2张"-->
                     <TextView
                         android:id="@+id/order_three_in_item_orderqty"
                         android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2张"/>
+                        />
+                   <!-- android:text="￥80"-->
                     <TextView
                         android:id="@+id/order_three_in_item_ordertotal"
                         android:layout_marginLeft="25dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="￥80"/>
+                        />
                 </LinearLayout>
             </TableRow>
         </TableLayout>
 
+        <!-- android:text="待出游"-->
         <TextView
+            android:id="@+id/order_three_in_item_status"
             android:layout_margin="20dp"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="待出游"/>
+            />
 
 </RelativeLayout>
