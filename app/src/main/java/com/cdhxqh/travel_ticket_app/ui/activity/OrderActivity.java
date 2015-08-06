@@ -84,6 +84,7 @@ public class OrderActivity extends BaseActivity {
     int currntPageOut = 1;
     final static int showCountOut = 1;
 
+    SimpleDateFormat formart = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -231,7 +232,6 @@ public class OrderActivity extends BaseActivity {
             JSONObject jsonObject = null;
             currntPageIn++;
             try {
-                SimpleDateFormat formart = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 jsonObject = new JSONObject(data);
                 JSONObject result = ((JSONObject)jsonObject.get("result"));
                 String serverurl = result.getString("serverurl");
@@ -304,6 +304,63 @@ public class OrderActivity extends BaseActivity {
         @Override
         public void onSuccess(String data) {
             progressDialog.dismiss();
+            JSONObject jsonObject = null;
+            currntPageOut++;
+            try {
+                jsonObject = new JSONObject(data);
+                JSONObject result = ((JSONObject)jsonObject.get("result"));
+                String serverurl = result.getString("serverurl");
+                int totalPage = result.getInt("totalPage");
+                JSONArray orderlist = result.getJSONArray("orderlist");
+                int length = orderlist.length();
+
+                List<OrderModel> groupList = new ArrayList<OrderModel>(0);
+                Map<String, List<OrderGoods>> itemList = new HashMap<String, List<OrderGoods>>(0);
+
+                for(int index=0; index<length; index++){
+                    JSONObject subObject = (JSONObject)orderlist.get(index);
+                    String orderSn = subObject.getString("orderSn");           // 订单号
+                    String orderStatus = subObject.getString("orderStatus");  // 订单状态
+                    Long addTime =       subObject.getLong("addTime");        // 购买时间
+                    String createTimt = "";
+                    try {
+                        createTimt = formart.format(new java.util.Date(addTime*1000));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    OrderModel orderModel = new OrderModel(orderSn, 0,0,0,orderStatus, createTimt);
+                    groupList.add(orderModel);
+
+                    JSONArray subArray = subObject.getJSONArray("orderGoods");
+                    // Log.e(TAG, " ----------------------------> "+subObject);
+                    if(subArray!=null){
+                        int size = subArray.length();
+                        if(size>0){
+                            List<OrderGoods> goodList = new ArrayList<OrderGoods>(0);
+                            itemList.put(orderModel.getOrderSn(), goodList);   // 注意此处不能使用orderSn!!!!!!
+                            for(int k=0; k<size; k++){
+                                JSONObject obj = (JSONObject)subArray.get(k);
+                                String goodsName = obj.getString("goodsName");  // 景点标题
+                                int goodsNumber = obj.getInt("goodsNumber");   // 总数量
+                                int goodsPrice = obj.getInt("goodsPrice");     // 购买价格
+                                String status = obj.getString("status");        // 景点标题
+                                String imgurl = obj.getString("goodsAttr");    // 景点图片
+                                OrderGoods goods = new OrderGoods(goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl);
+                                goodList.add(goods);
+                            }
+                            OrderGoods other = new OrderGoods();
+                            //other.setOrderSn("$$$$$$$$$$$$$$$$$$$$$$$$程序内部判断标示$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+                            goodList.add(other);  // 添加末尾的按钮组(不能省略)
+                        }
+                    }
+                }
+
+                OrderThreeInAdapter adapter = orderThreeOutFragment.getAdapter();
+                adapter.update(groupList, itemList);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
