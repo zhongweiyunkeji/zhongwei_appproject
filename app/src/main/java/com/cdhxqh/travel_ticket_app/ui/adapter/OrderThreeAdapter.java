@@ -1,6 +1,8 @@
 package com.cdhxqh.travel_ticket_app.ui.adapter;
 
 import android.content.Context;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +10,21 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.api.HttpManager;
+import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
+import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.OrderGoods;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
+import com.cdhxqh.travel_ticket_app.ui.activity.OrderActivity;
+import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -133,8 +145,8 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        OrderModel model = (OrderModel)this.getGroup(groupPosition);
-        OrderGoods msg = (itemList.get(model.getOrderSn())).get(childPosition);
+        final OrderModel model = (OrderModel)this.getGroup(groupPosition);
+        final OrderGoods msg = (itemList.get(model.getOrderSn())).get(childPosition);
         if(childPosition < (itemList.get(model.getOrderSn())).size()-1){
             ItemViewHolder viewHolder = null;
             if (convertView == null) {
@@ -177,6 +189,130 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
                 viewHolder.rtnButton.setVisibility(View.VISIBLE);  // 显示退票按钮
             }
 
+            Spanned str = Html.fromHtml("订单总额: <font color=\"red\">"+model.getGoodsAmount()+"</font>");
+            viewHolder.autTextView.setText(str);
+
+            // 注册删除按钮状态
+            viewHolder.delButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final String orderSn = model.getOrderSn();
+                    Map<String,String> params = new HashMap<String, String>(0);
+                    params.put("orderSn", orderSn.substring(4));  //
+                    HttpManager.requestOnceWithURLString(context, Constants.OEDER_DELETE_URL, params, new HttpRequestHandler<String>() {
+                        @Override
+                        public void onFailure(String error) {
+                            MessageUtils.showErrorMessage(context, error);
+                        }
+
+                        @Override
+                        public void onSuccess(String data) {
+                            JSONObject jsObj =null;
+                            String msg = "";
+                            try {
+                                jsObj = new JSONObject(data);
+                                msg = jsObj.getString("errmsg");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            MessageUtils.showMiddleToast(context, msg);
+
+                            groupList.remove(model);
+                            itemList.remove(orderSn);
+                            OrderThreeAdapter.this.notifyDataSetChanged();
+                            if(OrderThreeAdapter.this.getGroupList().size() == 0){
+                                LinearLayout layout = ((OrderActivity) context).getLaout();
+                                if(layout!=null){
+                                    layout.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onSuccess(String data, int totalPages, int currentPage) {
+                            JSONObject jsObj =null;
+                            String msg = "";
+                            try {
+                                jsObj = new JSONObject(data);
+                                msg = jsObj.getString("errmsg");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            MessageUtils.showMiddleToast(context, msg);
+                        }
+                    });
+                }
+            });
+
+            // 注册取消按钮事件
+            viewHolder.canButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {// 还需要增加代码防止多次点击按钮
+                    final Button thisBtn = (Button)v;
+                    thisBtn.setClickable(false);
+                    // Thread.currentThread().getState().isAlive();
+                    final String orderSn = model.getOrderSn();
+                    Map<String,String> params = new HashMap<String, String>(0);
+                    params.put("orderSn", orderSn.substring(4));  //
+                    HttpManager.requestOnceWithURLString(context, Constants.OEDER_CANCEL_URL, params, new HttpRequestHandler<String>() {
+                        @Override
+                        public void onSuccess(String data) {
+                            JSONObject jsObj =null;
+                            String msg = "";
+                            try {
+                                jsObj = new JSONObject(data);
+                                msg = jsObj.getString("errmsg");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            MessageUtils.showMiddleToast(context, msg);
+
+                            thisBtn.setClickable(true);
+                            for(OrderModel order : groupList){
+                                if(order.getOrderSn().equals(orderSn)){
+                                    // 0： 订单未确认  1：已付款   2：已取消订单    3：无效订单   4：已退货
+                                    order.setStatus("2");
+                                    List<OrderGoods> child =  itemList.get(orderSn);
+                                    if(child!=null){
+                                        for(OrderGoods goods : child){
+                                            // 0为其他；1为待出游；2为已出游；3为已点评
+                                            if(goods!=null){
+                                                goods.setStatus("0");
+                                            }
+                                        }
+                                        // 更新数据
+                                        OrderThreeAdapter.this.notifyDataSetChanged();
+                                    }
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void onSuccess(String data, int totalPages, int currentPage) {
+                            thisBtn.setClickable(true);
+                            JSONObject jsObj =null;
+                            String msg = "";
+                            try {
+                                jsObj = new JSONObject(data);
+                                msg = jsObj.getString("errmsg");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            MessageUtils.showMiddleToast(context, msg);
+                        }
+
+                        @Override
+                        public void onFailure(String error) {
+                            thisBtn.setClickable(true);
+                            MessageUtils.showErrorMessage(context, error);
+                        }
+                    });
+                }
+            });
+
             return convertView;
         }
     }
@@ -218,17 +354,18 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
 
     static class FooterViewHolder {
 
-        Button rtnButton;  // 退票按钮
-        Button canButton;  // 取消按钮
-        Button payButton;  // 继续支付按钮
-        Button delButton;  // 删除按钮
+        Button rtnButton;     // 退票按钮
+        Button canButton;     // 取消按钮
+        Button payButton;     // 继续支付按钮
+        Button delButton;     // 删除按钮
+        TextView autTextView; // 总金额
 
         public FooterViewHolder(View view){
             rtnButton = (Button)view.findViewById(R.id.order_three_item_footer_ret_btn);
             canButton = (Button)view.findViewById(R.id.order_three_item_footer_can_btn);
             payButton = (Button)view.findViewById(R.id.order_three_item_footer_pay_btn);
             delButton = (Button)view.findViewById(R.id.order_three_item_footer_del_btn);
-
+            autTextView = (TextView)view.findViewById(R.id.order_three_item_footer_goodsamount);
             /*
             RelativeLayout relativeLayout = new RelativeLayout(context);
 

@@ -151,7 +151,9 @@ public class OrderActivity extends BaseActivity {
             if(1 == currntPageIn){
                 requestOrderList(true, "after");
             }
-
+            if(orderThreeInFragment.getAdapter()!=null && orderThreeInFragment.getAdapter().getGroupList().size() == 0){
+                laout.setVisibility(View.VISIBLE);
+            }
         } else if (tabName == "three_out") {
             if(null == orderThreeOutFragment){
                 orderThreeOutFragment = new OrderThreeOutFragment();
@@ -166,6 +168,9 @@ public class OrderActivity extends BaseActivity {
 
             if(1 == currntPageOut){
                 requestOrderList(true, "before");
+            }
+            if(orderThreeOutFragment.getAdapter()!=null && orderThreeOutFragment.getAdapter().getGroupList().size() == 0){
+                laout.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -214,8 +219,11 @@ public class OrderActivity extends BaseActivity {
     }
 
     public void requestOrderList(boolean refersh, String type) {
-        if(orderThreeInFragment.getSwipeRefreshLayoutIn() != null){
+        if(orderThreeInFragment!=null && orderThreeInFragment.getSwipeRefreshLayoutIn() != null){
             orderThreeInFragment.getSwipeRefreshLayoutIn().setRefreshing(false);
+        }
+        if(orderThreeOutFragment!=null && orderThreeOutFragment.getSwipeRefreshLayoutOut() != null){
+            orderThreeOutFragment.getSwipeRefreshLayoutOut().setRefreshing(false);
         }
         createProgressDialog();
         if("after".equals(type)){  // 3个月内
@@ -247,6 +255,7 @@ public class OrderActivity extends BaseActivity {
                     String orderSn = subObject.getString("orderSn");           // 订单号
                     String orderStatus = subObject.getString("orderStatus");  // 订单状态
                     Long addTime =       subObject.getLong("addTime");        // 购买时间
+                    double goodsAmount = subObject.getDouble("goodsAmount");// 总额
                     String createTimt = "";
                     try {
                         createTimt = formart.format(new java.util.Date(addTime*1000));
@@ -254,7 +263,7 @@ public class OrderActivity extends BaseActivity {
                         e.printStackTrace();
                     }
 
-                    OrderModel orderModel = new OrderModel(orderSn, 0,0,0,orderStatus, createTimt);
+                    OrderModel orderModel = new OrderModel(orderSn, 0,0,0,orderStatus, createTimt, goodsAmount);
                     groupList.add(orderModel);
 
                     JSONArray subArray = subObject.getJSONArray("orderGoods");
@@ -309,6 +318,10 @@ public class OrderActivity extends BaseActivity {
         }
     };
 
+    public LinearLayout getLaout() {
+        return laout;
+    }
+
     private HttpRequestHandler<String> handlerOut = new HttpRequestHandler<String>() {
         @Override
         public void onSuccess(String data) {
@@ -330,6 +343,7 @@ public class OrderActivity extends BaseActivity {
                     String orderSn = subObject.getString("orderSn");           // 订单号
                     String orderStatus = subObject.getString("orderStatus");  // 订单状态
                     Long addTime =       subObject.getLong("addTime");        // 购买时间
+                    double goodsAmount = subObject.getDouble("goodsAmount");// 总额
                     String createTimt = "";
                     try {
                         createTimt = formart.format(new java.util.Date(addTime*1000));
@@ -337,7 +351,7 @@ public class OrderActivity extends BaseActivity {
                         e.printStackTrace();
                     }
 
-                    OrderModel orderModel = new OrderModel(orderSn, 0,0,0,orderStatus, createTimt);
+                    OrderModel orderModel = new OrderModel(orderSn, 0,0,0,orderStatus, createTimt, goodsAmount);
                     groupList.add(orderModel);
 
                     JSONArray subArray = subObject.getJSONArray("orderGoods");

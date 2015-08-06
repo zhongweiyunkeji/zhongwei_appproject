@@ -12,24 +12,26 @@ import org.json.JSONObject;
  */
 public class OrderModel implements Parcelable {
 
-    private String orderSn;   // 订单号
-    private int orderStatus; // 订单状态
-    private String addTime;     // 订购时间  (数据库中是以秒为单位)
+    private String orderSn;       // 订单号
+    private int orderStatus;     // 订单状态
+    private String addTime;       // 订购时间  (数据库中是以秒为单位)
     private int shippingStatus;
-    private int payStatus;   // 支付状态
-    private String status;    // 订单状态
+    private int payStatus;       // 支付状态
+    private String status;        // 订单状态
+    private double goodsAmount; // 订单总额
 
     public OrderModel(){
 
     }
 
-    public OrderModel( String orderSn, int orderStatus, int payStatus, int shippingStatus, String status, String addTime) {
+    public OrderModel( String orderSn, int orderStatus, int payStatus, int shippingStatus, String status, String addTime, double goodsAmount) {
         this.orderSn = orderSn;
         this.orderStatus = orderStatus;
         this.payStatus = payStatus;
         this.shippingStatus = shippingStatus;
         this.status = status;
         this.addTime = addTime;
+        this.goodsAmount = goodsAmount;
     }
 
     public String getAddTime() {
@@ -72,6 +74,14 @@ public class OrderModel implements Parcelable {
         this.shippingStatus = shippingStatus;
     }
 
+    public double getGoodsAmount() {
+        return goodsAmount;
+    }
+
+    public void setGoodsAmount(double goodsAmount) {
+        this.goodsAmount = goodsAmount;
+    }
+
     public String getStatus() {
         // 0： 订单未确认  1：已付款   2：已取消订单    3：无效订单   4：已退货
         if("0".equals(status)){
@@ -81,7 +91,7 @@ public class OrderModel implements Parcelable {
             return "已付款";
         }
         if("2".equals(status)){
-            return "已取消订单";
+            return "已取消";
         }
         if("3".equals(status)){
             return "无效订单";
