@@ -12,24 +12,26 @@ import org.json.JSONObject;
  */
 public class OrderModel implements Parcelable {
 
-    private String orderSn;   // 订单号
-    private int orderStatus; // 订单状态
-    private String addTime;     // 订购时间  (数据库中是以秒为单位)
+    private String orderSn;       // 订单号
+    private int orderStatus;     // 订单状态
+    private String addTime;       // 订购时间  (数据库中是以秒为单位)
     private int shippingStatus;
-    private int payStatus;   // 支付状态
-    private String status;    // 订单状态
+    private int payStatus;       // 支付状态
+    private String status;        // 订单状态
+    private double goodsAmount; // 订单总额
 
     public OrderModel(){
 
     }
 
-    public OrderModel( String orderSn, int orderStatus, int payStatus, int shippingStatus, String status, String addTime) {
+    public OrderModel( String orderSn, int orderStatus, int payStatus, int shippingStatus, String status, String addTime, double goodsAmount) {
         this.orderSn = orderSn;
         this.orderStatus = orderStatus;
         this.payStatus = payStatus;
         this.shippingStatus = shippingStatus;
         this.status = status;
         this.addTime = addTime;
+        this.goodsAmount = goodsAmount;
     }
 
     public String getAddTime() {
@@ -70,6 +72,14 @@ public class OrderModel implements Parcelable {
 
     public void setShippingStatus(int shippingStatus) {
         this.shippingStatus = shippingStatus;
+    }
+
+    public double getGoodsAmount() {
+        return goodsAmount;
+    }
+
+    public void setGoodsAmount(double goodsAmount) {
+        this.goodsAmount = goodsAmount;
     }
 
     public String getStatus() {
