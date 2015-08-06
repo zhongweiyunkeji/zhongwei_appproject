@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -78,6 +79,8 @@ public class OrderActivity extends BaseActivity {
 
     LinearLayout laout;  // 提示信息
 
+    ImageView searchIcon;
+
     SimpleDateFormat formart = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     @Override
@@ -95,11 +98,13 @@ public class OrderActivity extends BaseActivity {
         inttextView = (TextView) findViewById(R.id.order_in_text);
         outtextView = (TextView) findViewById(R.id.order_out_text);
         laout = (LinearLayout)findViewById(R.id.activity_order_hint_layout);
+        searchIcon = (ImageView)findViewById(R.id.title_search_id);
     }
 
     @Override
     protected void initView() {
         titleTextView.setText(getString(R.string.order_title_text));
+        searchIcon.setVisibility(View.GONE);
         inttextView.setOnClickListener(inttextViewOnClickListener);
         outtextView.setOnClickListener(outtextViewOnClickListener);
         OnTabSelected("three_in");
