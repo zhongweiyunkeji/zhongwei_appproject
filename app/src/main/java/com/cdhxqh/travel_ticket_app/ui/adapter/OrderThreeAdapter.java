@@ -151,6 +151,7 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
             viewHolder.order_three_in_item_ordertime.setText(model.getAddTime());
             viewHolder.order_three_in_item_orderqty.setText(msg.getGoodsNumber()+"");
             viewHolder.order_three_in_item_ordertotal.setText("￥"+(msg.getGoodsNumber()*msg.getGoodsPrice())+"");
+            viewHolder.order_three_in_item_status.setText(msg.getStatus());
             // viewHolder.expand_text_04.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);  // 设置中划线并加清晰
 
             return convertView;
@@ -202,6 +203,7 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
         TextView order_three_in_item_ordertime;   // 够票时间
         TextView order_three_in_item_orderqty;    // 购票数量
         TextView order_three_in_item_ordertotal;  // 购票总额
+        TextView order_three_in_item_status;      // 出票状态
 
         public ItemViewHolder(View convertView){
             order_three_in_item_img          = (ImageView)convertView.findViewById(R.id.order_three_in_item_img );
@@ -209,6 +211,7 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
             order_three_in_item_ordertime   = (TextView)convertView.findViewById(R.id.order_three_in_item_ordertime );
             order_three_in_item_orderqty    = (TextView)convertView.findViewById(R.id.order_three_in_item_orderqty );
             order_three_in_item_ordertotal  = (TextView)convertView.findViewById(R.id.order_three_in_item_ordertotal );
+            order_three_in_item_status       = (TextView)convertView.findViewById(R.id.order_three_in_item_status );
         }
 
     }
@@ -289,4 +292,7 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
         itemList.clear();
     }
 
+    public List<OrderModel> getGroupList() {
+        return groupList;
+    }
 }
