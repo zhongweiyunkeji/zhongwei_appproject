@@ -1,29 +1,19 @@
 package com.cdhxqh.travel_ticket_app.ui.fragment;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
 import com.cdhxqh.travel_ticket_app.R;
-import com.cdhxqh.travel_ticket_app.model.Ec_goods;
 import com.cdhxqh.travel_ticket_app.model.OrderGoods;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
 import com.cdhxqh.travel_ticket_app.ui.activity.OrderActivity;
-import com.cdhxqh.travel_ticket_app.ui.adapter.OrderListAdapter;
-import com.cdhxqh.travel_ticket_app.ui.adapter.OrderThreeInAdapter;
-import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
+import com.cdhxqh.travel_ticket_app.ui.adapter.OrderThreeAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +29,7 @@ public class OrderThreeInFragment extends BaseFragment {
     private static final String TAG="OrderThreeInFragment";
 
     ExpandableListView expandableListView;
-    OrderThreeInAdapter adapter;
+    OrderThreeAdapter adapter;
     TimerTask task;
     Timer timer = new Timer();
     SwipeRefreshLayout swipeRefreshLayoutIn;
@@ -75,7 +65,7 @@ public class OrderThreeInFragment extends BaseFragment {
 
     private void initView() {
         if(adapter == null){
-            adapter = new OrderThreeInAdapter(this.getActivity());
+            adapter = new OrderThreeAdapter(this.getActivity());
         }
         expandableListView.setAdapter(adapter);
         expandableListView.setGroupIndicator(null);  // 去掉左边展开和关闭的图标
@@ -83,8 +73,8 @@ public class OrderThreeInFragment extends BaseFragment {
         swipeRefreshLayoutIn.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {// 注册刷新监听
             @Override
             public void onRefresh() {
-               //  ((OrderActivity)getActivity()).requestOrderList(true, "after");
-                addGoods();
+               ((OrderActivity)getActivity()).requestOrderList(true, "after");
+               // addGoods();
             }
         });
 
@@ -157,7 +147,7 @@ public class OrderThreeInFragment extends BaseFragment {
         }
     };
 
-    public OrderThreeInAdapter getAdapter() {
+    public OrderThreeAdapter getAdapter() {
         return adapter;
     }
 
