@@ -1,6 +1,8 @@
 package com.cdhxqh.travel_ticket_app.ui.adapter;
 
 import android.content.Context;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -177,6 +179,9 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
                 viewHolder.rtnButton.setVisibility(View.VISIBLE);  // 显示退票按钮
             }
 
+            Spanned str = Html.fromHtml("订单总额: <font color=\"red\">"+model.getGoodsAmount()+"</font>");
+            viewHolder.autTextView.setText(str);
+
             return convertView;
         }
     }
@@ -218,17 +223,18 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
 
     static class FooterViewHolder {
 
-        Button rtnButton;  // 退票按钮
-        Button canButton;  // 取消按钮
-        Button payButton;  // 继续支付按钮
-        Button delButton;  // 删除按钮
+        Button rtnButton;     // 退票按钮
+        Button canButton;     // 取消按钮
+        Button payButton;     // 继续支付按钮
+        Button delButton;     // 删除按钮
+        TextView autTextView; // 总金额
 
         public FooterViewHolder(View view){
             rtnButton = (Button)view.findViewById(R.id.order_three_item_footer_ret_btn);
             canButton = (Button)view.findViewById(R.id.order_three_item_footer_can_btn);
             payButton = (Button)view.findViewById(R.id.order_three_item_footer_pay_btn);
             delButton = (Button)view.findViewById(R.id.order_three_item_footer_del_btn);
-
+            autTextView = (TextView)view.findViewById(R.id.order_three_item_footer_goodsamount);
             /*
             RelativeLayout relativeLayout = new RelativeLayout(context);
 
