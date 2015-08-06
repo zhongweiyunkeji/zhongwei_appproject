@@ -26,11 +26,10 @@ import com.cdhxqh.travel_ticket_app.ui.adapter.OrderThreeInAdapter;
 import com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeInFragment;
 import com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeOutFragment;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
-
+import android.support.v4.widget.SwipeRefreshLayout;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -79,6 +78,7 @@ public class OrderActivity extends BaseActivity {
     // 3个月内
     int currntPageIn = 1;
     final static int showCountIn = 1;
+    SwipeRefreshLayout swipeRefreshLayoutIn;
 
     // 3个月钱
     int currntPageOut = 1;
@@ -134,9 +134,9 @@ public class OrderActivity extends BaseActivity {
 
     void OnTabSelected(String tabName) {
         if (tabName == "three_in") {
-
             if (null == orderThreeInFragment) {
                 orderThreeInFragment = new OrderThreeInFragment();
+
             }
 
             FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();  //
@@ -146,11 +146,14 @@ public class OrderActivity extends BaseActivity {
             inttextView.setBackgroundColor(getResources().getColor(R.color.green_color));
             outtextView.setBackgroundColor(getResources().getColor(R.color.white));
 
+            if(1 == currntPageIn){
+                requestOrderList(true, "after");
+            }
 
         } else if (tabName == "three_out") {
-
-            orderThreeOutFragment = new OrderThreeOutFragment();
-
+            if(null == orderThreeOutFragment){
+                orderThreeOutFragment = new OrderThreeOutFragment();
+            }
 
             FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();
             localFragmentTransaction.replace(R.id.container, orderThreeOutFragment, "three_out");
@@ -159,16 +162,10 @@ public class OrderActivity extends BaseActivity {
             inttextView.setBackgroundColor(getResources().getColor(R.color.white));
             outtextView.setBackgroundColor(getResources().getColor(R.color.green_color));
 
-
+            if(1 == currntPageOut){
+                requestOrderList(true, "before");
+            }
         }
-
-        if("three_in".equals(tabName)){
-            requestOrderList(true, "after");
-        } else
-        if("three_out".equals(tabName)){
-            requestOrderList(true, "before");
-        }
-
     }
 
 
@@ -214,7 +211,10 @@ public class OrderActivity extends BaseActivity {
         progressDialog = ProgressDialog.show(OrderActivity.this, null, getString(R.string.please_loading_hint), true, true);
     }
 
-    private void requestOrderList(boolean refersh, String type) {
+    public void requestOrderList(boolean refersh, String type) {
+        if(orderThreeInFragment.getSwipeRefreshLayoutIn() != null){
+            orderThreeInFragment.getSwipeRefreshLayoutIn().setRefreshing(false);
+        }
         createProgressDialog();
         if("after".equals(type)){  // 3个月内
             HttpManager.getOrder_list(this, Constants.OTDER_LIST_URL, type, showCountIn+"", currntPageIn+"", handlerIn);
