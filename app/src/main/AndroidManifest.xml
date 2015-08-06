@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cdhxqh.travel_ticket_app" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        />
+
     <!-- 百度地图权限开始 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -112,6 +119,10 @@
             android:label="@string/title_activity_scenic__tickets_"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.cdhxqh.travel_ticket_app.ui.activity.Layoutonline_Payment_Activity"
+            android:label="@string/title_activity_scenic__tickets_"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".ui.activity.ScenicMapActivity"
             android:label="@string/title_activity_scenic_map" />
         <activity
@@ -168,6 +179,20 @@
             android:name="com.cdhxqh.travel_ticket_app.ui.activity.Listen_ZhongWei_Search_Activity" />
         <activity
             android:name="com.cdhxqh.travel_ticket_app.ui.activity.Attractions_Search_List_Activty" />
+
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+
     </application>
 
 </manifest>
