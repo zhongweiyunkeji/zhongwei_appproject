@@ -201,7 +201,8 @@ public class Tickets_Detail_Activity extends BaseActivity {
             bundle.putString("tittle_reservation", "沙坡头成人票（下单立减100元）");
             bundle.putString("end_date_id_a", "2015-12-31 17:00:00");
             bundle.putString("bookingNum", "20");
-            bundle.putString("unit_fare", "10");
+            bundle.putString("unit_fare", "1");
+            bundle.putString("goodsId", "9");
             intent.putExtras(bundle);
             intent.setClass(Tickets_Detail_Activity.this, ReservationActivity.class);
             startActivity(intent);
