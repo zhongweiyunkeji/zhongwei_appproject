@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.ui.activity.TicketCheckActivity;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class UserSetingAdapter extends RecyclerView.Adapter<UserSetingAdapter.Vi
 
     ArrayList<String> names=new ArrayList<String>();
 
-    int[] images = {R.drawable.ic_map, R.drawable.ic_passengers, R.drawable.ic_invoice, R.drawable.ic_seting, R.drawable.ic_wo};
+    int[] images = {R.drawable.ic_map,R.drawable.ic_map, R.drawable.ic_passengers, R.drawable.ic_invoice, R.drawable.ic_seting, R.drawable.ic_wo};
 
     public UserSetingAdapter(Context context,ArrayList<String> strings) {
         mContext = context;
@@ -39,6 +40,15 @@ public class UserSetingAdapter extends RecyclerView.Adapter<UserSetingAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_seting_item, viewGroup, false);
+        if("办公".equals(names.get(i))){
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, TicketCheckActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
+        }
         return new ViewHolder(v);
     }
 

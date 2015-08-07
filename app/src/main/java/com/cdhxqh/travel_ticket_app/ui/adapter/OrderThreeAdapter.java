@@ -19,10 +19,12 @@ import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
 import com.cdhxqh.travel_ticket_app.config.Constants;
+import com.cdhxqh.travel_ticket_app.model.CategoryModel;
 import com.cdhxqh.travel_ticket_app.model.OrderGoods;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
 import com.cdhxqh.travel_ticket_app.ui.activity.Layoutonline_Payment_Activity;
 import com.cdhxqh.travel_ticket_app.ui.activity.OrderActivity;
+import com.cdhxqh.travel_ticket_app.ui.activity.Tickets_Detail_Activity;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -142,7 +144,7 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
         viewHolder.order_three_in_group_status.setText(text.getStatus());
 
         FrameLayout fl = (FrameLayout)convertView;
-        fl.setPadding(0,-10,0,0);
+        // fl.setPadding(0,-10,0,0);
 
         return convertView;
     }
@@ -169,6 +171,14 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
             viewHolder.order_three_in_item_ordertotal.setText("￥"+(msg.getGoodsNumber()*msg.getGoodsPrice())+"");
             viewHolder.order_three_in_item_status.setText(msg.getStatus());
             // viewHolder.expand_text_04.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);  // 设置中划线并加清晰
+
+            // ListView的Item项的监听事件(需要排除最后的Item项)
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
 
             return convertView;
         } else {
@@ -201,19 +211,49 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
                 @Override
                 public void onClick(View v) {
                     // PC端的订单可以包含多种票，所以无法给出具体的商品名称和商品详情，这里暂时使用商品编号代替这2个值
-                    final String orderSn = model.getOrderSn();           // 订单号
-                    final double amount = model.getGoodsAmount();       //  商品总额
-                    final String lastTime = "2015-10-03 17:00:00" ;  // 最晚出行时间
-                    final String payFun = "在线支付";                  // 支付方式
-                    final String goodsName = orderSn;                   // 商品名称
-                    final String goodsDetail = orderSn;                 // 商品详情
+                    String orderSn = model.getOrderSn();           // 订单号
+                    double amount = model.getGoodsAmount();       //  商品总额
+                    //final String lastTime = "2015-10-03 17:00:00" ;  // 最晚出行时间
+                    //final String payFun = "在线支付";                  // 支付方式
+                    String goodsName = orderSn;                   // 商品名称
+                    String goodsDetail = orderSn;                 // 商品详情
+
+                    List<OrderGoods> goods = itemList.get(orderSn);
+                    orderSn = model.getOrderSn().substring(4);
+                    String json = "";
+                    StringBuilder builder = new StringBuilder();
+                    for(int index=0; index<goods.size()-1; index++){
+                        OrderGoods good = goods.get(index);
+                        // 需要的json格式为:   {"goodsid":"9","goodsnum":"20"}
+                        builder.append("{\"goodsid\":\"").append(good.getGoodsId()).append("\",\"goodsnum\":\"").append(good.getGoodsName()).append("\"},");
+                    }
+                    if(builder.length()>0){
+                        builder.delete(builder.length()-1, builder.length());// 删除最后一个逗号
+                        json = "{\"goodsIds\":["+builder.toString()+"]}";
+                    }
 
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
-                    bundle.putString("out_trade_no", orderSn);  // 订单号
-                    bundle.putString("subject",  goodsName);     // 商品名称
-                    bundle.putString("body", goodsDetail);        // 商品详情
-                    bundle.putString("total_fee", amount + "");  // 商品金额
+
+                    // 更新界面相关的参数
+                    bundle.putString("goodsAmount", amount + "");  // 商品金额
+                    bundle.putString("tittle",  goodsName);      // 商品名称
+
+                    // 判断数量相关的参数
+                    bundle.putString("goodsIds", json);  // 订单号
+
+                    // 支付相关的的参数
+                    CategoryModel categoryModel = new CategoryModel();
+                    categoryModel.setOut_trade_no(orderSn);  //  订单号
+                    categoryModel.setSubject(goodsName);// 商品名称
+                    categoryModel.setBody(goodsDetail);// 商品详情
+                    categoryModel.setTotal_fee(amount+"");  // 总金额
+
+                    // 额外的参数用于与预定信息页面区分开来的参数
+                    bundle.putString("type", "订单列表");  // 订单号
+
+                    bundle.putSerializable("categoryModel", categoryModel);        // 商品详情
+
                     intent.putExtras(bundle);
                     intent.setClass(context, Layoutonline_Payment_Activity.class);
                     context.startActivity(intent);
