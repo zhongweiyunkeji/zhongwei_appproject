@@ -106,10 +106,25 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
     private ProgressDialog progressDialog;
 
     /**
+     *  产品名称
+     */
+    String tittle;
+
+
+    /**
      * 支付状态
      */
     private String orderStatus;
 
+    /**
+     * 支付总额
+     */
+    private TextView num_sid;
+
+    /**
+     * 产品名称
+     */
+    private TextView tittle_reservation;
 
 
     @Override
@@ -131,6 +146,9 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         seachImageView = (ImageView) findViewById(R.id.title_search_id);
 
         zhifubao_id = (ImageView) findViewById(R.id.zhifubao_id);
+
+        num_sid = (TextView) findViewById(R.id.num_sid);
+        tittle_reservation = (TextView) findViewById(R.id.tittle_reservation);
     }
 
     @Override
@@ -139,6 +157,8 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
         titleTextView.setText("在线支付");
+        num_sid.setText(goodsAmount);
+        tittle_reservation.setText(tittle);
 
         zhifubao_id.setOnClickListener(zhifubaoListener);
     }
@@ -175,6 +195,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         goodsIds = bundle.getString("goodsIds");
         mobile = bundle.getString("mobile");
         postscript = bundle.getString("postscript");
+        tittle = bundle.getString("tittle");
     }
 
 
@@ -249,7 +270,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
 
         @Override
         public void onFailure(String error) {
-
+            MessageUtils.showErrorMessage(Layoutonline_Payment_Activity.this, error);
         }
     };
 

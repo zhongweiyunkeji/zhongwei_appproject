@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by Administrator on 2015/7/28.
@@ -180,6 +181,7 @@ public class ReservationActivity extends BaseActivity{
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
         titleTextView.setText("预订信息填写");
+        total_fare_id.setText(String.valueOf(unit_fare));
         //返回至登录界面事件
         backImageView.setOnClickListener(backImageViewOnClickListener);
         /**
@@ -311,6 +313,7 @@ public class ReservationActivity extends BaseActivity{
 //                    reservation_display_num.setText(Math.abs(new Integer(reservation_display_num.getText().toString())));
 //                }
                 bookingNum = new Integer(reservation_display_num.getText().toString());
+                goodsnum = String.valueOf(bookingNum);
                 total_fare = bookingNum * unit_fare;
                 total_fare_id.setText(String.valueOf(bookingNum * unit_fare));
             } else {
@@ -325,16 +328,38 @@ public class ReservationActivity extends BaseActivity{
     private View.OnClickListener putOrderClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putString("goodsAmount", String.valueOf(total_fare));
-            bundle.putString("goodsIds", setJson());
-            bundle.putString("consignee", ticket_user.getText().toString());
-            bundle.putString("mobile", ticket_user_a.getText().toString());
-            bundle.putString("postscript", id_card.getText().toString());
-            intent.putExtras(bundle);
-            intent.setClass(ReservationActivity.this, Layoutonline_Payment_Activity.class);
-            startActivity(intent);
+            String user = ticket_user.getText().toString();
+            String phone = ticket_user_a.getText().toString();
+            String Idcard = id_card.getText().toString();
+
+            if(user == null || "".equals(user)){
+                ticket_user.setError(getString(R.string.ticket_user_null));
+                ticket_user.requestFocus();
+            }else if(phone == null || "".equals(phone)) {
+                ticket_user_a.setError(getString(R.string.ticket_phone_null));
+                ticket_user_a.requestFocus();
+            }else if(!isMobileNO(phone)) {
+                ticket_user_a.setError(getString(R.string.ticket_phone_errer));
+                ticket_user_a.requestFocus();
+            }else if(Idcard == null || "".equals(Idcard)) {
+                id_card.setError(getString(R.string.ticket_card_null));
+                id_card.requestFocus();
+            }else if(!isCardNO(Idcard)){
+                id_card.setError(getString(R.string.ticket_card_errer));
+                id_card.requestFocus();
+            }else {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putString("goodsAmount", String.valueOf(total_fare));
+                bundle.putString("goodsIds", setJson());
+                bundle.putString("consignee", ticket_user.getText().toString());
+                bundle.putString("mobile", ticket_user_a.getText().toString());
+                bundle.putString("postscript", id_card.getText().toString());
+                bundle.putString("tittle", tittle_reservation.getText().toString());
+                intent.putExtras(bundle);
+                intent.setClass(ReservationActivity.this, Layoutonline_Payment_Activity.class);
+                startActivity(intent);
+            }
         }
     };
 
@@ -358,7 +383,24 @@ public class ReservationActivity extends BaseActivity{
         }
         return name;
     }
-}
+
+    /*
+    手机验证
+     */
+    public boolean isMobileNO(String mobiles) {
+        mobiles = (mobiles == null ? "" : mobiles);
+        return Pattern.compile("^[1][3,4,5,8][0-9]{9}$").matcher(mobiles).matches();
+    }
+
+    /**
+     * 身份证验证
+     */
+    public boolean isCardNO(String IdCard) {
+        IdCard = (IdCard == null ? "" : IdCard);
+        return Pattern.compile("^(^\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$").matcher(IdCard).matches();
+    }
+
+    }
 
 class Goods{
     private String goodsid;
