@@ -205,7 +205,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         mobile = bundle.getString("mobile");              // 电话号码
         postscript = bundle.getString("postscript");
         tittle = bundle.getString("tittle");
-        categoryModel = (CategoryModel)bundle.getSerializable("categoryModel");
+        categoryModel = (CategoryModel)bundle.getParcelable("categoryModel");
         type = bundle.getString("type");
     }
 
