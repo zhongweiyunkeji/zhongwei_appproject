@@ -3,10 +3,12 @@ package com.cdhxqh.travel_ticket_app.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2015/7/31.
  */
-public class CategoryModel  implements Parcelable {
+public class CategoryModel  implements Parcelable,Serializable {
     /**
      * 订单id
      */

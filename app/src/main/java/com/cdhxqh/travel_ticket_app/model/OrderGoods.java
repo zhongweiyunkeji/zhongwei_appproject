@@ -9,6 +9,7 @@ import android.os.Parcelable;
  */
 public class OrderGoods implements Parcelable {
 
+    private String goodsId;
     private String orderSn;     // 订单号
     private String goodsName;   // 标题
     private int goodsNumber;   // 电子票总数量
@@ -20,7 +21,8 @@ public class OrderGoods implements Parcelable {
 
     }
 
-    public OrderGoods( String goodsName, int goodsNumber, double goodsPrice, String orderSn, String imgurl, String status) {
+    public OrderGoods( String goodsId, String goodsName, int goodsNumber, double goodsPrice, String orderSn, String imgurl, String status) {
+        this.goodsId = goodsId;
         this.goodsName = goodsName;
         this.goodsNumber = goodsNumber;
         this.goodsPrice = goodsPrice;
@@ -85,6 +87,14 @@ public class OrderGoods implements Parcelable {
         }
 
         return status;
+    }
+
+    public String getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
     public void setStatus(String status) {
