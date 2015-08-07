@@ -28,9 +28,10 @@
                 />
 
             <TextView
+                android:id="@+id/num_sid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="￥136"
+                android:text=""
                 android:textColor="#ffa500"/>
         </TableRow>
 
@@ -42,9 +43,10 @@
                 android:text="产品名称"/>
 
             <TextView
+                android:id="@+id/tittle_sid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="沙坡头成人票（下单立减5元）"
+                android:text=""
                 android:textColor="#a9a9a9"/>
         </TableRow>
 
@@ -143,6 +145,7 @@
                 android:src="@drawable/payment_line_x"/>
 
             <RelativeLayout
+                android:id="@+id/zhifu_id_a"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -167,7 +170,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="微信支付"
+                        android:text="支付宝支付"
                         android:textColor="#2f4f4f"/>
                     <TextView
                         android:layout_width="wrap_content"

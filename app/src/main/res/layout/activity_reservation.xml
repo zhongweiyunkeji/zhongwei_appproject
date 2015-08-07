@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="#f1fbf9"
     android:orientation="vertical">
 
@@ -10,7 +10,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -19,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="6dp"
                 android:paddingBottom="6dp"
-                android:text="@string/spot_discount"
+                android:text=""
                 android:textSize="17sp"
                 android:textColor="#2e8b57"/>
 
@@ -61,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:text="64"
+                android:text=""
                 android:textColor="#ffa500"/>
 
                 <TextView
@@ -153,6 +155,7 @@
                         android:cursorVisible="true"
                         android:numeric="signed"
                         android:maxLength="4"
+                        android:textCursorDrawable="@drawable/color_cursor"
                         android:textColor="#2f4f4f"/>
                     <Button
                         android:id="@+id/reservation_add_button"
@@ -205,6 +208,9 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
                         android:background="@android:color/transparent"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:textCursorDrawable="@drawable/color_cursor"
                         android:textSize="14sp"
                         />
 
@@ -234,6 +240,10 @@
                         android:layout_marginLeft="5dp"
                         android:background="@android:color/transparent"
                         android:textSize="14sp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:inputType="phone"
+                        android:textCursorDrawable="@drawable/color_cursor"
                         />
 
                         </LinearLayout>
@@ -262,6 +272,9 @@
                         android:background="@android:color/transparent"
                         android:hint="用于景点的入园凭证"
                         android:textSize="14sp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:textCursorDrawable="@drawable/color_cursor"
                         />
 
                         </LinearLayout>
@@ -311,28 +324,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="15dp"
                 android:background="@drawable/line_x_reservation"/>
 
+            <Button
+                android:id="@+id/put_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/button_login_mail"
+                android:text="提交订单"
+                android:textColor="#ffffff"
+                />
+
         </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/put_order"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/button_login_mail"
-            android:text="提交订单"
-            android:textColor="#ffffff"
-            />
-
-    </LinearLayout>
 
 </LinearLayout>
