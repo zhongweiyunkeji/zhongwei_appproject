@@ -169,6 +169,9 @@ public class HttpManager {
                             SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
                         }
                     }
+                    if (errcode.equals(Constants.STOCK_FAILE)) {
+                        SafeHandler.onFailure(handler, "预订商品库存不足");
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
