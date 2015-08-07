@@ -99,9 +99,9 @@ public class Tickets_Detail_Activity extends BaseActivity {
         titleTextView = (TextView) findViewById(R.id.ticket_detail_title_id);
         expandableListView = (CustomExpandableListView) findViewById(R.id.expandableListView);
         spot_introduction_id = (RelativeLayout) findViewById(R.id.spot_introduction_id);
-        tickets_detail_address = (RelativeLayout) findViewById(R.id.tickets_detail_address);
+        //tickets_detail_address = (RelativeLayout) findViewById(R.id.tickets_detail_address);
 //        reserve_id = (ImageView) findViewById(R.id.reserve_id);
-        tickets_detail_address_text_id_Ba_ = (RelativeLayout) findViewById(R.id.tickets_detail_address_text_id_Ba_);
+        //tickets_detail_address_text_id_Ba_ = (RelativeLayout) findViewById(R.id.tickets_detail_address_text_id_Ba_);
     }
 
     @Override
