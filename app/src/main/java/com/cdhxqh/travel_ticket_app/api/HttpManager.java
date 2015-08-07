@@ -8,6 +8,7 @@ import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.Attractions;
 import com.cdhxqh.travel_ticket_app.model.CategoryModel;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
+import com.cdhxqh.travel_ticket_app.model.GoodsList;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
 import com.cdhxqh.travel_ticket_app.model.PersistenceHelper;
 import com.cdhxqh.travel_ticket_app.model.SpotBookModel;
@@ -463,7 +464,7 @@ public class HttpManager {
                     JSONObject jsonObject = new JSONObject(responseString);
                     String errcode = jsonObject.getString("errcode");
                     if (Constants.REQUEST_SUCCESS.equals(errcode)) {
-                         SafeHandler.onSuccess(handler, responseString);
+                        SafeHandler.onSuccess(handler, responseString);
                         String result = jsonObject.getString("result");
                         // ArrayList<SpotBookModel> spotBookModel = JsonUtils.parsingSpotBook(result);
                         /*if (spotBookModel != null && spotBookModel.size() != 0) {
@@ -471,8 +472,7 @@ public class HttpManager {
                         } else {
                             SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
                         }*/
-                    } else
-                    if(Constants.LOGIN_TIMEOUT.equals(errcode)){
+                    } else if (Constants.LOGIN_TIMEOUT.equals(errcode)) {
                         SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorLoginTimeOutFailure));
                     }
                 } catch (JSONException e) {
@@ -596,6 +596,52 @@ public class HttpManager {
                 }
 
 
+            }
+        });
+    }
+
+    /**
+     *
+     * 获取门票信息
+     * @param context
+     * @param url
+     * @param handler
+     */
+    public static void getbrandlist(final Context context, String url,
+                                    final HttpRequestHandler<ArrayList<GoodsList>> handler){
+        final AsyncHttpClient client = getClient(context, false);
+//        client.addHeader("Referer", Constants.GOODSLIST_URL);
+//        client.addHeader("Content-Type", "application/x-www-form-urlencoded");
+        Log.i(TAG, "urlqqqq="+url);
+        client.get(url, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.i(TAG,"zzzzzzz");
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Log.i(TAG,"responseString="+responseString);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String errcode = jsonObject.getString("errcode");
+                    if (errcode.equals(Constants.REQUEST_SUCCESS)) {
+                        String errmsg = jsonObject.getString("errmsg");
+
+                        String result = jsonObject.getString("result");
+
+                        ArrayList<GoodsList> goodsLists = JsonUtils.parsingGoodsList(result);
+                        if (goodsLists!=null&&goodsLists.size()!=0){
+                            SafeHandler.onSuccess(handler, goodsLists);
+                        } else {
+                            SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

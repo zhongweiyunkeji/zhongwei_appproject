@@ -59,6 +59,8 @@ public class Constants {
     /**根据景区ID获取景点列表接口**/
     public static final String ATTRACTIONS_URL = BASE_URL+"ecsbrand/articlelist";
 
+	/**根据景区ID获取门票列表**/
+	public static  final String GOODSLIST_URL = BASE_URL+"ecscategory/goodslist";
 
 	public static final String CATEGORY_URL = BASE_URL+"ecscategory/categorylist";
 
