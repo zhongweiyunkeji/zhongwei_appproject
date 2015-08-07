@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.Attractions;
+import com.cdhxqh.travel_ticket_app.model.CategoryModel;
 import com.cdhxqh.travel_ticket_app.model.Ec_user;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.model.PersistenceHelper;
@@ -72,6 +73,44 @@ public class JsonUtils {
                 return 2; //邮箱未注册
             } else {
                 return 3; //邮箱注册失败
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    /**
+     * 创建订单*
+     */
+    public static CategoryModel reservationStr(final Context cxt, String data) {
+        CategoryModel categoryModel = null;
+        try {
+            JSONObject json = new JSONObject(data);
+            categoryModel = new CategoryModel();
+            categoryModel.setOrderId(json.getString("orderId"));
+            categoryModel.setTotal_fee(json.getString("goodsAmount"));
+            categoryModel.setOut_trade_no(json.getString("orderSn"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return categoryModel;
+    }
+
+    /**
+     * 判断库存是否充足
+     */
+    public static int parsingStock(String data) {
+        try {
+            JSONObject json = new JSONObject(data);
+            String errcode = json.getString("errcode");
+            if (errcode.equals(Constants.STOCK_SUCCESS)) {
+                return 1; //库存充足
+            } else if(errcode.equals(Constants.STOCK_FAILE)){
+                return 2; //库存不足
+            } else {
+                return 0;
             }
         } catch (JSONException e) {
             e.printStackTrace();
