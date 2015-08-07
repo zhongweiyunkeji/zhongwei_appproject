@@ -137,6 +137,8 @@ public class ReservationActivity extends BaseActivity{
      */
     private String goodsnum = "1";
 
+    String tittle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -212,6 +214,7 @@ public class ReservationActivity extends BaseActivity{
     private void getdate() {
         Bundle bundle = new Bundle();
         bundle = this.getIntent().getExtras();
+        tittle =   bundle.getString("tittle_reservation");
         tittle_reservation.setText(bundle.getString("tittle_reservation"));
         end_date_id_s.setText(bundle.getString("end_date_id_a"));
         num_ticket_id.setText(bundle.getString("bookingNum"));
@@ -271,9 +274,11 @@ public class ReservationActivity extends BaseActivity{
     private View.OnClickListener addOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            bookingNum =  new Integer(reservation_display_num.getText().toString());
-            goodsnum = String.valueOf(bookingNum + 1);
-            reservation_display_num.setText(String.valueOf(bookingNum + 1));
+            if(reservation_display_num.getText().toString() != null &&  !("".equals(reservation_display_num.getText().toString())) ) {
+                bookingNum = new Integer(reservation_display_num.getText().toString());
+                goodsnum = String.valueOf(bookingNum + 1);
+                reservation_display_num.setText(String.valueOf(bookingNum + 1));
+            }
         }
     };
 
@@ -283,10 +288,12 @@ public class ReservationActivity extends BaseActivity{
     private View.OnClickListener reduceOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            bookingNum = new Integer(reservation_display_num.getText().toString());
-            if(bookingNum > 1) {
-                goodsnum = String.valueOf(bookingNum + 1);
-                reservation_display_num.setText(String.valueOf(bookingNum - 1));
+            if(reservation_display_num.getText().toString() != null &&  !("".equals(reservation_display_num.getText().toString())) ) {
+                bookingNum = new Integer(reservation_display_num.getText().toString());
+                if (bookingNum > 1) {
+                    goodsnum = String.valueOf(bookingNum + 1);
+                    reservation_display_num.setText(String.valueOf(bookingNum - 1));
+                }
             }
         }
     };
@@ -355,7 +362,7 @@ public class ReservationActivity extends BaseActivity{
                 bundle.putString("consignee", ticket_user.getText().toString());
                 bundle.putString("mobile", ticket_user_a.getText().toString());
                 bundle.putString("postscript", id_card.getText().toString());
-                bundle.putString("tittle", tittle_reservation.getText().toString());
+                bundle.putString("tittle", tittle);
                 intent.putExtras(bundle);
                 intent.setClass(ReservationActivity.this, Layoutonline_Payment_Activity.class);
                 startActivity(intent);

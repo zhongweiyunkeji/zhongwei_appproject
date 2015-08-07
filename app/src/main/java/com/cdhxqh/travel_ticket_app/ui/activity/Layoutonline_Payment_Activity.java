@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,7 +71,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
     /**
      * 支付宝
      */
-    private ImageView zhifubao_id;
+    private RelativeLayout zhifu_id_a;
 
     private static final int SDK_PAY_FLAG = 1;
 
@@ -108,7 +109,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
     /**
      *  产品名称
      */
-    String tittle;
+    private String tittle;
 
 
     /**
@@ -124,7 +125,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
     /**
      * 产品名称
      */
-    private TextView tittle_reservation;
+    private TextView tittle_sid;
 
 
     @Override
@@ -145,10 +146,10 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         titleTextView = (TextView) findViewById(R.id.title_text_id);
         seachImageView = (ImageView) findViewById(R.id.title_search_id);
 
-        zhifubao_id = (ImageView) findViewById(R.id.zhifubao_id);
+        zhifu_id_a = (RelativeLayout) findViewById(R.id.zhifu_id_a);
 
         num_sid = (TextView) findViewById(R.id.num_sid);
-        tittle_reservation = (TextView) findViewById(R.id.tittle_reservation);
+        tittle_sid = (TextView) findViewById(R.id.tittle_sid);
     }
 
     @Override
@@ -157,10 +158,10 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
         titleTextView.setText("在线支付");
-        num_sid.setText(goodsAmount);
-        tittle_reservation.setText(tittle);
+        num_sid.setText("￥" + goodsAmount);
+        tittle_sid.setText(tittle);
 
-        zhifubao_id.setOnClickListener(zhifubaoListener);
+        zhifu_id_a.setOnClickListener(zhifubaoListener);
     }
 
     /**
