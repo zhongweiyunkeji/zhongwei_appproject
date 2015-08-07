@@ -14,6 +14,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tittle_reservation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="6dp"
@@ -35,6 +36,7 @@
                 android:text="到期时间" />
 
                 <TextView
+                    android:id="@+id/end_date_id_s"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2015-12-31 17:00:00"
@@ -55,6 +57,7 @@
                     android:textColor="#ffa500"/>
 
             <TextView
+                android:id="@+id/num_ticket_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -197,6 +200,7 @@
                         android:textSize="16sp"/>
 
                     <EditText
+                        android:id="@+id/ticket_user"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
@@ -224,6 +228,7 @@
                             android:textSize="16sp"/>
 
                     <EditText
+                        android:id="@+id/ticket_user_a"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
@@ -250,6 +255,7 @@
                             android:textSize="16sp"/>
 
                     <EditText
+                        android:id="@+id/id_card"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
@@ -317,6 +323,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/put_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
