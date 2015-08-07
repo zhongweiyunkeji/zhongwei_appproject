@@ -108,7 +108,13 @@ public class OrderGoods implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(goodsId);
+        dest.writeString(orderSn);
+        dest.writeString(goodsName);
+        dest.writeString(imgurl);
+        dest.writeString(status);
+        dest.writeInt(goodsNumber);
+        dest.writeDouble(goodsPrice);
     }
 
 }

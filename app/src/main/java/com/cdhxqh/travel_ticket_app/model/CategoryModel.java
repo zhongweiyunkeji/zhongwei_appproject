@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Created by Administrator on 2015/7/31.
  */
-public class CategoryModel  implements Parcelable,Serializable {
+public class CategoryModel  implements Parcelable {
     /**
      * 订单id
      */
@@ -69,7 +69,11 @@ public class CategoryModel  implements Parcelable,Serializable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(orderId);
+        dest.writeString(out_trade_no);
+        dest.writeString(subject);
+        dest.writeString(body);
+        dest.writeString(total_fee);
     }
 
     public String getOrderId() {

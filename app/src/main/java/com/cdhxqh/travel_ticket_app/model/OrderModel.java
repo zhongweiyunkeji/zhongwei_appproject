@@ -120,7 +120,12 @@ public class OrderModel implements Parcelable {
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(orderSn);
+        dest.writeString(addTime);
+        dest.writeInt(orderStatus);
+        dest.writeString(status);
+        dest.writeInt(shippingStatus);
+        dest.writeInt(payStatus);
+        dest.writeDouble(goodsAmount);
     }
-
 }
