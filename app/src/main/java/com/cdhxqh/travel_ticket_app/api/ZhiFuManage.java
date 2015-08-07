@@ -63,9 +63,9 @@ public class ZhiFuManage {
      * call alipay sdk pay. 调用SDK支付
      *
      */
-    public static void pay(final View v, final Activity cxt, final Handler mHandler) {
+    public static void pay( final Activity cxt, final Handler mHandler, String out_trade_no, String subject, String body, String price) {
         // 订单
-        String orderInfo = getOrderInfo("测试", "该测试商品", "0.01");
+        String orderInfo = getOrderInfo(out_trade_no, subject, body, price);
         // 对订单做RSA 签名
         String sign = sign(orderInfo);
         try {
@@ -105,7 +105,7 @@ public class ZhiFuManage {
      * create the order info. 创建订单信息
      *
      */
-    public static String getOrderInfo(String subject, String body, String price) {
+    public static String getOrderInfo(String out_trade_no, String subject, String body, String price) {
         // 签约合作者身份ID
         String orderInfo = "partner=" + "\"" + PARTNER + "\"";
 
@@ -113,7 +113,7 @@ public class ZhiFuManage {
         orderInfo += "&seller_id=" + "\"" + SELLER + "\"";
 
         // 商户网站唯一订单号
-        orderInfo += "&out_trade_no=" + "\"" + getOutTradeNo() + "\"";
+        orderInfo += "&out_trade_no=" + "\"" + out_trade_no + "\"";
 
         // 商品名称
         orderInfo += "&subject=" + "\"" + subject + "\"";
