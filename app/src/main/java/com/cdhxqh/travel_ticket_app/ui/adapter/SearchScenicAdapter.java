@@ -3,6 +3,7 @@ package com.cdhxqh.travel_ticket_app.ui.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -44,6 +45,9 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
 
     public void onBindViewHolder(SearchScenicAdapter.ViewHolder paramViewHolder, int paramInt) {
         final Ecs_brand localEcs_brand = (Ecs_brand) this.list.get(paramInt);
+
+        Log.i(TAG,"mark="+mark);
+
         if(1000 == mark){ // 景区门票
             ImageLoader.getInstance().displayImage(localEcs_brand.brand_logo, paramViewHolder.imageView);
             paramViewHolder.nameText.setText(localEcs_brand.brand_name);

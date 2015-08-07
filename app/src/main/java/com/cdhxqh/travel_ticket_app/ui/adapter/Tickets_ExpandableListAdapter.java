@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.model.GoodsList;
 
 import java.util.List;
 
@@ -18,10 +19,10 @@ import java.util.List;
 public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> group;
-    private List<List<String>> child;
+    private List<List<GoodsList>> child;
 
     public Tickets_ExpandableListAdapter(Context context, List<String> group,
-                                         List<List<String>> child) {
+                                         List<List<GoodsList>> child) {
         this.context = context;
         this.group = group;
         this.child = child;
@@ -34,7 +35,7 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return child.size();
+        return child.get(groupPosition).size();
     }
 
     @Override
@@ -76,6 +77,8 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
 
             holder.imageView = (ImageView) convertView
                     .findViewById(R.id.e_stus_id);
+            holder.imagetitle = (ImageView) convertView
+                    .findViewById(R.id.group_image_id);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolderGroup) convertView.getTag();
@@ -84,10 +87,28 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
         if(isExpanded){
             holder.imageView.setBackgroundResource(R.drawable.ic_up);
         }else{
-
             holder.imageView.setBackgroundResource(R.drawable.ic_down);
         }
-
+        switch (group.get(groupPosition)){
+            case "成人票":
+                holder.imagetitle.setImageResource(R.drawable.ic_adult_ticket);
+                break;
+            case "组合票":
+                holder.imagetitle.setImageResource(R.drawable.ic_group);
+                break;
+            case "儿童票":
+                holder.imagetitle.setImageResource(R.drawable.ic_child);
+                break;
+            case "学生票":
+                holder.imagetitle.setImageResource(R.drawable.ic_pupil);
+                break;
+            case "优待票":
+                holder.imagetitle.setImageResource(R.drawable.ic_vip);
+                break;
+            case "其它":
+                holder.imagetitle.setImageResource(R.drawable.ic_adult_ticket);
+                break;
+        }
 
         return convertView;
 
@@ -104,11 +125,14 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
             holder = new ViewHolderChild();
             holder.textView = (TextView) convertView
                     .findViewById(R.id.ticket_detail_name_id);
+            holder.priceView = (TextView) convertView
+                    .findViewById(R.id.ticket_detail_price_id);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolderChild) convertView.getTag();
         }
-        holder.textView.setText(child.get(groupPosition).get(childPosition));
+        holder.textView.setText(child.get(groupPosition).get(childPosition).getGoods_name());
+        holder.priceView.setText("￥"+child.get(groupPosition).get(childPosition).getShop_price());
         return convertView;
     }
 
@@ -117,6 +141,8 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
     class ViewHolderGroup {
         /**标题**/
         TextView textView;
+        /**标题图标**/
+        ImageView imagetitle;
         /**图标**/
         ImageView imageView;
 
@@ -125,6 +151,7 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
     /**内容**/
     class ViewHolderChild {
         TextView textView;
+        TextView priceView;
     }
 
 

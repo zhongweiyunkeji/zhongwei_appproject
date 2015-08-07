@@ -50,7 +50,7 @@ public class BrandListAdapter extends RecyclerView.Adapter<BrandListAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         final Ecs_brand ecs_brand = ecs_brands.get(i);
-
+        Log.i(TAG,"mark="+mark);
         ImageLoader.getInstance().displayImage(ecs_brand.brand_logo, viewHolder.imageView);
         viewHolder.nameText.setText(ecs_brand.brand_name);
         viewHolder.timeText.setText(ecs_brand.valid_date);
