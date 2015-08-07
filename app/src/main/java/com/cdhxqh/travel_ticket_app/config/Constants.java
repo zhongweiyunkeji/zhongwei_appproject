@@ -17,7 +17,7 @@ public class Constants {
 //    public static final String BASE_URL = "http://192.168.1.106:8080/qdm/";
     //远程服务器地址
 
-    public static final String BASE_URL = "http://192.168.1.99:8080/qdm/";  //  "http://182.92.158.158:8080/qdm/"
+    public static final String BASE_URL = "http://182.92.158.158:8080/qdm/";  //  "http://182.92.158.158:8080/qdm/"
 
     /**登录用户接口**/
     public static final String LOGIN_URL = BASE_URL+"ecsusers/login";
