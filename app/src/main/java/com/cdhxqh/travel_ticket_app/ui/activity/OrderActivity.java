@@ -275,12 +275,13 @@ public class OrderActivity extends BaseActivity {
                             itemList.put(orderModel.getOrderSn(), goodList);   // 注意此处不能使用orderSn!!!!!!
                             for(int k=0; k<size; k++){
                                 JSONObject obj = (JSONObject)subArray.get(k);
+                                int goodsId = obj.getInt("goodsId");    // id
                                 String goodsName = obj.getString("goodsName");  // 景点标题
                                 int goodsNumber = obj.getInt("goodsNumber");   // 总数量
                                 int goodsPrice = obj.getInt("goodsPrice");     // 购买价格
                                 String status = obj.getString("status");        // 景点状态
                                 String imgurl = obj.getString("goodsAttr");    // 景点图片
-                                OrderGoods goods = new OrderGoods(goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status);
+                                OrderGoods goods = new OrderGoods(goodsId+"", goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status);
                                 goodList.add(goods);
                             }
                             OrderGoods other = new OrderGoods();
@@ -363,12 +364,13 @@ public class OrderActivity extends BaseActivity {
                             itemList.put(orderModel.getOrderSn(), goodList);   // 注意此处不能使用orderSn!!!!!!
                             for(int k=0; k<size; k++){
                                 JSONObject obj = (JSONObject)subArray.get(k);
+                                int goodsId = obj.getInt("goodsId");    // id
                                 String goodsName = obj.getString("goodsName");  // 景点标题
                                 int goodsNumber = obj.getInt("goodsNumber");   // 总数量
                                 int goodsPrice = obj.getInt("goodsPrice");     // 购买价格
                                 String status = obj.getString("status");        // 景点标题
                                 String imgurl = obj.getString("goodsAttr");    // 景点图片
-                                OrderGoods goods = new OrderGoods(goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status);
+                                OrderGoods goods = new OrderGoods(goodsId+"", goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status);
                                 goodList.add(goods);
                             }
                             OrderGoods other = new OrderGoods();
