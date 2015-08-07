@@ -13,11 +13,10 @@
         android:layout_marginLeft="20dp"
         android:orientation="horizontal">
 
-        <ListView
+        <TextView
             android:id="@+id/listView_book_id"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

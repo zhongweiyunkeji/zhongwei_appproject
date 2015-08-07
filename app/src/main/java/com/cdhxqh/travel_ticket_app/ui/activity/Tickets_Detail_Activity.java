@@ -50,12 +50,12 @@ public class Tickets_Detail_Activity extends BaseActivity {
     /**
      * 景区介绍*
      */
-    private TextView tickets_detail_introduce_text_id;
+    private RelativeLayout spot_introduction_id;
 
     /**
      * 预定须知
      */
-    private TextView tickets_detail_address_text_id;
+    private RelativeLayout tickets_detail_address;
 
 //    /**
 //     * 预定
@@ -65,7 +65,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
     /**
      *测试
      */
-    private TextView tickets_detail_address_text_id_a;
+    private RelativeLayout tickets_detail_address_text_id_Ba_;
 
     Tickets_ExpandableListAdapter tickets_expandableListAdapter;
 
@@ -98,10 +98,10 @@ public class Tickets_Detail_Activity extends BaseActivity {
         backImageView = (ImageView) findViewById(R.id.ticket_detail_back_id);
         titleTextView = (TextView) findViewById(R.id.ticket_detail_title_id);
         expandableListView = (CustomExpandableListView) findViewById(R.id.expandableListView);
-        tickets_detail_introduce_text_id = (TextView) findViewById(R.id.tickets_detail_introduce_text_id);
-        tickets_detail_address_text_id = (TextView) findViewById(R.id.tickets_detail_address_text_id_1);
+        spot_introduction_id = (RelativeLayout) findViewById(R.id.spot_introduction_id);
+        tickets_detail_address = (RelativeLayout) findViewById(R.id.tickets_detail_address);
 //        reserve_id = (ImageView) findViewById(R.id.reserve_id);
-        tickets_detail_address_text_id_a = (TextView) findViewById(R.id.tickets_detail_address_text_id_a);
+        tickets_detail_address_text_id_Ba_ = (RelativeLayout) findViewById(R.id.tickets_detail_address_text_id_Ba_);
     }
 
     @Override
@@ -132,10 +132,10 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
 
 
-        tickets_detail_introduce_text_id.setOnClickListener(ticketsIntroduceOnClickListener);
-        tickets_detail_address_text_id.setOnClickListener(ticketsdetailOnClickListener);
+        spot_introduction_id.setOnClickListener(ticketsIntroduceOnClickListener);
+        tickets_detail_address.setOnClickListener(ticketsdetailOnClickListener);
 //        reserve_id.setOnClickListener(reserveOnClickListener);
-        tickets_detail_address_text_id_a.setOnClickListener(reserveOnClickListener);
+        tickets_detail_address_text_id_Ba_.setOnClickListener(reserveOnClickListener);
 
     }
 
@@ -201,7 +201,8 @@ public class Tickets_Detail_Activity extends BaseActivity {
             bundle.putString("tittle_reservation", "沙坡头成人票（下单立减100元）");
             bundle.putString("end_date_id_a", "2015-12-31 17:00:00");
             bundle.putString("bookingNum", "20");
-            bundle.putString("unit_fare", "10");
+            bundle.putString("unit_fare", "1");
+            bundle.putString("goodsId", "9");
             intent.putExtras(bundle);
             intent.setClass(Tickets_Detail_Activity.this, ReservationActivity.class);
             startActivity(intent);

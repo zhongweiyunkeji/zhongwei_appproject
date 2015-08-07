@@ -127,6 +127,142 @@ public class HttpManager {
         });
     }
 
+    /**
+     *创建订单
+     * @param cxt
+     * @param handler
+     */
+    public static void reservation(final Context cxt, final String goodsAmount, String goodsIds, String payId, String payName, String consignee, String mobile, String postscript,final HttpRequestHandler<CategoryModel> handler) {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.addHeader("Cookie", "JSESSIONID="+HttpManager.SESSIONID);
+        client.setConnectTimeout(10000);
+        RequestParams params = new RequestParams();
+        params.put("goodsAmount", goodsAmount);
+        params.put("goodsIds", goodsIds);
+        params.put("payId", payId);
+        params.put("payName", payName);
+        params.put("consignee", consignee);
+        params.put("mobile", mobile);
+        params.put("postscript", postscript);
+        client.post(Constants.CREATORDER_URL, params, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String errcode = jsonObject.getString("errcode");
+                    if (errcode.equals(Constants.REQUEST_SUCCESS)) {
+                        String errmsg = jsonObject.getString("errmsg");
+
+                        String result = jsonObject.getString("result");
+
+                        CategoryModel categoryModel = JsonUtils.reservationStr(cxt, result);
+                        if (categoryModel != null) {
+                            SafeHandler.onSuccess(handler, categoryModel);
+                        } else {
+                            SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+                        }
+                    }else if (errcode.equals(Constants.STOCK_FAILE)) {
+                        SafeHandler.onFailure(handler, "预订商品库存不足");
+                    }else if (errcode.equals(Constants.LOGIN_TIMEOUT)) {
+                        SafeHandler.onFailure(handler, "会话过期，请重新登录");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+                }
+            }
+        });
+    }
+
+    /**
+     *判断订单库存
+     * @param cxt
+     * @param handler
+     */
+    public static void stockNum(final Context cxt, String goodsIds,final HttpRequestHandler<Integer> handler) {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setConnectTimeout(10000);
+        RequestParams params = new RequestParams();
+        params.put("goodsIds", goodsIds);
+        client.get(Constants.STOCK_URL, params, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String errcode = jsonObject.getString("errcode");
+                    if (errcode.equals(Constants.STOCK_SUCCESS)) {
+                        SafeHandler.onSuccess(handler, 200);
+                    } else {
+                        SafeHandler.onFailure(handler, "库存不足");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+                }
+            }
+        });
+    }
+
+    /**
+     *更新订单接口
+     * @param cxt
+     * @param handler
+     */
+    public static void updateStock(final Context cxt, String orderSn, String orderId, String orderStatus, String goodsIds, final HttpRequestHandler<Integer> handler) {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setConnectTimeout(10000);
+        client.addHeader("Cookie", "JSESSIONID=" + HttpManager.SESSIONID);
+        RequestParams params = new RequestParams();
+        params.put("orderSn", orderSn);
+        params.put("orderId", orderId);
+        params.put("orderStatus", orderStatus);
+        params.put("goodsIds", goodsIds);
+        client.post(Constants.UPDATE_STOCK_URL, params, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String errcode = jsonObject.getString("errcode");
+                    if (errcode.equals(Constants.STOCK_FAILE_NULL)) {
+                        SafeHandler.onFailure(handler, "订单号为空");
+                    } else if(errcode.equals(Constants.STOCK_FAILE_STYLE)){
+                        SafeHandler.onFailure(handler, "未接收到客户端支付状态");
+                    } else if(errcode.equals(Constants.STOCK_FAILE_PAY)){
+                        SafeHandler.onFailure(handler, "支付失败");
+                    } else {
+                        SafeHandler.onSuccess(handler, 200);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+                }
+            }
+        });
+    }
 
     /**
      * 使用用户名密码登录
@@ -574,7 +710,7 @@ public class HttpManager {
         }
         /*PersistentCookieStore myCookieStore = new PersistentCookieStore(cxt);
         client.setCookieStore(myCookieStore);*/
-
+        client.setConnectTimeout(2000);
         client.post(url, params, new TextHttpResponseHandler() {
 
 
@@ -586,9 +722,9 @@ public class HttpManager {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                for(Header h : headers){
+                for (Header h : headers) {
                     String name = h.getName();
-                    if("Set-Cookie".equals(name) && (-1 != url.indexOf(Constants.LOGIN_URL))){
+                    if ("Set-Cookie".equals(name) && (-1 != url.indexOf(Constants.LOGIN_URL))) {
                         String cookie = h.getValue();
                         SESSIONID = cookie.split(";")[0].split("=")[1];
                         break;

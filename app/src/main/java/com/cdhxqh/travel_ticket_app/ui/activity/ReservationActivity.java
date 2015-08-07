@@ -14,9 +14,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONArray;
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.api.HttpManager;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Created by Administrator on 2015/7/28.
@@ -61,6 +69,11 @@ public class ReservationActivity extends BaseActivity{
     private int bookingNum;
 
     /**
+     * 门票总数量
+     */
+    private int bookingMax;
+
+    /**
      * 出行日期按钮
      */
     private TextView outDate_id;
@@ -68,18 +81,70 @@ public class ReservationActivity extends BaseActivity{
     /**
      *门票单价
      */
-    private int unit_fare = 50;
+    private int unit_fare;
 
     /**
      *出行日期显示
      */
     private TextView out_date_id;
 
+    /**
+     *提交订单
+     */
+    private Button put_order;
+
+    /**
+     * 描述
+     */
+    private TextView tittle_reservation;
+
+    /**
+     * 截止日期
+     */
+    private TextView end_date_id_s;
+
+    /**
+     * 门票数量显示框
+     */
+    private TextView num_ticket_id;
+
+    /**
+     *总金额
+     */
+    private int total_fare;
+
+    /**
+     *取票人
+     */
+    private TextView ticket_user;
+
+    /**
+     *手机号
+     */
+    private TextView ticket_user_a;
+
+    /**
+     *身份证
+     */
+    private TextView id_card;
+    /**
+     * 商品id
+     */
+    private String goodsId;
+
+    /**
+     *购买数量
+     */
+    private String goodsnum = "1";
+
+    String tittle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
         findViewById();
+        getdate();
         initView();
     }
 
@@ -91,6 +156,18 @@ public class ReservationActivity extends BaseActivity{
         total_fare_id = (TextView) findViewById(R.id.total_fare_id);
         outDate_id = (TextView) findViewById(R.id.outDate_id);
         out_date_id = (TextView) findViewById(R.id.out_date_id);
+
+        put_order = (Button) findViewById(R.id.put_order);
+
+        tittle_reservation = (TextView) findViewById(R.id.tittle_reservation);
+
+        end_date_id_s = (TextView) findViewById(R.id.end_date_id_s);
+
+        num_ticket_id = (TextView) findViewById(R.id.num_ticket_id);
+
+        ticket_user = (TextView) findViewById(R.id.ticket_user);
+        ticket_user_a = (TextView) findViewById(R.id.ticket_user_a);
+        id_card = (TextView) findViewById(R.id.id_card);
 
         /**
          * 标题标签相关id
@@ -106,6 +183,7 @@ public class ReservationActivity extends BaseActivity{
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
         titleTextView.setText("预订信息填写");
+        total_fare_id.setText(String.valueOf(unit_fare));
         //返回至登录界面事件
         backImageView.setOnClickListener(backImageViewOnClickListener);
         /**
@@ -124,6 +202,26 @@ public class ReservationActivity extends BaseActivity{
          * 出行日期
          */
         outDate_id.setOnClickListener(outDateOnClickListener);
+        /**
+         * 提交订单
+         */
+        put_order.setOnClickListener(putOrderClickListener);
+    }
+
+    /**
+     * 获取数据
+     */
+    private void getdate() {
+        Bundle bundle = new Bundle();
+        bundle = this.getIntent().getExtras();
+        tittle =   bundle.getString("tittle_reservation");
+        tittle_reservation.setText(bundle.getString("tittle_reservation"));
+        end_date_id_s.setText(bundle.getString("end_date_id_a"));
+        num_ticket_id.setText(bundle.getString("bookingNum"));
+        bookingMax = new Integer(bundle.getString("bookingNum"));
+        unit_fare = new Integer(bundle.getString("unit_fare"));
+        total_fare = unit_fare;
+        goodsId = bundle.getString("goodsId");
     }
 
     /**
@@ -176,8 +274,11 @@ public class ReservationActivity extends BaseActivity{
     private View.OnClickListener addOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            bookingNum =  new Integer(reservation_display_num.getText().toString());
-            reservation_display_num.setText(String.valueOf(bookingNum + 1));
+            if(reservation_display_num.getText().toString() != null &&  !("".equals(reservation_display_num.getText().toString())) ) {
+                bookingNum = new Integer(reservation_display_num.getText().toString());
+                goodsnum = String.valueOf(bookingNum + 1);
+                reservation_display_num.setText(String.valueOf(bookingNum + 1));
+            }
         }
     };
 
@@ -187,9 +288,13 @@ public class ReservationActivity extends BaseActivity{
     private View.OnClickListener reduceOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            bookingNum = new Integer(reservation_display_num.getText().toString());
-            if(bookingNum > 1)
-            reservation_display_num.setText(String.valueOf(bookingNum - 1));
+            if(reservation_display_num.getText().toString() != null &&  !("".equals(reservation_display_num.getText().toString())) ) {
+                bookingNum = new Integer(reservation_display_num.getText().toString());
+                if (bookingNum > 1) {
+                    goodsnum = String.valueOf(bookingNum + 1);
+                    reservation_display_num.setText(String.valueOf(bookingNum - 1));
+                }
+            }
         }
     };
 
@@ -215,10 +320,113 @@ public class ReservationActivity extends BaseActivity{
 //                    reservation_display_num.setText(Math.abs(new Integer(reservation_display_num.getText().toString())));
 //                }
                 bookingNum = new Integer(reservation_display_num.getText().toString());
+                goodsnum = String.valueOf(bookingNum);
+                total_fare = bookingNum * unit_fare;
                 total_fare_id.setText(String.valueOf(bookingNum * unit_fare));
             } else {
                 total_fare_id.setText(String.valueOf(0));
             }
         }
     };
+
+    /**
+     * 提交订单
+     */
+    private View.OnClickListener putOrderClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String user = ticket_user.getText().toString();
+            String phone = ticket_user_a.getText().toString();
+            String Idcard = id_card.getText().toString();
+
+            if(reservation_display_num.getText().toString() == null || "".equals(reservation_display_num.getText().toString())){
+                reservation_display_num.setError(getString(R.string.ticket_null));
+                reservation_display_num.requestFocus();
+            }else if(user == null || "".equals(user)){
+                ticket_user.setError(getString(R.string.ticket_user_null));
+                ticket_user.requestFocus();
+            }else if(phone == null || "".equals(phone)) {
+                ticket_user_a.setError(getString(R.string.ticket_phone_null));
+                ticket_user_a.requestFocus();
+            } else if(!isMobileNO(phone)) {
+                ticket_user_a.setError(getString(R.string.ticket_phone_errer));
+                ticket_user_a.requestFocus();
+            }else if(Idcard == null || "".equals(Idcard)) {
+                id_card.setError(getString(R.string.ticket_card_null));
+                id_card.requestFocus();
+            }else if(!isCardNO(Idcard)){
+                id_card.setError(getString(R.string.ticket_card_errer));
+                id_card.requestFocus();
+            }else {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putString("goodsAmount", String.valueOf(total_fare));
+                bundle.putString("goodsIds", setJson());
+                bundle.putString("consignee", ticket_user.getText().toString());
+                bundle.putString("mobile", ticket_user_a.getText().toString());
+                bundle.putString("postscript", id_card.getText().toString());
+                bundle.putString("tittle", tittle);
+                intent.putExtras(bundle);
+                intent.setClass(ReservationActivity.this, Layoutonline_Payment_Activity.class);
+                startActivity(intent);
+            }
+        }
+    };
+
+    /**
+     * 设置json字符串
+     * @return
+     */
+    private String setJson() {
+        String name = null;
+        try{
+            Goods goods = new Goods();
+            goods.setGoodsid(goodsId);
+            goods.setGoodsnum(goodsnum);
+            List<Goods> list = new ArrayList<Goods>();
+            Map<String, List<Goods>> lists = new HashMap<String, List<Goods>>();
+            list.add(goods);
+            lists.put("goodsIds", list);
+            name = JSONArray.toJSONString(lists);
+        }catch (Exception e){
+
+        }
+        return name;
+    }
+
+    /*
+    手机验证
+     */
+    public boolean isMobileNO(String mobiles) {
+        mobiles = (mobiles == null ? "" : mobiles);
+        return Pattern.compile("^[1][3,4,5,8][0-9]{9}$").matcher(mobiles).matches();
+    }
+
+    /**
+     * 身份证验证
+     */
+    public boolean isCardNO(String IdCard) {
+        IdCard = (IdCard == null ? "" : IdCard);
+        return Pattern.compile("^(^\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$").matcher(IdCard).matches();
+    }
+
+    }
+
+class Goods{
+    private String goodsid;
+    private String goodsnum;
+
+    public String getGoodsid(){
+        return this.goodsid;
+    }
+    public void setGoodsid(String goodsid){
+        this.goodsid = goodsid;
+    }
+
+    public String getGoodsnum(){
+        return this.goodsnum;
+    }
+    public void setGoodsnum(String goodsnum){
+        this.goodsnum = goodsnum;
+    }
 }

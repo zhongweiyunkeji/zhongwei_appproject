@@ -115,5 +115,14 @@
     <string name="end_date_time_text">到期时间:</string>
     <string name="need_know_text">预定需知</string>
 
+    <!--提交订单-->
+    <string name="ticket_phone_null">手机号不能为空</string>
+    <string name="ticket_phone_errer">手机号格式错误</string>
+    <string name="ticket_card_null">身份证号不能为空</string>
+    <string name="ticket_card_errer">身份证号格式错误</string>
+    <string name="ticket_user_null">取票人不能为空</string>
+    <string name="ticket_null">请输入购票数</string>
+
+
 
 </resources>
