@@ -83,4 +83,29 @@ public class CategoryModel  implements Parcelable {
     public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
+
+    public static final Parcelable.Creator<CategoryModel> CREATOR = new Creator(){
+
+        @Override
+        public CategoryModel createFromParcel(Parcel source) {
+            // 必须按成员变量声明的顺序读取数据，不然会出现获取数据出错
+            CategoryModel p = new CategoryModel();
+            p.setOrderId(source.readString());
+            p.setOut_trade_no(source.readString());
+            p.setSubject(source.readString());
+            p.setBody(source.readString());
+            p.setTotal_fee(source.readString());
+
+            return p;
+        }
+
+
+
+        @Override
+        public CategoryModel[] newArray(int size) {
+            return new CategoryModel[size];
+        }
+    };
+
+
 }
