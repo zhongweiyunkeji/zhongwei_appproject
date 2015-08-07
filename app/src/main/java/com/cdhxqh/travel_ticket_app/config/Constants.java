@@ -17,7 +17,7 @@ public class Constants {
 //    public static final String BASE_URL = "http://192.168.1.106:8080/qdm/";
     //远程服务器地址
 
-    public static final String BASE_URL = "http://182.92.158.158:8080/qdm/";  //  http://182.92.158.158:8080/qdm/    http://192.168.1.99:8080/qdm/
+    public static final String BASE_URL = "http://192.168.1.99:8080/qdm/";  //  "http://182.92.158.158:8080/qdm/"
 
     /**登录用户接口**/
     public static final String LOGIN_URL = BASE_URL+"ecsusers/login";
@@ -61,6 +61,12 @@ public class Constants {
 
 
 	public static final String CATEGORY_URL = BASE_URL+"ecscategory/categorylist";
+
+	public static final String CREATORDER_URL = BASE_URL+"ecsorder/create";
+
+	public static final String STOCK_URL = BASE_URL+"ecsorder/justInv";
+
+	public static final String UPDATE_STOCK_URL = BASE_URL+"ecsorder/change";
 
 
 	/**
@@ -182,6 +188,21 @@ public class Constants {
 
     //请求成功
     public static final String REQUEST_SUCCESS = "ZWTICKET-GLOBAL-S-0";
+
+	//库存充足
+	public static final String STOCK_SUCCESS = "ZWTICKET-ORDER-S-303";
+
+	//库存不足
+	public static final String STOCK_FAILE = "ZWTICKET-ORDER-E-302";
+
+	//订单账号为空
+	public static final String STOCK_FAILE_NULL = "ZWTICKET-ORDER-E-304";
+
+	//订单账号为空
+	public static final String STOCK_FAILE_STYLE = "ZWTICKET-ORDER-E-305";
+
+	//支付失败
+	public static final String STOCK_FAILE_PAY = "ZWTICKET-ORDER-E-306";
 
 
 
