@@ -339,13 +339,16 @@ public class ReservationActivity extends BaseActivity{
             String phone = ticket_user_a.getText().toString();
             String Idcard = id_card.getText().toString();
 
-            if(user == null || "".equals(user)){
+            if(reservation_display_num.getText().toString() == null || "".equals(reservation_display_num.getText().toString())){
+                reservation_display_num.setError(getString(R.string.ticket_null));
+                reservation_display_num.requestFocus();
+            }else if(user == null || "".equals(user)){
                 ticket_user.setError(getString(R.string.ticket_user_null));
                 ticket_user.requestFocus();
             }else if(phone == null || "".equals(phone)) {
                 ticket_user_a.setError(getString(R.string.ticket_phone_null));
                 ticket_user_a.requestFocus();
-            }else if(!isMobileNO(phone)) {
+            } else if(!isMobileNO(phone)) {
                 ticket_user_a.setError(getString(R.string.ticket_phone_errer));
                 ticket_user_a.requestFocus();
             }else if(Idcard == null || "".equals(Idcard)) {
