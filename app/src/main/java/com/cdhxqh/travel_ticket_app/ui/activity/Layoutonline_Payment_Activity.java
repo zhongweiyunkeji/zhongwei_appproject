@@ -163,6 +163,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         tittle_sid.setText(tittle);
 
         zhifu_id_a.setOnClickListener(zhifubaoListener);
+        backImageView.setOnClickListener(backImageViewOnClickListener);
     }
 
     /**
@@ -173,6 +174,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         public void onClick(View v) {
             if("订单列表".equals(type)){// 订单列表页面
                 finish();
+                return;
             }
             Intent intent = new Intent();
             intent.setClass(Layoutonline_Payment_Activity.this, ReservationActivity.class);
@@ -205,7 +207,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         mobile = bundle.getString("mobile");              // 电话号码
         postscript = bundle.getString("postscript");
         tittle = bundle.getString("tittle");
-        categoryModel = (CategoryModel)bundle.getParcelable("categoryModel");
+        categoryModel = (CategoryModel) bundle.getParcelable("categoryModel");
         type = bundle.getString("type");
     }
 
