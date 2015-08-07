@@ -97,7 +97,7 @@ public class OrderThreeOutFragment extends BaseFragment {
 
             List<OrderGoods> list = new ArrayList<OrderGoods>(0);
             for(int j=0; j<2; j++){
-                OrderGoods goods = new OrderGoods( "沙坡头"+i+""+"j", 0, 188.0, sn, "http://e.hiphotos.baidu.com/image/pic/item/5fdf8db1cb134954b5a93c8d554e9258d0094aa0.jpg", "待出游");
+                OrderGoods goods = new OrderGoods("", "沙坡头"+i+""+"j", 0, 188.0, sn, "http://e.hiphotos.baidu.com/image/pic/item/5fdf8db1cb134954b5a93c8d554e9258d0094aa0.jpg", "待出游");
                 list.add(goods);
             }
             OrderGoods other = new OrderGoods();
@@ -134,7 +134,7 @@ public class OrderThreeOutFragment extends BaseFragment {
 
                 List<OrderGoods> list = new ArrayList<OrderGoods>(0);
                 for(int j=0; j<2; j++){
-                    OrderGoods goods = new OrderGoods("沙坡头"+i+""+"j", 0, 188.0, sn, "http://e.hiphotos.baidu.com/image/pic/item/5fdf8db1cb134954b5a93c8d554e9258d0094aa0.jpg", "待出游");
+                    OrderGoods goods = new OrderGoods("","沙坡头"+i+""+"j", 0, 188.0, sn, "http://e.hiphotos.baidu.com/image/pic/item/5fdf8db1cb134954b5a93c8d554e9258d0094aa0.jpg", "待出游");
                     list.add(goods);
                 }
                 OrderGoods other = new OrderGoods();
