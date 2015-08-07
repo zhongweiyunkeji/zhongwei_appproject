@@ -225,7 +225,7 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
                     for(int index=0; index<goods.size()-1; index++){
                         OrderGoods good = goods.get(index);
                         // 需要的json格式为:   {"goodsid":"9","goodsnum":"20"}
-                        builder.append("{\"goodsid\":\"").append(good.getGoodsId()).append("\",\"goodsnum\":\"").append(good.getGoodsName()).append("\"},");
+                        builder.append("{\"goodsid\":\"").append(good.getGoodsId()).append("\",\"goodsnum\":\"").append(good.getGoodsNumber()).append("\"},");
                     }
                     if(builder.length()>0){
                         builder.delete(builder.length()-1, builder.length());// 删除最后一个逗号
@@ -252,12 +252,12 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
                     // 额外的参数用于与预定信息页面区分开来的参数
                     bundle.putString("type", "订单列表");  // 订单号
 
-                    bundle.putSerializable("categoryModel", categoryModel);        // 商品详情
+                    bundle.putParcelable("categoryModel", categoryModel);        // 商品详情
 
                     intent.putExtras(bundle);
                     intent.setClass(context, Layoutonline_Payment_Activity.class);
                     context.startActivity(intent);
-                    ((Activity)context).finish();
+                    // ((Activity)context).finish();
                 }
             });
 
