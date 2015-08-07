@@ -127,6 +127,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
      */
     private TextView tittle_sid;
 
+    String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +171,9 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if("订单列表".equals(type)){// 订单列表页面
+                finish();
+            }
             Intent intent = new Intent();
             intent.setClass(Layoutonline_Payment_Activity.this, ReservationActivity.class);
             startActivityForResult(intent, 0);
@@ -182,6 +186,10 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
     private View.OnClickListener zhifubaoListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if("订单列表".equals(type)){  // 从订单列表过来的不需要创建订单
+                stockNum();
+                return;
+            }
             reservation();
         }
     };
@@ -192,11 +200,13 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
     private void getdate() {
         Bundle bundle = new Bundle();
         bundle = this.getIntent().getExtras();
-        goodsAmount = bundle.getString("goodsAmount");
-        goodsIds = bundle.getString("goodsIds");
-        mobile = bundle.getString("mobile");
+        goodsAmount = bundle.getString("goodsAmount");   // 总金额
+        goodsIds = bundle.getString("goodsIds");          //
+        mobile = bundle.getString("mobile");              // 电话号码
         postscript = bundle.getString("postscript");
         tittle = bundle.getString("tittle");
+        categoryModel = (CategoryModel)bundle.getSerializable("categoryModel");
+        type = bundle.getString("type");
     }
 
 
