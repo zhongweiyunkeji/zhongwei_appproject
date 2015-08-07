@@ -168,9 +168,10 @@ public class HttpManager {
                         } else {
                             SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
                         }
-                    }
-                    if (errcode.equals(Constants.STOCK_FAILE)) {
+                    }else if (errcode.equals(Constants.STOCK_FAILE)) {
                         SafeHandler.onFailure(handler, "预订商品库存不足");
+                    }else if (errcode.equals(Constants.LOGIN_TIMEOUT)) {
+                        SafeHandler.onFailure(handler, "会话过期，请重新登录");
                     }
 
                 } catch (JSONException e) {
