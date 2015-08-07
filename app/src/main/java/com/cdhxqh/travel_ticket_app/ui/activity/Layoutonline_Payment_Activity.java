@@ -13,13 +13,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONArray;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.ErrorType;
+import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
 import com.cdhxqh.travel_ticket_app.api.ZhiFuManage;
 import com.cdhxqh.travel_ticket_app.app.PayResult;
 import com.cdhxqh.travel_ticket_app.app.SignUtils;
 import com.cdhxqh.travel_ticket_app.config.Constants;
+import com.cdhxqh.travel_ticket_app.model.CategoryModel;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
 import com.cdhxqh.travel_ticket_app.model.SpotBookModel;
 import com.cdhxqh.travel_ticket_app.utils.JsonUtils;
@@ -39,7 +42,10 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 
 import com.alipay.sdk.app.PayTask;
@@ -80,6 +86,29 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
      */
     private String goodsIds;
 
+    /**
+     *取票人
+     */
+    private String consignee;
+
+    /**
+     *电话
+     */
+    private String mobile;
+
+    /**
+     *身份证号
+     */
+    private String postscript;
+
+    CategoryModel categoryModel = new CategoryModel();
+
+    private ProgressDialog progressDialog;
+
+    /**
+     * 支付状态
+     */
+    private String orderStatus;
 
 
 
@@ -109,7 +138,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         //设置标签页显示方式
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
-        titleTextView.setText("预订信息填写的");
+        titleTextView.setText("在线支付");
 
         zhifubao_id.setOnClickListener(zhifubaoListener);
     }
@@ -132,7 +161,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
     private View.OnClickListener zhifubaoListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            ZhiFuManage.pay(v, Layoutonline_Payment_Activity.this, mHandler);
+            reservation();
         }
     };
 
@@ -144,7 +173,11 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         bundle = this.getIntent().getExtras();
         goodsAmount = bundle.getString("goodsAmount");
         goodsIds = bundle.getString("goodsIds");
+        mobile = bundle.getString("mobile");
+        postscript = bundle.getString("postscript");
     }
+
+
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -161,6 +194,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
                     if (TextUtils.equals(resultStatus, "9000")) {
                         Toast.makeText(Layoutonline_Payment_Activity.this, "支付成功",
                                 Toast.LENGTH_SHORT).show();
+                                orderStatus = "1";
                     } else {
                         // 判断resultStatus 为非“9000”则代表可能支付失败
                         // “8000”代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
@@ -174,7 +208,11 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
                                     Toast.LENGTH_SHORT).show();
 
                         }
+                        orderStatus = "2";
                     }
+
+                    updateStock(orderStatus);
+
                     break;
                 }
                 case SDK_CHECK_FLAG: {
@@ -188,6 +226,89 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         };
     };
 
+    /**
+     * 创建订单
+     */
+    private void reservation() {
+        HttpManager.reservation(this, goodsAmount, goodsIds, "1", "1", consignee, mobile, postscript, handler);
+    }
 
+    private HttpRequestHandler<CategoryModel> handler = new HttpRequestHandler<CategoryModel>() {
+
+
+        @Override
+        public void onSuccess(CategoryModel data) {
+            categoryModel = data;
+            stockNum();
+        }
+
+        @Override
+        public void onSuccess(CategoryModel data, int totalPages, int currentPage) {
+
+        }
+
+        @Override
+        public void onFailure(String error) {
+
+        }
+    };
+
+    /**
+     * 判断订单库存
+     */
+    private void stockNum() {
+        /**
+         * 加载中
+         */
+        progressDialog = ProgressDialog.show(Layoutonline_Payment_Activity.this, null,
+                getString(R.string.loading), true, true);
+        HttpManager.stockNum(this, goodsIds, handlerStock);
+    }
+
+    private HttpRequestHandler<Integer> handlerStock = new HttpRequestHandler<Integer>() {
+
+        @Override
+        public void onSuccess(Integer data) {
+            progressDialog.dismiss();
+            ZhiFuManage.pay(Layoutonline_Payment_Activity.this, mHandler, categoryModel.getOut_trade_no(), "沙坡头", "沙坡头", categoryModel.getTotal_fee());
+        }
+
+        @Override
+        public void onSuccess(Integer data, int totalPages, int currentPage) {
+
+        }
+
+        @Override
+        public void onFailure(String error) {
+            MessageUtils.showErrorMessage(Layoutonline_Payment_Activity.this, error);
+            progressDialog.dismiss();
+        }
+    };
+
+    /**
+     * 更新订单接口
+     */
+    private void updateStock(String orderStatus) {
+        HttpManager.updateStock(this, categoryModel.getOut_trade_no(), categoryModel.getOrderId(), orderStatus, goodsIds, handlerUpdateStock);
+    }
+
+    private HttpRequestHandler<Integer> handlerUpdateStock = new HttpRequestHandler<Integer>() {
+
+        @Override
+        public void onSuccess(Integer data) {
+            MessageUtils.showMiddleToast(Layoutonline_Payment_Activity.this, "订单生成成功");
+        }
+
+        @Override
+        public void onSuccess(Integer data, int totalPages, int currentPage) {
+
+        }
+
+        @Override
+        public void onFailure(String error) {
+            MessageUtils.showErrorMessage(Layoutonline_Payment_Activity.this, error);
+        }
+    };
 
 }
+
