@@ -7,6 +7,7 @@
     android:paddingRight="@dimen/dimens_20">
 
     <RelativeLayout
+        android:id="@+id/tickets_detail_address_text_id_Ba_"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dimens_10">
@@ -19,7 +20,7 @@
             android:src="@drawable/ic_address" />
 
         <TextView
-            android:id="@+id/tickets_detail_address_text_id"
+            android:id="@+id/tickets_detail_address_text_id_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
