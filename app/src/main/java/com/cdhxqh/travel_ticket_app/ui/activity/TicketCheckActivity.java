@@ -30,10 +30,13 @@ public class TicketCheckActivity extends BaseActivity {
     ImageView searchImg;
     TextView checkCode; // 电子票输入框
     Button validBtn;  // 验证按钮
+    Button checkBtn;  // 验证电子码按钮
     LinearLayout elecLayout;  // 电子验票显示区域
     TextView title;     // 抬头
     TextView elecTextSelcect; // 电子票选项卡
     TextView qrcodeSelect;    // 二维码选项卡
+    LinearLayout chkTktSuccess;
+    LinearLayout chkTktFail;
 
 
     @Override
@@ -53,11 +56,25 @@ public class TicketCheckActivity extends BaseActivity {
         searchImg = (ImageView)findViewById(R.id.title_search_id);
         checkCode = (TextView)findViewById(R.id.electronic_ticket_text);
         validBtn =  (Button)findViewById(R.id.ticket_check_btn);
+        checkBtn =  (Button)findViewById(R.id.ticket_check_btn);
 
         elecLayout = (LinearLayout)findViewById(R.id.electronic_layout);
 
         elecTextSelcect = (TextView)findViewById(R.id.electronic_text);
         qrcodeSelect = (TextView)findViewById(R.id.electronic_qrcode);
+
+        chkTktSuccess = (LinearLayout)findViewById(R.id.check_ticket_success_ele);
+        chkTktFail = (LinearLayout)findViewById(R.id.check_ticket_fail_ele);
+
+        // 注册事件
+        validBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                elecLayout.setVisibility(View.GONE);
+
+            }
+        });
+
     }
 
     @Override

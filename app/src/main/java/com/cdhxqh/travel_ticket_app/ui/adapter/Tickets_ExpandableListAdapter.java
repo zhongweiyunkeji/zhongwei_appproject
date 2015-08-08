@@ -182,7 +182,7 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         public ViewHolderChild(View paramView) {
-            expand_able_list_id = (RelativeLayout) paramView.findViewById(R.id.expand_able_list_id);
+            // expand_able_list_id = (RelativeLayout) paramView.findViewById(R.id.expand_able_list_id);
         }
     }
 
