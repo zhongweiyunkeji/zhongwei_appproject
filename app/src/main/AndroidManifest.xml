@@ -11,8 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- 百度地图权限开始 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -61,7 +60,7 @@
         <!-- 百度地图key -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="wDUm9rQ1XnK4XDfptA8PlRGp" />
+            android:value="iTIOC0GE1Xe5uiPysSpmm4EZ" />
         <!-- 友盟自动更新 -->
         <meta-data
             android:name="UMENG_APPKEY"
@@ -124,9 +123,9 @@
             android:label="@string/title_activity_scenic__tickets_"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.cdhxqh.travel_ticket_app.ui.activity.Layoutonline_Payment_Activity"
+            android:name=".ui.activity.Layoutonline_Payment_Activity"
             android:label="@string/title_activity_scenic__tickets_"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.ScenicMapActivity"
             android:label="@string/title_activity_scenic_map" />
@@ -142,19 +141,19 @@
         <activity
             android:name=".ui.activity.IntroductionActivity"
             android:label="@string/title_activity_scenic_map"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.ReservationActivity"
             android:label="@string/title_activity_scenic_map"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.Book_Informtion_Activity"
             android:label="@string/title_activity_scenic_map"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.Attractions_details_Activity"
             android:label="@string/title_activity_attractions_details_"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ui.activity.Order_Tracking_Activity"
@@ -178,13 +177,16 @@
             android:name=".ui.activity.Tickets_Detail_Activity"
             android:label="@string/title_activity_tickets__detail_" >
         </activity>
-        <activity
-            android:name="com.cdhxqh.travel_ticket_app.ui.activity.SearchSecnicActivity" />
-        <activity
-            android:name="com.cdhxqh.travel_ticket_app.ui.activity.Listen_ZhongWei_Search_Activity" />
-        <activity
-            android:name="com.cdhxqh.travel_ticket_app.ui.activity.Attractions_Search_List_Activty" />
 
+        <activity
+            android:name=".ui.activity.Brand_Address_Activity"
+            android:label="@string/title_activity_brand__address_" >
+        </activity>
+
+
+        <activity android:name=".ui.activity.SearchSecnicActivity" />
+        <activity android:name=".ui.activity.Listen_ZhongWei_Search_Activity" />
+        <activity android:name=".ui.activity.Attractions_Search_List_Activty" />
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"

@@ -11,8 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-4dp"
-        android:text="沙漠博物馆"
         android:textColor="@color/write"
-        android:textSize="18dp"/>
+        android:textSize="16dp"/>
 
 </LinearLayout>

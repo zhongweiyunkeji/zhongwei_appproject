@@ -543,6 +543,9 @@ public class HttpManager {
      */
 
     public static void getEcs_Brands(final Context ctx, String url, boolean refresh,  final HttpRequestHandler<ArrayList<Ecs_brand>> handler) {
+
+       Log.i(TAG,"brand  url="+url);
+
         final Integer currentPage = (Integer)threadLocal.get();  // 从当前线程中取出当前页
         final String key = Uri.parse(url).getEncodedQuery();
         if (!refresh) {

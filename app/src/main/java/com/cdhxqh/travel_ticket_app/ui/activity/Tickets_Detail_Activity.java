@@ -53,9 +53,18 @@ public class Tickets_Detail_Activity extends BaseActivity {
     TextView titleTextView;
 
     /**
+     * 景区地址*
+     */
+    RelativeLayout addrelativeLayout;
+
+    /**地址信息**/
+    TextView addTextView;
+
+
+    /**
      * Ecs_brand*
      */
-    private static Ecs_brand ecs_brand=null;
+    private  Ecs_brand ecs_brand=null;
 
     /**
      * 可扩展的*
@@ -66,8 +75,11 @@ public class Tickets_Detail_Activity extends BaseActivity {
      * 点评
      */
     RecyclerView recyclerView;
+
     ReviewListAdapter reviewadapter;
-    RecyclerView.LayoutManager reviewmanager;
+
+
+
 
     /**
      * 景区介绍*
@@ -76,15 +88,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
     TextView tickets_detail_introduce_text_id;
 
-    /**
-     * 预定须知
-     */
-    private RelativeLayout tickets_detail_address;
 
-//    /**
-//     * 预定
-//     */
-//    private ImageView reserve_id;
 
 
     Tickets_ExpandableListAdapter tickets_expandableListAdapter;
@@ -98,7 +102,9 @@ public class Tickets_Detail_Activity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tickets_detail_);
+        if (ecs_brand == null) {
             getData();
+        }
         findViewById();
         initView();
     }
@@ -108,11 +114,8 @@ public class Tickets_Detail_Activity extends BaseActivity {
      * 获取上个界面的数据*
      */
     private void getData() {
-        Log.i(TAG, "******65");
-
-            ecs_brand = getIntent().getExtras().getParcelable("ecs_brand");
-            getgoodslist();
-
+        ecs_brand = getIntent().getExtras().getParcelable("ecs_brand");
+        getgoodslist();
     }
 
     /**
@@ -152,11 +155,14 @@ public class Tickets_Detail_Activity extends BaseActivity {
     protected void findViewById() {
         backImageView = (ImageView) findViewById(R.id.ticket_detail_back_id);
         titleTextView = (TextView) findViewById(R.id.ticket_detail_title_id);
+
+        addrelativeLayout = (RelativeLayout) findViewById(R.id.address_relativelayout_id);
+        addTextView=(TextView)findViewById(R.id.tickets_detail_address_text_id);
+
         expandableListView = (CustomExpandableListView) findViewById(R.id.expandableListView);
         spot_introduction_id = (RelativeLayout) findViewById(R.id.spot_introduction_id);
         tickets_detail_introduce_text_id = (TextView) findViewById(R.id.tickets_detail_introduce_text_id);
         recyclerView = (RecyclerView) findViewById(R.id.review_list);
-        tickets_detail_address = (RelativeLayout) findViewById(R.id.tickets_detail_address);
 
         final FullyLinearLayoutManager manager = new FullyLinearLayoutManager(Tickets_Detail_Activity.this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -177,16 +183,20 @@ public class Tickets_Detail_Activity extends BaseActivity {
     protected void initView() {
         if (ecs_brand != null) {
             titleTextView.setText(ecs_brand.brand_name);
+            addTextView.setText(ecs_brand.address);
         }
 
 
         backImageView.setOnClickListener(backImageViewOnClickListener);
 
-        spot_introduction_id.setOnClickListener(ticketsIntroduceOnClickListener);
-//        tickets_detail_address.setOnClickListener(ticketsdetailOnClickListener);
-        tickets_detail_introduce_text_id.setOnClickListener(ticketsIntroduceOnClickListener);
 
-        tickets_detail_address.setOnClickListener(ticketsdetailOnClickListener);
+
+
+        addrelativeLayout.setOnClickListener(addrelativeLayoutOnClickListener);
+
+
+        spot_introduction_id.setOnClickListener(ticketsIntroduceOnClickListener);
+        tickets_detail_introduce_text_id.setOnClickListener(ticketsIntroduceOnClickListener);
 
     }
 
@@ -237,6 +247,40 @@ public class Tickets_Detail_Activity extends BaseActivity {
         });
 
 
+        tickets_detail_introduce_text_id.setOnClickListener(ticketsIntroduceOnClickListener);
+
+        setListViewHeight(expandableListView);
+    }
+
+    /**
+     * 景区地址*
+     */
+    private View.OnClickListener addrelativeLayoutOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = getIntent();
+
+            intent.setClass(Tickets_Detail_Activity.this, Brand_Address_Activity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
+
+
+    private void setListViewHeight(ExpandableListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        int totalHeight = 0;
+        int count = listAdapter.getCount();
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 
 

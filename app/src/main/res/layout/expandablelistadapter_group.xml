@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/write"
     android:padding="@dimen/dimens_10">
 
     <ImageView
@@ -14,12 +15,11 @@
 
     <TextView
         android:id="@+id/group_text_id"
-        android:layout_toRightOf="@+id/group_image_id"
-        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/dimens_10"
-        android:textSize="20dp"
+        android:layout_toRightOf="@+id/group_image_id"
         android:text="成人票" />
 
 
@@ -27,6 +27,5 @@
         android:id="@+id/e_stus_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-         />
+        android:layout_alignParentRight="true" />
 </RelativeLayout>

@@ -3,6 +3,7 @@
     android:id="@+id/expand_able_list_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/result_image_border"
     android:orientation="horizontal">
 
 
@@ -22,9 +23,9 @@
                 android:id="@+id/ticket_detail_name_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_5"
                 android:text="沙坡头成人票"
-                android:textColor="@color/text_color_1"
-                android:textSize="@dimen/activity_vertical_margin" />
+                android:textColor="@color/text_color_1" />
 
         </LinearLayout>
 
@@ -57,8 +58,8 @@
                 android:id="@+id/ticket_detail_price_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/yellow_color_1" />
+                android:textColor="@color/yellow_color_1"
+                android:textSize="18sp" />
 
         </LinearLayout>
 

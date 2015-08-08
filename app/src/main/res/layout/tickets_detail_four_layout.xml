@@ -4,14 +4,19 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingLeft="@dimen/dimens_20"
-    android:paddingRight="@dimen/dimens_20">
+    android:paddingRight="@dimen/dimens_20"
+    android:layout_marginTop="@dimen/dimens_10">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/ic_line"></View>
 
     <RelativeLayout
         android:id="@+id/tickets_detail_address"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/dimens_10"
-        android:paddingRight="@dimen/dimens_10">
+        android:padding="@dimen/dimens_10">
 
         <ImageView
             android:id="@+id/tickets_detail_ic_address_id"
