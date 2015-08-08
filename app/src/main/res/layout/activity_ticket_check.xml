@@ -8,66 +8,59 @@
 
     <include layout="@layout/activity_title"></include>
 
-    <!--电子码验票-->
+    <!-- 选项卡区域  -->
     <LinearLayout
-        android:id="@+id/reg_layou_1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="visible">
+        android:layout_height="50dp"
+        android:layout_gravity="center|center_horizontal"
+        android:layout_margin="28dp"
+        android:background="@drawable/phone_tabs_list"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+        <TextView
+            android:id="@+id/electronic_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center|center_horizontal"
-            android:layout_margin="28dp"
-            android:background="@drawable/phone_tabs_list"
+            android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:text="电子码验票"
+            android:textColor="@color/write" />
 
-            <TextView
-                android:id="@+id/electronic_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|center_horizontal"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="电子码验票"
-                android:textColor="@color/write" />
+        <TextView
+            android:id="@+id/electronic_qrcode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="二维码验票" />
 
-            <TextView
-                android:id="@+id/electronic_qrcode"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="二维码验票" />
+    </LinearLayout>
 
-        </LinearLayout>
+    <!--  电子码验票区域  开始   -->
+    <LinearLayout
+        android:id="@+id/electronic_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical"
+        android:visibility="visible" >
 
-        <LinearLayout
-            android:id="@+id/electronic_layout"
+        <EditText
+            android:id="@+id/electronic_ticket_text"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/electronic_ticket_text"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/check_ticket_background"
-                android:hint="请输入6位电子码"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:cursorVisible="true"
-                android:inputType="phone" />
-
-        </LinearLayout>
-
+            android:layout_height="70dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/check_ticket_background"
+            android:hint="请输入6位电子码"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:cursorVisible="true"
+            android:inputType="phone" />
+        <!--  电子码验票区域  结束   -->
 
         <Button
             android:id="@+id/ticket_check_btn"
@@ -75,21 +68,18 @@
             android:layout_height="50dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="80dp"
             android:background="@drawable/button_login_phone"
-            android:text="验证"
+            android:text="验票"
             android:textColor="@color/write"
             android:textSize="20sp" />
     </LinearLayout>
 
-    <!--二维码验票-->
-    <!--<LinearLayout
-        android:id="@+id/reg_layou_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="invisible">
+    <!--电子码验票失败界面-->
+    <include layout="@layout/check_ticket_fail_ele"></include>
 
-    </LinearLayout>-->
+    <!--电子码验票成功界面-->
+    <include layout="@layout/check_ticket_success_ele"></include>
+
 
 </LinearLayout>
