@@ -55,7 +55,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
     /**
      * Ecs_brand*
      */
-    private  Ecs_brand ecs_brand=null;
+    private static Ecs_brand ecs_brand=null;
 
     /**
      * 可扩展的*
@@ -86,10 +86,6 @@ public class Tickets_Detail_Activity extends BaseActivity {
 //     */
 //    private ImageView reserve_id;
 
-    /**
-     * 测试
-     */
-    private RelativeLayout tickets_detail_address_text_id_Ba_;
 
     Tickets_ExpandableListAdapter tickets_expandableListAdapter;
 
@@ -102,9 +98,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tickets_detail_);
-        if (ecs_brand==null) {
             getData();
-        }
         findViewById();
         initView();
     }
@@ -115,8 +109,10 @@ public class Tickets_Detail_Activity extends BaseActivity {
      */
     private void getData() {
         Log.i(TAG, "******65");
-        ecs_brand = getIntent().getExtras().getParcelable("ecs_brand");
-        getgoodslist();
+
+            ecs_brand = getIntent().getExtras().getParcelable("ecs_brand");
+            getgoodslist();
+
     }
 
     /**
@@ -160,6 +156,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
         spot_introduction_id = (RelativeLayout) findViewById(R.id.spot_introduction_id);
         tickets_detail_introduce_text_id = (TextView) findViewById(R.id.tickets_detail_introduce_text_id);
         recyclerView = (RecyclerView) findViewById(R.id.review_list);
+        tickets_detail_address = (RelativeLayout) findViewById(R.id.tickets_detail_address);
 
         final FullyLinearLayoutManager manager = new FullyLinearLayoutManager(Tickets_Detail_Activity.this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -187,8 +184,9 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
         spot_introduction_id.setOnClickListener(ticketsIntroduceOnClickListener);
 //        tickets_detail_address.setOnClickListener(ticketsdetailOnClickListener);
-//        tickets_detail_address_text_id_Ba_.setOnClickListener(reserve_idOnClickListener);
         tickets_detail_introduce_text_id.setOnClickListener(ticketsIntroduceOnClickListener);
+
+        tickets_detail_address.setOnClickListener(ticketsdetailOnClickListener);
 
     }
 
@@ -269,31 +267,12 @@ public class Tickets_Detail_Activity extends BaseActivity {
         public void onClick(View v) {
             Intent intent = new Intent();
             Bundle bundle = new Bundle();
-            bundle.putString("content", "特色之二是沙山北面是浩瀚无垠的腾格里沙漠。而沙山南面则是一片郁郁葱葱的沙漠绿洲。游人既可以在这里观赏大沙漠的景色，眺望包兰铁路如一条绿龙伸向远方；又可以骑骆驼在沙漠上走走，照张相片，领略一下沙漠行旅的味道。\\n\" +\n" +
-                    "//                \"特色之三是乘古老的渡河工具羊皮筏，在滔滔黄河之中，渡向彼岸。 这种羊皮筏俗称“排子”，是将山羊割去头蹄，然后将囫囵脱下的羊皮， 扎口，用时以嘴吹气，使之鼓起，十几个“浑脱”制成的“排子”，一 个人就能扛起，非常轻便。游人坐在“排子”上，筏工用桨划筏前进， 非常有趣。\\n\" +\n" +
-                    "//                \"许多人在评价中国旅游区形象的说到，“看的多，玩的少；让人沉思的，让人心情愉快的少”，在宁夏这片被中国旅游界称之为“中国旅游最后的处女地”的土地上，当神秘的面纱被掀起时，一次“看的过瘾，玩的尽兴”现代时尚的沙漠旅游拉开了序幕。因为这里好看，2005年10月被最具权威的《中国地理杂志社》组织国家十几位院士和近百位专家组成的评审团评为“中国最美的五大沙漠”之一；因为这里好玩，在2004年10月被中国电视艺术家协会旅游电视委员会、全国电视旅游节目协作会、中央电视台评为“中国十大最好玩的地方”之一。");
+            bundle.putString("content", ecs_brand.po_notice);
             intent.putExtras(bundle);
             intent.setClass(Tickets_Detail_Activity.this, Book_Informtion_Activity.class);
             startActivity(intent);
         }
     };
-
-    private View.OnClickListener reserveOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putString("tittle_reservation", "沙坡头成人票（下单立减100元）");
-            bundle.putString("end_date_id_a", "2015-12-31 17:00:00");
-            bundle.putString("bookingNum", "20");
-            bundle.putString("unit_fare", "1");
-            bundle.putString("goodsId", "9");
-            intent.putExtras(bundle);
-            intent.setClass(Tickets_Detail_Activity.this, ReservationActivity.class);
-            startActivity(intent);
-        }
-    };
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

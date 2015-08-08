@@ -71,7 +71,7 @@ public class ReservationActivity extends BaseActivity{
     /**
      * 门票总数量
      */
-    private int bookingMax;
+    private double bookingMax;
 
     /**
      * 出行日期按钮
@@ -81,7 +81,7 @@ public class ReservationActivity extends BaseActivity{
     /**
      *门票单价
      */
-    private int unit_fare;
+    private Double unit_fare;
 
     /**
      *出行日期显示
@@ -111,7 +111,7 @@ public class ReservationActivity extends BaseActivity{
     /**
      *总金额
      */
-    private int total_fare;
+    private double total_fare;
 
     /**
      *取票人
@@ -218,8 +218,8 @@ public class ReservationActivity extends BaseActivity{
         tittle_reservation.setText(bundle.getString("tittle_reservation"));
         end_date_id_s.setText(bundle.getString("end_date_id_a"));
         num_ticket_id.setText(bundle.getString("bookingNum"));
-        bookingMax = new Integer(bundle.getString("bookingNum"));
-        unit_fare = new Integer(bundle.getString("unit_fare"));
+        bookingMax = Double.parseDouble(bundle.getString("bookingNum"));
+        unit_fare = Double.parseDouble(bundle.getString("unit_fare"));
         total_fare = unit_fare;
         goodsId = bundle.getString("goodsId");
     }
@@ -230,9 +230,7 @@ public class ReservationActivity extends BaseActivity{
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.setClass(ReservationActivity.this, Tickets_Detail_Activity.class);
-            startActivityForResult(intent, 0);
+            finish();
         }
     };
 
