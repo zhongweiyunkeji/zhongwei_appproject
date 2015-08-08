@@ -172,13 +172,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if("订单列表".equals(type)){// 订单列表页面
                 finish();
-                return;
-            }
-            Intent intent = new Intent();
-            intent.setClass(Layoutonline_Payment_Activity.this, ReservationActivity.class);
-            startActivityForResult(intent, 0);
         }
     };
 

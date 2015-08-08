@@ -1,16 +1,22 @@
 package com.cdhxqh.travel_ticket_app.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.model.GoodsList;
+import com.cdhxqh.travel_ticket_app.ui.activity.Order_Tracking_Activity;
+import com.cdhxqh.travel_ticket_app.ui.activity.ReservationActivity;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -122,7 +128,7 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(
                     R.layout.expandablelistadapter_child, null);
-            holder = new ViewHolderChild();
+            holder = new ViewHolderChild(convertView);
             holder.textView = (TextView) convertView
                     .findViewById(R.id.ticket_detail_name_id);
             holder.priceView = (TextView) convertView
@@ -131,6 +137,23 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
         } else {
             holder = (ViewHolderChild) convertView.getTag();
         }
+        final int groupPositions = groupPosition;
+        final int childPositions = childPosition;
+        holder.expand_able_list_id.setOnClickListener(new View.OnClickListener( ) {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putString("tittle_reservation", child.get(groupPositions).get(childPositions).getGoods_name());
+                bundle.putString("end_date_id_a", "2015-12-31 17:00:00");
+                bundle.putString("bookingNum", child.get(groupPositions).get(childPositions).getShop_price().toString());
+                bundle.putString("unit_fare", child.get(groupPositions).get(childPositions).getShop_price().toString());
+                bundle.putString("goodsId", child.get(groupPositions).get(childPositions).getGoods_id());
+                intent.putExtras(bundle);
+                intent.setClass(context, ReservationActivity.class);
+                context.startActivity(intent);
+            }
+        });
         holder.textView.setText(child.get(groupPosition).get(childPosition).getGoods_name());
         holder.priceView.setText("￥"+child.get(groupPosition).get(childPosition).getShop_price());
         return convertView;
@@ -152,6 +175,15 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
     class ViewHolderChild {
         TextView textView;
         TextView priceView;
+        RelativeLayout expand_able_list_id;
+
+        public ViewHolderChild() {
+
+        }
+
+        public ViewHolderChild(View paramView) {
+            expand_able_list_id = (RelativeLayout) paramView.findViewById(R.id.expand_able_list_id);
+        }
     }
 
 
