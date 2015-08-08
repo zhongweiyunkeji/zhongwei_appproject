@@ -256,6 +256,9 @@ public class OrderActivity extends BaseActivity {
                     String orderStatus = subObject.getString("orderStatus");  // 订单状态
                     Long addTime =       subObject.getLong("addTime");        // 购买时间
                     double goodsAmount = subObject.getDouble("goodsAmount");// 总额
+                    String consignee = subObject.getString("consignee"); // 出游人
+                    String mobile = subObject.getString("mobile");       // 手机号
+                    String qrcodeurl = subObject.getString("qrcodeurl")+"/"; // 二维码地址
                     String createTimt = "";
                     try {
                         createTimt = formart.format(new java.util.Date(addTime*1000));
@@ -281,9 +284,8 @@ public class OrderActivity extends BaseActivity {
                                 int goodsPrice = obj.getInt("goodsPrice");     // 购买价格
                                 String status = obj.getString("status");        // 景点状态
                                 String imgurl = obj.getString("goodsAttr");    // 景点图片
-                                String consignee = obj.getString("consignee"); // 出游人
-                                String mobile = obj.getString("mobile");       // 手机号
-                                OrderGoods goods = new OrderGoods(goodsId+"", goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status, consignee, mobile);
+                                String cardSn = ((obj.getString("card_sn")==null) ? "" : obj.getString("card_sn"))+".png";      // 二维码名称
+                                OrderGoods goods = new OrderGoods(goodsId+"", goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status, consignee, mobile, qrcodeurl+cardSn);
                                 goodList.add(goods);
                             }
                             OrderGoods other = new OrderGoods();
@@ -347,6 +349,7 @@ public class OrderActivity extends BaseActivity {
                     String orderStatus = subObject.getString("orderStatus");  // 订单状态
                     Long addTime =       subObject.getLong("addTime");        // 购买时间
                     double goodsAmount = subObject.getDouble("goodsAmount");// 总额
+                    String qrcodeurl = subObject.getString("qrcodeurl")+"/"; // 二维码地址
                     String createTimt = "";
                     try {
                         createTimt = formart.format(new java.util.Date(addTime*1000));
@@ -374,7 +377,8 @@ public class OrderActivity extends BaseActivity {
                                 String imgurl = obj.getString("goodsAttr");    // 景点图片
                                 String consignee = obj.getString("consignee"); // 出游人
                                 String mobile = obj.getString("mobile");       // 手机号
-                                OrderGoods goods = new OrderGoods(goodsId+"", goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status, consignee, mobile);
+                                String cardSn = ((obj.getString("card_sn")==null) ? "" : obj.getString("card_sn"))+".png";      // 二维码名称
+                                OrderGoods goods = new OrderGoods(goodsId+"", goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status, consignee, mobile, qrcodeurl+cardSn);
                                 goodList.add(goods);
                             }
                             OrderGoods other = new OrderGoods();
