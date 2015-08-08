@@ -300,6 +300,7 @@ public class OrderActivity extends BaseActivity {
                 if(adapter.getGroupList().size() == 0){
                     laout.setVisibility(View.VISIBLE);
                 } else {
+                    laout.setVisibility(View.GONE);
                     currntPageIn++;
                 }
             } catch (JSONException e) {
@@ -322,10 +323,6 @@ public class OrderActivity extends BaseActivity {
             progressDialog.dismiss();
         }
     };
-
-    public LinearLayout getLaout() {
-        return laout;
-    }
 
     private HttpRequestHandler<String> handlerOut = new HttpRequestHandler<String>() {
         @Override
@@ -393,6 +390,7 @@ public class OrderActivity extends BaseActivity {
                 if(adapter.getGroupList().size() == 0){
                     laout.setVisibility(View.VISIBLE);
                 } else {
+                    laout.setVisibility(View.GONE);
                     currntPageOut++;
                 }
             } catch (JSONException e) {
@@ -415,4 +413,11 @@ public class OrderActivity extends BaseActivity {
             progressDialog.dismiss();
         }
     };
+
+
+    public LinearLayout getLaout() {
+        return laout;
+    }
+
+
 }
