@@ -108,7 +108,7 @@ public class JsonUtils {
             String errcode = json.getString("errcode");
             if (errcode.equals(Constants.STOCK_SUCCESS)) {
                 return 1; //库存充足
-            } else if(errcode.equals(Constants.STOCK_FAILE)){
+            } else if (errcode.equals(Constants.STOCK_FAILE)) {
                 return 2; //库存不足
             } else {
                 return 0;
@@ -126,7 +126,6 @@ public class JsonUtils {
         try {
             JSONObject json = new JSONObject(data);
             String errcode = json.getString("errcode");
-            Log.i(TAG, "errcode=" + errcode);
             if (errcode.equals(Constants.SUCCESS_LINE)) {
                 return 1; //成功
             } else if (errcode.equals(Constants.SUCCESS_PHONE_CODE)) {
@@ -147,7 +146,6 @@ public class JsonUtils {
         try {
             JSONObject json = new JSONObject(data);
             String errcode = json.getString("errcode");
-            Log.i(TAG, "errcode=" + errcode);
             if (errcode.equals(Constants.SUCCESSE_LINE_PASS)) {
                 return 1; //成功
             } else if (errcode.equals(Constants.RUNTIME_LINE_PASS)) {
@@ -202,10 +200,8 @@ public class JsonUtils {
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.i(TAG, "eeeeee");
             return null;
         }
-        Log.i(TAG, "*****1");
         return models;
     }
 
@@ -236,9 +232,9 @@ public class JsonUtils {
                 attractions.setLongitude(jsonObject.getString("longitude"));
 
                 String file_url = jsonObject.get("file_url").toString().trim();
-
+                Log.i(TAG, "file_url=" + file_url);
                 if (!file_url.equals("")) {
-                    attractions.setFile_url(serverurl + file_url);
+                    attractions.setFile_url(file_url);
                 }
                 attractions.setImage(jsonObject.getString("image"));
 
