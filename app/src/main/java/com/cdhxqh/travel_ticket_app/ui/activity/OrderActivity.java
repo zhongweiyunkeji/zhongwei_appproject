@@ -281,7 +281,9 @@ public class OrderActivity extends BaseActivity {
                                 int goodsPrice = obj.getInt("goodsPrice");     // 购买价格
                                 String status = obj.getString("status");        // 景点状态
                                 String imgurl = obj.getString("goodsAttr");    // 景点图片
-                                OrderGoods goods = new OrderGoods(goodsId+"", goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status);
+                                String consignee = obj.getString("consignee"); // 出游人
+                                String mobile = obj.getString("mobile");       // 手机号
+                                OrderGoods goods = new OrderGoods(goodsId+"", goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status, consignee, mobile);
                                 goodList.add(goods);
                             }
                             OrderGoods other = new OrderGoods();
@@ -370,7 +372,9 @@ public class OrderActivity extends BaseActivity {
                                 int goodsPrice = obj.getInt("goodsPrice");     // 购买价格
                                 String status = obj.getString("status");        // 景点标题
                                 String imgurl = obj.getString("goodsAttr");    // 景点图片
-                                OrderGoods goods = new OrderGoods(goodsId+"", goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status);
+                                String consignee = obj.getString("consignee"); // 出游人
+                                String mobile = obj.getString("mobile");       // 手机号
+                                OrderGoods goods = new OrderGoods(goodsId+"", goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status, consignee, mobile);
                                 goodList.add(goods);
                             }
                             OrderGoods other = new OrderGoods();
