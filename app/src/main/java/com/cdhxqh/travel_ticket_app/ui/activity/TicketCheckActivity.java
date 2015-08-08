@@ -90,7 +90,7 @@ public class TicketCheckActivity extends BaseActivity {
     @Override
     protected void initView() {
         title.setText("验票");
-        backImg.setVisibility(View.GONE);
+        backImg.setVisibility(View.VISIBLE);
         searchImg.setVisibility(View.GONE); // 隐藏搜索按钮
         chkTktSuccess.setVisibility(View.GONE);
         chkTktFail.setVisibility(View.GONE);
@@ -148,6 +148,14 @@ public class TicketCheckActivity extends BaseActivity {
                 elecLayout.setVisibility(View.VISIBLE);
                 chkTktSuccess.setVisibility(View.GONE);
                 chkTktFail.setVisibility(View.GONE);
+            }
+        });
+
+        // 注册退回按钮事件
+        backImg.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
