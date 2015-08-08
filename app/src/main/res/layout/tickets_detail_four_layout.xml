@@ -13,6 +13,7 @@
         android:background="@drawable/ic_line"></View>
 
     <RelativeLayout
+        android:id="@+id/tickets_detail_address"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/dimens_10">
@@ -25,7 +26,7 @@
             android:src="@drawable/ic_need_know" />
 
         <TextView
-            android:id="@+id/tickets_detail_address_text_id"
+            android:id="@+id/tickets_detail_address_text_id_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

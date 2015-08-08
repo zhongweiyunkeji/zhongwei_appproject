@@ -107,9 +107,7 @@ public class IntroductionActivity extends BaseActivity{
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.setClass(IntroductionActivity.this, Tickets_Detail_Activity.class);
-            startActivityForResult(intent, 0);
+            finish();
         }
     };
 

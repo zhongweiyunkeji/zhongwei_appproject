@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -155,14 +156,15 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
         final OrderGoods msg = (itemList.get(model.getOrderSn())).get(childPosition);
         if(childPosition < (itemList.get(model.getOrderSn())).size()-1){
             ItemViewHolder viewHolder = null;
-            if (convertView == null) {
+            //if (convertView == null) {
                 convertView = inflater.inflate(R.layout.fragment_order_three_in_item, null);
                 viewHolder = new ItemViewHolder(convertView);
-
-                convertView.setTag(viewHolder);
-            } else {
-                viewHolder = (ItemViewHolder)convertView.getTag();
-            }
+            //    convertView.setTag(viewHolder);
+            //    Log.e("TAG", "groupPosition=" + groupPosition + ", childPosition=" + childPosition + ", " + convertView.getTag().getClass().getName()+", size="+itemList.get(model.getOrderSn()).size());
+            //} else {
+            //    Log.e("TAG", "groupPosition=" + groupPosition + ", childPosition=" + childPosition + ", " + convertView.getTag().getClass().getName()+", size="+itemList.get(model.getOrderSn()).size());
+            //    viewHolder = (ItemViewHolder)convertView.getTag();
+           // }
 
             ImageLoader.getInstance().displayImage(msg.getImgurl(), viewHolder.order_three_in_item_img);  // 设置图片
             viewHolder.order_three_in_item_title.setText(msg.getGoodsName());
@@ -183,13 +185,13 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
             return convertView;
         } else {
             FooterViewHolder viewHolder = null;
-            if (convertView == null) {
+            //if (convertView == null) {
                 convertView = LayoutInflater.from(context).inflate(R.layout.fragment_order_three_in_item_footer, null);
                 viewHolder = new FooterViewHolder(convertView);
-                convertView.setTag(viewHolder);
-            } else {
-                viewHolder = (FooterViewHolder)convertView.getTag();
-            }
+            //    convertView.setTag(viewHolder);
+            //} else {
+            //    viewHolder = (FooterViewHolder)convertView.getTag();
+            //}
 
            String status =  model.getStatus();
             if("订单未确认".equals(status)){

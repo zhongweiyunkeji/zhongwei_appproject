@@ -9,6 +9,15 @@ public class GoodsList {
     private String shop_price;//价格
     private String catName;//类型
     private String goods_id;//id
+    private String goods_number;//门票数
+
+    public String getGoods_number() {
+        return goods_number;
+    }
+
+    public void setGoods_number(String goods_number) {
+        this.goods_number = goods_number;
+    }
 
     public String getGoods_name() {
         return goods_name;
