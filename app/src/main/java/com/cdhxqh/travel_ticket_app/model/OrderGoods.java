@@ -15,7 +15,7 @@ public class OrderGoods implements Parcelable {
     private int goodsNumber;   // 电子票总数量
     private double goodsPrice; // 电子票单价
     private String imgurl;      // 图片
-    private String status;
+    private String status;      // 状态
 
     public OrderGoods(){
 
