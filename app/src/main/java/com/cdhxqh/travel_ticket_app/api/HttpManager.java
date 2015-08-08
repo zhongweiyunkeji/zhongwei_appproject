@@ -759,9 +759,9 @@ public class HttpManager {
         }
         /*PersistentCookieStore myCookieStore = new PersistentCookieStore(cxt);
         client.setCookieStore(myCookieStore);*/
-        /*client.setConnectTimeout(20000);
+        //client.setConnectTimeout(20000);
         client.setResponseTimeout(20000);
-        client.setTimeout(20000);*/
+        client.setTimeout(20000);
         client.post(url, params, new TextHttpResponseHandler() {
 
 
