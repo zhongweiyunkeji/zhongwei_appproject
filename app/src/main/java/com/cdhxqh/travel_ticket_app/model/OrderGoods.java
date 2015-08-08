@@ -16,12 +16,15 @@ public class OrderGoods implements Parcelable {
     private double goodsPrice; // 电子票单价
     private String imgurl;      // 图片
     private String status;      // 状态
+    private String consignee;  // 出游人
+    private String mobile;      // 手机号
+    private Double amount;      // 总金额
 
     public OrderGoods(){
 
     }
 
-    public OrderGoods( String goodsId, String goodsName, int goodsNumber, double goodsPrice, String orderSn, String imgurl, String status) {
+    public OrderGoods( String goodsId, String goodsName, int goodsNumber, double goodsPrice, String orderSn, String imgurl, String status, String consignee, String mobile) {
         this.goodsId = goodsId;
         this.goodsName = goodsName;
         this.goodsNumber = goodsNumber;
@@ -29,6 +32,8 @@ public class OrderGoods implements Parcelable {
         this.orderSn = orderSn;
         this.imgurl = imgurl;
         this.status = status;
+        this.consignee = consignee;
+        this.mobile = mobile;
     }
 
     public String getGoodsName() {
@@ -106,6 +111,18 @@ public class OrderGoods implements Parcelable {
         return 0;
     }
 
+    public String getConsignee() {
+        return consignee;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public Double getAmount() {
+        return goodsPrice*goodsNumber;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(goodsId);
@@ -115,6 +132,8 @@ public class OrderGoods implements Parcelable {
         dest.writeString(status);
         dest.writeInt(goodsNumber);
         dest.writeDouble(goodsPrice);
+        dest.writeString(consignee);
+        dest.writeString(mobile);
     }
 
 }
