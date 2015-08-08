@@ -19,12 +19,13 @@ public class OrderGoods implements Parcelable {
     private String consignee;  // 出游人
     private String mobile;      // 手机号
     private Double amount;      // 总金额
+    private String qecode;      // 服务器二维码url地址
 
     public OrderGoods(){
 
     }
 
-    public OrderGoods( String goodsId, String goodsName, int goodsNumber, double goodsPrice, String orderSn, String imgurl, String status, String consignee, String mobile) {
+    public OrderGoods( String goodsId, String goodsName, int goodsNumber, double goodsPrice, String orderSn, String imgurl, String status, String consignee, String mobile, String qecode) {
         this.goodsId = goodsId;
         this.goodsName = goodsName;
         this.goodsNumber = goodsNumber;
@@ -34,6 +35,7 @@ public class OrderGoods implements Parcelable {
         this.status = status;
         this.consignee = consignee;
         this.mobile = mobile;
+        this.qecode = qecode;
     }
 
     public String getGoodsName() {
@@ -121,6 +123,26 @@ public class OrderGoods implements Parcelable {
 
     public Double getAmount() {
         return goodsPrice*goodsNumber;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public void setConsignee(String consignee) {
+        this.consignee = consignee;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getQecode() {
+        return qecode;
+    }
+
+    public void setQecode(String qecode) {
+        this.qecode = qecode;
     }
 
     @Override
