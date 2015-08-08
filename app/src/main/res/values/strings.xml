@@ -109,9 +109,10 @@
     <string name="spot_discount">沙坡头成人票（下单立减5元）</string>
     <string name="booking_expires">到期时间</string>
 
-
-    <!--景区门票详情-->
+    <!-- 景区门票详情 -->
     <string name="tickets_info_text">景区简介</string>
+    <string name="tickets_situation_text">景区实况</string>
+
     <string name="end_date_time_text">到期时间:</string>
     <string name="need_know_text">预定需知</string>
 
@@ -124,5 +125,8 @@
     <string name="ticket_null">请输入购票数</string>
 
 
+    <string name="title_activity_brand__address_">Brand_Address_Activity</string>
+    <string name="not_address_info_text">暂无地址信息</string>
+    <string name="brand_address_text">景区地址</string>
 
 </resources>

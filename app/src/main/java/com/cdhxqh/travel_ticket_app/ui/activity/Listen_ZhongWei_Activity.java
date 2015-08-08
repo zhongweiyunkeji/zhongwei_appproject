@@ -62,7 +62,7 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
 
 
     /**显示条数**/
-    private static final int showCount=3;
+    private static final int showCount=10;
     /**当前页数**/
     private static int currentPage=1;
 
@@ -79,7 +79,6 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
         initView();
 
         currentPage = 1;
-        Log.e("111", "1111");
 
         requestEcsBrands(true);
 

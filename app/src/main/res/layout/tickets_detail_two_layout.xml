@@ -7,6 +7,7 @@
     android:paddingRight="@dimen/dimens_20">
 
     <RelativeLayout
+        android:id="@+id/address_relativelayout_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dimens_10">
@@ -24,8 +25,10 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dimens_10"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:layout_toRightOf="@+id/tickets_detail_ic_address_id"
-            android:text="沙坡头风景区" />
+            android:hint="@string/not_address_info_text" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -52,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+
             android:src="@drawable/ic_ticket_info" />
 
         <TextView
@@ -72,6 +76,42 @@
             android:src="@drawable/ic_more" />
     </RelativeLayout>
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/ic_line"></View>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimens_10">
+
+        <ImageView
+            android:id="@+id/scenic_spot_image_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_situation" />
+
+        <TextView
+            android:id="@+id/scenic_spot_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/scenic_spot_image_id"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:text="@string/tickets_situation_text" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimens_5"
+            android:src="@drawable/ic_more" />
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
