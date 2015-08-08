@@ -281,7 +281,7 @@ public class OrderActivity extends BaseActivity {
                                 int goodsId = obj.getInt("goodsId");    // id
                                 String goodsName = obj.getString("goodsName");  // 景点标题
                                 int goodsNumber = obj.getInt("goodsNumber");   // 总数量
-                                int goodsPrice = obj.getInt("goodsPrice");     // 购买价格
+                                double goodsPrice = obj.getDouble("goodsPrice");     // 购买价格
                                 String status = obj.getString("status");        // 景点状态
                                 String imgurl = obj.getString("goodsAttr");    // 景点图片
                                 String cardSn = ((obj.getString("card_sn")==null) ? "" : obj.getString("card_sn"))+".png";      // 二维码名称
