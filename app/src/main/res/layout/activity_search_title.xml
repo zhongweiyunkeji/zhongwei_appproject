@@ -12,8 +12,9 @@
 
         <ImageView
             android:id="@+id/back_imageview_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="@dimen/dimens_5"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:src="@drawable/title_back_btn"
