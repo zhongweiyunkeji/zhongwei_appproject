@@ -139,7 +139,7 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         final int groupPositions = groupPosition;
         final int childPositions = childPosition;
-        holder.expand_able_list_id.setOnClickListener(new View.OnClickListener( ) {
+        convertView.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
