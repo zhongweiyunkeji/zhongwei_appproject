@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
+import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.google.zxing.WriterException;
 import com.cdhxqh.travel_ticket_app.zxing.encoding.EncodingHandler;
@@ -170,8 +171,8 @@ public class TicketCheckActivity extends BaseActivity {
             // 调用接口验票
             Map<String, String> mapparams = new HashMap<String, String>(0);
             mapparams.put("ticket_sn", result);   // 电子票号
-            mapparams.put("brand_id", "3");    // 验票终端所属景区ID
-            mapparams.put("check_admin", "admin"); // 验票终端登录用户名称
+            mapparams.put("brand_id", HttpManager.brand_id);    // 验票终端所属景区ID
+            mapparams.put("check_admin", HttpManager.check_admin); // 验票终端登录用户名称
 
             checkCode(mapparams);
         }
@@ -184,7 +185,7 @@ public class TicketCheckActivity extends BaseActivity {
     private void checkCode(Map<String,String> mapparams){
         createProgressDialog();
 
-        HttpManager.requestOnceWithURLString(TicketCheckActivity.this, "http://192.168.1.99:8080/qdm/checkticket/check", mapparams, handler );
+        HttpManager.requestOnceWithURLString(TicketCheckActivity.this, Constants.CHECK_TICKET_URL, mapparams, handler );
     }
 
     private HttpRequestHandler handler = new HttpRequestHandler<String>() {
