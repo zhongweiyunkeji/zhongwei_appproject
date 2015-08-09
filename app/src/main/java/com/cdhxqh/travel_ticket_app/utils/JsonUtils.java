@@ -217,6 +217,8 @@ public class JsonUtils {
         try {
             JSONObject json = new JSONObject(result);
 
+
+
             //服务器url
             String serverurl = json.getString("serverurl");
 
@@ -226,15 +228,20 @@ public class JsonUtils {
             for (int i = 0; i < attractionslist.length(); i++) {
                 JSONObject jsonObject = (JSONObject) attractionslist.get(i);
                 Attractions attractions = new Attractions();
-                attractions.setArticle_id(jsonObject.getInt("article_id"));
+                attractions.setArticle_id(jsonObject.getInt("articleId"));
+
                 attractions.setTitle(jsonObject.getString("title"));
+
                 attractions.setContent(jsonObject.getString("content"));
+
+
                 attractions.setDescription(jsonObject.getString("description"));
+
                 attractions.setLatitude(jsonObject.getString("latitude"));
+
                 attractions.setLongitude(jsonObject.getString("longitude"));
 
-                String file_url = jsonObject.get("file_url").toString().trim();
-                Log.i(TAG, "file_url=" + file_url);
+                String file_url = jsonObject.get("fileUrl").toString().trim();
                 if (!file_url.equals("")) {
                     attractions.setFile_url(file_url);
                 }

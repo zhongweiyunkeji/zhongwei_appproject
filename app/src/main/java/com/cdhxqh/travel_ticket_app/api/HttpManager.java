@@ -110,15 +110,10 @@ public class HttpManager {
         String urlString;
 
         if (title.equals("")) {
-            urlString = Constants.ATTRACTIONS_URL1 + "?" + "brandId=" + brandId ;
+            urlString = Constants.ATTRACTIONS_URL + "?" + "brandId=" + brandId ;
         } else {
-            urlString = Constants.ATTRACTIONS_URL1 + "?" + "title=" + title + "brandId=" + brandId;
+            urlString = Constants.ATTRACTIONS_URL + "?" + "title=" + title + "brandId=" + brandId;
         }
-//        if (title.equals("")) {
-//            urlString = Constants.ATTRACTIONS_URL + "?" + "brandId=" + brandId + "&" + "showCount=" + showCount + "&" + "currentPage=" + currentPage;
-//        } else {
-//            urlString = Constants.ATTRACTIONS_URL + "?" + "title=" + title + "brandId=" + brandId + "&" + "showCount=" + showCount + "&" + "currentPage=" + currentPage;
-//        }
         getAttractions(cxt, urlString, refresh, handler);
     }
 
@@ -361,12 +356,10 @@ public class HttpManager {
         requestOnceWithURLString(cxt, Constants.TICKET_URL, mapparams, new HttpRequestHandler<String>() {
             @Override
             public void onSuccess(String data, int totalPages, int currentPage) {
-                Log.i(TAG, "data=" + data);
             }
 
             @Override
             public void onSuccess(String data) {
-                Log.i(TAG, "data=" + data);
                 //解析返回的Json数据
                 JSONObject jsonObject = null;
                 try {
@@ -768,13 +761,11 @@ public class HttpManager {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
-                Log.i(TAG, "fstatusCode=" + statusCode);
                 SafeHandler.onFailure(handler, ErrorType.errorMessage(ctx, ErrorType.ErrorGetNotificationFailure));
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
-                Log.i(TAG, "SstatusCode=" + statusCode + ",responseBody=" + responseBody);
 
                 /**解析实体类**/
                 try {
