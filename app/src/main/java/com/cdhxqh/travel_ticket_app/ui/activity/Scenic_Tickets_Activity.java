@@ -56,7 +56,7 @@ public class Scenic_Tickets_Activity extends BaseActivity {
     SearchScenicAdapter brandListAdapter;
 
     /**显示条数**/
-    private static final int showCount=3;
+    private static final int showCount=10;
     /**当前页数**/
     private static int currentPage=1;
 
