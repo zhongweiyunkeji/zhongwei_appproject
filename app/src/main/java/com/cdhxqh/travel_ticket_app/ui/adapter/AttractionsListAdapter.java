@@ -130,7 +130,7 @@ public class AttractionsListAdapter extends RecyclerView.Adapter<AttractionsList
                     }
                 }
                 if (exist) continue;
-                data.add(obj);
+                data.add(0, obj);
             }
         }
         attractionses = data;
