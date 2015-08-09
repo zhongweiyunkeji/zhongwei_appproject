@@ -53,7 +53,7 @@ public class Attractions_Search_List_Activty extends BaseActivity {
     String brandName; // 景区名称
     int brandId;     // 景点ID
 
-    private static final int showCount = 1;  // 显示条数
+    private static final int showCount = 10;  // 显示条数
     private static int currentPage = 1;   // 当前页
 
     private ProgressDialog progressDialog;   // 进度条

@@ -42,7 +42,7 @@ public class SearchSecnicActivity extends BaseActivity  {
     SearchScenicAdapter adapter;     // RecyclerView适配器
 
     int currentPage = 1;            // 当前页
-    int showCount = 1;              // 每页显示
+    int showCount = 10;              // 每页显示
 
     RecyclerView recyclerView;      // ListView替代控件
     SwipeRefreshLayout swipeRefreshLayout;

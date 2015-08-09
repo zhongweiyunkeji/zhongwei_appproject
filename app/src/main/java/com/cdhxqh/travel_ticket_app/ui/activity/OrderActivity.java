@@ -70,12 +70,12 @@ public class OrderActivity extends BaseActivity {
 
     // 3个月内
     int currntPageIn = 1;
-    final static int showCountIn = 1;
+    final static int showCountIn = 10;
     SwipeRefreshLayout swipeRefreshLayoutIn;
 
     // 3个月钱
     int currntPageOut = 1;
-    final static int showCountOut = 1;
+    final static int showCountOut = 10;
 
     LinearLayout laout;  // 提示信息
 
