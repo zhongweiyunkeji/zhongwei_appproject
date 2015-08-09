@@ -2,6 +2,7 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -140,7 +141,8 @@ public class OrderActivity extends BaseActivity {
                 orderThreeInFragment = new OrderThreeInFragment();
 
             }
-
+            inttextView.setTextColor(Color.rgb(255, 255, 255));  // 设置字体为白色
+            outtextView.setTextColor(Color.rgb(0, 0, 0));        // 设置字体为绿色
             FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();  //
             localFragmentTransaction.replace(R.id.container, orderThreeInFragment, "three_in");
             localFragmentTransaction.commit();
@@ -159,6 +161,8 @@ public class OrderActivity extends BaseActivity {
                 orderThreeOutFragment = new OrderThreeOutFragment();
             }
 
+            outtextView.setTextColor(Color.rgb(255, 255, 255));  // 设置字体为白色
+            inttextView.setTextColor(Color.rgb(0, 0, 0));        // 设置字体为绿色
             FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();
             localFragmentTransaction.replace(R.id.container, orderThreeOutFragment, "three_out");
             localFragmentTransaction.commit();
