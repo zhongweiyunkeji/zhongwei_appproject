@@ -16,6 +16,7 @@ import com.cdhxqh.travel_ticket_app.ui.activity.ScenicMapActivity;
 import com.cdhxqh.travel_ticket_app.ui.activity.Tickets_Detail_Activity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -26,7 +27,7 @@ import android.widget.ImageView;
  */
 public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapter.ViewHolder>  {
     public static final String TAG = "SearchScenicAdapter";
-    private List<Ecs_brand> list = new ArrayList(0);
+    private ArrayList<Ecs_brand> list = new ArrayList(0);
     Context mContext;
     int mark;
 
@@ -39,7 +40,7 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
         return this.list.size();
     }
 
-    public List<Ecs_brand> getList() {
+    public ArrayList<Ecs_brand> getList() {
         return this.list;
     }
 
@@ -104,7 +105,7 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
         // return new SearchScenicAdapter1.ViewHolder(LayoutInflater.from(this.mContext).inflate(R.layout.activity_scenic_search_item, paramViewGroup, false));
     }
 
-    public void update(List<Ecs_brand> ecs_brands) {
+    public void update(ArrayList<Ecs_brand> ecs_brands) {
         for (int i = 0; i < ecs_brands.size(); i++) {
             Ecs_brand obj = ecs_brands.get(i);
             boolean exist = false;
@@ -115,7 +116,7 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
                 }
             }
             if (exist) continue;
-            list.add(obj);
+            list.add(0, obj);
         }
         ecs_brands = list;
 
