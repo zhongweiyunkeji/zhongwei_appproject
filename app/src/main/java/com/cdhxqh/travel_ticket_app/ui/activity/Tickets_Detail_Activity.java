@@ -89,6 +89,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
     TextView tickets_detail_introduce_text_id;
 
+    private RelativeLayout tickets_detail_address;
 
 
 
@@ -175,6 +176,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
         reviewadapter = new ReviewListAdapter(this);
         recyclerView.setAdapter(reviewadapter);
 
+        tickets_detail_address = (RelativeLayout) findViewById(R.id.tickets_detail_address);
 
         addData();
     }
@@ -198,6 +200,8 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
         spot_introduction_id.setOnClickListener(ticketsIntroduceOnClickListener);
         tickets_detail_introduce_text_id.setOnClickListener(ticketsIntroduceOnClickListener);
+
+        tickets_detail_address.setOnClickListener(ticketsdetailOnClickListener);
 
     }
 
