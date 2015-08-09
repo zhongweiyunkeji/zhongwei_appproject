@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -43,7 +44,7 @@ public class TicketCheckActivity extends BaseActivity {
     TextView checkCode; // 电子票输入框
     Button validBtn;  // 验证按钮
     Button checkBtn;  // 验证电子码按钮
-    Button rtnButton; // 返回按钮
+    Button rtnButton; // ;返回按钮
     LinearLayout elecLayout;  // 电子验票显示区域
     TextView title;     // 抬头
     TextView elecTextSelcect; // 电子票选项卡
@@ -95,6 +96,8 @@ public class TicketCheckActivity extends BaseActivity {
         searchImg.setVisibility(View.GONE); // 隐藏搜索按钮
         chkTktSuccess.setVisibility(View.GONE);
         chkTktFail.setVisibility(View.GONE);
+
+        backImg.setOnTouchListener(backImageViewOnTouchListener);
 
         elecTextSelcect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,6 +164,18 @@ public class TicketCheckActivity extends BaseActivity {
         });
 
     }
+
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

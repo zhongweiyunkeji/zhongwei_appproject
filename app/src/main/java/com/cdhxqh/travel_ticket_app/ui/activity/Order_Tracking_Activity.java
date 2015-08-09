@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -131,6 +132,8 @@ public class Order_Tracking_Activity extends BaseActivity{
         //返回至登录界面事件
         backImageView.setOnClickListener(backImageViewOnClickListener);
 
+        backImageView.setOnTouchListener(backImageViewOnTouchListener);
+
         //跳转至购票界面
         ticket_buy_id.setOnClickListener(ticketOnClickListener);
 
@@ -152,6 +155,18 @@ public class Order_Tracking_Activity extends BaseActivity{
 
         order_tracking.setAdapter(ordreTrackingAdapter);
     }
+
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
 
     private void getCode () {
         //根据字符串生成二维码图片并显示在界面上，第二个参数为图片的大小（350*350）

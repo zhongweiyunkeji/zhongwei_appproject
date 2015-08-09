@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
@@ -88,6 +89,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
     TextView tickets_detail_introduce_text_id;
 
+    private RelativeLayout tickets_detail_address;
 
 
 
@@ -174,6 +176,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
         reviewadapter = new ReviewListAdapter(this);
         recyclerView.setAdapter(reviewadapter);
 
+        tickets_detail_address = (RelativeLayout) findViewById(R.id.tickets_detail_address);
 
         addData();
     }
@@ -189,7 +192,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
         backImageView.setOnClickListener(backImageViewOnClickListener);
 
-
+        backImageView.setOnTouchListener(backImageViewOnTouchListener);
 
 
         addrelativeLayout.setOnClickListener(addrelativeLayoutOnClickListener);
@@ -198,7 +201,21 @@ public class Tickets_Detail_Activity extends BaseActivity {
         spot_introduction_id.setOnClickListener(ticketsIntroduceOnClickListener);
         tickets_detail_introduce_text_id.setOnClickListener(ticketsIntroduceOnClickListener);
 
+        tickets_detail_address.setOnClickListener(ticketsdetailOnClickListener);
+
     }
+
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
 
     /**
      * 初始化expandableView*

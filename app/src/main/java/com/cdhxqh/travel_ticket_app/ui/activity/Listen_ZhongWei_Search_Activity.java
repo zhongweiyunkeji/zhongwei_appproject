@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -139,6 +140,8 @@ public class Listen_ZhongWei_Search_Activity extends BaseActivity {
         recyclerView.setVisibility(View.GONE);
         clearImg.setVisibility(View.GONE);
 
+        backupImg.setOnTouchListener(backImageViewOnTouchListener);
+
         searchText.setHint("请输入搜索内容");
         searchText.setHintTextColor(getResources().getColor(R.color.white));  // 设置提示颜色为白色
         searchText.setTextSize(15);
@@ -204,6 +207,18 @@ public class Listen_ZhongWei_Search_Activity extends BaseActivity {
             }
         });
     }
+
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
 
     public void loadData(Map<String, String> params) {
         if (NetWorkHelper.isNetAvailable(this)) {
