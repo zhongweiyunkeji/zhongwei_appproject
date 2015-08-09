@@ -7,6 +7,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -128,8 +129,20 @@ public class Attractions_details_Activity extends BaseActivity {
             contentText.setText(Html.fromHtml(attractions.content));
         }
 
+        backImage.setOnTouchListener(backImageViewOnTouchListener);
     }
 
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
 
     private View.OnClickListener playImageOnClickListener = new View.OnClickListener() {
         @Override

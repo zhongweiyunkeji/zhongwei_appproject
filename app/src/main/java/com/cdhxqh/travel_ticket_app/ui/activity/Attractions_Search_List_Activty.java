@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -98,7 +99,20 @@ public class Attractions_Search_List_Activty extends BaseActivity {
         hintLayout = (LinearLayout)findViewById(R.id.scenic_search_result_empty);
         recyclerView = (RecyclerView)findViewById(R.id.scenic_ticket_list);
         swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.scenic_refresh_container);
+        backImg.setOnTouchListener(backImageViewOnTouchListener);
     }
+
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void initView() {

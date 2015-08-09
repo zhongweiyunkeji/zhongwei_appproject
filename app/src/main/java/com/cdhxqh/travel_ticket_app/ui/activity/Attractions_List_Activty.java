@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -145,6 +146,8 @@ public class Attractions_List_Activty extends BaseActivity {
         backImage.setOnClickListener(backImageOnClickListener);
         backImage.setVisibility(View.VISIBLE);
 
+        backImage.setOnTouchListener(backImageViewOnTouchListener);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);
@@ -180,6 +183,17 @@ public class Attractions_List_Activty extends BaseActivity {
 
     }
 
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
     /**
      * 定位相关*
      */

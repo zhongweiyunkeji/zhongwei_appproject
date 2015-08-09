@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -153,10 +154,23 @@ public class ScenicMapActivity extends BaseActivity {
         backImageView.setOnClickListener(backImageOnClickListener);
         menuTextView.setOnClickListener(menuTextViewOnClickListener);
 
+        backImageView.setOnTouchListener(backImageViewOnTouchListener);
+
         initBaiDuMap();
 
     }
 
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
 
     /**
      * 百度地图*
