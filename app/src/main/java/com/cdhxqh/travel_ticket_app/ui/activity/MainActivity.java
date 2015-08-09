@@ -33,7 +33,7 @@ public class MainActivity extends TabActivity {
      */
     public static final String TAB_CLASS = "CLASS_ACTIVITY";
     /**
-     * 订单*
+     * 订单*ORDER_ACTIVITY
      */
     public static final String TAB_ORDER = "ORDER_ACTIVITY";
     /**
@@ -83,7 +83,14 @@ public class MainActivity extends TabActivity {
         mTabHost.addTab(mTabHost.newTabSpec(TAB_USER).setIndicator(TAB_USER)
                 .setContent(i_user));
 
+        Bundle bundle = new Bundle();
+
         mTabHost.setCurrentTabByTag(TAB_HOME);
+        if(this.getIntent().getExtras() != null) {
+            bundle = this.getIntent().getExtras();
+            String activity =   bundle.getString("activity");
+            mTabHost.setCurrentTabByTag(activity);
+        }
 
         mTabButtonGroup
                 .setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

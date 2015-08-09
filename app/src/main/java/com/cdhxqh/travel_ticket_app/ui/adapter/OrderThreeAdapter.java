@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
@@ -25,6 +26,7 @@ import com.cdhxqh.travel_ticket_app.model.OrderGoods;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
 import com.cdhxqh.travel_ticket_app.ui.activity.Layoutonline_Payment_Activity;
 import com.cdhxqh.travel_ticket_app.ui.activity.OrderActivity;
+import com.cdhxqh.travel_ticket_app.ui.activity.Order_Tracking_Activity;
 import com.cdhxqh.travel_ticket_app.ui.activity.Tickets_Detail_Activity;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -172,15 +174,27 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
             viewHolder.order_three_in_item_orderqty.setText(msg.getGoodsNumber()+"");
             viewHolder.order_three_in_item_ordertotal.setText("￥"+(msg.getGoodsNumber()*msg.getGoodsPrice())+"");
             viewHolder.order_three_in_item_status.setText(msg.getStatus());
-            // viewHolder.expand_text_04.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);  // 设置中划线并加清晰
 
-            // ListView的Item项的监听事件(需要排除最后的Item项)
-            convertView.setOnClickListener(new View.OnClickListener() {
+            //订单详情
+            viewHolder.order_id.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("orderId", msg.getOrderSn()); // 订单号
+                    bundle.putString("goodsNumber",String.valueOf(msg.getGoodsNumber())); // 数量
+                    bundle.putString("orderAmount", String.valueOf(msg.getGoodsNumber()*msg.getGoodsPrice())); //订单总额
+                    bundle.putString("goodsName", String.valueOf(msg.getGoodsName()));//标题
+                    bundle.putString("consignee", String.valueOf(msg.getConsignee()));//出游人
+                    bundle.putString("mobile", String.valueOf(msg.getMobile()));//手机号
+                    bundle.putString("Qecode", String.valueOf(msg.getQecode()));//二维码
+                    intent.putExtras(bundle);
+                    intent.setClass(context, Order_Tracking_Activity.class);
+                    context.startActivity(intent);
                 }
             });
+
+            // viewHolder.expand_text_04.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);  // 设置中划线并加清晰
 
             return convertView;
         } else {
@@ -405,6 +419,7 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
     // 子项的ViewHolder
     static class ItemViewHolder {
         //文字*
+        RelativeLayout order_id;
         ImageView order_three_in_item_img;          // 景点图片
         TextView order_three_in_item_title;        // 景点名称
         TextView order_three_in_item_ordertime;   // 够票时间
@@ -419,6 +434,7 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
             order_three_in_item_orderqty    = (TextView)convertView.findViewById(R.id.order_three_in_item_orderqty );
             order_three_in_item_ordertotal  = (TextView)convertView.findViewById(R.id.order_three_in_item_ordertotal );
             order_three_in_item_status       = (TextView)convertView.findViewById(R.id.order_three_in_item_status );
+            order_id = (RelativeLayout) convertView.findViewById(R.id.order_id);
         }
 
     }

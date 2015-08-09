@@ -51,7 +51,7 @@
             android:drawableRight="@drawable/login_icon_lock"
             android:textCursorDrawable="@drawable/color_cursor"
             android:singleLine="true"
-            android:inputType="numberPassword"
+            android:inputType="textPassword"
             android:hint="@string/please_pass_word_text" />
     </LinearLayout>
 
@@ -63,6 +63,17 @@
         android:layout_marginRight="@dimen/dimens_30"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/TextViewPassWord"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/forget_pass_word"
+            android:textColor="@color/list_item_read"
+            android:textSize="15sp" />
+
         <Button
             android:id="@+id/login_btn_id"
             android:layout_width="match_parent"
@@ -72,17 +83,17 @@
             android:textColor="@color/white"
             android:textSize="20dp" />
 
-        <TextView
-            android:id="@+id/TextViewPassWord"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/forget_pass_word"
-            android:textColor="@color/list_item_read"
-            android:textSize="15sp" />
 
+            <com.cdhxqh.travel_ticket_app.app.SwitchButton
+                android:id="@+id/wiperSwitch1"
+                android:layout_gravity="center"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                />
+
+        <CheckedTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 
@@ -91,7 +102,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/login_footbg_f"
         android:gravity="center">
 
