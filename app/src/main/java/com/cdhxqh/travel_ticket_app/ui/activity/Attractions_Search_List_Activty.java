@@ -7,6 +7,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -106,13 +108,41 @@ public class Attractions_Search_List_Activty extends BaseActivity {
         recyclerView.setLayoutManager(linearLayoutManager);   // 设置管理器
         recyclerView.setItemAnimator(new DefaultItemAnimator());  // 添加动画
         recyclerView.addItemDecoration(new ItemDivider(this, 1));// 添加分隔线
-        hintLayout.setVisibility(View.VISIBLE);
+        hintLayout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
+        closeImg.setVisibility(View.GONE);
+
+        searchText.setHint("请输入搜索内容");
+        searchText.setHintTextColor(getResources().getColor(R.color.white));  // 设置提示颜色为白色
+        searchText.setTextSize(15);
 
         if(attractionsListAdapter == null){
             attractionsListAdapter = new AttractionsListAdapter(this);
             recyclerView.setAdapter(attractionsListAdapter);
         }
+
+        // 注册清除按钮内容变更事件
+        this.searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if (0 != length) {
+                    closeImg.setVisibility(View.VISIBLE);
+                } else {
+                    closeImg.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+        });
 
         searchText.setDrawableLeftListener(new XEditText.DrawableLeftListener() {  // 注册左侧图片搜索事件
             @Override
@@ -146,6 +176,9 @@ public class Attractions_Search_List_Activty extends BaseActivity {
     public void refreshData() {
         swipeRefreshLayout.setRefreshing(false);     // 完成刷新,隐藏搜索刷新旋转按钮
         String searchText = this.searchText.getText().toString();
+        if("".equals(searchText)){
+            return;
+        }
         preText = curText;         // 保存上一次搜索的内容
         curText = searchText;       // 保存当前搜索框的内容
         if (!curText.equals(preText)) { // 更新搜索的当前页

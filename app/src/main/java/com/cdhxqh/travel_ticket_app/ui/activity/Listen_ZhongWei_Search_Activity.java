@@ -6,6 +6,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -132,8 +135,36 @@ public class Listen_ZhongWei_Search_Activity extends BaseActivity {
         recyclerView.setLayoutManager(localLinearLayoutManager);   // 设置管理器
         recyclerView.setItemAnimator(new DefaultItemAnimator());  // 添加动画
         recyclerView.addItemDecoration(new ItemDivider(this, 1));// 添加分隔线
-        hintLaout.setVisibility(View.VISIBLE);
+        hintLaout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
+        clearImg.setVisibility(View.GONE);
+
+        searchText.setHint("请输入搜索内容");
+        searchText.setHintTextColor(getResources().getColor(R.color.white));  // 设置提示颜色为白色
+        searchText.setTextSize(15);
+
+        // 注册清除按钮内容变更事件
+        this.searchText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int length = editable.length();
+                if (0 != length) {
+                    clearImg.setVisibility(View.VISIBLE);
+                } else {
+                    clearImg.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+        });
 
         // RecyclerView注册适配器
         if (adapter == null) {
@@ -187,6 +218,9 @@ public class Listen_ZhongWei_Search_Activity extends BaseActivity {
     public void refreshData() {
         swipeRefreshLayout.setRefreshing(false);     // 完成刷新,隐藏搜索刷新旋转按钮
         String searchText = this.searchText.getText().toString();
+        if("".equals(searchText)){
+            return;
+        }
         preText = curText;         // 保存上一次搜索的内容
         curText = searchText;       // 保存当前搜索框的内容
         if (!curText.equals(preText)) { // 更新搜索的当前页
