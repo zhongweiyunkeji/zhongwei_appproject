@@ -30,11 +30,11 @@ public class Constants {
 
 	/**用户注册验证码 **/
 
-	public static final String REG_CODE_URL = BASE_URL+"ecsusers/doCheck";
+	public static final String REG_URL  = BASE_URL+"ecsusers/doCheck";
 
     /**用户注册**/
 
-    public static final String REG_URL = BASE_URL+"ecsusers/doCheck";
+    public static final String  REG_CODE_URL = BASE_URL+"ecsusers/check";
 
     /**获取游客中心**/
 

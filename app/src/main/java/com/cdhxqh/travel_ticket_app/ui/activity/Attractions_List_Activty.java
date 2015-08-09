@@ -92,7 +92,7 @@ public class Attractions_List_Activty extends BaseActivity {
 
     Map<String, String> params = new HashMap(0);  // 保存http请求的参数
 
-    private static final int showCount = 1;  // 显示条数
+    private static final int showCount = 10;  // 显示条数
     private static int currentPage = 1;   // 当前页
 
     ProgressDialog progressDialog;  // 进度条
