@@ -100,7 +100,7 @@ public class ScenicMapActivity extends BaseActivity {
     /**
      * 显示条数*
      */
-    private static final int showCount = 10;
+    private static final int showCount = 100;
     /**
      * 当前页数*
      */

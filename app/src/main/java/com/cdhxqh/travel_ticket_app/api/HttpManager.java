@@ -90,6 +90,36 @@ public class HttpManager {
     }
 
 
+
+
+
+    /**
+     * 不分页
+     * @param cxt         上下文
+     * @param title       景点标题
+     * @param showCount   当前条数
+     * @param currentPage 当前页数
+     * @param refresh     是否刷新
+     * @param handler     handler
+     */
+    public static void getAttractions_lists(Context cxt, String title, String brandId, String showCount, String currentPage, boolean refresh,
+                                           HttpRequestHandler<ArrayList<Attractions>> handler) {
+        String urlString;
+
+        if (title.equals("")) {
+            urlString = Constants.ATTRACTIONS_URL1 + "?" + "brandId=" + brandId ;
+        } else {
+            urlString = Constants.ATTRACTIONS_URL1 + "?" + "title=" + title + "brandId=" + brandId;
+        }
+//        if (title.equals("")) {
+//            urlString = Constants.ATTRACTIONS_URL + "?" + "brandId=" + brandId + "&" + "showCount=" + showCount + "&" + "currentPage=" + currentPage;
+//        } else {
+//            urlString = Constants.ATTRACTIONS_URL + "?" + "title=" + title + "brandId=" + brandId + "&" + "showCount=" + showCount + "&" + "currentPage=" + currentPage;
+//        }
+        getAttractions(cxt, urlString, refresh, handler);
+    }
+
+
     public static void getCategoryList_list(final Context cxt, final int type, final HttpRequestHandler<ArrayList<CategoryModel>> handler) {
 
         AsyncHttpClient client = new AsyncHttpClient();
