@@ -117,6 +117,7 @@ public class ScenicMapActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // SDKInitializer.initialize(getApplicationContext());   在使用SDK各组件之前初始化context信息，必须在setContentView方法之前调用
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_scenic_map);
         getData();
@@ -133,8 +134,8 @@ public class ScenicMapActivity extends BaseActivity {
     private void getData() {
         brand_id = getIntent().getExtras().getInt("brand_id");
         brandName = getIntent().getExtras().getString("brand_name");
-        longitude = getIntent().getExtras().getString("longitude");
-        latitude = getIntent().getExtras().getString("latitude");
+        longitude = getIntent().getExtras().getString("longitude");  // 接收参照物的经度
+        latitude = getIntent().getExtras().getString("latitude");    // 接收参照物的纬度
     }
 
     @Override
@@ -167,7 +168,7 @@ public class ScenicMapActivity extends BaseActivity {
         initLocation();
 
 
-        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
+        mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {// 注册覆盖物监听事件
             public boolean onMarkerClick(final Marker marker) {
                 for (int i = 0; i < mMarkerList.size(); i++) {
                     View view = customView();
@@ -194,8 +195,8 @@ public class ScenicMapActivity extends BaseActivity {
 
 
                         LatLng ll = marker.getPosition();
-                        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(view), ll, -60,listener);
-                        mBaiduMap.showInfoWindow(mInfoWindow);
+                        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(view), ll, -60,listener);  // 创建一个已知经纬度的信息窗口，已view作为显示窗口， 并增减消息窗口的监听事件
+                        mBaiduMap.showInfoWindow(mInfoWindow);  // 显示信息提示窗口
                     }
                 }
                 return true;
@@ -235,16 +236,16 @@ public class ScenicMapActivity extends BaseActivity {
      */
     public void initLocation() {
         if (!latitude.equals("") && !longitude.equals("")) {
-            LatLng cenpt = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
-
-            MapStatus mMapStatus = new MapStatus.Builder()
-                    .target(cenpt)
-                    .zoom(15)
-                    .build();
+            LatLng cenpt = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));  // 定义参照物坐标(中心坐标)
+            //定义地图状态
+            MapStatus mMapStatus = new MapStatus.Builder()  // 创建百度地图状态构造器
+                    .target(cenpt)  // 设置地图中心点
+                    .zoom(15)       // 设置地图缩放级别
+                    .build();       // 创建地图状态对象
             //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
 
 
-            MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+            MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);  // 创建百度地图状态
             //改变地图状态
             mBaiduMap.setMapStatus(mMapStatusUpdate);
         }
@@ -387,10 +388,10 @@ public class ScenicMapActivity extends BaseActivity {
                 if (!latitude.equals("") && !longitude.equals("")) {
                     LatLng llA = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
                     BitmapDescriptor bd = BitmapDescriptorFactory
-                            .fromView(cusBitmapDescripyorView(i + 1 + ""));
-                    OverlayOptions oo = new MarkerOptions().position(llA).icon(bd)
-                            .zIndex(9).draggable(true);
-                    Marker mMarker = (Marker) (mBaiduMap.addOverlay(oo));
+                            .fromView(cusBitmapDescripyorView(i + 1 + ""));   // 创建地图标覆盖物图标
+                    OverlayOptions oo = new MarkerOptions().position(llA).icon(bd)  // 设置覆盖物选项的经纬度和图标
+                            .zIndex(9).draggable(true);  // 设置覆盖物可拖拽
+                    Marker mMarker = (Marker) (mBaiduMap.addOverlay(oo));  // 在地图中添加覆盖物
                     mMarkerList.add(mMarker);
                     giflist.add(bd);
                 }
