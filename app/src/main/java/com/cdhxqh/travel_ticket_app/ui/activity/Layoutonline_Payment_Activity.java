@@ -326,6 +326,14 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         @Override
         public void onSuccess(Integer data) {
             MessageUtils.showMiddleToast(Layoutonline_Payment_Activity.this, "订单生成成功");
+            Intent intent=new Intent(Layoutonline_Payment_Activity.this,MainActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putString("activity", "ORDER_ACTIVITY");
+
+            intent.putExtras(bundle);
+            Layoutonline_Payment_Activity.this.startActivity(intent);
+
+            Layoutonline_Payment_Activity.this.finish();
         }
 
         @Override

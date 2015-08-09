@@ -17,10 +17,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.cdhxqh.travel_ticket_app.app.SwitchButton.OnChangeListener;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
+import com.cdhxqh.travel_ticket_app.app.SwitchButton;
 import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.utils.HttpUtil;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
@@ -65,6 +67,13 @@ public class LoginActivity extends BaseActivity {
 
     private ProgressDialog progressDialog;
 
+    private SwitchButton sb;
+    /**
+     * 管理员或用户
+     */
+    private boolean type = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +81,18 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         findViewById();
         initView();
+
+        SwitchButton sb = (SwitchButton) findViewById(R.id.wiperSwitch1);
+        sb.setOnChangeListener(new OnChangeListener() {
+
+            @Override
+            public void onChange(SwitchButton sb, boolean state) {
+                // TODO Auto-generated method stub
+                Log.d("switchButton", state ? "验票员" : "用户");
+                Toast.makeText(LoginActivity.this, state ? "验票员" : "用户", Toast.LENGTH_SHORT).show();
+                type = state;
+            }
+        });
     }
 
 
@@ -122,7 +143,6 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-
     private View.OnClickListener loginBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -166,31 +186,59 @@ public class LoginActivity extends BaseActivity {
         progressDialog = ProgressDialog.show(LoginActivity.this, null,
                 getString(R.string.login_loging), true, true);
 
-        HttpManager.loginWithUsername(this,
-                userEditText.getText().toString(),
-                pwdEditText.getText().toString(),
-                new HttpRequestHandler<Integer>() {
-                    @Override
-                    public void onSuccess(Integer data) {
+        if (!type) {
+            HttpManager.loginWithUsername(this,
+                    userEditText.getText().toString(),
+                    pwdEditText.getText().toString(),
+                    new HttpRequestHandler<Integer>() {
+                        @Override
+                        public void onSuccess(Integer data) {
 
 
-                        MessageUtils.showMiddleToast(LoginActivity.this, "登陆成功");
-                        progressDialog.dismiss();
-                        setResult(Constants.STATUS_CODE_1000);
-                        finish();
-                    }
+                            MessageUtils.showMiddleToast(LoginActivity.this, "登陆成功");
+                            progressDialog.dismiss();
+                            setResult(Constants.STATUS_CODE_1000);
+                            finish();
+                        }
 
-                    @Override
-                    public void onSuccess(Integer data, int totalPages, int currentPage) {
-                        Log.i(TAG, "22222");
-                    }
+                        @Override
+                        public void onSuccess(Integer data, int totalPages, int currentPage) {
+                            Log.i(TAG, "22222");
+                        }
 
-                    @Override
-                    public void onFailure(String error) {
-                        MessageUtils.showErrorMessage(LoginActivity.this, error);
-                        progressDialog.dismiss();
-                    }
-                });
+                        @Override
+                        public void onFailure(String error) {
+                            MessageUtils.showErrorMessage(LoginActivity.this, error);
+                            progressDialog.dismiss();
+                        }
+                    });
+        } else {
+            HttpManager.loginWithTicketCollector(this,
+                    userEditText.getText().toString(),
+                    pwdEditText.getText().toString(),
+                    new HttpRequestHandler<Integer>() {
+                        @Override
+                        public void onSuccess(Integer data) {
+
+
+                            MessageUtils.showMiddleToast(LoginActivity.this, "登陆成功");
+                            progressDialog.dismiss();
+                            setResult(Constants.STATUS_CODE_1000);
+                            finish();
+                        }
+
+                        @Override
+                        public void onSuccess(Integer data, int totalPages, int currentPage) {
+                            Log.i(TAG, "22222");
+                        }
+
+                        @Override
+                        public void onFailure(String error) {
+                            MessageUtils.showErrorMessage(LoginActivity.this, error);
+                            progressDialog.dismiss();
+                        }
+                    });
+        }
     }
 
 
