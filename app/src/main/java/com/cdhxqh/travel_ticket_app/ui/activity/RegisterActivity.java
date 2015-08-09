@@ -160,9 +160,10 @@ public class RegisterActivity extends BaseActivity {
         regSenmsgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Button button = (Button) v;
+                // Button button = (Button) v;
 
-                loadTokenCode(button);   // 获取验证码
+                newUserRegister();     // 新注册用户
+               // loadTokenCode(button);   // 获取验证码
             }
         });
 
@@ -171,7 +172,9 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 progressDialog = ProgressDialog.show(RegisterActivity.this, null, getString(R.string.reg_loaing), true, true); // 显示进度条
-                newUserRegister();     // 新注册用户
+                // newUserRegister();     // 新注册用户
+                Button button = (Button) v;
+                loadTokenCode(button);   // 获取验证码
             }
         });
 
@@ -276,7 +279,7 @@ public class RegisterActivity extends BaseActivity {
         Map<String, String> mapparams=new HashMap<String,String>(0);
         mapparams.put("mobilePhone",phone);                  // 手机验证方式
         mapparams.put("password", pwd);
-        HttpManager.requestOnceWithURLString(this, Constants.REG_URL, mapparams, new HttpRequestHandler<String>() {
+        HttpManager.requestOnceWithURLString(this, Constants.REG_CODE_URL, mapparams, new HttpRequestHandler<String>() {
             @Override
             public void onSuccess(String data) {
                 Log.i(TAG, "data=" + data);
@@ -325,7 +328,7 @@ public class RegisterActivity extends BaseActivity {
         String verifyCode = reg_msg_input.getText().toString();   // 获取输入的验证码
         Map<String, String> mapparams = new HashMap<String, String>(0);
         mapparams.put("authstring", verifyCode);
-        HttpManager.requestOnceWithURLString(this, Constants.REG_CODE_URL, mapparams, new HttpRequestHandler<String>() {
+        HttpManager.requestOnceWithURLString(this, Constants.REG_URL, mapparams, new HttpRequestHandler<String>() {
             @Override
             public void onSuccess(String data) {
                 TimeCountUtil timeCountUtil = new TimeCountUtil(RegisterActivity.this, 60000, 1000, button, R.drawable.phone_test_on); // 更新按钮状态

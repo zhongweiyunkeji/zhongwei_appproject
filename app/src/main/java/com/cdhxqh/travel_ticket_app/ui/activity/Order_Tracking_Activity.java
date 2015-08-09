@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
@@ -18,6 +19,7 @@ import com.cdhxqh.travel_ticket_app.ui.adapter.SearchScenicAdapter;
 import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
 import com.cdhxqh.travel_ticket_app.zxing.encoding.EncodingHandler;
 import com.google.zxing.WriterException;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * Created by Administrator on 2015/8/4.
@@ -52,6 +54,41 @@ public class Order_Tracking_Activity extends BaseActivity{
     private RelativeLayout ticket_buy_id;
 
     private Button order_button_id;
+    /**
+     * 订单总额
+     */
+    private TextView total_charge_id;
+    /**
+     * 订单确认号
+     */
+    private TextView order_confirmed_id;
+
+    /**
+     * 二维码
+     */
+    private ImageView two_dimensional_code;
+
+    /**
+     * 标题
+     */
+    private TextView order_tittle_id;
+
+    /**
+     *门票数量
+     */
+    private TextView order_num;
+
+    /**
+     * 出游人
+     */
+    private TextView user_play;
+
+    /**
+     * 联系电话
+     */
+    private TextView user_num;
+
+    private TableRow table_id;
 
 
     @Override
@@ -59,6 +96,7 @@ public class Order_Tracking_Activity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
         findViewById();
+        getdata();
         initView();
     }
 
@@ -74,6 +112,14 @@ public class Order_Tracking_Activity extends BaseActivity{
         order_tracking = (RecyclerView) findViewById(R.id.order_tracking);
         ticket_buy_id = (RelativeLayout) findViewById(R.id.ticket_buy_id);
         order_button_id = (Button) findViewById(R.id.order_button_id);
+        total_charge_id = (TextView) findViewById(R.id.total_charge_id);
+        order_confirmed_id = (TextView)findViewById(R.id.order_confirmed_id);
+        two_dimensional_code = (ImageView)findViewById(R.id.two_dimensional_code);
+        order_tittle_id = (TextView) findViewById(R.id.order_tittle_id);
+        order_num = (TextView) findViewById(R.id.order_num);
+        user_play = (TextView)findViewById(R.id.user_play);
+        user_num = (TextView)findViewById(R.id.user_num);
+        table_id = (TableRow) findViewById(R.id.table_id);
     }
 
     @Override
@@ -115,9 +161,29 @@ public class Order_Tracking_Activity extends BaseActivity{
         } catch (WriterException e) {
             e.printStackTrace();
         }
-        ImageView qrImgImageView=null;
-        qrImgImageView.setImageBitmap(qrCodeBitmap);
+        two_dimensional_code.setImageBitmap(qrCodeBitmap);
 
+    }
+
+    private void getdata() {
+        Bundle bundle = new Bundle();
+        bundle = this.getIntent().getExtras();
+        //设置参数
+        total_charge_id.setText("￥" + bundle.getString("orderAmount"));
+        order_confirmed_id.setText(bundle.getString("orderId"));
+        order_tittle_id.setText(bundle.getString("goodsName"));
+        order_num.setText(bundle.getString("goodsNumber"));
+        user_play.setText(bundle.getString("consignee"));
+        user_num.setText(bundle.getString("mobile"));
+        table_id.setVisibility(View.VISIBLE);
+        int flag = bundle.getString("Qecode").indexOf("null");
+        if(flag < 0) {
+            ImageLoader.getInstance().displayImage(bundle.getString("Qecode"), two_dimensional_code);
+        }else {
+            table_id.setVisibility(View.GONE);
+        }
+//        tittle =   bundle.getString("tittle_reservation");
+//        tittle_reservation.setText(bundle.getString("tittle_reservation"));
     }
 
     /**
@@ -126,9 +192,7 @@ public class Order_Tracking_Activity extends BaseActivity{
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.setClass(Order_Tracking_Activity.this, OrderActivity.class);
-            startActivityForResult(intent, 0);
+            finish();
         }
     };
 

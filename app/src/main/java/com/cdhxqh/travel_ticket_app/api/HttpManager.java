@@ -37,12 +37,15 @@ public class HttpManager {
 
     private static final String TAG = "HttpManager";
 
-
     private static AsyncHttpClient sClient = null;
 
     public static String SESSIONID = "";
 
     public static ThreadLocal threadLocal = new ThreadLocal();
+
+    public static String brand_id = null;
+
+    public static String check_admin = null;
 
 
     /**
@@ -199,9 +202,9 @@ public class HttpManager {
                         } else {
                             SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
                         }
-                    }else if (errcode.equals(Constants.STOCK_FAILE)) {
+                    } else if (errcode.equals(Constants.STOCK_FAILE)) {
                         SafeHandler.onFailure(handler, "预订商品库存不足");
-                    }else if (errcode.equals(Constants.LOGIN_TIMEOUT)) {
+                    } else if (errcode.equals(Constants.LOGIN_TIMEOUT)) {
                         SafeHandler.onFailure(handler, "会话过期，请重新登录");
                     }
 
@@ -250,6 +253,8 @@ public class HttpManager {
         });
     }
 
+
+
     /**
      *更新订单接口
      * @param cxt
@@ -279,9 +284,9 @@ public class HttpManager {
                     String errcode = jsonObject.getString("errcode");
                     if (errcode.equals(Constants.STOCK_FAILE_NULL)) {
                         SafeHandler.onFailure(handler, "订单号为空");
-                    } else if(errcode.equals(Constants.STOCK_FAILE_STYLE)){
+                    } else if (errcode.equals(Constants.STOCK_FAILE_STYLE)) {
                         SafeHandler.onFailure(handler, "未接收到客户端支付状态");
-                    } else if(errcode.equals(Constants.STOCK_FAILE_PAY)){
+                    } else if (errcode.equals(Constants.STOCK_FAILE_PAY)) {
                         SafeHandler.onFailure(handler, "支付失败");
                     } else {
                         SafeHandler.onSuccess(handler, 200);
@@ -320,12 +325,68 @@ public class HttpManager {
             public void onSuccess(String data) {
                 Log.i(TAG, "data=" + data);
                 //解析返回的Json数据
-                boolean code = JsonUtils.parsingAuthStr(cxt, data);
+                boolean code = JsonUtils.parsingAuthStr(cxt, data, 1);
 //
                 if (code == true) {
                     SafeHandler.onSuccess(handler, 200);
                 } else {
                     SafeHandler.onFailure(handler, "登陆失败");
+                }
+
+            }
+
+
+            @Override
+            public void onFailure(String error) {
+                SafeHandler.onFailure(handler, error);
+            }
+        });
+    }
+
+    /**
+     * 使用验票员用户名密码登录
+     *
+     * @param cxt
+     * @param username 用户名
+     * @param password 密码
+     * @param handler  返回结果处理
+     */
+    public static void loginWithTicketCollector(final Context cxt, final String username, final String password,
+                                         final HttpRequestHandler<Integer> handler) {
+        Map<String, String> mapparams = new HashMap<String, String>();
+        mapparams.put("userName", username);
+        mapparams.put("password", password);
+
+
+        requestOnceWithURLString(cxt, Constants.TICKET_URL, mapparams, new HttpRequestHandler<String>() {
+            @Override
+            public void onSuccess(String data, int totalPages, int currentPage) {
+                Log.i(TAG, "data=" + data);
+            }
+
+            @Override
+            public void onSuccess(String data) {
+                Log.i(TAG, "data=" + data);
+                //解析返回的Json数据
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(data);
+                    String errcode = jsonObject.getString("errcode");
+
+                    if (errcode.equals(Constants.SUCCESS_LOGIN)) {
+                        boolean code = JsonUtils.parsingAuthStr(cxt, data, 2);
+                        SafeHandler.onSuccess(handler, 200);
+                        String result = jsonObject.getString("result");
+                        JSONObject json = new JSONObject(result);
+
+                        brand_id = json.getString("brandId");
+                        check_admin = json.getString("userName");
+
+                    } else {
+                        SafeHandler.onFailure(handler, "登陆失败");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
             }
@@ -789,9 +850,9 @@ public class HttpManager {
         }
         /*PersistentCookieStore myCookieStore = new PersistentCookieStore(cxt);
         client.setCookieStore(myCookieStore);*/
-        /*client.setConnectTimeout(20000);
+        //client.setConnectTimeout(20000);
         client.setResponseTimeout(20000);
-        client.setTimeout(20000);*/
+        client.setTimeout(20000);
         client.post(url, params, new TextHttpResponseHandler() {
 
 

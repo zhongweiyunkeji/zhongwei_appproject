@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/bj_color"
+    android:background="#F2FBFA"
     android:orientation="vertical"
     tools:context="com.cdhxqh.travel_ticket_app.ui.activity.Tickets_Detail_Activity">
 

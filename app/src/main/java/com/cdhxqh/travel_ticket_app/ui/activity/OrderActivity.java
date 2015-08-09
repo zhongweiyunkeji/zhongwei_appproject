@@ -2,6 +2,7 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -70,12 +71,12 @@ public class OrderActivity extends BaseActivity {
 
     // 3个月内
     int currntPageIn = 1;
-    final static int showCountIn = 1;
+    final static int showCountIn = 10;
     SwipeRefreshLayout swipeRefreshLayoutIn;
 
     // 3个月钱
     int currntPageOut = 1;
-    final static int showCountOut = 1;
+    final static int showCountOut = 10;
 
     LinearLayout laout;  // 提示信息
 
@@ -140,7 +141,8 @@ public class OrderActivity extends BaseActivity {
                 orderThreeInFragment = new OrderThreeInFragment();
 
             }
-
+            inttextView.setTextColor(Color.rgb(255, 255, 255));  // 设置字体为白色
+            outtextView.setTextColor(Color.rgb(0, 0, 0));        // 设置字体为绿色
             FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();  //
             localFragmentTransaction.replace(R.id.container, orderThreeInFragment, "three_in");
             localFragmentTransaction.commit();
@@ -159,6 +161,8 @@ public class OrderActivity extends BaseActivity {
                 orderThreeOutFragment = new OrderThreeOutFragment();
             }
 
+            outtextView.setTextColor(Color.rgb(255, 255, 255));  // 设置字体为白色
+            inttextView.setTextColor(Color.rgb(0, 0, 0));        // 设置字体为绿色
             FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();
             localFragmentTransaction.replace(R.id.container, orderThreeOutFragment, "three_out");
             localFragmentTransaction.commit();
@@ -281,7 +285,7 @@ public class OrderActivity extends BaseActivity {
                                 int goodsId = obj.getInt("goodsId");    // id
                                 String goodsName = obj.getString("goodsName");  // 景点标题
                                 int goodsNumber = obj.getInt("goodsNumber");   // 总数量
-                                int goodsPrice = obj.getInt("goodsPrice");     // 购买价格
+                                double goodsPrice = obj.getDouble("goodsPrice");     // 购买价格
                                 String status = obj.getString("status");        // 景点状态
                                 String imgurl = obj.getString("goodsAttr");    // 景点图片
                                 String cardSn = ((obj.getString("card_sn")==null) ? "" : obj.getString("card_sn"))+".png";      // 二维码名称
@@ -300,6 +304,7 @@ public class OrderActivity extends BaseActivity {
                 if(adapter.getGroupList().size() == 0){
                     laout.setVisibility(View.VISIBLE);
                 } else {
+                    laout.setVisibility(View.GONE);
                     currntPageIn++;
                 }
             } catch (JSONException e) {
@@ -322,10 +327,6 @@ public class OrderActivity extends BaseActivity {
             progressDialog.dismiss();
         }
     };
-
-    public LinearLayout getLaout() {
-        return laout;
-    }
 
     private HttpRequestHandler<String> handlerOut = new HttpRequestHandler<String>() {
         @Override
@@ -393,6 +394,7 @@ public class OrderActivity extends BaseActivity {
                 if(adapter.getGroupList().size() == 0){
                     laout.setVisibility(View.VISIBLE);
                 } else {
+                    laout.setVisibility(View.GONE);
                     currntPageOut++;
                 }
             } catch (JSONException e) {
@@ -415,4 +417,11 @@ public class OrderActivity extends BaseActivity {
             progressDialog.dismiss();
         }
     };
+
+
+    public LinearLayout getLaout() {
+        return laout;
+    }
+
+
 }

@@ -203,6 +203,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         tittle = bundle.getString("tittle");
         categoryModel = (CategoryModel) bundle.getParcelable("categoryModel");
         type = bundle.getString("type");
+        consignee = bundle.getString("consignee");
     }
 
 
@@ -258,6 +259,11 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
      * 创建订单
      */
     private void reservation() {
+        /**
+         * 加载中
+         */
+//        progressDialog = ProgressDialog.show(Layoutonline_Payment_Activity.this, null,
+//                getString(R.string.loading), true, true);
         HttpManager.reservation(this, goodsAmount, goodsIds, "1", "1", consignee, mobile, postscript, handler);
     }
 
@@ -285,11 +291,6 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
      * 判断订单库存
      */
     private void stockNum() {
-        /**
-         * 加载中
-         */
-        progressDialog = ProgressDialog.show(Layoutonline_Payment_Activity.this, null,
-                getString(R.string.loading), true, true);
         HttpManager.stockNum(this, goodsIds, handlerStock);
     }
 
@@ -297,7 +298,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
 
         @Override
         public void onSuccess(Integer data) {
-            progressDialog.dismiss();
+//            progressDialog.dismiss();
             ZhiFuManage.pay(Layoutonline_Payment_Activity.this, mHandler, categoryModel.getOut_trade_no(), "沙坡头", "沙坡头", categoryModel.getTotal_fee());
         }
 
@@ -325,6 +326,14 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         @Override
         public void onSuccess(Integer data) {
             MessageUtils.showMiddleToast(Layoutonline_Payment_Activity.this, "订单生成成功");
+            Intent intent=new Intent(Layoutonline_Payment_Activity.this,MainActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putString("activity", "ORDER_ACTIVITY");
+
+            intent.putExtras(bundle);
+            Layoutonline_Payment_Activity.this.startActivity(intent);
+
+            Layoutonline_Payment_Activity.this.finish();
         }
 
         @Override

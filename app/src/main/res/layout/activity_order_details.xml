@@ -66,7 +66,6 @@
                     android:id="@+id/order_tittle_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="沙坡头成人票（下单立减5元）"
                     android:textColor="#2e8b57"
                     android:textSize="16sp"/>
 
@@ -106,7 +105,6 @@
                             android:id="@+id/order_num"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="2张"
                             android:textColor="#00CED1"/>
 
                     </TableRow>
@@ -125,7 +123,6 @@
                             android:id="@+id/total_charge_id"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="￥136"
                             android:textColor="#EEAD0E"/>
 
                     </TableRow>
@@ -169,7 +166,6 @@
                     android:id="@+id/order_confirmed_id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="592317"
                     android:textColor="#a9a9a9"/>
 
             </TableRow>
@@ -213,21 +209,22 @@
             </TableRow>
 
             <TableRow
+                android:id="@+id/table_id"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1">
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="" />
 
                 <ImageView
                     android:id="@+id/two_dimensional_code"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/button_addition_reservation"/>
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
+                    />
 
             </TableRow>
 
@@ -334,7 +331,6 @@
                     android:id="@+id/user_num"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="18094535443"
                     android:textColor="#a9a9a9"/>
 
             </TableRow>

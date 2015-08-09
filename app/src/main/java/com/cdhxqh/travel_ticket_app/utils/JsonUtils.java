@@ -30,7 +30,7 @@ public class JsonUtils {
      * data json数据
      * isChecked 是否保存密码
      */
-    public static boolean parsingAuthStr(final Context cxt, String data) {
+    public static boolean parsingAuthStr(final Context cxt, String data, int i) {
         try {
             JSONObject json = new JSONObject(data);
             String errcode = json.getString("errcode");
@@ -43,7 +43,9 @@ public class JsonUtils {
                 ec_user.setEmail(result.getString("email"));
                 ec_user.setUserName(result.getString("userName"));
                 ec_user.setPassword(result.getString("password"));
-                ec_user.setMobilePhone(result.getString("mobilePhone"));
+                if(i ==  1) {
+                    ec_user.setMobilePhone(result.getString("mobilePhone"));
+                }
 
 //                PersistenceHelper.saveModel(cxt, ec_user, Constants.USER_CACHE+userId);
                 AccountUtils.writeLoginMember(cxt, ec_user);
@@ -300,6 +302,7 @@ public class JsonUtils {
                 }
                 goodsList.setGoods_id(jsonObject.getInt("goodsId") + "");
                 goodsList.setGoods_name(jsonObject.getString("goodsName"));
+                goodsList.setGoods_number(jsonObject.getString("goodsNumber"));
                 goodsList.setShop_price(jsonObject.getString("shopPrice"));
                 Log.i(TAG, "shopPrice=" + jsonObject.getString("shopPrice"));
                 list.add(goodsList);
