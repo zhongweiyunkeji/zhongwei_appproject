@@ -64,7 +64,21 @@ public final class ViewfinderView extends View {
     int height = canvas.getHeight();
 
     // Draw the exterior (i.e. outside the framing rect) darkened
-    paint.setColor(resultBitmap != null ? resultColor : maskColor);
+    /*paint.setColor(resultBitmap != null ? resultColor : maskColor);
+    canvas.drawRect(0, 0, width, frame.top, paint);
+    canvas.drawRect(0, frame.top, frame.left, frame.bottom + 1, paint);
+    canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1, paint);
+    canvas.drawRect(0, frame.bottom + 1, width, height, paint);*/
+
+    /**
+     * public void drawRect (float left, float top, float right, float bottom, Paint paint)
+     * 参数说明
+     * left：  矩形的左边位置。
+     * top：   矩形的上边位置。
+     * right： 矩形的右边位置。
+     * bottom：矩形的下边位置。
+     * paint： 绘制时所使用的画笔。
+     */
     canvas.drawRect(0, 0, width, frame.top, paint);
     canvas.drawRect(0, frame.top, frame.left, frame.bottom + 1, paint);
     canvas.drawRect(frame.right + 1, frame.top, width, frame.bottom + 1, paint);
