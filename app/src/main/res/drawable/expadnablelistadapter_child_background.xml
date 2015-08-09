@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <shape>
+            <!-- 边框颜色值 -->
+            <solid android:color="#C5D1CF" />
+        </shape>
+    </item>
+    <!-- 此处定义只有左、右、下这三边有边框 高度为1dp  -->
+    <item android:bottom="1dp" android:left="1dp" android:right="1dp" >
+        <shape>
+            <!--边框里面背景颜色 白色-->
+            <solid android:color="#F1F2F7" />
+        </shape>
+    </item>
+</layer-list>
