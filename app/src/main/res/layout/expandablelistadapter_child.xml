@@ -3,7 +3,7 @@
     android:id="@+id/expand_able_list_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/result_image_border"
+    android:background="@drawable/expadnablelistadapter_child_background"
     android:orientation="horizontal">
 
 
