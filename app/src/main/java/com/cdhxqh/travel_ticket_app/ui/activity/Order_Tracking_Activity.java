@@ -145,11 +145,14 @@ public class Order_Tracking_Activity extends BaseActivity{
         order_tracking.setLayoutManager(layoutManager);
         order_tracking.setItemAnimator(new DefaultItemAnimator());
 
-        String[] dataset = new String[3];
+        String[][] dataset = new String[3][2];
 //        for(int i = 0; i< dataset.length; i++) {
-        dataset[0] = "订单提交成功，带出游";
-        dataset[1] = "订单已审核入园";
-        dataset[2] = "订单已点评";
+        dataset[0][0] = "订单提交成功，带出游";
+        dataset[0][1] = "2015-01-02 10:10:10";
+        dataset[1][0] = "订单已审核入园";
+        dataset[1][1] = "2015-01-02 12:10:10";
+        dataset[2][0] = "订单已点评";
+        dataset[2][1] = "2015-01-02 14:10:10";
 //        }
         ordreTrackingAdapter = new OrdreTrackingAdapter(this, dataset);
 
