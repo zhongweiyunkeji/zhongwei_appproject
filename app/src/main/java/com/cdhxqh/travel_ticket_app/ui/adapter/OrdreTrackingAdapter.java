@@ -19,9 +19,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  */
 public class OrdreTrackingAdapter extends RecyclerView.Adapter<OrdreTrackingAdapter.ViewHolder> {
     Context mContext;
-    String[] datasets;
+    String[][] datasets;
 
-    public OrdreTrackingAdapter(Context paramContext, String[] dataset) {
+    public OrdreTrackingAdapter(Context paramContext, String[][] dataset) {
         this.mContext = paramContext;
         datasets = dataset;
     }
@@ -34,7 +34,7 @@ public class OrdreTrackingAdapter extends RecyclerView.Adapter<OrdreTrackingAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int i) {
-        LinearLayout.LayoutParams lytp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams lytp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         if(i == 0) {
             holder.img_a_id.setImageResource(R.drawable.ic_node_up);
         }else if(i == getItemCount()-1){
@@ -46,8 +46,8 @@ public class OrdreTrackingAdapter extends RecyclerView.Adapter<OrdreTrackingAdap
             lytp.gravity = Gravity.CENTER_VERTICAL;
             holder.l_s_id.setLayoutParams(lytp);
         }
-        holder.text_b_id.setText(datasets[i]);
-        holder.text_c_id.setText(datasets[i]);
+        holder.text_b_id.setText(datasets[i][0]);
+        holder.text_c_id.setText(datasets[i][1]);
     }
 
     @Override
