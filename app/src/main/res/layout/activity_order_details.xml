@@ -19,8 +19,9 @@
         <!--订单跟踪-->
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="242dp"
-            android:orientation="horizontal">
+            android:layout_height="130dp"
+            android:orientation="horizontal"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -29,13 +30,14 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/order_tracking"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"></android.support.v7.widget.RecyclerView>
 
@@ -257,7 +259,7 @@
                 <TextView
                     android:layout_width="240dp"
                     android:layout_height="match_parent"
-                    android:text="青色的长袍，自信的笑容，手上拿着一张折扇，正是在万贯楼有过一面之缘的刘希元。和万贯楼中不同，此时的刘希元一身便服，和万贯楼中的权势形成了鲜明对比。如果不是知道，也最多以为他只是太渊洲府中稍有势力的一些富户、贵绅而已。"
+                    android:text="每周一至周日 早上9：00-下午17：00对公业务：每周一至周五 早上9：00-中午12：00    下午13：00-17：00"
                     android:textColor="#a9a9a9"/>
 
             </TableRow>
