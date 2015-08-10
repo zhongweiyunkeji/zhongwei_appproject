@@ -333,6 +333,11 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
      * 更新订单接口
      */
     private void updateStock(String orderStatus) {
+        /**
+         * 加载中
+         */
+        progressDialog = ProgressDialog.show(Layoutonline_Payment_Activity.this, null,
+                getString(R.string.loading), true, true);
         HttpManager.updateStock(this, categoryModel.getOut_trade_no(), categoryModel.getOrderId(), orderStatus, goodsIds, handlerUpdateStock);
     }
 
@@ -346,6 +351,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
             bundle.putString("activity", "ORDER_ACTIVITY");
 
             intent.putExtras(bundle);
+            progressDialog.dismiss();
             Layoutonline_Payment_Activity.this.startActivity(intent);
 
             Layoutonline_Payment_Activity.this.finish();
