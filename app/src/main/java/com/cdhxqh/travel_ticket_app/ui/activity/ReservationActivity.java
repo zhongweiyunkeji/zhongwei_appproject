@@ -265,7 +265,7 @@ public class ReservationActivity extends BaseActivity{
             case 1:
                 Log.v("Test", "--------start---------->");
                 Calendar c = Calendar.getInstance();
-                return new DatePickerDialog(this, onDateSetListener, c.get(Calendar.YEAR), c.get(Calendar.MONTH)+1, c.get(Calendar.DAY_OF_MONTH));
+                return new DatePickerDialog(this, onDateSetListener, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
             // return new TimePickerDialog(this,onTimeSetListener,22,3, true);
         }
         return super.onCreateDialog(id);
@@ -277,7 +277,7 @@ public class ReservationActivity extends BaseActivity{
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
 
-            out_date_id.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
+            out_date_id.setText(year + "-" + (monthOfYear+1) + "-" + dayOfMonth);
         }
     };
 
