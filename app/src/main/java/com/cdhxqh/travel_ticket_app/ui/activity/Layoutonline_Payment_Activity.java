@@ -365,6 +365,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         @Override
         public void onFailure(String error) {
             MessageUtils.showErrorMessage(Layoutonline_Payment_Activity.this, error);
+            progressDialog.dismiss();
         }
     };
 
