@@ -69,7 +69,6 @@ public class HttpManager {
             threadLocal.set(curPage);
         } catch (NumberFormatException e) { }
         getEcs_Brands(cxt, urlString, refresh, handler);
-        Log.i(TAG, "---------------------------");
     }
 
 
