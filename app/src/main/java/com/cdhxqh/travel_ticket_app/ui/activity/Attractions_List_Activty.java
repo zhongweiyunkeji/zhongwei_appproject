@@ -261,7 +261,7 @@ public class Attractions_List_Activty extends BaseActivity {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
-            Log.i(TAG, "定位开始＝" + location.getLocType());
+          //  Log.i(TAG, "定位开始＝" + location.getLocType());
 //            if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
 
             String latitude = location.getLatitude() + "";
@@ -273,7 +273,7 @@ public class Attractions_List_Activty extends BaseActivity {
             String altitude = location.getAltitude() + "";
 
             attractionsListAdapter.updateDis(latitude, longitude);
-            Log.i(TAG, "latitude=" + latitude + ",Longitude=" + longitude + ",speed=" + speed + ",altitude=" + altitude);
+            // Log.i(TAG, "latitude=" + latitude + ",Longitude=" + longitude + ",speed=" + speed + ",altitude=" + altitude);
 
 
 //            }

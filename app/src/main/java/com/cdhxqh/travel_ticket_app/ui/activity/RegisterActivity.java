@@ -163,10 +163,8 @@ public class RegisterActivity extends BaseActivity {
         regSenmsgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Button button = (Button) v;
-
-                newUserRegister();     // 新注册用户
-               // loadTokenCode(button);   // 获取验证码
+                Button button = (Button) v;
+                loadTokenCode(button);   // 获取验证码
             }
         });
 
@@ -176,8 +174,9 @@ public class RegisterActivity extends BaseActivity {
             public void onClick(View v) {
                 progressDialog = ProgressDialog.show(RegisterActivity.this, null, getString(R.string.reg_loaing), true, true); // 显示进度条
                 // newUserRegister();     // 新注册用户
-                Button button = (Button) v;
-                loadTokenCode(button);   // 获取验证码
+                //Button button = (Button) v;
+                newUserRegister();     // 新注册用户
+                // loadTokenCode(button);   // 获取验证码
             }
         });
 
@@ -286,9 +285,9 @@ public class RegisterActivity extends BaseActivity {
     }
 
     /**
-     * 注册新用户
+     * 验证用户输入的验证码是否正确
      */
-    private void newUserRegister(){
+    private void loadTokenCode(final Button button){
         String phone = reg_phone_text.getText().toString();  // 获取手机
         String pwd = reg_pwd_input.getText().toString();     // 获取密码
         Map<String, String> mapparams=new HashMap<String,String>(0);
@@ -298,17 +297,19 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onSuccess(String data) {
                 Log.i(TAG, "data=" + data);
-                progressDialog.dismiss(); // 关闭进度条
+                TimeCountUtil timeCountUtil = new TimeCountUtil(RegisterActivity.this, 60000, 1000, button, R.drawable.phone_test_on); // 更新按钮状态
+                timeCountUtil.start(); // 启动线程
                 try {
                     JSONObject jsonObject = new JSONObject(data);
                     String errcode = (String) jsonObject.get("errcode");
                     if (null != errcode && errcode.length() > 0) {
-                        if ("ZWTICKET-GLOBAE-S-14".equals(errcode)) {
-                            Bundle bundle = new Bundle();
+                        if ("ZWTICKET-GLOBAL-S-10".equals(errcode)) {
+                            Log.i(TAG, "data=" + data);
+                            String msg = "已发送短信验证码到";
                             String phone = reg_phone_text.getText().toString();
-                            bundle.putCharSequence("RegisterActivity", phone);
-                            openActivity(LoginActivity.class, bundle);
-                            finish();
+                            phone = phone.substring(0, 3) + "****" + phone.substring(7);
+                            msg = msg + phone;
+                            reg_hint_text.setText(msg);
                         } else {
                             MessageUtils.showMiddleToast(RegisterActivity.this, (String) jsonObject.get("errmsg"));
                         }
@@ -321,12 +322,10 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onSuccess(String data, int totalPages, int currentPage) {
                 Log.i(TAG, "data=" + data);
-                progressDialog.dismiss(); // 关闭进度条
             }
 
             @Override
             public void onFailure(String error) {
-                progressDialog.dismiss();  // 关闭进度条
                 if (null != error && error.length() > 0) {
                     MessageUtils.showErrorMessage(RegisterActivity.this, error);
                 } else {
@@ -337,32 +336,42 @@ public class RegisterActivity extends BaseActivity {
     }
 
     /**
-     * 验证用户输入的验证码是否正确
+     * 注册新用户
      */
-    private void loadTokenCode(final Button button) {
+    private void newUserRegister() {
         String verifyCode = reg_msg_input.getText().toString();   // 获取输入的验证码
         Map<String, String> mapparams = new HashMap<String, String>(0);
         mapparams.put("authstring", verifyCode);
         HttpManager.requestOnceWithURLString(this, Constants.REG_URL, mapparams, new HttpRequestHandler<String>() {
             @Override
             public void onSuccess(String data) {
-                TimeCountUtil timeCountUtil = new TimeCountUtil(RegisterActivity.this, 60000, 1000, button, R.drawable.phone_test_on); // 更新按钮状态
-                timeCountUtil.start(); // 启动线程
-                Log.i(TAG, "data=" + data);
-                String msg = "已发送短信验证码到";
-                String phone = reg_phone_text.getText().toString();
-                phone = phone.substring(0, 3) + "****" + phone.substring(7);
-                msg = msg + phone;
-                reg_hint_text.setText(msg);
+                progressDialog.dismiss(); // 关闭进度条
+                try{
+                    JSONObject jsonObject = new JSONObject(data);
+                    String errcode = (String) jsonObject.get("errcode");
+                    if ("ZWTICKET-GLOBAL-S-14".equals(errcode)) {
+                        Bundle bundle = new Bundle();
+                        String phone = reg_phone_text.getText().toString();
+                        bundle.putCharSequence("RegisterActivity", phone);
+                        openActivity(LoginActivity.class, bundle);
+                        finish();
+                    } else {
+                        MessageUtils.showMiddleToast(RegisterActivity.this, (String) jsonObject.get("errmsg"));
+                    }
+                } catch (Exception e) {
+                e.printStackTrace();
+            }
             }
 
             @Override
             public void onSuccess(String data, int totalPages, int currentPage) {
+                progressDialog.dismiss(); // 关闭进度条
                 Log.i(TAG, "data=" + data);
             }
 
             @Override
             public void onFailure(String error) {
+                progressDialog.dismiss(); // 关闭进度条
                 if (null != error && error.length() > 0) {
                     MessageUtils.showErrorMessage(RegisterActivity.this, error);
                 } else {
