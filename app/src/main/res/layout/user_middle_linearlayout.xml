@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/user_layout_bj"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="145dp"
     android:layout_below="@+id/user_re_layout_id"
     android:layout_marginLeft="@dimen/dimens_10"
     android:layout_marginRight="@dimen/dimens_10"
@@ -12,8 +12,9 @@
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
 
         android:orientation="vertical">
 
@@ -22,11 +23,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dimens_5"
+            android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/ic_my_wallet"
             android:gravity="center_vertical"
             android:text="@string/user_my_wallet_text"
-
+            android:layout_marginBottom="3dp"
             />
 
         <View
@@ -35,7 +36,7 @@
             android:layout_height="1px"
             android:layout_marginLeft="@dimen/dimens_10"
             android:layout_marginRight="@dimen/dimens_10"
-            android:layout_marginTop="@dimen/dimens_5"
+            android:layout_marginTop="5dp"
             android:background="@drawable/ic_line"></View>
 
         <LinearLayout
@@ -117,14 +118,17 @@
         android:background="@drawable/ic_line"></View>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="2"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginTop="@dimen/dimens_5"
+            android:layout_marginBottom="@dimen/dimens_5"
             android:orientation="horizontal">
 
             <ImageView
@@ -162,6 +166,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimens_5"
+            android:layout_marginBottom="@dimen/dimens_5"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
@@ -199,6 +205,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimens_5"
+            android:layout_marginBottom="@dimen/dimens_5"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
