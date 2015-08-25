@@ -17,7 +17,7 @@ public class Constants {
 //    public static final String BASE_URL = "http://192.168.1.106:8080/qdm/";
     //远程服务器地址
 
-    public static final String BASE_URL = "http://182.92.158.158:8080/qdm/";  //  "http://182.92.158.158:8080/qdm/"
+    public static final String BASE_URL = "http://192.168.43.27:8080/qdm/";  //  "http://182.92.158.158:8080/qdm/"
 
     /**登录用户接口**/
     public static final String LOGIN_URL = BASE_URL+"ecsusers/login";
@@ -28,11 +28,11 @@ public class Constants {
     /**验证码密码接口**/
     public static final String PHONELINE_URL = BASE_URL+"ecsusers/doReset";
 
-    /**用户注册验证码 **/
-
-    public static final String REG_CODE_URL = BASE_URL+"ecsusers/doCheck";
-
     /**用户注册**/
+
+    public static final String REG_CODE_URL = BASE_URL+"ecsusers/check";
+
+    /**用户注册验证码 **/
 
     public static final String REG_URL = BASE_URL+"ecsusers/doCheck";
 
@@ -234,6 +234,6 @@ public class Constants {
 
     public static final String SCENICE_SEARCH_URL = BASE_URL + "ecsbrand/brandlist";
 
-    public static final String ATTRACTIONS_SEARCH_URL = BASE_URL + "ecsbrand/articlelist";
+    public static final String ATTRACTIONS_SEARCH_URL = BASE_URL + "ecsbrand/articlepage";
 
 }
