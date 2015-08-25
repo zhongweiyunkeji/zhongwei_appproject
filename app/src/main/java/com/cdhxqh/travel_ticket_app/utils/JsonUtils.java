@@ -228,7 +228,11 @@ public class JsonUtils {
             for (int i = 0; i < attractionslist.length(); i++) {
                 JSONObject jsonObject = (JSONObject) attractionslist.get(i);
                 Attractions attractions = new Attractions();
-                attractions.setArticle_id(jsonObject.getInt("articleId"));
+                try {
+                    attractions.setArticle_id(jsonObject.getInt("articleId"));
+                } catch (JSONException e) {// 在ecsbrand/articlelist和ecsbrand/articlepage中2者的值不一样
+                    attractions.setArticle_id(jsonObject.getInt("article_id"));
+                }
 
                 attractions.setTitle(jsonObject.getString("title"));
 
@@ -241,7 +245,12 @@ public class JsonUtils {
 
                 attractions.setLongitude(jsonObject.getString("longitude"));
 
-                String file_url = jsonObject.get("fileUrl").toString().trim();
+                String file_url = "";
+                try {
+                    file_url = jsonObject.get("fileUrl").toString().trim();
+                } catch (JSONException e) {// 在ecsbrand/articlelist和ecsbrand/articlepage中2者的值不一样
+                    file_url = jsonObject.get("file_url").toString().trim();
+                }
                 if (!file_url.equals("")) {
                     attractions.setFile_url(file_url);
                 }
