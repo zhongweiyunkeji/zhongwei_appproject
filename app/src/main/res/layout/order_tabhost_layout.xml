@@ -9,7 +9,8 @@
     android:orientation="horizontal">
 
     <TableRow android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:background="@drawable/shape2">
 
         <TextView
             android:id="@+id/order_in_text"

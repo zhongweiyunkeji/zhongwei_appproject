@@ -44,6 +44,11 @@ public class HomeActivity extends BaseActivity {
      */
     private LinearLayout listen_zhongwei_layout;
 
+    /**
+     * 今日特价
+     */
+    private LinearLayout todaySpecial;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +67,7 @@ public class HomeActivity extends BaseActivity {
         mIndicator = (PageIndicator) findViewById(R.id.indicator);
         scenic_spot_layout = (LinearLayout) findViewById(R.id.scenic_spot_id);
         listen_zhongwei_layout = (LinearLayout) findViewById(R.id.listen_zhongwei_layout_id);
-
+        todaySpecial = (LinearLayout) findViewById(R.id.todaySpecial);
     }
 
     @Override
@@ -88,8 +93,19 @@ public class HomeActivity extends BaseActivity {
         scenic_spot_layout.setOnClickListener(senic_spot_layoutOnClickListener);
         listen_zhongwei_layout.setOnClickListener(listen_zhongweiOnClickListener);
 
+        todaySpecial.setOnClickListener(todaySpecialOnClickListener);
+
 
     }
+
+    private View.OnClickListener todaySpecialOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(HomeActivity.this, TodaySpecialActivity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
 
     private View.OnClickListener senic_spot_layoutOnClickListener = new View.OnClickListener() {
         @Override

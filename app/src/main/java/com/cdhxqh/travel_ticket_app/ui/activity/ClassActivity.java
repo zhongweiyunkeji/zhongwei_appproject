@@ -1,11 +1,13 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.app.ProgressDialog;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,10 +16,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.api.HttpManager;
+import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
 import com.cdhxqh.travel_ticket_app.model.Ec_goods;
+import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.ui.adapter.Class_adapter;
 import com.cdhxqh.travel_ticket_app.ui.adapter.GoodsListAdapter;
 import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
+import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 
 import java.util.ArrayList;
 
@@ -54,6 +60,8 @@ public class ClassActivity extends BaseActivity {
 
     GoodsListAdapter goodsListAdapter;
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,9 +88,7 @@ public class ClassActivity extends BaseActivity {
         titleTextView.setText(getString(R.string.class_title_text));
         class_adapter = new Class_adapter(ClassActivity.this);
         gridView.setAdapter(class_adapter);
-        class_adapter.update(addData());
-
-
+        getType();
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -98,56 +104,90 @@ public class ClassActivity extends BaseActivity {
         goodsListAdapter = new GoodsListAdapter(this);
 
         mRecyclerView.setAdapter(goodsListAdapter);
-        goodsListAdapter.update(addGoods(), true);
-
+        hotSpot ();
 //        mSwipeLayout.setRefreshing(false);
 
     }
 
-
     /**
-     * 封装测试数据*
+     * 热门景点
      */
-    private ArrayList<String> addData() {
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("名胜古迹");
-        list.add("古镇");
-        list.add("博物馆");
-        list.add("自然风光");
-        list.add("滑雪");
-        list.add("漂流");
-        list.add("主题乐园");
-        list.add("动物园");
-        list.add("植物园");
-        list.add("海洋馆");
-        list.add("城市观光");
-        list.add("影视基地");
-        list.add("温泉");
-        list.add("游船");
-        list.add("科技馆");
-        list.add("游船");
-        list.add("展览");
-        list.add("赏花");
-        return list;
+    private void hotSpot () {
+
+
+        HttpManager.geHot(this,
+                "isHot",
+                "true",
+                new HttpRequestHandler<ArrayList<Ec_goods>>() {
+                    @Override
+                    public void onSuccess(ArrayList<Ec_goods> data) {
+//                        MessageUtils.showMiddleToast(ClassActivity.this, "邮箱发送成功");
+                        progressDialog.dismiss();
+                        goodsListAdapter.update(data, true);
+
+                    }
+
+                    @Override
+                    public void onSuccess(ArrayList<Ec_goods> data, int totalPages, int currentPage) {
+                        Log.i(TAG, "22222");
+                    }
+
+                    @Override
+                    public void onFailure(String error) {
+                        MessageUtils.showErrorMessage(ClassActivity.this, error);
+                        progressDialog.dismiss();
+                    }
+                });
     }
 
 
     /**
-     * 添加商品测试数据*
+     * 景区分类
      */
-    private ArrayList<Ec_goods> addGoods() {
-        ArrayList<Ec_goods> goodsList = new ArrayList<Ec_goods>();
+    private void getType () {
+        /**
+         * 加载中
+         */
+        progressDialog = ProgressDialog.show(ClassActivity.this, null,
+                getString(R.string.loading), true, true);
 
-        for (int i = 0; i < 10; i++) {
-            Ec_goods ec_goods = new Ec_goods();
-            ec_goods.setGood_name("沙坡头" + i);
-            ec_goods.setGood_time("8:00 - 17:30");
-            ec_goods.setGood_pay("￥ 32");
-            goodsList.add(ec_goods);
-        }
+        HttpManager.geType(this,
+                "cate",
+                new HttpRequestHandler<ArrayList<String>>() {
+                    @Override
+                    public void onSuccess(ArrayList<String> data) {
+//                        MessageUtils.showMiddleToast(ClassActivity.this, "邮箱发送成功");
+                        class_adapter.update(data);
+                    }
 
-        return goodsList;
+                    @Override
+                    public void onSuccess(ArrayList<String> data, int totalPages, int currentPage) {
+                        Log.i(TAG, "22222");
+                    }
+
+                    @Override
+                    public void onFailure(String error) {
+                        MessageUtils.showErrorMessage(ClassActivity.this, error);
+                    }
+                });
     }
+
+//    /**
+//     * 添加商品测试数据*
+//     */
+//    private ArrayList<Ec_goods> addGoods() {
+//        ArrayList<Ec_goods> goodsList = new ArrayList<Ec_goods>();
+//
+//        for (int i = 0; i < 10; i++) {
+//            Ec_goods ec_goods = new Ec_goods();
+//            ec_goods.setGood_name("沙坡头" + i);
+//            ec_goods.setGood_time("8:00 - 17:30");
+//            ec_goods.setGood_pay("￥ 32");
+//            goodsList.add(ec_goods);
+//        }
+//
+//        return goodsList;
+//    }
 
 
     @Override
