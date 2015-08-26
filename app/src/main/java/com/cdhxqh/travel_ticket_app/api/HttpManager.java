@@ -7,6 +7,7 @@ import android.util.Log;
 import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.Attractions;
 import com.cdhxqh.travel_ticket_app.model.CategoryModel;
+import com.cdhxqh.travel_ticket_app.model.Ec_goods;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.model.GoodsList;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
@@ -303,7 +304,7 @@ public class HttpManager {
      * @param password 密码
      * @param handler  返回结果处理
      */
-    public static void loginWithUsername(final Context cxt, final String username, final String password,
+    public static <E> void loginWithUsername(final Context cxt, final String username, final String password,
                                          final HttpRequestHandler<Integer> handler) {
         Map<String, String> mapparams = new HashMap<String, String>();
         mapparams.put("loginName", username);
@@ -388,6 +389,76 @@ public class HttpManager {
             @Override
             public void onFailure(String error) {
                 SafeHandler.onFailure(handler, error);
+            }
+        });
+    }
+
+    /**
+     * 景区分类
+     *
+     * @param cxt
+     * @param type 邮箱号
+     * @param handler  返回结果处理
+     */
+    public static void geType(final Context cxt, final String type,
+                                       final HttpRequestHandler<ArrayList<String>> handler) {
+        RequestParams maps = new RequestParams();
+        AsyncHttpClient client = new AsyncHttpClient();
+        maps.put("type", type);
+
+        client.get(Constants.CATEGORY_URL, maps, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                //解析返回的Json数据
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String result = jsonObject.getString("result");
+                    ArrayList<String> type = JsonUtils.spotType(result);
+                    SafeHandler.onSuccess(handler, type);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * 景区分类
+     *
+     * @param cxt
+     * @param type 邮箱号
+     * @param handler  返回结果处理
+     */
+    public static void geHot(final Context cxt, final String types, final String type,
+                              final HttpRequestHandler<ArrayList<Ec_goods>> handler) {
+        RequestParams maps = new RequestParams();
+        AsyncHttpClient client = new AsyncHttpClient();
+        maps.put(types, type);
+
+        client.get(Constants.GOODSLIST_URL, maps, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                //解析返回的Json数据
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String result = jsonObject.getString("result");
+                    ArrayList<Ec_goods> type = JsonUtils.hotSpot(result);
+                    SafeHandler.onSuccess(handler, type);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

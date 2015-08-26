@@ -31,7 +31,7 @@ public class Ec_goods extends Zw_Model implements Parcelable {
     /**
      * 价格*
      */
-    public String good_pay;
+    public double good_pay;
 
     /**
      * 景点级别*
@@ -53,12 +53,38 @@ public class Ec_goods extends Zw_Model implements Parcelable {
      */
     public String good_order_state;
 
+    public String getBrand_logo() {
+        return brand_logo;
+    }
+
+    public void setBrand_logo(String brand_logo) {
+        this.brand_logo = brand_logo;
+    }
+
+    public String getGood_price() {
+        return good_price;
+    }
+
+    public void setGood_price(String good_price) {
+        this.good_price = good_price;
+    }
+
+    /**
+     * 价格*
+     */
+    public String good_price;
+
+    /**
+     * 景区Logo
+     */
+    public String brand_logo;
+
     public void parse(JSONObject jsonObject) throws JSONException {
         Log.i(TAG, "jsonObject=" + jsonObject.toString());
         id = jsonObject.getInt("id");
         good_name = jsonObject.getString("good_name");
         good_time = jsonObject.getString("good_time");
-        good_pay = jsonObject.getString("good_pay");
+        good_pay = jsonObject.getDouble("good_pay");
         good_level = jsonObject.getString("good_level");
         good_order_time = jsonObject.getString("good_order_time");
         good_order_number = jsonObject.getString("good_order_number");
@@ -73,7 +99,7 @@ public class Ec_goods extends Zw_Model implements Parcelable {
         id = in.readInt();
         good_name = in.readString();
         good_time = in.readString();
-        good_pay = in.readString();
+        good_pay = in.readDouble();
         good_level = in.readString();
         good_order_time = in.readString();
         good_order_number = in.readString();
@@ -90,7 +116,7 @@ public class Ec_goods extends Zw_Model implements Parcelable {
         dest.writeInt(id);
         dest.writeString(good_name);
         dest.writeString(good_time);
-        dest.writeString(good_pay);
+        dest.writeDouble(good_pay);
         dest.writeString(good_level);
         dest.writeString(good_order_time);
         dest.writeString(good_order_number);
@@ -133,11 +159,11 @@ public class Ec_goods extends Zw_Model implements Parcelable {
         this.good_time = good_time;
     }
 
-    public String getGood_pay() {
+    public double getGood_pay() {
         return good_pay;
     }
 
-    public void setGood_pay(String good_pay) {
+    public void setGood_pay(double good_pay) {
         this.good_pay = good_pay;
     }
 

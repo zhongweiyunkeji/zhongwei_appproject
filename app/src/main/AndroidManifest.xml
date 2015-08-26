@@ -60,7 +60,7 @@
         <!-- 百度地图key -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="iTIOC0GE1Xe5uiPysSpmm4EZ" />
+            android:value="vwanOSQxsfTleQYKaejrK1Bh" />
         <!-- 友盟自动更新 -->
         <meta-data
             android:name="UMENG_APPKEY"
@@ -90,6 +90,11 @@
             android:name=".ui.activity.HomeActivity"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.TodaySpecialActivity"
+            android:label="@string/title_activity_home"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.activity.ClassActivity"
             android:label="@string/title_activity_class"

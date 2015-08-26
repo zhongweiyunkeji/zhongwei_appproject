@@ -1,6 +1,8 @@
 package com.cdhxqh.travel_ticket_app.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,9 @@ import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.model.Ec_goods;
 
 import java.util.ArrayList;
+
+import com.cdhxqh.travel_ticket_app.ui.activity.ReservationActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 
 /**
@@ -40,9 +45,27 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         final Ec_goods ec_goods = ec_goodses.get(i);
 
+
+        ImageLoader.getInstance().displayImage(ec_goods.getBrand_logo(), viewHolder.imageView);
         viewHolder.nameText.setText(ec_goods.getGood_name());
         viewHolder.timeText.setText(ec_goods.getGood_time());
-        viewHolder.payText.setText(ec_goods.getGood_pay());
+        viewHolder.payText.setText(ec_goods.getGood_price());
+
+        viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putString("tittle_reservation", ec_goods.getGood_name());
+                bundle.putString("end_date_id_a", "2015-12-31 17:00:00");
+                bundle.putString("bookingNum", ec_goods.getGood_price());
+                bundle.putString("unit_fare", ec_goods.getGood_price());
+                bundle.putString("goodsId", String.valueOf(ec_goods.getId()));
+                intent.putExtras(bundle);
+                intent.setClass(mContext, ReservationActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -78,6 +101,7 @@ public class GoodsListAdapter extends RecyclerView.Adapter<GoodsListAdapter.View
             super(view);
 
             relativeLayout = (RelativeLayout) view.findViewById(R.id.content_id);
+            imageView= (ImageView) view.findViewById(R.id.goods_image_id);
             nameText = (TextView) view.findViewById(R.id.goods_name_id);
             timeText = (TextView) view.findViewById(R.id.goods_time_id);
             payText = (TextView) view.findViewById(R.id.goods_pay_id);

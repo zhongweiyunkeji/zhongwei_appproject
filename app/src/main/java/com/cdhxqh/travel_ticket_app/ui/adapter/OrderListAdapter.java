@@ -51,7 +51,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.View
         viewHolder.ordernumberText.setText(ec_goods.good_order_number);
 
 
-        viewHolder.payText.setText(ec_goods.good_pay);
+        viewHolder.payText.setText(String.valueOf(ec_goods.good_pay));
 
         viewHolder.statusText.setText(ec_goods.good_order_state);
 
