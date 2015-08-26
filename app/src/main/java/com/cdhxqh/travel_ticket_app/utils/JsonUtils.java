@@ -6,6 +6,7 @@ import android.util.Log;
 import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.Attractions;
 import com.cdhxqh.travel_ticket_app.model.CategoryModel;
+import com.cdhxqh.travel_ticket_app.model.Ec_goods;
 import com.cdhxqh.travel_ticket_app.model.Ec_user;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.model.GoodsList;
@@ -165,6 +166,30 @@ public class JsonUtils {
 
 
     /**
+     * 获取景区分类*
+     */
+    public static ArrayList<String> spotType(String result) {
+
+        ArrayList<String> type = new ArrayList<String>();
+        try {
+            JSONArray array = new JSONArray(result);
+
+
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject myjObject = array.getJSONObject(i);
+                type.add(myjObject.get("catName").toString());
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return type;
+    }
+
+
+    /**
      * 获取景区信息*
      */
     public static ArrayList<Ecs_brand> parsingBrandsInfo(String result) {
@@ -196,6 +221,49 @@ public class JsonUtils {
                 ecs_brand.setPo_notice(jsonObject.getString("po_notice"));
 
                 ecs_brand.setMinprice(jsonObject.getDouble("minprice"));
+                models.add(ecs_brand);
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return models;
+    }
+
+    /**
+     * 热门景点*
+     */
+    public static ArrayList<Ec_goods> hotSpot(String result) {
+
+        ArrayList<Ec_goods> models = new ArrayList<Ec_goods>();
+        try {
+
+            JSONObject json = new JSONObject(result);
+
+            String url = json.getString("serverurl");
+
+            JSONArray brandlist = json.getJSONArray("goodslist");
+
+            for (int i = 0; i < brandlist.length(); i++) {
+                JSONObject jsonObject = (JSONObject) brandlist.get(i);
+                Ec_goods ecs_brand = new Ec_goods();
+                ecs_brand.setId(jsonObject.getInt("goodsId"));
+//                ecs_brand.setIs_show(jsonObject.getBoolean("is_show") + "");
+                ecs_brand.setGood_name(jsonObject.getString("goodsName"));
+//                ecs_brand.setBrand_desc(jsonObject.getString("brand_desc"));
+//                ecs_brand.setSort_order(jsonObject.getString("sort_order"));
+//                ecs_brand.setSite_url(jsonObject.getString("site_url"));
+                ecs_brand.setBrand_logo(url + "/" + jsonObject.getString("goodsImg"));
+                ecs_brand.setGood_time(jsonObject.getString("promoteStartDate"));
+//                ecs_brand.setLongitude(jsonObject.getString("longitude"));
+//                ecs_brand.setLatitude(jsonObject.getString("latitude"));
+
+//                ecs_brand.setAddress(jsonObject.getString("address"));
+//                ecs_brand.setPo_notice(jsonObject.getString("po_notice"));
+
+                ecs_brand.setGood_price(jsonObject.getString("shopPrice"));
                 models.add(ecs_brand);
             }
 
