@@ -21,7 +21,7 @@ public class StartActivity extends BaseActivity {
 
 
     private static final int[] SPLASH_ARRAY = {
-            R.drawable.splash0,
+            R.drawable.front_cover
 
     };
 
