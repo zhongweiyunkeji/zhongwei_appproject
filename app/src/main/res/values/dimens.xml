@@ -15,8 +15,15 @@
     <dimen name="dimens_35">35dp</dimen>
     <dimen name="reg_dimens_margin_left_20">20dp</dimen>
     <dimen name="reg_dimens_margin_right_20">20dp</dimen>
-    <dimen name="text_size_45">45px</dimen>
-    <dimen name="text_size_40">40px</dimen>
-    <dimen name="reg_dimens_textsize_01">40px</dimen>
+    <dimen name="text_size_45">45dp</dimen>
+    <dimen name="text_size_40">40dp</dimen>
+    <dimen name="reg_dimens_textsize_01">40dp</dimen>
 
+
+
+    <dimen name="font14">14sp</dimen>
+    <dimen name="font16">16sp</dimen>
+    <dimen name="font18">18sp</dimen>
+    <dimen name="font20">20sp</dimen>
+    <dimen name="font28">28sp</dimen>
 </resources>
