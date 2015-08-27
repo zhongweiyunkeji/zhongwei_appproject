@@ -236,4 +236,6 @@ public class Constants {
 
     public static final String ATTRACTIONS_SEARCH_URL = BASE_URL + "ecsbrand/articlelist";
 
+    public static final String ATTRACTIONS_PAGGING_URL = BASE_URL + "ecsbrand/articlepage";
+
 }
