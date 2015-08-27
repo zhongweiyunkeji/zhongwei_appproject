@@ -1,6 +1,7 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -26,6 +27,7 @@ import com.cdhxqh.travel_ticket_app.ui.widget.XEditText;
 import com.cdhxqh.travel_ticket_app.utils.JsonUtils;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.cdhxqh.travel_ticket_app.utils.NetWorkHelper;
+import com.cdhxqh.travel_ticket_app.utils.UIUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,13 +64,13 @@ public class Listen_ZhongWei_Search_Activity extends BaseActivity {
     HttpRequestHandler requestHandler = new HttpRequestHandler<String> (){ // 分页回调接口
         @Override
         public void onFailure(String error) {
-            progressDialog.dismiss();
+           // progressDialog.dismiss();
             MessageUtils.showErrorMessage(Listen_ZhongWei_Search_Activity.this, error);
         }
 
         @Override
         public void onSuccess(String data) {
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
             try {
                 JSONObject jsonObject = new JSONObject(data);
                 String str = jsonObject.getString("errcode");
@@ -100,7 +102,7 @@ public class Listen_ZhongWei_Search_Activity extends BaseActivity {
 
         @Override
         public void onSuccess(String data, int totalPages, int currentPage) {
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
         }
     };
 
@@ -142,6 +144,7 @@ public class Listen_ZhongWei_Search_Activity extends BaseActivity {
 
         backupImg.setOnTouchListener(backImageViewOnTouchListener);
 
+        UIUtils.drawableRadiusTextView(searchText, Color.parseColor("#249174"));  // 画出圆角searchText
         searchText.setHint("请输入搜索内容");
         searchText.setHintTextColor(getResources().getColor(R.color.white));  // 设置提示颜色为白色
         searchText.setTextSize(15);
@@ -156,6 +159,7 @@ public class Listen_ZhongWei_Search_Activity extends BaseActivity {
                 } else {
                     clearImg.setVisibility(View.GONE);
                 }
+                refreshData();
             }
 
             @Override
@@ -222,7 +226,7 @@ public class Listen_ZhongWei_Search_Activity extends BaseActivity {
 
     public void loadData(Map<String, String> params) {
         if (NetWorkHelper.isNetAvailable(this)) {
-            createProgressDialog();
+           // createProgressDialog();
             HttpManager.requestOnceWithURLString(this, Constants.SCENICE_SEARCH_URL, params, requestHandler);
         } else {
             MessageUtils.showErrorMessage(this, getResources().getString(R.string.error_network_exception));
