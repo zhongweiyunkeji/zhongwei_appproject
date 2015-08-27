@@ -1,6 +1,7 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -25,6 +26,8 @@ import com.cdhxqh.travel_ticket_app.ui.widget.XEditText;
 import com.cdhxqh.travel_ticket_app.utils.JsonUtils;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.cdhxqh.travel_ticket_app.utils.NetWorkHelper;
+import com.cdhxqh.travel_ticket_app.utils.UIUtils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -56,13 +59,15 @@ public class SearchSecnicActivity extends BaseActivity  {
     HttpRequestHandler requestHandler = new HttpRequestHandler<String> (){ // 分页回调接口
         @Override
         public void onFailure(String error) {
-            progressDialog.dismiss();
+            swipeRefreshLayout.setRefreshing(false);
+            //progressDialog.dismiss();
             MessageUtils.showErrorMessage(SearchSecnicActivity.this, error);
         }
 
         @Override
         public void onSuccess(String data) {
-            progressDialog.dismiss();
+            swipeRefreshLayout.setRefreshing(false);
+            //progressDialog.dismiss();
             try {
                 JSONObject jsonObject = new JSONObject(data);
                 String str = jsonObject.getString("errcode");
@@ -95,7 +100,8 @@ public class SearchSecnicActivity extends BaseActivity  {
 
         @Override
         public void onSuccess(String data, int totalPages, int currentPage) {
-            progressDialog.dismiss();
+            swipeRefreshLayout.setRefreshing(false);
+            // progressDialog.dismiss();
         }
     };
 
@@ -135,6 +141,8 @@ public class SearchSecnicActivity extends BaseActivity  {
         hintLaout.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
         clearImg.setVisibility(View.GONE);
+
+        UIUtils.drawableRadiusTextView(searchText, Color.parseColor("#249174"));  // 画出圆角searchText
         searchText.setHint("请输入搜索内容");
         searchText.setHintTextColor(getResources().getColor(R.color.white));  // 设置提示颜色为白色
         searchText.setTextSize(15);
@@ -190,6 +198,7 @@ public class SearchSecnicActivity extends BaseActivity  {
                 } else {
                     clearImg.setVisibility(View.GONE);
                 }
+                refreshData();
             }
 
             @Override
@@ -222,7 +231,7 @@ public class SearchSecnicActivity extends BaseActivity  {
             return;
         }
         if (NetWorkHelper.isNetAvailable(this)) {
-            createProgressDialog();
+           // createProgressDialog();
             HttpManager.requestOnceWithURLString(this, Constants.SCENICE_SEARCH_URL, params, requestHandler);
         } else {
             MessageUtils.showErrorMessage(this, getResources().getString(R.string.error_network_exception));
@@ -231,7 +240,7 @@ public class SearchSecnicActivity extends BaseActivity  {
 
 
     public void refreshData() {
-        swipeRefreshLayout.setRefreshing(false);     // 完成刷新,隐藏搜索刷新旋转按钮
+        // swipeRefreshLayout.setRefreshing(false);     // 完成刷新,隐藏搜索刷新旋转按钮
         String searchText = this.searchText.getText().toString();
         preText = curText;         // 保存上一次搜索的内容
         curText = searchText;       // 保存当前搜索框的内容
