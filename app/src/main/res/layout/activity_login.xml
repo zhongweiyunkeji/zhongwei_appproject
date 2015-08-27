@@ -79,12 +79,12 @@
             android:text="@string/login_text" />
 
 
-            <!--<com.cdhxqh.travel_ticket_app.app.SwitchButton-->
-                <!--android:id="@+id/wiperSwitch1"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_width="10dp"-->
-                <!--android:layout_height="10dp"-->
-                <!--/>-->
+            <com.cdhxqh.travel_ticket_app.app.SwitchButton
+                android:id="@+id/wiperSwitch1"
+                android:layout_gravity="center"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                />
 
         <CheckedTextView
             android:layout_width="match_parent"
