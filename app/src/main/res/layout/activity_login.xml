@@ -9,30 +9,30 @@
 
     <ImageView
         android:id="@+id/top_image_view_id"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/login_top_dimens"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:scaleType="fitXY"
-
-        android:src="@drawable/login_edit_pic" />
+        android:background="@drawable/login_bg"
+        android:src="@drawable/login_font" />
 
     <LinearLayout
         android:id="@+id/linearlayout_1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimens_120"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/dimens_30"
-        android:background="@drawable/login_edit_text"
+        android:layout_margin="@dimen/dimens_20"
+        android:background="@drawable/edit_text_bg"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/user_edittext_id"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_60"
-            android:layout_marginLeft="@dimen/dimens_5"
-            android:layout_marginRight="@dimen/dimens_5"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:layout_marginRight="@dimen/dimens_10"
             android:textCursorDrawable="@drawable/color_cursor"
             android:singleLine="true"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:drawableRight="@drawable/login_icon_user"
             android:hint="@string/please_user_name_text" />
 
@@ -45,9 +45,9 @@
             android:id="@+id/passworld_edittext_id"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimens_60"
-            android:layout_marginLeft="@dimen/dimens_5"
-            android:background="@color/white"
-            android:layout_marginRight="@dimen/dimens_5"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:background="@android:color/transparent"
             android:drawableRight="@drawable/login_icon_lock"
             android:textCursorDrawable="@drawable/color_cursor"
             android:singleLine="true"
@@ -59,8 +59,8 @@
         android:id="@+id/linearlayout_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimens_30"
-        android:layout_marginRight="@dimen/dimens_30"
+        android:layout_marginLeft="@dimen/dimens_20"
+        android:layout_marginRight="@dimen/dimens_20"
         android:orientation="vertical">
 
         <TextView
@@ -68,7 +68,6 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="@string/forget_pass_word"
             android:textColor="@color/list_item_read"
@@ -76,20 +75,16 @@
 
         <Button
             android:id="@+id/login_btn_id"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/login_button_login"
-            android:text="@string/login_text"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+            style="@style/btnOrange"
+            android:text="@string/login_text" />
 
 
-            <com.cdhxqh.travel_ticket_app.app.SwitchButton
-                android:id="@+id/wiperSwitch1"
-                android:layout_gravity="center"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                />
+            <!--<com.cdhxqh.travel_ticket_app.app.SwitchButton-->
+                <!--android:id="@+id/wiperSwitch1"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_width="10dp"-->
+                <!--android:layout_height="10dp"-->
+                <!--/>-->
 
         <CheckedTextView
             android:layout_width="match_parent"
@@ -113,7 +108,7 @@
             android:layout_gravity="bottom"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_marginTop="@dimen/dimens_30"
+            android:layout_marginTop="@dimen/dimens_20"
             android:background="@drawable/login_button1_a"
             android:gravity="center">
 
@@ -127,8 +122,8 @@
 
             <ImageView
                 android:id="@+id/image_view_id"
-                android:layout_width="@dimen/dimens_40"
-                android:layout_height="@dimen/dimens_40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/button_id"
                 android:src="@drawable/login_icon_add" />
         </LinearLayout>

@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:contentDescription="entry"
-        android:src="@drawable/splash0"
+        android:src="@drawable/front_cover"
         android:id="@+id/iv_entry"/>
 
 
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:gravity="center"
-        android:textSize="23sp"
+        android:textSize="@dimen/font14"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
         android:text="@string/travel_app_text"/>
