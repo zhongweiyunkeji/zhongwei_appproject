@@ -126,7 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_below="@+id/user_re_layout_id"
-        android:background="@drawable/line_x_reservation"/>
+        android:background="@drawable/list_line_x"/>
 
 
 
