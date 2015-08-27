@@ -35,6 +35,7 @@
             android:layout_height="@dimen/dimens_35"
             android:layout_alignBaseline="@+id/reg_msg_input"
             android:layout_alignRight="@+id/reg_msg_input"
+            android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/phone_test_on"
             android:padding="10dp"
