@@ -64,11 +64,11 @@ public class Constants {
 
     public static final String UPDATE_STOCK_URL = BASE_URL+"ecsorder/change";
 
-	/**验票员登录接口**/
-	public static final String TICKET_URL = BASE_URL+"ecsusers/adminlogin";
+    /**验票员登录接口**/
+    public static final String TICKET_URL = BASE_URL+"ecsusers/adminlogin";
 
-	/**  验票地址  **/
-	public static final String CHECK_TICKET_URL = BASE_URL+"checkticket/check";
+    /**  验票地址  **/
+    public static final String CHECK_TICKET_URL = BASE_URL+"checkticket/check";
 
     /**
      ******************************************* 接口参数设置信息结束 ******************************************
