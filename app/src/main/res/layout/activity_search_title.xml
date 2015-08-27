@@ -30,7 +30,7 @@
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/search_text_background_icon"
+            android:background="#249174"
             android:drawableLeft="@drawable/icon_search"
             android:textColor="@color/white"
             android:textSize="@dimen/dimens_22" />

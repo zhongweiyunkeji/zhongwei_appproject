@@ -1,6 +1,7 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -28,6 +29,7 @@ import com.cdhxqh.travel_ticket_app.ui.widget.XEditText;
 import com.cdhxqh.travel_ticket_app.utils.JsonUtils;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.cdhxqh.travel_ticket_app.utils.NetWorkHelper;
+import com.cdhxqh.travel_ticket_app.utils.UIUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,6 +128,7 @@ public class Attractions_Search_List_Activty extends BaseActivity {
         recyclerView.setVisibility(View.GONE);
         closeImg.setVisibility(View.GONE);
 
+        UIUtils.drawableRadiusTextView(searchText, Color.parseColor("#249174"));  // 画出圆角searchText
         searchText.setHint("请输入搜索内容");
         searchText.setHintTextColor(getResources().getColor(R.color.white));  // 设置提示颜色为白色
         searchText.setTextSize(15);
