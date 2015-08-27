@@ -76,7 +76,7 @@
             android:layout_height="15dp"
             android:layout_gravity="center_vertical"
             android:layout_toRightOf="@+id/user_not_pay_id"
-            android:background="@drawable/ic_line"></View>
+            android:background="@drawable/list_line_x"></View>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -100,7 +100,7 @@
             android:layout_height="15dp"
             android:layout_gravity="center_vertical"
             android:layout_toRightOf="@+id/user_not_travel_id"
-            android:background="@drawable/ic_line"></View>
+            android:background="@drawable/list_line_x"></View>
 
     <LinearLayout
         android:layout_width="0dp"

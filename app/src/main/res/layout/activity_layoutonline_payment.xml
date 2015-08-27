@@ -80,29 +80,30 @@
     </TableLayout>
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/payment_line_x"/>
+        android:background="@drawable/list_line_x"/>
 
         <!--支付界面-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/login_input_style"
+            android:background="@drawable/edit_text_bg"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                >
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1">
 
                 <ImageView
                     android:id="@+id/weixin_id"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/online_payment_03"/>
@@ -138,23 +139,22 @@
             </RelativeLayout>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:src="@drawable/payment_line_x"/>
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"/>
 
             <RelativeLayout
                 android:id="@+id/zhifu_id_a"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                >
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1">
 
                 <ImageView
                     android:id="@+id/zhifu_id"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
                     android:src="@drawable/payment_online_06"/>

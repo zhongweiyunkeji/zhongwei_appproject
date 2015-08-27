@@ -4,6 +4,6 @@
     android:layout_height="wrap_content" 
     android:textColor="@color/umeng_socialize_text_friends_list"
     android:background="#eeeeee"
-    android:paddingLeft="8dp"
+    android:paddingLeft="10dp"
     android:text="header"
     android:id="@+id/header" />

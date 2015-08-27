@@ -25,8 +25,7 @@
             android:orientation="vertical"
             android:gravity="center"
             android:visibility="gone"
-            android:layout_centerInParent="true"
-            >
+            android:layout_centerInParent="true">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,9 +33,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#F0B300"
-                android:textSize="25dp"
-                android:text="亲,暂时没有订单可查看"/>
+                android:textColor="@color/gray"
+                android:textSize="@dimen/font18"
+                android:paddingTop="10dp"
+                android:text="亲，暂时没有订单可看"/>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

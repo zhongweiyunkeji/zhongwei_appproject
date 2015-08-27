@@ -16,18 +16,17 @@
             android:layout_width="fill_parent"
             android:layout_height="@dimen/dimens_60"
             android:layout_gravity="left"
-            android:layout_marginBottom="20dp"
             android:layout_marginLeft="@dimen/reg_dimens_margin_left_20"
             android:layout_marginRight="@dimen/reg_dimens_margin_right_20"
-            android:background="@drawable/user_middle_bj"
+            android:background="@drawable/edit_text_bg"
             android:gravity="center_vertical"
             android:hint="验证码"
             android:maxLength="6"
             android:paddingLeft="10dp"
             android:singleLine="true"
-            android:textColor="#B9B9B9"
+            android:textColor="@color/balck_color"
             android:textCursorDrawable="@drawable/color_cursor"
-            android:textSize="@dimen/reg_dimens_textsize_01" />
+            android:textSize="@dimen/font18" />
 
         <Button
             android:id="@+id/reg_senmsg_btn"
@@ -38,33 +37,29 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/phone_test_on"
-            android:padding="10dp"
+            android:paddingLeft="@dimen/dimens_10"
+            android:paddingRight="@dimen/dimens_10"
             android:text="获取验证码"
-            android:textColor="#000000"
-            android:textSize="25px" />
+            android:textColor="@color/balck_color"
+            android:textSize="@dimen/font16" />
     </RelativeLayout>
 
     <TextView
         android:id="@+id/reg_hint_text"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/dimens_60"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp"
-        android:singleLine="true"
-        android:text="已发送短信验证码到182****5217"
-        android:textColor="#C8D1D0"
-        android:textSize="25px" />
-
-    <Button
-        android:id="@+id/reg_msg_btn"
-        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/reg_bottom_button"
-        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:singleLine="true"
+        android:text="已发送短信验证码到"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/font14" />
+
+    <Button
+        android:id="@+id/reg_msg_btn"
+        style="@style/btnOrange"
         android:text="注册"
-        android:textColor="@color/white"
-        android:textSize="40px" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
 </LinearLayout>

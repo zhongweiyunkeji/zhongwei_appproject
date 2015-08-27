@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f1fbf9"
     android:orientation="vertical">
@@ -182,9 +182,9 @@
 
                 <LinearLayout
                     android:layout_width="120dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="150dp"
                     android:layout_weight="1"
-                    android:background="@drawable/input_left_text"
+                    android:background="@drawable/edit_text_bg"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -199,23 +199,26 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="15dp"
                         android:gravity="center"
-                        android:text="取票人"
+                        android:text="出游人"
                         android:textSize="16sp"/>
 
                     <EditText
                         android:id="@+id/ticket_user"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="10dp"
                         android:background="@android:color/transparent"
                         android:singleLine="true"
                         android:ellipsize="end"
                         android:textCursorDrawable="@drawable/color_cursor"
                         android:textSize="14sp"
-                        />
+                        android:hint="出游人姓名"/>
 
-                        </LinearLayout>
-
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="@drawable/list_line_x"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -237,17 +240,20 @@
                         android:id="@+id/ticket_user_a"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="10dp"
                         android:background="@android:color/transparent"
                         android:textSize="14sp"
                         android:singleLine="true"
                         android:ellipsize="end"
                         android:inputType="phone"
                         android:textCursorDrawable="@drawable/color_cursor"
-                        />
+                        android:hint="接收电子票码手机号" />
 
-                        </LinearLayout>
-
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="@drawable/list_line_x"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -268,9 +274,9 @@
                         android:id="@+id/id_card"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="10dp"
                         android:background="@android:color/transparent"
-                        android:hint="用于景点的入园凭证"
+                        android:hint="用于景区的入园凭证"
                         android:textSize="14sp"
                         android:singleLine="true"
                         android:ellipsize="end"
@@ -283,11 +289,10 @@
 
                 <FrameLayout
                     android:layout_height="match_parent"
-                    android:layout_width="0dp"
-                    android:layout_weight="1">
+                    android:layout_width="wrap_content">
                     <TextView
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_width="wrap_content"
                         android:background="@drawable/button_right_t"
                         android:textColor="#2f4f4f"/>
                 </FrameLayout>
@@ -329,14 +334,8 @@
 
             <Button
                 android:id="@+id/put_order"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/button_login_mail"
-                android:text="提交订单"
-                android:textColor="#ffffff"
-                />
+                style="@style/btnOrange"
+                android:text="提交订单"/>
 
         </LinearLayout>
 
