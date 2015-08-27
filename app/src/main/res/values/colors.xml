@@ -9,7 +9,7 @@
     <color name="light_green">#dff2ee</color>
 
     <color name="list_item_read">#ffb7b7b7</color>
-    <color name="gray">#bfbfbf</color>
+    <color name="gray">#999999</color>
     <color name="orange_color">#f4ad49</color>
     <color name="write">#ffffff</color>
     <color name="clarity">@android:color/transparent</color>
