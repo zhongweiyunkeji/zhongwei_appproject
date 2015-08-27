@@ -28,14 +28,6 @@ public class Constants {
     /**验证码密码接口**/
     public static final String PHONELINE_URL = BASE_URL+"ecsusers/doReset";
 
-    /**用户注册验证码 **/
-
-    public static final String REG_CODE_URL = BASE_URL+"ecsusers/doCheck";
-
-    /**用户注册**/
-
-    public static final String REG_URL = BASE_URL+"ecsusers/doCheck";
-
     /**获取游客中心**/
 
     public static final String USER_URL = BASE_URL+"ecsusers/info";
@@ -237,5 +229,13 @@ public class Constants {
     public static final String ATTRACTIONS_SEARCH_URL = BASE_URL + "ecsbrand/articlelist";
 
     public static final String ATTRACTIONS_PAGGING_URL = BASE_URL + "ecsbrand/articlepage";
+
+    /**用户注册验证码 **/
+
+    public static final String REG_CODE_URL = BASE_URL+"ecsusers/check";
+
+    /**用户注册**/
+
+    public static final String REG_URL = BASE_URL+"ecsusers/doCheck";
 
 }
