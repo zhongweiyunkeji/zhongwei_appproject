@@ -63,7 +63,7 @@ public class RegisterActivity extends BaseActivity {
 
     private ProgressDialog  progressDialog;
 
-
+    TimeCountUtil timeCountUtil;
 
 
     @Override
@@ -117,6 +117,7 @@ public class RegisterActivity extends BaseActivity {
         titleText.setText("手机号注册");
         backImageviewId.setVisibility(View.VISIBLE);
         titleSearchId.setVisibility(View.GONE);
+        reg_hint_text.setText("");
 
         backImageviewId.setOnTouchListener(backImageViewOnTouchListener);
 
@@ -297,7 +298,9 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onSuccess(String data) {
                 Log.i(TAG, "data=" + data);
-                TimeCountUtil timeCountUtil = new TimeCountUtil(RegisterActivity.this, 60000, 1000, button, R.drawable.phone_test_on); // 更新按钮状态
+                if(timeCountUtil == null){
+                    timeCountUtil  = new TimeCountUtil(RegisterActivity.this, 60000, 1000, button, R.drawable.phone_test_on); // 更新按钮状态
+                }
                 timeCountUtil.start(); // 启动线程
                 try {
                     JSONObject jsonObject = new JSONObject(data);
@@ -311,6 +314,9 @@ public class RegisterActivity extends BaseActivity {
                             msg = msg + phone;
                             reg_hint_text.setText(msg);
                         } else {
+                            if(timeCountUtil != null){
+                                timeCountUtil.cancelCountDown("获取验证码");
+                            }
                             MessageUtils.showMiddleToast(RegisterActivity.this, (String) jsonObject.get("errmsg"));
                         }
                     }
@@ -326,6 +332,9 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onFailure(String error) {
+                if(timeCountUtil != null){
+                    timeCountUtil.cancelCountDown("获取验证码");
+                }
                 if (null != error && error.length() > 0) {
                     MessageUtils.showErrorMessage(RegisterActivity.this, error);
                 } else {
