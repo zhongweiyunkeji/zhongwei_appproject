@@ -17,7 +17,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dimens_10"
-            android:src="@drawable/title_back_btn" />
+            android:src="@drawable/ic_menu_back" />
 
         <TextView
             android:id="@+id/title_text_id"

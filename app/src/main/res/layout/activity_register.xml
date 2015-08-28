@@ -29,7 +29,7 @@
             <ImageView
                 android:layout_column="1"
                 android:layout_weight="1"
-                android:src="@drawable/reg_nav_icon_ight" />
+                android:src="@drawable/ic_tab_arrow_right" />
 
             <TextView
                 android:id="@+id/write_pwd"
@@ -44,7 +44,7 @@
             <ImageView
                 android:layout_column="3"
                 android:layout_weight="1"
-                android:src="@drawable/reg_nav_icon_ight" />
+                android:src="@drawable/ic_tab_arrow_right" />
 
             <TextView
                 android:id="@+id/write_sendmsg"

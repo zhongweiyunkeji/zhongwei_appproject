@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         />
-                   <!-- android:text="￥80"-->
+                   <!-- android:text="¥80"-->
                     <TextView
                         android:id="@+id/order_three_in_item_ordertotal"
                         android:layout_marginLeft="25dp"

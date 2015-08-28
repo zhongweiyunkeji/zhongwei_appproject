@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/title_back_btn"
+            android:src="@drawable/ic_menu_back"
             android:visibility="gone"/>
 
         <TextView
@@ -36,7 +36,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:scaleType="center"
-            android:src="@drawable/ic_menu" />
+            android:src="@drawable/ic_menu_list" />
              />
 
 
@@ -47,5 +47,4 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clickable="true" />
-
 </LinearLayout>

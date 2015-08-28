@@ -106,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/online_payment_03"/>
+                    android:src="@drawable/ic_weixinplay"/>
 
                 <LinearLayout
                     android:id="@+id/weixin_payment_id"
@@ -135,7 +135,7 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/payment_icon_right"/>
+                    android:src="@drawable/ic_list_view"/>
             </RelativeLayout>
 
             <ImageView
@@ -157,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/payment_online_06"/>
+                    android:src="@drawable/ic_alipay"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -186,7 +186,7 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/payment_icon_right"/>
+                    android:src="@drawable/ic_list_view"/>
             </RelativeLayout>
 
         </LinearLayout>

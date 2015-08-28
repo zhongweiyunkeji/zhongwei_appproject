@@ -1,27 +1,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.cdhxqh.travel_ticket_app.ui.activity.ClassActivity">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:background="@drawable/action_bar_top">
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/green_color">
 
         <ImageView
             android:id="@+id/back_imageview_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/title_back_btn"
-            android:layout_marginLeft="@dimen/dimens_10"
-            android:visibility="gone"
-           />
+            android:src="@drawable/ic_menu_back"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/title_text_id"
@@ -30,8 +25,8 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:textColor="@color/white"
-            android:text="标题"
-            android:textSize="@dimen/font28"/>
+            android:textSize="@dimen/font28"
+            android:text="标题"/>
 
         <ImageView
             android:id="@+id/title_search_id"
@@ -39,14 +34,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_search" />
+            android:src="@drawable/ic_menu_search" />
 
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/action_bar_down"></LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/action_bar_down"></LinearLayout>-->
 
 </LinearLayout>

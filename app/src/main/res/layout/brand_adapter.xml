@@ -14,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:scaleType="fitXY"
-        android:background="@drawable/big_not_image_bj"
+        android:background="@drawable/not_image_bj"
          />
 
     <LinearLayout

@@ -21,24 +21,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-
-            android:background="@drawable/btn_black_circle"
-            android:src="@drawable/reg_top_left_icon" />
+            android:src="@drawable/ic_menu_back2" />
 
         <ImageView
             android:id="@+id/tickets_share_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@drawable/btn_black_circle"
-            android:src="@drawable/scenic_detail_share" />
+            android:src="@drawable/ic_menu_share" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/tickets_share_id"
-            android:background="@drawable/btn_black_circle"
-            android:src="@drawable/scenic_detail_star" />
+            android:src="@drawable/ic_menu_collection2" />
 
     </RelativeLayout>
 
