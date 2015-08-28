@@ -63,6 +63,11 @@
         android:layout_marginRight="@dimen/dimens_30"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
         <TextView
             android:id="@+id/TextViewPassWord"
             android:layout_width="70dp"
@@ -74,6 +79,15 @@
             android:textColor="@color/list_item_read"
             android:textSize="15sp" />
 
+        <com.cdhxqh.travel_ticket_app.app.SwitchButton
+            android:id="@+id/wiperSwitch1"
+            android:layout_alignParentRight="true"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            />
+
+            </RelativeLayout>
+
         <Button
             android:id="@+id/login_btn_id"
             android:layout_width="match_parent"
@@ -82,14 +96,6 @@
             android:text="@string/login_text"
             android:textColor="@color/white"
             android:textSize="20dp" />
-
-
-            <com.cdhxqh.travel_ticket_app.app.SwitchButton
-                android:id="@+id/wiperSwitch1"
-                android:layout_gravity="center"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                />
 
         <CheckedTextView
             android:layout_width="match_parent"
@@ -102,7 +108,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/login_footbg_f"
         android:gravity="center">
 
