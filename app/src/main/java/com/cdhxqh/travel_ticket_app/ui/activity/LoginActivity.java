@@ -2,6 +2,7 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -35,6 +36,7 @@ import java.util.HashMap;
 
 public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity3";
+    SharedPreferences.Editor editor;
 
 
     /**
@@ -93,6 +95,7 @@ public class LoginActivity extends BaseActivity {
                 type = state;
             }
         });
+        editor = myshared.edit();
     }
 
 
@@ -190,10 +193,11 @@ public class LoginActivity extends BaseActivity {
             HttpManager.loginWithUsername(this,
                     userEditText.getText().toString(),
                     pwdEditText.getText().toString(),
-                    new HttpRequestHandler<Integer>() {
+                    new HttpRequestHandler<String>() {
                         @Override
-                        public void onSuccess(Integer data) {
-
+                        public void onSuccess(String data) {
+                            editor.putString(Constants.SESSIONIDTRUE,  data);
+                            editor.commit();
 
                             MessageUtils.showMiddleToast(LoginActivity.this, "登陆成功");
                             progressDialog.dismiss();
@@ -202,7 +206,7 @@ public class LoginActivity extends BaseActivity {
                         }
 
                         @Override
-                        public void onSuccess(Integer data, int totalPages, int currentPage) {
+                        public void onSuccess(String data, int totalPages, int currentPage) {
                             Log.i(TAG, "22222");
                         }
 

@@ -3,6 +3,7 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -279,7 +280,8 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
          */
 //        progressDialog = ProgressDialog.show(Layoutonline_Payment_Activity.this, null,
 //                getString(R.string.loading), true, true);
-        HttpManager.reservation(this, goodsAmount, goodsIds, "1", "1", consignee, mobile, postscript, handler);
+        SharedPreferences myShared = getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
+        HttpManager.reservation(myShared.getString(Constants.SESSIONIDTRUE, "") ,this, goodsAmount, goodsIds, "1", "1", consignee, mobile, postscript, handler);
     }
 
     private HttpRequestHandler<CategoryModel> handler = new HttpRequestHandler<CategoryModel>() {
@@ -338,7 +340,8 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
          */
         progressDialog = ProgressDialog.show(Layoutonline_Payment_Activity.this, null,
                 getString(R.string.loading), true, true);
-        HttpManager.updateStock(this, categoryModel.getOut_trade_no(), categoryModel.getOrderId(), orderStatus, goodsIds, handlerUpdateStock);
+        SharedPreferences myShared = getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
+        HttpManager.updateStock(myShared.getString(Constants.SESSIONIDTRUE, ""), this, categoryModel.getOut_trade_no(), categoryModel.getOrderId(), orderStatus, goodsIds, handlerUpdateStock);
     }
 
     private HttpRequestHandler<Integer> handlerUpdateStock = new HttpRequestHandler<Integer>() {
