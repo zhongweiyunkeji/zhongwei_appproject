@@ -95,9 +95,13 @@ public class AroundPlayActivity extends BaseActivity{
 
         Bundle bundle = new Bundle();
         bundle = this.getIntent().getExtras();
-        text_introduction_tittle.setText(bundle.getString("spotId"));
-        ImageLoader.getInstance().displayImage(bundle.getString("spotLogo"), image_introduction_id);
-        text_introduction_desc.setText(bundle.getString("spotDesc"));
+        text_introduction_tittle.setText("周边游");
+//        ImageLoader.getInstance().displayImage(bundle.getString("spotLogo"), image_introduction_id);
+        text_introduction_desc.setText("杨纪淡淡道。他一点也不怕大阿修罗会掐断意识连接，论心情的急切程度，大阿修罗恐怕比自己都要厉害的多。\n" +
+                "\n" +
+                "如果自己放弃的话，恐怕大阿修罗会是第一个不答应的。\n" +
+                "\n" +
+                "话是这么说，不过杨纪还是很快将精力集中到了突然℉℉，x.变化的视野出现的东西，就在万年红心桃木法器的底部核心，透过大阿修罗的能力，杨纪看到了完全截然不同的东西。");
 
         //返回至登录界面事件
         backImageView.setOnClickListener(backImageViewOnClickListener);
