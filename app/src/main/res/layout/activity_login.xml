@@ -44,7 +44,7 @@
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:singleLine="true"
                 android:background="@android:color/transparent"
-                android:drawableRight="@drawable/login_icon_user"
+                android:drawableRight="@drawable/ic_menu_user"
                 android:hint="@string/please_user_name_text" />
 
             <View
@@ -59,7 +59,7 @@
                 android:layout_marginLeft="@dimen/dimens_10"
                 android:layout_marginRight="@dimen/dimens_10"
                 android:background="@android:color/transparent"
-                android:drawableRight="@drawable/login_icon_lock"
+                android:drawableRight="@drawable/ic_menu_lock"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:singleLine="true"
                 android:inputType="textPassword"
@@ -140,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/button_id"
-                android:src="@drawable/login_icon_add" />
+                android:src="@drawable/ic_add_user" />
         </LinearLayout>
 
     </RelativeLayout>

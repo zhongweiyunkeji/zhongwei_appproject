@@ -27,26 +27,27 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center|center_horizontal"
                 android:layout_margin="20dp"
-                android:background="@drawable/phone_tabs_list"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_gravity="center|center_horizontal"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/phone_find_back_text"
+                    android:background="@drawable/tabs_left_sel"
                     android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/TextViewMail"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/email_find_back_text" />
+                    android:text="@string/email_find_back_text"
+                    android:background="@drawable/tabs_right_nol"/>
 
             </LinearLayout>
 
@@ -64,7 +65,7 @@
                     android:paddingRight="10dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:drawableRight="@drawable/button_phone_bm"
+                    android:drawableRight="@drawable/ic_menu_mobile"
                     android:hint="@string/please_in_phone_number_text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:cursorVisible="true"
@@ -94,10 +95,10 @@
                     <Button
                         android:id="@+id/info_button_id"
                         android:layout_width="wrap_content"
-                        android:layout_height="25dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="right|center_vertical"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/phone_test_on"
+                        android:background="@drawable/btn_sm_gray"
                         android:paddingLeft="@dimen/dimens_10"
                         android:paddingRight="@dimen/dimens_10"
                         android:gravity="center"
@@ -136,25 +137,26 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center|center_horizontal"
                 android:layout_margin="20dp"
-                android:background="@drawable/mail_tabs_list"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/ImageButton2"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_gravity="center|center_horizontal"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="手机找回" />
+                    android:text="手机找回"
+                    android:background="@drawable/tabs_left_nol"/>
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="邮箱找回"
+                    android:background="@drawable/tabs_right_sel"
                     android:textColor="@color/white" />
 
             </LinearLayout>
@@ -175,7 +177,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:drawableRight="@drawable/icon_mail_a"
+                    android:drawableRight="@drawable/ic_menu_mail"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:singleLine="true"
                     android:ellipsize="end"

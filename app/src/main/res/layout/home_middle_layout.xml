@@ -21,10 +21,10 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/the_w_tourism" />
+                android:src="@drawable/ic_travel" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,10 +52,10 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/the_today_offer" />
+                android:src="@drawable/ic_sales" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -87,10 +87,10 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/the_scenic_spot" />
+                android:src="@drawable/ic_ticket" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -117,10 +117,10 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/the_swim_around" />
+                android:src="@drawable/ic_nearby" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -152,10 +152,10 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/the_listen_zhongwen" />
+                android:src="@drawable/ic_listen" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -182,10 +182,10 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/the_look_zhongwei" />
+                android:src="@drawable/ic_look" />
 
             <TextView
                 android:layout_width="wrap_content"

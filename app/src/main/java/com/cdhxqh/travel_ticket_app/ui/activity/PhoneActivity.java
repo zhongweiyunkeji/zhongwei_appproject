@@ -186,10 +186,7 @@ public class PhoneActivity extends BaseActivity {
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            finish();
-            Intent intent = new Intent();
-            intent.setClass(PhoneActivity.this, Layoutonline_Payment_Activity.class);
-            startActivityForResult(intent, 0);
+            finish();
         }
     };
 
@@ -219,9 +216,9 @@ public class PhoneActivity extends BaseActivity {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                v.setBackgroundResource(R.drawable.phone_button_get);
+                v.setBackgroundResource(R.drawable.btn_orange_nol);
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                v.setBackgroundResource(R.drawable.phone_button_login);
+                v.setBackgroundResource(R.drawable.btn_orange_sel);
             }
             return false;
         }
@@ -232,9 +229,9 @@ public class PhoneActivity extends BaseActivity {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                v.setBackgroundResource(R.drawable.phone_a_down);
+                v.setBackgroundResource(R.drawable.btn_sm_nol);
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                v.setBackgroundResource(R.drawable.phone_a_on);
+                v.setBackgroundResource(R.drawable.btn_sm_sel);
             }
             return false;
         }
@@ -274,9 +271,9 @@ public class PhoneActivity extends BaseActivity {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                v.setBackgroundResource(R.drawable.button_on_mail);
+                v.setBackgroundResource(R.drawable.btn_orange_nol);
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                v.setBackgroundResource(R.drawable.button_login_mail);
+                v.setBackgroundResource(R.drawable.btn_orange_sel);
             }
             return false;
         }
@@ -299,16 +296,6 @@ public class PhoneActivity extends BaseActivity {
         }
     };
 
-    //手机获取密码
-    private View.OnClickListener getPhonePassClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-                /*
-                发送请求获取密码
-                 */
-            getPhonePass ();
-        }
-    };
 
     /**
      * 根据邮箱号获取密码
@@ -360,7 +347,7 @@ public class PhoneActivity extends BaseActivity {
                     public void onSuccess(Integer data) {
                         MessageUtils.showMiddleToast(PhoneActivity.this, "验证码发送成功");
                         progressDialog.dismiss();
-                        TimeCountUtil timeCountUtil = new TimeCountUtil(PhoneActivity.this, 60000, 1000, info_button_id, R.drawable.phone_test_on);
+                        TimeCountUtil timeCountUtil = new TimeCountUtil(PhoneActivity.this, 60000, 1000, info_button_id, R.drawable.btn_sm_sel);
                         timeCountUtil.start();
                     }
 
@@ -376,6 +363,17 @@ public class PhoneActivity extends BaseActivity {
                     }
                 });
     }
+
+    //手机获取密码
+    private View.OnClickListener getPhonePassClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+                /*
+                发送请求获取密码
+                 */
+            getPhonePass ();
+        }
+    };
 
     /**
      * 根据手机号重置密码

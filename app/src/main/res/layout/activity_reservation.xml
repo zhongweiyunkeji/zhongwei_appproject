@@ -55,7 +55,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="￥"
+                    android:text="¥"
                     android:textColor="#ffa500"/>
 
             <TextView
@@ -109,7 +109,7 @@
                 android:text="请选择出行时间"
                 android:textColor="#a9a9a9"/>
 
-              </RelativeLayout >
+              </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
@@ -313,7 +313,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="订单总额  ￥"
+                android:text="订单总额 ¥"
                 android:textColor="#2f4f4f"/>
 
             <TextView

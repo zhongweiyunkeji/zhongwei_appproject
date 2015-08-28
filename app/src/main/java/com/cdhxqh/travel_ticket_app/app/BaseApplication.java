@@ -1,12 +1,14 @@
 package com.cdhxqh.travel_ticket_app.app;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Environment;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.weather.WeatherEngine;
 import com.github.mrengineer13.snackbar.BuildConfig;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -23,6 +25,11 @@ import java.io.File;
  */
 public class BaseApplication extends Application {
     private static BaseApplication mContext;
+    private BaseApplication mApplication;
+    private Context mContexts;
+
+    private WeatherEngine mWeatherEngine;
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         // TODO Auto-generated method stub
@@ -39,9 +46,16 @@ public class BaseApplication extends Application {
         SDKInitializer.initialize(this);
         mContext=this;
         initImageLoader();
+        mContexts = this.getApplicationContext();
 
 
+    }
 
+    public WeatherEngine getWeatherEngine() {
+        if (mWeatherEngine == null) {
+            mWeatherEngine = WeatherEngine.getinstance(mContext);
+        }
+        return mWeatherEngine;
     }
 
     @Override
@@ -62,7 +76,7 @@ public class BaseApplication extends Application {
                 .imageScaleType(ImageScaleType.EXACTLY)
                 .cacheOnDisc(true)
                 .displayer(new FadeInBitmapDisplayer(200))
-                .showImageOnLoading(R.drawable.big_not_image_bj)
+                .showImageOnLoading(R.drawable.not_image_bj)
                 .build();
 
         File cacheDir;

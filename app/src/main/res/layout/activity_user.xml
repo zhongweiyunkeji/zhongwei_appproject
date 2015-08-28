@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@dimen/dimens_10"
         android:background="@color/green_color"
-
         android:paddingTop="@dimen/dimens_10">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -63,7 +62,7 @@
         <TextView
             android:id="@+id/user_not_pay_id"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimens_30"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:drawableLeft="@drawable/ic_wait_pay"
             android:gravity="center_vertical"
@@ -86,7 +85,7 @@
         <TextView
             android:id="@+id/user_not_travel_id"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimens_30"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:drawableLeft="@drawable/ic_wait_travel"
 
@@ -110,7 +109,7 @@
         <TextView
             android:id="@+id/user_not_review_id"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimens_30"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:drawableLeft="@drawable/ic_wait_review"
             android:gravity="center_vertical"

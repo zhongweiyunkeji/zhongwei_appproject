@@ -299,7 +299,7 @@ public class RegisterActivity extends BaseActivity {
             public void onSuccess(String data) {
                 Log.i(TAG, "data=" + data);
                 if(timeCountUtil == null){
-                    timeCountUtil  = new TimeCountUtil(RegisterActivity.this, 60000, 1000, button, R.drawable.phone_test_on); // 更新按钮状态
+                    timeCountUtil  = new TimeCountUtil(RegisterActivity.this, 60000, 1000, button, R.drawable.btn_sm_sel); // 更新按钮状态
                 }
                 timeCountUtil.start(); // 启动线程
                 try {

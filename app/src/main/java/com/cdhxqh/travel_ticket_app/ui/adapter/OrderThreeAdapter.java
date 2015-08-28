@@ -172,7 +172,7 @@ public class OrderThreeAdapter extends BaseExpandableListAdapter {
             viewHolder.order_three_in_item_title.setText(msg.getGoodsName());
             viewHolder.order_three_in_item_ordertime.setText(model.getAddTime());
             viewHolder.order_three_in_item_orderqty.setText(msg.getGoodsNumber()+"");
-            viewHolder.order_three_in_item_ordertotal.setText("￥"+(msg.getGoodsNumber()*msg.getGoodsPrice())+"");
+            viewHolder.order_three_in_item_ordertotal.setText("¥"+(msg.getGoodsNumber()*msg.getGoodsPrice())+"");
             viewHolder.order_three_in_item_status.setText(msg.getStatus());
 
             //订单详情

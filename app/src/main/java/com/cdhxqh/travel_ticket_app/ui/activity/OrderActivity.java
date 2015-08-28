@@ -2,6 +2,8 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -230,11 +232,12 @@ public class OrderActivity extends BaseActivity {
             orderThreeOutFragment.getSwipeRefreshLayoutOut().setRefreshing(false);
         }
         createProgressDialog();
+        SharedPreferences myShared = getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
         if("after".equals(type)){  // 3个月内
-            HttpManager.getOrder_list(this, Constants.OTDER_LIST_URL, type, showCountIn+"", currntPageIn+"", handlerIn);
+            HttpManager.getOrder_list(myShared.getString(Constants.SESSIONIDTRUE, ""), this, Constants.OTDER_LIST_URL, type, showCountIn+"", currntPageIn+"", handlerIn);
         } else
         if("before".equals(type)){// 3个月前
-            HttpManager.getOrder_list(this, Constants.OTDER_LIST_URL, type, showCountOut+"", currntPageOut+"", handlerOut);
+            HttpManager.getOrder_list(myShared.getString(Constants.SESSIONIDTRUE, ""), this, Constants.OTDER_LIST_URL, type, showCountOut+"", currntPageOut+"", handlerOut);
         }
     }
 

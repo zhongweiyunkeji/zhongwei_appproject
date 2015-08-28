@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.cdhxqh.travel_ticket_app.app.AppManager;
+import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.Ec_user;
 import com.cdhxqh.travel_ticket_app.task.AsyncCallable;
 import com.cdhxqh.travel_ticket_app.task.Callback;
@@ -38,6 +40,8 @@ public abstract class BaseActivity extends Activity implements AccountUtils.OnAc
     protected boolean mIsLogin;
     protected Ec_user ec_user;
 
+    protected SharedPreferences myshared;
+
 
     private long exitTime = 0;
 
@@ -53,8 +57,12 @@ public abstract class BaseActivity extends Activity implements AccountUtils.OnAc
         SDKInitializer.initialize(getApplicationContext());
         tManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        init();
     }
 
+    public void init() {
+        myshared = this.getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
+    }
 
     @Override
     public void onLogout() {

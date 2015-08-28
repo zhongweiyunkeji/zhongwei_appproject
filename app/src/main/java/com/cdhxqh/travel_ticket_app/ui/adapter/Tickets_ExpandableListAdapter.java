@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.model.GoodsList;
+import com.cdhxqh.travel_ticket_app.ui.activity.LoginActivity;
 import com.cdhxqh.travel_ticket_app.ui.activity.Order_Tracking_Activity;
 import com.cdhxqh.travel_ticket_app.ui.activity.ReservationActivity;
+import com.cdhxqh.travel_ticket_app.ui.activity.Tickets_Detail_Activity;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -97,22 +99,22 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
         }
         switch (group.get(groupPosition)){
             case "成人票":
-                holder.imagetitle.setImageResource(R.drawable.ic_adult_ticket);
+                holder.imagetitle.setImageResource(R.drawable.ic_menu_adult);
                 break;
             case "组合票":
-                holder.imagetitle.setImageResource(R.drawable.ic_group);
+                holder.imagetitle.setImageResource(R.drawable.ic_menu_group);
                 break;
             case "儿童票":
-                holder.imagetitle.setImageResource(R.drawable.ic_child);
+                holder.imagetitle.setImageResource(R.drawable.ic_menu_child);
                 break;
             case "学生票":
-                holder.imagetitle.setImageResource(R.drawable.ic_pupil);
+                holder.imagetitle.setImageResource(R.drawable.ic_menu_pupil);
                 break;
             case "优待票":
-                holder.imagetitle.setImageResource(R.drawable.ic_vip);
+                holder.imagetitle.setImageResource(R.drawable.ic_menu_vip);
                 break;
             case "其它":
-                holder.imagetitle.setImageResource(R.drawable.ic_adult_ticket);
+                holder.imagetitle.setImageResource(R.drawable.ic_menu_other);
                 break;
         }
 
@@ -150,12 +152,13 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
                 bundle.putString("unit_fare", child.get(groupPositions).get(childPositions).getShop_price().toString());
                 bundle.putString("goodsId", child.get(groupPositions).get(childPositions).getGoods_id());
                 intent.putExtras(bundle);
+
                 intent.setClass(context, ReservationActivity.class);
                 context.startActivity(intent);
             }
         });
         holder.textView.setText(child.get(groupPosition).get(childPosition).getGoods_name());
-        holder.priceView.setText("￥"+child.get(groupPosition).get(childPosition).getShop_price());
+        holder.priceView.setText("¥"+child.get(groupPosition).get(childPosition).getShop_price());
         return convertView;
     }
 

@@ -13,7 +13,7 @@
         android:layout_height="@dimen/dimens_60"
         android:layout_gravity="left"
         android:background="@drawable/edit_text_bg"
-        android:drawableRight="@drawable/reg_input_mobile_img"
+        android:drawableRight="@drawable/ic_menu_mobile"
         android:gravity="center_vertical"
         android:hint="@string/please_input_phone_number_text"
         android:inputType="phone"
@@ -45,7 +45,6 @@
             android:textColor="@color/gray" />
 
     </LinearLayout>
-
 
     <Button
         android:id="@+id/reg_phone_next_btn"
