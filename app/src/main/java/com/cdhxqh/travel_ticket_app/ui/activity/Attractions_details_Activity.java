@@ -79,7 +79,6 @@ public class Attractions_details_Activity extends BaseActivity {
         initAudio();
         findViewById();
         initView();
-
     }
 
     /**

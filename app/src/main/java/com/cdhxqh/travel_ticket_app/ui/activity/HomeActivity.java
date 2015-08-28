@@ -49,6 +49,11 @@ public class HomeActivity extends BaseActivity {
      */
     private LinearLayout todaySpecial;
 
+    /**
+     * 智慧旅游
+     */
+    LinearLayout tourism_spot_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +68,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void findViewById() {
+        tourism_spot_id = (LinearLayout) findViewById(R.id.tourism_spot_id);
         bannerViewPager = (ViewPager) findViewById(R.id.banner_viewpager);
         mIndicator = (PageIndicator) findViewById(R.id.indicator);
         scenic_spot_layout = (LinearLayout) findViewById(R.id.scenic_spot_id);
@@ -93,17 +99,30 @@ public class HomeActivity extends BaseActivity {
         scenic_spot_layout.setOnClickListener(senic_spot_layoutOnClickListener);
         listen_zhongwei_layout.setOnClickListener(listen_zhongweiOnClickListener);
 
+
+        tourism_spot_id.setOnClickListener(tourism_spotOnClickListener);
+
         todaySpecial.setOnClickListener(todaySpecialOnClickListener);
 
 
     }
+
+
+    private View.OnClickListener tourism_spotOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(HomeActivity.this, WeatherActivity.class);
+            startActivity(intent);
+        }
+    };
 
     private View.OnClickListener todaySpecialOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
             intent.setClass(HomeActivity.this, TodaySpecialActivity.class);
-            startActivityForResult(intent, 0);
+            startActivity(intent);
         }
     };
 

@@ -100,6 +100,8 @@ public class Tickets_Detail_Activity extends BaseActivity {
     private ArrayList<GoodsList> arrayList;
     private ArrayList<List<GoodsList>> child;
 
+    private static boolean login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,8 +111,8 @@ public class Tickets_Detail_Activity extends BaseActivity {
         }
         findViewById();
         initView();
+        login = mIsLogin;
     }
-
 
     /**
      * 获取上个界面的数据*
@@ -132,15 +134,15 @@ public class Tickets_Detail_Activity extends BaseActivity {
                 "请稍候...", true, true);
     }
 
-    private HttpRequestHandler<ArrayList<GoodsList>> handler = new HttpRequestHandler<ArrayList<GoodsList>>() {
-        @Override
-        public void onSuccess(ArrayList<GoodsList> data) {
-            Log.i(TAG, "data=" + data.size());
-            arrayList = data;
-            progressDialog.dismiss();
-            initexpandableView();
+        private HttpRequestHandler<ArrayList<GoodsList>> handler = new HttpRequestHandler<ArrayList<GoodsList>>() {
+            @Override
+            public void onSuccess(ArrayList<GoodsList> data) {
+                Log.i(TAG, "data=" + data.size());
+                arrayList = data;
+                progressDialog.dismiss();
+                initexpandableView();
 
-        }
+            }
 
         @Override
         public void onSuccess(ArrayList<GoodsList> data, int totalPages, int currentPage) {
