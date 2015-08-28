@@ -186,10 +186,7 @@ public class PhoneActivity extends BaseActivity {
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-//            finish();
-            Intent intent = new Intent();
-            intent.setClass(PhoneActivity.this, Layoutonline_Payment_Activity.class);
-            startActivityForResult(intent, 0);
+            finish();
         }
     };
 
@@ -299,16 +296,6 @@ public class PhoneActivity extends BaseActivity {
         }
     };
 
-    //手机获取密码
-    private View.OnClickListener getPhonePassClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-                /*
-                发送请求获取密码
-                 */
-            getPhonePass ();
-        }
-    };
 
     /**
      * 根据邮箱号获取密码
@@ -376,6 +363,17 @@ public class PhoneActivity extends BaseActivity {
                     }
                 });
     }
+
+    //手机获取密码
+    private View.OnClickListener getPhonePassClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+                /*
+                发送请求获取密码
+                 */
+            getPhonePass ();
+        }
+    };
 
     /**
      * 根据手机号重置密码

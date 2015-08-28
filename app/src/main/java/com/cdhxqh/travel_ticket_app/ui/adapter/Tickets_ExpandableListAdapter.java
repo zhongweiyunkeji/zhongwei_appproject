@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.model.GoodsList;
+import com.cdhxqh.travel_ticket_app.ui.activity.LoginActivity;
 import com.cdhxqh.travel_ticket_app.ui.activity.Order_Tracking_Activity;
 import com.cdhxqh.travel_ticket_app.ui.activity.ReservationActivity;
+import com.cdhxqh.travel_ticket_app.ui.activity.Tickets_Detail_Activity;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -150,6 +152,7 @@ public class Tickets_ExpandableListAdapter extends BaseExpandableListAdapter {
                 bundle.putString("unit_fare", child.get(groupPositions).get(childPositions).getShop_price().toString());
                 bundle.putString("goodsId", child.get(groupPositions).get(childPositions).getGoods_id());
                 intent.putExtras(bundle);
+
                 intent.setClass(context, ReservationActivity.class);
                 context.startActivity(intent);
             }

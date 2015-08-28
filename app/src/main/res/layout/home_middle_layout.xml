@@ -21,8 +21,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_travel" />
 
@@ -52,8 +52,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_sales" />
 
@@ -87,8 +87,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_ticket" />
 
@@ -117,8 +117,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_nearby" />
 
@@ -152,8 +152,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_listen" />
 
@@ -182,8 +182,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_look" />
 

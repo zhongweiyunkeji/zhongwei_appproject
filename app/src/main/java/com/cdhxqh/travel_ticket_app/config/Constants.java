@@ -5,6 +5,14 @@ import android.os.Environment;
 
 public class Constants {
 
+    public static final String USER_INFO = "userinfo";
+    public static final String NAME_KEY = "name_key";
+    public static final String PASS_KEY = "pass_key";
+    public static final String ISREMENBER = "isRemenber";
+    public static final String ISFIRST = "isFirst";
+    public static final String SESSIONID = "sessionId";
+    public static final String SESSIONIDTRUE = "sessionIdTrue";
+
     /**
      ******************************************* 接口参数设置信息开始 ******************************************
      * 这里编写与服务器交互需要的url
