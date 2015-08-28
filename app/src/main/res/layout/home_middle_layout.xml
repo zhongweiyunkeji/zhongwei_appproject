@@ -21,8 +21,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/the_w_tourism" />
 
@@ -52,8 +52,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/the_today_offer" />
 
@@ -87,8 +87,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/the_scenic_spot" />
 
@@ -117,8 +117,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/the_swim_around" />
 
@@ -152,8 +152,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/the_listen_zhongwen" />
 
@@ -182,8 +182,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_50"
-                android:layout_height="@dimen/dimens_50"
+                android:layout_width="@dimen/dimens_40"
+                android:layout_height="@dimen/dimens_40"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/the_look_zhongwei" />
 
