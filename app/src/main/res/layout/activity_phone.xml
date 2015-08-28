@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1fbf9"
+    android:background="@color/bj_color"
     android:orientation="vertical">
 
     <LinearLayout
@@ -18,13 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="visible"
+            android:layout_marginLeft="@dimen/dimens_20"
+            android:layout_marginRight="@dimen/dimens_20">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center|center_horizontal"
-                android:layout_margin="28dp"
+                android:layout_margin="20dp"
                 android:background="@drawable/phone_tabs_list"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -36,7 +38,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/phone_find_back_text"
-                    android:textColor="@color/write" />
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/TextViewMail"
@@ -50,50 +52,58 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/phone_input_text"
+                android:layout_height="100dp"
+                android:background="@drawable/edit_text_bg"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/EditText1"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:drawableRight="@drawable/button_phone_bm"
                     android:hint="@string/please_in_phone_number_text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:cursorVisible="true"
-                    android:inputType="phone" />
+                    android:inputType="phone"
+                    android:textSize="@dimen/font18"
+                    android:textColor="@color/balck_color" />
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1">
-
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1px"
+                        android:background="@drawable/list_line_x" />
                     <EditText
                         android:id="@+id/button_id"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="10dp"
                         android:background="@android:color/transparent"
                         android:textCursorDrawable="@drawable/color_cursor"
-                        android:hint="短信验证码" />
+                        android:hint="短信验证码"
+                        android:textColor="@color/balck_color"
+                        android:textSize="@dimen/font18"/>
 
                     <Button
                         android:id="@+id/info_button_id"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
                         android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="15dp"
+                        android:layout_marginRight="10dp"
                         android:background="@drawable/phone_test_on"
+                        android:paddingLeft="@dimen/dimens_10"
+                        android:paddingRight="@dimen/dimens_10"
                         android:gravity="center"
                         android:text="获取验证码"
-                        android:textSize="12dp" />
+                        android:textColor="@color/balck_color"
+                        android:textSize="@dimen/font14" />
                 </FrameLayout>
 
             </LinearLayout>
@@ -101,23 +111,16 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/transparent"
                 android:text="新密码以短信形式发送到该手机号，请注意查收"
-                android:textSize="11sp" />
+                android:textColor="@color/gray"
+                android:textSize="@dimen/font14" />
 
             <Button
                 android:id="@+id/restart_passworld_id"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_login_phone"
-                android:text="获取密码"
-                android:textColor="@color/write"
-                android:textSize="20sp" />
+                style="@style/btnOrange"
+                android:text="获取新密码" />
         </LinearLayout>
 
         <!--邮箱找回-->
@@ -129,10 +132,10 @@
             android:visibility="invisible">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center|center_horizontal"
-                android:layout_margin="28dp"
+                android:layout_margin="20dp"
                 android:background="@drawable/mail_tabs_list"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -152,24 +155,24 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="邮箱找回"
-                    android:textColor="@color/write" />
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/mail_s_1"
+                android:layout_height="50dp"
+                android:layout_marginLeft="@dimen/dimens_20"
+                android:layout_marginRight="@dimen/dimens_20"
+                android:background="@drawable/edit_text_bg"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/EditTextMail"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:drawableRight="@drawable/icon_mail_a"
@@ -183,23 +186,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="@dimen/dimens_20"
+                android:layout_marginRight="@dimen/dimens_20"
                 android:layout_marginTop="10dp"
                 android:background="@android:color/transparent"
                 android:text="新密码以短信形式发送到该手机号，请注意查收"
-                android:textSize="11sp" />
+                android:textColor="@color/gray"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/restart_passworld_mail"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_login_mail"
+                style="@style/btnOrange"
                 android:text="获取新密码"
-                android:textColor="@color/write"
-                android:textSize="20sp" />
+                android:layout_marginLeft="@dimen/dimens_20"
+                android:layout_marginRight="@dimen/dimens_20"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

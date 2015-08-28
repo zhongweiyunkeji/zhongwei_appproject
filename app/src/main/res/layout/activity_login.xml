@@ -2,125 +2,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f1fbf9"
-    android:orientation="vertical"
-    >
-
-
-    <ImageView
-        android:id="@+id/top_image_view_id"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/login_top_dimens"
-        android:scaleType="fitXY"
-
-        android:src="@drawable/login_edit_pic" />
+    android:background="@color/bj_color"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/linearlayout_1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimens_120"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/dimens_30"
-        android:background="@drawable/login_edit_text"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/user_edittext_id"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_60"
-            android:layout_marginLeft="@dimen/dimens_5"
-            android:layout_marginRight="@dimen/dimens_5"
-            android:textCursorDrawable="@drawable/color_cursor"
-            android:singleLine="true"
-            android:background="@color/white"
-            android:drawableRight="@drawable/login_icon_user"
-            android:hint="@string/please_user_name_text" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/ic_line"></View>
-
-        <EditText
-            android:id="@+id/passworld_edittext_id"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimens_60"
-            android:layout_marginLeft="@dimen/dimens_5"
-            android:background="@color/white"
-            android:layout_marginRight="@dimen/dimens_5"
-            android:drawableRight="@drawable/login_icon_lock"
-            android:textCursorDrawable="@drawable/color_cursor"
-            android:singleLine="true"
-            android:inputType="textPassword"
-            android:hint="@string/please_pass_word_text" />
+        android:layout_height="160dp"
+        android:gravity="center"
+        android:background="@drawable/login_bg">
+        <ImageView
+            android:id="@+id/top_image_view_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/login_font" />
     </LinearLayout>
 
+
     <LinearLayout
-        android:id="@+id/linearlayout_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimens_30"
-        android:layout_marginRight="@dimen/dimens_30"
-        android:orientation="vertical">
-
-        <RelativeLayout
+        android:orientation="vertical"
+        android:layout_weight="5"
+        android:layout_marginLeft="@dimen/dimens_20"
+        android:layout_marginRight="@dimen/dimens_20">
+        <LinearLayout
+            android:id="@+id/linearlayout_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edit_text_bg"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/TextViewPassWord"
-            android:layout_width="70dp"
+            <EditText
+                android:id="@+id/user_edittext_id"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_50"
+                android:paddingLeft="@dimen/dimens_10"
+                android:paddingRight="@dimen/dimens_10"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:singleLine="true"
+                android:background="@android:color/transparent"
+                android:drawableRight="@drawable/login_icon_user"
+                android:hint="@string/please_user_name_text" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"></View>
+
+            <EditText
+                android:id="@+id/passworld_edittext_id"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimens_50"
+                android:layout_marginLeft="@dimen/dimens_10"
+                android:layout_marginRight="@dimen/dimens_10"
+                android:background="@android:color/transparent"
+                android:drawableRight="@drawable/login_icon_lock"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:hint="@string/please_pass_word_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/forget_pass_word"
-            android:textColor="@color/list_item_read"
-            android:textSize="15sp" />
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
 
-        <com.cdhxqh.travel_ticket_app.app.SwitchButton
+            <TextView
+                android:id="@+id/TextViewPassWord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:text="@string/forget_pass_word"
+                android:textColor="@color/green_color"
+                android:paddingTop="10dp"
+                android:textSize="16sp" />
+
+            <com.cdhxqh.travel_ticket_app.app.SwitchButton
             android:id="@+id/wiperSwitch1"
-            android:layout_alignParentRight="true"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            />
-
-            </RelativeLayout>
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/login_btn_id"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/login_button_login"
-            android:text="@string/login_text"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
+            style="@style/btnOrange"
+            android:text="@string/login_text" />
 
-        <CheckedTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/regbtn_bar_top"></LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_gravity="bottom"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/login_footbg_f"
+        android:paddingBottom="5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/regbtn_bar_down"
         android:gravity="center">
 
         <LinearLayout
             android:id="@+id/linearLayout_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="bottom"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:layout_marginTop="@dimen/dimens_30"
-            android:background="@drawable/login_button1_a"
+            android:layout_marginTop="@dimen/dimens_20"
+            android:background="@drawable/btn_green"
             android:gravity="center">
 
             <TextView
@@ -129,15 +132,16 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/registered_new_user"
+                android:textSize="@dimen/font20"
                 android:textColor="@color/write" />
 
             <ImageView
                 android:id="@+id/image_view_id"
-                android:layout_width="@dimen/dimens_40"
-                android:layout_height="@dimen/dimens_40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/button_id"
                 android:src="@drawable/login_icon_add" />
         </LinearLayout>
+
     </RelativeLayout>
 </LinearLayout>
-

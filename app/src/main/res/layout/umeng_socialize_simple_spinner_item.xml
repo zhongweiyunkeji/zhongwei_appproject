@@ -17,5 +17,4 @@
         android:layout_height="fill_parent"
         android:layout_toRightOf="@id/umeng_socialize_spinner_img"
         android:gravity="center_vertical" />
-
 </RelativeLayout>

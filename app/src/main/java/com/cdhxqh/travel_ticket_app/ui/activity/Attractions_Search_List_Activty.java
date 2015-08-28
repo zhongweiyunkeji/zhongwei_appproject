@@ -1,7 +1,7 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
-import android.os.AsyncTask;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -21,20 +20,19 @@ import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
 import com.cdhxqh.travel_ticket_app.config.Constants;
 import com.cdhxqh.travel_ticket_app.model.Attractions;
-import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.ui.adapter.AttractionsListAdapter;
 import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
 import com.cdhxqh.travel_ticket_app.ui.widget.XEditText;
 import com.cdhxqh.travel_ticket_app.utils.JsonUtils;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.cdhxqh.travel_ticket_app.utils.NetWorkHelper;
+import com.cdhxqh.travel_ticket_app.utils.UIUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -126,6 +124,7 @@ public class Attractions_Search_List_Activty extends BaseActivity {
         recyclerView.setVisibility(View.GONE);
         closeImg.setVisibility(View.GONE);
 
+        UIUtils.drawableRadiusTextView(searchText, Color.parseColor("#249174"));  // 画出圆角searchText
         searchText.setHint("请输入搜索内容");
         searchText.setHintTextColor(getResources().getColor(R.color.white));  // 设置提示颜色为白色
         searchText.setTextSize(15);
@@ -145,6 +144,7 @@ public class Attractions_Search_List_Activty extends BaseActivity {
                 } else {
                     closeImg.setVisibility(View.GONE);
                 }
+                refreshData();
             }
 
             @Override
@@ -210,8 +210,8 @@ public class Attractions_Search_List_Activty extends BaseActivity {
 
     public void loadData(Map<String, String> params) {
         if (NetWorkHelper.isNetAvailable(this)) {
-            createProgressDialog();
-            HttpManager.requestOnceWithURLString(this, Constants.ATTRACTIONS_SEARCH_URL, params, requestHandler);
+            // createProgressDialog();
+            HttpManager.requestOnceWithURLString(this, Constants.ATTRACTIONS_PAGGING_URL, params, requestHandler);
         } else {
             MessageUtils.showErrorMessage(this, getResources().getString(R.string.error_network_exception));
         }
@@ -220,13 +220,13 @@ public class Attractions_Search_List_Activty extends BaseActivity {
     HttpRequestHandler requestHandler = new HttpRequestHandler<String> (){ // 分页回调接口
         @Override
         public void onFailure(String error) {
-            progressDialog.dismiss();
+           // progressDialog.dismiss();
             MessageUtils.showErrorMessage(Attractions_Search_List_Activty.this, error);
         }
 
         @Override
         public void onSuccess(String data) {
-            progressDialog.dismiss();
+            //progressDialog.dismiss();
             try {
                 JSONObject jsonObject = new JSONObject(data);
                 String str = jsonObject.getString("errcode");
@@ -259,7 +259,7 @@ public class Attractions_Search_List_Activty extends BaseActivity {
 
         @Override
         public void onSuccess(String data, int totalPages, int currentPage) {
-            progressDialog.dismiss();
+           // progressDialog.dismiss();
         }
     };
 

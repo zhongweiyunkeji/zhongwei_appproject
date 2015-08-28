@@ -3,13 +3,13 @@
     <color name="rew">#ffff4444</color>
 
 
-    <color name="green_color">#2ebb96</color>
+    <color name="green_color">#00c58e</color>
     <color name="balck_color">#484b4a</color>
 
     <color name="light_green">#dff2ee</color>
 
     <color name="list_item_read">#ffb7b7b7</color>
-    <color name="gray">#bfbfbf</color>
+    <color name="gray">#999999</color>
     <color name="orange_color">#f4ad49</color>
     <color name="write">#ffffff</color>
     <color name="clarity">@android:color/transparent</color>
@@ -33,6 +33,7 @@
 
     <!--界面背景颜色-->
     <color name="bj_color">#f1fbf9</color>
+    <!--<color name="bj_color">#e1f2ef</color>-->
     <color name="blue_text_color">#0bacd3</color>
 
 

@@ -7,13 +7,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -38,7 +36,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -301,7 +298,7 @@ public class Attractions_List_Activty extends BaseActivity {
     public void loadData(Map<String, String> params) {
         if (NetWorkHelper.isNetAvailable(this)) {
             createProgressDialog();
-            HttpManager.requestOnceWithURLString(this, Constants.ATTRACTIONS_SEARCH_URL, params, requestHandler);
+            HttpManager.requestOnceWithURLString(this, Constants.ATTRACTIONS_PAGGING_URL, params, requestHandler);
         } else {
             MessageUtils.showErrorMessage(this, getResources().getString(R.string.error_network_exception));
         }

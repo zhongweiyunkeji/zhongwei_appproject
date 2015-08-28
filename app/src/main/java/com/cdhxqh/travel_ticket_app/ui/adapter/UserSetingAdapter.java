@@ -30,7 +30,7 @@ public class UserSetingAdapter extends RecyclerView.Adapter<UserSetingAdapter.Vi
 
     ArrayList<String> names=new ArrayList<String>();
 
-    int[] images = {R.drawable.ic_map,R.drawable.ic_passengers, R.drawable.ic_invoice, R.drawable.ic_seting, R.drawable.ic_wee};
+    int[] images = { R.drawable.ic_wee, R.drawable.ic_map,R.drawable.ic_passengers, R.drawable.ic_invoice, R.drawable.ic_seting, R.drawable.ic_wee};
 
     public UserSetingAdapter(Context context,ArrayList<String> strings) {
         mContext = context;

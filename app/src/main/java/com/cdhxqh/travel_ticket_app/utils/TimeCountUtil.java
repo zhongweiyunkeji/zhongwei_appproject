@@ -45,4 +45,17 @@ public class TimeCountUtil extends CountDownTimer {
             info_button_id.setBackgroundResource(img);
         }
     }
+
+    public void cancelCountDown(String text){
+        cancel();
+        if(text!=null && !"".equals(text.trim())){
+            this.info_button_id.setText(text);
+        } else {
+            info_button_id.setText(phoneActivity.getResources().getString(R.string.phone_get_number));
+        }
+        info_button_id.setClickable(true);
+        if(img != 0) {
+            info_button_id.setBackgroundResource(img);
+        }
+    }
 }

@@ -17,15 +17,14 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="40dp" >
+            android:layout_height="60dp" >
             <ImageView
                 android:id="@+id/umeng_update_wifi_indicator"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:contentDescription="@string/UMGprsCondition"
-                android:src="@drawable/umeng_update_wifi_disable" />
+                android:contentDescription="@string/UMGprsCondition" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -33,7 +32,7 @@
                 android:layout_centerInParent="true"
                 android:text="@string/UMUpdateTitle"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#008bea" />
+                android:textColor="@color/green_color" />
             
             <Button
                 android:id="@+id/umeng_update_id_close"
@@ -52,15 +51,14 @@
 
         <View
             android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="#008bea" />
+            android:layout_height="1dp"
+            android:background="@drawable/list_line_x" />
         <!-- Content -->
 
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="10dp" >
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -71,9 +69,8 @@
                     android:id="@+id/umeng_update_content"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:focusable="true"
                     android:textColor="#000" />
             </LinearLayout>
@@ -84,10 +81,11 @@
 		<CheckBox
 		    android:id="@+id/umeng_update_id_check"
 	        android:layout_width="fill_parent"
-	        android:layout_height="32dp"
+	        android:layout_height="48dp"
 	        android:text="@string/UMIgnore"
+            android:layout_marginLeft="@dimen/dimens_5"
 	        android:button="@drawable/umeng_update_button_check_selector"
-	        android:textColor="#000" />
+	        android:textColor="@color/balck_color" />
 
         <!-- OK&Cancel Button -->
 
@@ -98,28 +96,27 @@
             <Button
                 android:id="@+id/umeng_update_id_ok"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/umeng_update_button_ok_bg_selector"
+                android:background="@drawable/btn_orange"
                 android:gravity="center"
                 android:padding="12dp"
                 android:text="@string/UMUpdateNow"
 				android:focusable="true"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/umeng_update_id_cancel"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/umeng_update_button_cancel_bg_selector"
+                android:background="@drawable/btn_gray"
                 android:gravity="center"
-                android:padding="12dp"
                 android:text="@string/UMNotNow"
 				android:focusable="true"
-                android:textColor="#000" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/umeng_update_id_ignore"
@@ -133,7 +130,7 @@
                 android:padding="12dp"
                 android:text="@string/UMIgnore"
 				android:focusable="true"
-                android:textColor="#AAABAF" />
+                android:textColor="@color/balck_color" />
         </LinearLayout>
     </LinearLayout>
 

@@ -3,16 +3,16 @@
     android:id="@+id/reg_layou_1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginLeft="@dimen/dimens_20"
+    android:layout_marginRight="@dimen/dimens_20">
 
     <EditText
         android:id="@+id/reg_phone_text"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/dimens_60"
         android:layout_gravity="left"
-        android:layout_marginLeft="@dimen/reg_dimens_margin_left_20"
-        android:layout_marginRight="@dimen/reg_dimens_margin_right_20"
-        android:background="@drawable/user_middle_bj"
+        android:background="@drawable/edit_text_bg"
         android:drawableRight="@drawable/reg_input_mobile_img"
         android:gravity="center_vertical"
         android:hint="@string/please_input_phone_number_text"
@@ -21,26 +21,34 @@
         android:singleLine="true"
         android:textColor="@color/balck_color"
         android:textCursorDrawable="@drawable/color_cursor"
-        android:textSize="@dimen/reg_dimens_textsize_01" />
+        android:textSize="@dimen/font18" />
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/dimens_60"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:paddingLeft="20dp"
-        android:text="已同意《智慧旅游票务云服务条款》，点击“下一步”"
-        android:textColor="#B9B9B9" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已同意"
+            android:textColor="@color/gray" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《智慧旅游云服务条款》"
+            android:textColor="@color/green_color" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="，点击“下一步”"
+            android:textColor="@color/gray" />
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/reg_phone_next_btn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/reg_bottom_button"
-        android:gravity="center"
-        android:text="下一步"
-        android:textColor="@color/white"
-        android:textSize="40px" />
+        style="@style/btnOrange"
+        android:text="下一步" />
 </LinearLayout>

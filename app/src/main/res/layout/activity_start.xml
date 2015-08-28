@@ -2,14 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     style="@style/FitSystemWindows"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/green_color">
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:contentDescription="entry"
-        android:src="@drawable/splash0"
-        android:id="@+id/iv_entry"/>
+        android:src="@drawable/front_cover"
+        android:id="@+id/iv_entry"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:paddingBottom="80dp"/>
 
 
     <TextView
@@ -17,7 +21,7 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:gravity="center"
-        android:textSize="23sp"
+        android:textSize="@dimen/font16"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
         android:text="@string/travel_app_text"/>
