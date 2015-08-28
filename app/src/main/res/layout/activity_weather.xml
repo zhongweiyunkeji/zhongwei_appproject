@@ -1,0 +1,228 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include layout="@layout/activity_title"
+        android:id="@+id/weather"></include>
+
+    <LinearLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/weather"
+        android:orientation="vertical"
+        >
+
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/hot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/l1">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="机票热度"/>
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="0%"/>
+
+            <com.cdhxqh.travel_ticket_app.weather.MyProgress
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="8dp"
+                android:max="100"
+                android:progress="90"
+                android:background="#ffffff"
+                android:progressDrawable="@drawable/progressbg"
+                android:id="@+id/progressBar" />
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:text="100%"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="火车票热度"/>
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="0%"/>
+
+            <com.cdhxqh.travel_ticket_app.weather.MyProgress
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="8dp"
+                android:max="100"
+                android:progress="70"
+                android:progressDrawable="@drawable/progressbg"
+                android:id="@+id/progressBar1" />
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:text="100%"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="汽车票热度"/>
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="0%"/>
+
+            <com.cdhxqh.travel_ticket_app.weather.MyProgress
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="8dp"
+                android:max="100"
+                android:progress="20"
+                android:progressDrawable="@drawable/progressbg"
+                android:id="@+id/progressBar2" />
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:text="100%"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="停车位热度"/>
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="0%"/>
+
+            <com.cdhxqh.travel_ticket_app.weather.MyProgress
+                android:layout_gravity="center_vertical"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="8dp"
+                android:max="100"
+                android:progress="25"
+                android:progressDrawable="@drawable/progressbg"
+                android:id="@+id/progressBar3" />
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:text="100%"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="停车位热度"/>
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="0%"/>
+
+            <com.cdhxqh.travel_ticket_app.weather.MyProgress
+                android:layout_gravity="center_vertical"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="8dp"
+                android:max="100"
+                android:progress="25"
+                android:progressDrawable="@drawable/progressbg"
+                android:id="@+id/progressBar4" />
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:text="100%"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="停车位热度"/>
+
+            <TextView
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:text="0%"/>
+
+            <com.cdhxqh.travel_ticket_app.weather.MyProgress
+                android:layout_gravity="center_vertical"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="8dp"
+                android:max="100"
+                android:progress="25"
+                android:progressDrawable="@drawable/progressbg"
+                android:id="@+id/progressBar5" />
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:text="100%"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="165.0dip"
+        android:layout_below="@+id/hot"
+        android:overScrollMode="never"
+        />
+
+</RelativeLayout>
