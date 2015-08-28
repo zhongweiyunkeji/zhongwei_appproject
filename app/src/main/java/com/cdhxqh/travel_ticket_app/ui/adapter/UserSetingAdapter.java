@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.ui.activity.Activity_company_introduce;
 import com.cdhxqh.travel_ticket_app.ui.activity.TicketCheckActivity;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 public class UserSetingAdapter extends RecyclerView.Adapter<UserSetingAdapter.ViewHolder> {
     private static final String TAG = "UserSetingAdapter";
     Context mContext;
+    int a = 0;
 
     ArrayList<String> names=new ArrayList<String>();
 
@@ -40,7 +42,7 @@ public class UserSetingAdapter extends RecyclerView.Adapter<UserSetingAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_seting_item, viewGroup, false);
-        if("办公".equals(names.get(i))){
+        if("验票".equals(names.get(a))){
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -48,7 +50,16 @@ public class UserSetingAdapter extends RecyclerView.Adapter<UserSetingAdapter.Vi
                     mContext.startActivity(intent);
                 }
             });
+        }else if("关于我们".equals(names.get(a))){
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, Activity_company_introduce.class);
+                    mContext.startActivity(intent);
+                }
+            });
         }
+        a++;
         return new ViewHolder(v);
     }
 

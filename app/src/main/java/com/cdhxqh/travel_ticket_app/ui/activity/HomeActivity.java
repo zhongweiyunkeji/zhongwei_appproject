@@ -54,6 +54,12 @@ public class HomeActivity extends BaseActivity {
      */
     LinearLayout tourism_spot_id;
 
+    /**
+     * 周边游
+     */
+    LinearLayout around_play;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +80,7 @@ public class HomeActivity extends BaseActivity {
         scenic_spot_layout = (LinearLayout) findViewById(R.id.scenic_spot_id);
         listen_zhongwei_layout = (LinearLayout) findViewById(R.id.listen_zhongwei_layout_id);
         todaySpecial = (LinearLayout) findViewById(R.id.todaySpecial);
+        around_play = (LinearLayout) findViewById(R.id.around_play);
     }
 
     @Override
@@ -104,9 +111,19 @@ public class HomeActivity extends BaseActivity {
 
         todaySpecial.setOnClickListener(todaySpecialOnClickListener);
 
+        around_play.setOnClickListener(around_playOnClickListener);
+
 
     }
 
+    private View.OnClickListener around_playOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(HomeActivity.this, AroundPlayActivity.class);
+            startActivity(intent);
+        }
+    };
 
     private View.OnClickListener tourism_spotOnClickListener = new View.OnClickListener() {
         @Override
