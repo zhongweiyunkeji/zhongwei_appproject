@@ -187,7 +187,7 @@ public class Order_Tracking_Activity extends BaseActivity{
         Bundle bundle = new Bundle();
         bundle = this.getIntent().getExtras();
         //设置参数
-        total_charge_id.setText("￥" + bundle.getString("orderAmount"));
+        total_charge_id.setText("¥" + bundle.getString("orderAmount"));
         order_confirmed_id.setText(bundle.getString("orderId"));
         order_tittle_id.setText(bundle.getString("goodsName"));
         order_num.setText(bundle.getString("goodsNumber"));

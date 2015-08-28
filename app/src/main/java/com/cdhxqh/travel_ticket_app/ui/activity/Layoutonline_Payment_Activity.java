@@ -161,7 +161,7 @@ public class Layoutonline_Payment_Activity extends BaseActivity{
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
         titleTextView.setText("在线支付");
-        num_sid.setText("￥" + goodsAmount);
+        num_sid.setText("¥" + goodsAmount);
         tittle_sid.setText(tittle);
 
         zhifu_id_a.setOnClickListener(zhifubaoListener);

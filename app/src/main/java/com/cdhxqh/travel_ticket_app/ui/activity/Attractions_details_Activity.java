@@ -158,16 +158,16 @@ public class Attractions_details_Activity extends BaseActivity {
                     playstaus = 1;
                     player.playUrl(file_url);
                     player.play();
-                    playImage.setImageResource(R.drawable.music_playing);
+                    playImage.setImageResource(R.drawable.ic_play3);
                 } else if (playstaus == 1) { //暂停
                     //Log.i(TAG, "暂停");
                     playstaus = 2;
                     player.pause();
-                    playImage.setImageResource(R.drawable.music_play);
+                    playImage.setImageResource(R.drawable.ic_play_stop);
                 } else if (playstaus == 2) { //暂停后再播放
                     player.play();
                     playstaus = 1;
-                    playImage.setImageResource(R.drawable.music_playing);
+                    playImage.setImageResource(R.drawable.ic_play3);
                 } else {
                     playstaus = 0;
                 }

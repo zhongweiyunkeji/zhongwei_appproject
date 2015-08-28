@@ -182,7 +182,7 @@ public class ClassActivity extends BaseActivity {
 //            Ec_goods ec_goods = new Ec_goods();
 //            ec_goods.setGood_name("沙坡头" + i);
 //            ec_goods.setGood_time("8:00 - 17:30");
-//            ec_goods.setGood_pay("￥ 32");
+//            ec_goods.setGood_pay("¥ 32");
 //            goodsList.add(ec_goods);
 //        }
 //
