@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="user_name_arrays">
-        <item>办公</item>
         <item>收货地址</item>
         <item>常用旅客信息</item>
         <item>发票把头</item>
