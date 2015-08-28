@@ -115,7 +115,7 @@
     <!-- 选中时的颜色 -->
     <color name="default_circle_indicator_fill_color">#FFFFFF</color>
     <!-- 未选中时的颜色 -->
-    <color name="default_circle_indicator_page_color">#E93333</color>
+    <!--<color name="default_circle_indicator_page_color">#E93333</color>-->
     <!-- 未选中时周围圈的颜色 -->
     <color name="default_circle_indicator_stroke_color">#FF0000</color>
 
