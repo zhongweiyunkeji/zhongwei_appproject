@@ -162,10 +162,10 @@ public class HttpManager {
      * @param cxt
      * @param handler
      */
-    public static void reservation(final Context cxt, final String goodsAmount, String goodsIds, String payId, String payName, String consignee, String mobile, String postscript,final HttpRequestHandler<CategoryModel> handler) {
+    public static void reservation(final String sessionId, final Context cxt, final String goodsAmount, String goodsIds, String payId, String payName, String consignee, String mobile, String postscript,final HttpRequestHandler<CategoryModel> handler) {
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Cookie", "JSESSIONID="+HttpManager.SESSIONID);
+        client.addHeader("Cookie", "JSESSIONID="+sessionId);
         client.setConnectTimeout(10000);
         RequestParams params = new RequestParams();
         params.put("goodsAmount", goodsAmount);
@@ -256,11 +256,11 @@ public class HttpManager {
      * @param cxt
      * @param handler
      */
-    public static void updateStock(final Context cxt, String orderSn, String orderId, String orderStatus, String goodsIds, final HttpRequestHandler<Integer> handler) {
+    public static void updateStock(final String sessionId, final Context cxt, String orderSn, String orderId, String orderStatus, String goodsIds, final HttpRequestHandler<Integer> handler) {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setConnectTimeout(10000);
-        client.addHeader("Cookie", "JSESSIONID=" + HttpManager.SESSIONID);
+        client.addHeader("Cookie", "JSESSIONID=" + sessionId);
         RequestParams params = new RequestParams();
         params.put("orderSn", orderSn);
         params.put("orderId", orderId);
@@ -305,7 +305,7 @@ public class HttpManager {
      * @param handler  返回结果处理
      */
     public static <E> void loginWithUsername(final Context cxt, final String username, final String password,
-                                         final HttpRequestHandler<Integer> handler) {
+                                         final HttpRequestHandler<String> handler) {
         Map<String, String> mapparams = new HashMap<String, String>();
         mapparams.put("loginName", username);
         mapparams.put("password", password);
@@ -324,7 +324,7 @@ public class HttpManager {
                 boolean code = JsonUtils.parsingAuthStr(cxt, data, 1);
 //
                 if (code == true) {
-                    SafeHandler.onSuccess(handler, 200);
+                    SafeHandler.onSuccess(handler, SESSIONID);
                 } else {
                     SafeHandler.onFailure(handler, "登陆失败");
                 }
@@ -599,10 +599,10 @@ public class HttpManager {
      * @param handler
      */
 
-    public static void getOrder_list(final Context context, String url, String datenote, String showCount, String currentPage,  final HttpRequestHandler<String> handler) {
+    public static void getOrder_list(final String sessionId, final Context context, String url, String datenote, String showCount, String currentPage,  final HttpRequestHandler<String> handler) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        client.addHeader("Cookie", "JSESSIONID="+HttpManager.SESSIONID);  // 添加Header
+        client.addHeader("Cookie", "JSESSIONID="+sessionId);  // 添加Header
         params.put("datenote", datenote);
         params.put("showCount", showCount);
         params.put("currentPage", currentPage);
