@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
 
 
     <ImageView
@@ -15,12 +17,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="10dip">
+        android:paddingLeft="10dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="10dip">
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/review_userneme"
@@ -34,10 +36,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginBottom="2dip"
-                android:paddingBottom="5dip"
-                android:paddingRight="5dip"
-                android:paddingTop="5dip"
+                android:layout_marginBottom="2dp"
+                android:paddingBottom="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp"
                 android:text="2015-06-27 21:00:30"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -46,9 +48,7 @@
             android:id="@+id/review_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/dimens_5"
-
-             />
+            android:paddingTop="@dimen/dimens_5" />
 
         <View
             android:layout_width="wrap_content"
