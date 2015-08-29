@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.ui.activity.Activity_company_introduce;
+import com.cdhxqh.travel_ticket_app.ui.activity.InvoiceTitleActivity;
+import com.cdhxqh.travel_ticket_app.ui.activity.ReceivingAddressActivity;
+import com.cdhxqh.travel_ticket_app.ui.activity.SettingActivity;
 import com.cdhxqh.travel_ticket_app.ui.activity.TicketCheckActivity;
 
 import java.util.ArrayList;
@@ -55,6 +58,32 @@ public class UserSetingAdapter extends RecyclerView.Adapter<UserSetingAdapter.Vi
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, Activity_company_introduce.class);
+                    mContext.startActivity(intent);
+                }
+            });
+        }else if("收货地址".equals(names.get(a))){
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, ReceivingAddressActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
+        }
+        else if("发票抬头".equals(names.get(a))){
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, InvoiceTitleActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
+        }
+        else if("设置".equals(names.get(a))){
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, SettingActivity.class);
                     mContext.startActivity(intent);
                 }
             });
