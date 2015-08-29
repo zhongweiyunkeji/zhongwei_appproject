@@ -91,7 +91,6 @@ public class LoginActivity extends BaseActivity {
             public void onChange(SwitchButton sb, boolean state) {
                 // TODO Auto-generated method stub
                 Log.d("switchButton", state ? "验票员" : "用户");
-                Toast.makeText(LoginActivity.this, state ? "验票员" : "用户", Toast.LENGTH_SHORT).show();
                 type = state;
             }
         });
