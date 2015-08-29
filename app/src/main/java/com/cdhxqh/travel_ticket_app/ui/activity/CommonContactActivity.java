@@ -1,9 +1,12 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -63,6 +66,19 @@ public class CommonContactActivity extends BaseActivity {
 
     Contacters contacters = new Contacters();
 
+    /**
+     * 返回按钮*
+     */
+    private ImageView backImageView;
+    /**
+     * 标题*
+     */
+    private TextView titleTextView;
+    /**
+     * 搜索*
+     */
+    private ImageView seachImageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,10 +126,19 @@ public class CommonContactActivity extends BaseActivity {
          * list相关id
          */
         alarm_contacts = (RecyclerView) findViewById(R.id.alarm_contacts);
-
+        /**
+         * 标题标签相关id
+         */
+        backImageView = (ImageView) findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView) findViewById(R.id.title_text_id);
+        seachImageView = (ImageView) findViewById(R.id.title_search_id);
     }
 
     protected void initView() {
+        //设置标签页显示方式
+        backImageView.setVisibility(View.VISIBLE);
+        seachImageView.setVisibility(View.GONE);
+        titleTextView.setText("联系人");
         LinearLayoutManager layoutManager = new LinearLayoutManager(CommonContactActivity.this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);
@@ -136,5 +161,40 @@ public class CommonContactActivity extends BaseActivity {
         commonContactAdapter = new CommonContactAdapter(CommonContactActivity.this, contacts);
 
         alarm_contacts.setAdapter(commonContactAdapter);
+
+        backImageView.setOnTouchListener(backImageViewOnTouchListener);
+        //返回至登录界面事件
+        backImageView.setOnClickListener(backImageViewOnClickListener);
+    }
+
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
+
+    /**
+     * 返回事件的监听*
+     */
+    private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
+
+    @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+        if(resultCode == RESULT_OK) {
+            contacters = (Contacters) data.getSerializableExtra("contactList");
+            setData(contacters);
+        }
     }
 }
