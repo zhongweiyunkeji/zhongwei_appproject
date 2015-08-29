@@ -84,6 +84,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/scenic_spot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dimens_10">
