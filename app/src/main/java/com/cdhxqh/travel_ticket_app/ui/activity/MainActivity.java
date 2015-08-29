@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.Toast;
@@ -41,6 +42,8 @@ public class MainActivity extends TabActivity {
      */
     public static final String TAB_USER = "USER_ACTIVITY";
 
+    RadioButton home_tab_main, home_tab_order;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,9 @@ public class MainActivity extends TabActivity {
 
         mTabButtonGroup = (RadioGroup) findViewById(R.id.home_radio_button_group);
 
+        home_tab_main = (RadioButton) findViewById(R.id.home_tab_main);
+
+        home_tab_order = (RadioButton) findViewById(R.id.home_tab_order);
     }
 
     /**
@@ -85,10 +91,13 @@ public class MainActivity extends TabActivity {
 
         Bundle bundle = new Bundle();
 
-        mTabHost.setCurrentTabByTag(TAB_HOME);
+            mTabHost.setCurrentTabByTag(TAB_HOME);
+
         if(this.getIntent().getExtras() != null) {
             bundle = this.getIntent().getExtras();
             String activity =   bundle.getString("activity");
+            home_tab_main.setChecked(false);
+            home_tab_order.setChecked(true);
             mTabHost.setCurrentTabByTag(activity);
         }
 
@@ -127,6 +136,8 @@ public class MainActivity extends TabActivity {
         exit();
 
     }
+
+
 
     /**
      * 退出登陆*
