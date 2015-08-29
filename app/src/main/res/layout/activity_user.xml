@@ -18,7 +18,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_user" />
+            android:src="@drawable/ic_face" />
 
         <TextView
             android:id="@+id/txt_member"
