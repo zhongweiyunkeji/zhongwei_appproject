@@ -196,6 +196,7 @@ public class LoginActivity extends BaseActivity {
                     new HttpRequestHandler<String>() {
                         @Override
                         public void onSuccess(String data) {
+                            userType = true;
                             editor.putString(Constants.SESSIONIDTRUE,  data);
                             editor.commit();
 
@@ -224,7 +225,7 @@ public class LoginActivity extends BaseActivity {
                         @Override
                         public void onSuccess(Integer data) {
 
-                            userType = true;
+                            userType = false;
 
                             MessageUtils.showMiddleToast(LoginActivity.this, "登陆成功");
                             progressDialog.dismiss();

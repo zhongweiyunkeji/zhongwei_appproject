@@ -147,14 +147,20 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ticketor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:layout_below="@+id/profile_layout"
         android:visibility="gone">
 
         <ImageView
+            android:id="@+id/ticket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:src="@drawable/ic_verification"/>
 
     </LinearLayout>

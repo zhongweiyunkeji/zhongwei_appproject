@@ -10,6 +10,8 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
@@ -55,6 +57,21 @@ public class UserActivity extends BaseActivity {
     /**切换账号**/
     TextView switch_account_text;
 
+    /**
+     *用户
+     */
+    LinearLayout normalUser;
+
+    /**
+     *验票员
+     */
+    LinearLayout ticketor;
+
+    /**
+     * 验票
+     */
+    ImageView ticket;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +79,6 @@ public class UserActivity extends BaseActivity {
         setContentView(R.layout.activity_user);
         findViewById();
         initView();
-
 
     }
 
@@ -77,13 +93,27 @@ public class UserActivity extends BaseActivity {
         user_not_pay_id = (TextView)findViewById(R.id.user_not_pay_id);
         user_not_travel_id = (TextView) findViewById(R.id.user_not_travel_id);
         user_not_review_id = (TextView) findViewById(R.id.user_not_review_id);
+
+        normalUser = (LinearLayout) findViewById(R.id.normalUser);
+        ticketor = (LinearLayout) findViewById(R.id.ticketor);
+
+        ticket = (ImageView) findViewById(R.id.ticket);
     }
 
     @Override
     protected void initView() {
+        if(userType = true) {
+            normalUser.setVisibility(View.VISIBLE);
+            ticketor.setVisibility(View.GONE);
+        } else {
+            normalUser.setVisibility(View.GONE);
+            ticketor.setVisibility(View.VISIBLE);
+        }
         user_not_pay_id.setOnClickListener(user_not_payOnClickListener);
         user_not_travel_id.setOnClickListener(user_not_travelOnClickListener);
         user_not_review_id.setOnClickListener(user_not_reviewOnClickListener);
+
+        ticket.setOnClickListener(ticketOnClickListener);
 
         Log.i(TAG, "mIsLogin=" + mIsLogin);
         if (mIsLogin) {
@@ -96,7 +126,6 @@ public class UserActivity extends BaseActivity {
             txt_member.setOnClickListener(img_memberOnClickListener);
             img_member.setOnClickListener(img_memberOnClickListener);
         }
-
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(UserActivity.this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -178,6 +207,14 @@ public class UserActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.menu_user, menu);
         return true;
     }
+
+    private View.OnClickListener ticketOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(UserActivity.this, TicketCheckActivity.class);
+            UserActivity.this.startActivity(intent);
+        }
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
