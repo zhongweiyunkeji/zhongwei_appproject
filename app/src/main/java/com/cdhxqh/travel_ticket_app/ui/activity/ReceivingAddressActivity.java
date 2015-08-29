@@ -3,6 +3,7 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +31,12 @@ public class ReceivingAddressActivity extends BaseActivity{
      */
     private ImageView seachImageView;
 
+    /**
+     * 完成
+     */
+    private Button back_id;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +48,7 @@ public class ReceivingAddressActivity extends BaseActivity{
     @Override
     protected void findViewById() {
         address = (EditText) findViewById(R.id.address);
+        back_id = (Button) findViewById(R.id.back_id);
 
         /**
          * 标题标签相关id
@@ -52,6 +60,7 @@ public class ReceivingAddressActivity extends BaseActivity{
 
     @Override
     protected void initView() {
+        back_id.setText("完成");
         //设置标签页显示方式
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);

@@ -44,10 +44,7 @@ public class SettingActivity extends BaseActivity {
 //     */
 //    DataCleanManager dataCleanManager;
 
-    /**
-     *回退
-     */
-    Button back_id;
+
 
     /**
      * 返回按钮*
@@ -61,6 +58,11 @@ public class SettingActivity extends BaseActivity {
      * 搜索*
      */
     private ImageView seachImageView;
+
+    /**
+     * 完成
+     */
+    private Button back_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,11 +84,13 @@ public class SettingActivity extends BaseActivity {
         backImageView = (ImageView) findViewById(R.id.back_imageview_id);
         titleTextView = (TextView) findViewById(R.id.title_text_id);
         seachImageView = (ImageView) findViewById(R.id.title_search_id);
+        back_id = (Button) findViewById(R.id.back_id);
     }
 
     protected void initView() {
         catchs.setOnClickListener(catchsOnClickListener);
         back_id.setOnClickListener(backOnClickListener);
+        back_id.setText("退出");
 
         //设置标签页显示方式
         backImageView.setVisibility(View.VISIBLE);
@@ -157,11 +161,6 @@ public class SettingActivity extends BaseActivity {
     private View.OnClickListener backOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.putExtra("close", false);
-            intent.setClass(SettingActivity.this, LoginActivity.class);
-            startActivityForResult(intent, 0);
-            AccountUtils.removeAll(SettingActivity.this);
             SettingActivity.this.finish();
         }
     };
