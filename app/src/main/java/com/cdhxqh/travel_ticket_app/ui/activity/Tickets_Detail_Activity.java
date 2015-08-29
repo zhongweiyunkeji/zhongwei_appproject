@@ -91,6 +91,8 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
     private RelativeLayout tickets_detail_address;
 
+    private RelativeLayout scenic_spot;
+
 
 
     Tickets_ExpandableListAdapter tickets_expandableListAdapter;
@@ -179,6 +181,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
         recyclerView.setAdapter(reviewadapter);
 
         tickets_detail_address = (RelativeLayout) findViewById(R.id.tickets_detail_address);
+        scenic_spot = (RelativeLayout) findViewById(R.id.scenic_spot);
 
         addData();
     }
@@ -190,7 +193,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
             titleTextView.setText(ecs_brand.brand_name);
             addTextView.setText(ecs_brand.address);
         }
-
+        scenic_spot.setOnClickListener(scenic_spotOnClickListener);
 
         backImageView.setOnClickListener(backImageViewOnClickListener);
 
@@ -206,6 +209,20 @@ public class Tickets_Detail_Activity extends BaseActivity {
         tickets_detail_address.setOnClickListener(ticketsdetailOnClickListener);
 
     }
+
+    /**
+     * 景区实况*
+     */
+    private View.OnClickListener scenic_spotOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = getIntent();
+
+            intent.setClass(Tickets_Detail_Activity.this, WeatherActivity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
+
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
         @Override
