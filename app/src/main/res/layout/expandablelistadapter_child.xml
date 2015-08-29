@@ -36,11 +36,6 @@
             android:layout_marginTop="@dimen/dimens_5">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="" />
-
-            <TextView
                 android:id="@+id/tickets_end_date_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +47,8 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp">
 
             <TextView
                 android:id="@+id/ticket_detail_price_id"
@@ -75,8 +71,8 @@
 
         <ImageView
             android:id="@+id/reserve_id"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dimens_10"
             android:layout_marginRight="@dimen/dimens_10"
             android:src="@drawable/ic_reservation" />
