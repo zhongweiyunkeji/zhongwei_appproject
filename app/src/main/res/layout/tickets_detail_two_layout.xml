@@ -10,7 +10,8 @@
         android:id="@+id/address_relativelayout_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dimens_10">
+        android:paddingTop="@dimen/dimens_10"
+        android:paddingBottom="@dimen/dimens_10">
 
         <ImageView
             android:id="@+id/tickets_detail_ic_address_id"
@@ -24,18 +25,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dimens_10"
             android:ellipsize="end"
             android:maxLines="2"
             android:layout_toRightOf="@+id/tickets_detail_ic_address_id"
-            android:hint="@string/not_address_info_text" />
+            android:hint="@string/not_address_info_text"
+            android:textSize="@dimen/font18"
+            android:textColor="@color/balck_color"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dimens_5"
             android:src="@drawable/ic_list_view" />
     </RelativeLayout>
 
@@ -48,31 +49,31 @@
         android:id="@+id/spot_introduction_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dimens_10">
+        android:paddingTop="@dimen/dimens_10"
+        android:paddingBottom="@dimen/dimens_10">
 
         <ImageView
             android:id="@+id/tickets_detail_ic_introduce_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-
-            android:src="@drawable/ic_ticket_info" />
+            android:src="@drawable/ic_menu_scenery" />
 
         <TextView
             android:id="@+id/tickets_detail_introduce_text_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dimens_10"
             android:layout_toRightOf="@+id/tickets_detail_ic_introduce_id"
-            android:text="@string/tickets_info_text" />
+            android:text="@string/tickets_info_text"
+            android:textSize="@dimen/font18"
+            android:textColor="@color/balck_color" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dimens_5"
             android:src="@drawable/ic_list_view" />
     </RelativeLayout>
 
@@ -87,7 +88,8 @@
         android:id="@+id/scenic_spot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dimens_10">
+        android:paddingTop="@dimen/dimens_10"
+        android:paddingBottom="@dimen/dimens_10">
 
         <ImageView
             android:id="@+id/scenic_spot_image_id"
@@ -102,15 +104,15 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/scenic_spot_image_id"
-            android:layout_marginLeft="@dimen/dimens_10"
-            android:text="@string/tickets_situation_text" />
+            android:text="@string/tickets_situation_text"
+            android:textSize="@dimen/font18"
+            android:textColor="@color/balck_color" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dimens_5"
             android:src="@drawable/ic_list_view" />
     </RelativeLayout>
 
