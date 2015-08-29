@@ -37,6 +37,8 @@ public abstract class BaseActivity extends Activity implements AccountUtils.OnAc
     protected InputMethodManager imm;
     private TelephonyManager tManager;
 
+    public boolean userType;
+
     protected boolean mIsLogin;
     protected Ec_user ec_user;
 
