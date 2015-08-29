@@ -35,7 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:text="到期时间" />
+                android:text="到期时间"
+                android:textSize="@dimen/font18" />
 
                 <TextView
                     android:id="@+id/end_date_id_s"
@@ -55,8 +56,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/font18"
                     android:text="¥"
-                    android:textColor="#ffa500"/>
+                    android:textColor="#ffbb00"/>
 
             <TextView
                 android:id="@+id/num_ticket_id"
@@ -90,7 +92,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:gravity="center_vertical"
                 android:text="出行时间"
+                android:textSize="@dimen/font18"
                 android:textColor="#2f4f4f"/>
 
                 <TextView
@@ -98,6 +104,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/time_out_id"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
                     android:text=""
                     android:textColor="#a9a9a9"/>
 
@@ -107,7 +115,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="请选择出行时间"
-                android:textColor="#a9a9a9"/>
+                android:textColor="#a9a9a9"
+                android:gravity="center_vertical"
+                android:drawableRight="@drawable/ic_tab_arrow_right" />
 
               </RelativeLayout>
 
@@ -130,6 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="数量"
+                android:textSize="@dimen/font18"
                 android:textColor="#2f4f4f"/>
 
                 <LinearLayout
@@ -171,20 +182,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/list_line_x"/>
 
             <!--填单框-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="150dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="120dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
-                    android:background="@drawable/edit_text_bg"
+                    android:background="@drawable/reservation_bg"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -288,13 +299,14 @@
                 </LinearLayout>
 
                 <FrameLayout
-                    android:layout_height="match_parent"
-                    android:layout_width="wrap_content">
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp">
                     <TextView
-                        android:layout_height="150dp"
                         android:layout_width="wrap_content"
-                        android:background="@drawable/button_right_t"
-                        android:textColor="#2f4f4f"/>
+                        android:layout_height="150dp"
+                        android:background="@drawable/btn_choose_user"
+                        android:textColor="#2f4f4f"
+                        android:text="" />
                 </FrameLayout>
 
             </LinearLayout>
@@ -302,7 +314,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/list_line_x"/>
             <!--订单总额-->
@@ -313,15 +325,21 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="订单总额 ¥"
-                android:textColor="#2f4f4f"/>
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="订单总额  ¥"
+                android:textSize="@dimen/font18"
+                android:textColor="#ffbb00"/>
 
             <TextView
                 android:id="@+id/total_fare_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="@dimen/font20"
                 android:text="138"
-                android:textColor="#2f4f4f"/>
+                android:textColor="#ffbb00"/>
 
             </LinearLayout>
 
