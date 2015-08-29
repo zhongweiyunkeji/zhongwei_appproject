@@ -238,4 +238,6 @@
     <string name="cache_title">清除缓存</string>
 
     <string name="back">退出</string>
+
+    <string name="title_activity_play__video_">Play_Video_Activity</string>
 </resources>

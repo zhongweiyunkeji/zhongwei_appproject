@@ -143,7 +143,6 @@ public class MainActivity extends TabActivity {
      * 退出登陆*
      */
     private void exit() {
-        Log.i(TAG,"123");
         if ((System.currentTimeMillis() - exitTime) > 2000) {
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_LONG).show();
             exitTime = System.currentTimeMillis();

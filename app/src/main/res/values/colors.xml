@@ -124,4 +124,9 @@
     <color name="text_shadow">#dd000000</color>
     <color name="text_shadow_opaque">#3f000000</color>
 
+
+    <color name="play_translucent_bg">#c0000000</color>
+
+    <color name="gray_text">#adadad</color>
+
 </resources>

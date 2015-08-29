@@ -32,8 +32,8 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
 
     private static final String TAG="Listen_ZhongWei_Activity";
 
-    /**景区地图的标识**/
-    private static final int Map_TAG=1001;
+    /**听中卫－景区地图的标识**/
+    int Map_TAG;
 
 
     /**
@@ -71,11 +71,17 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
 
     ImageView searchImg;
 
+
+    /**显示标题**/
+    int i_mark;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scenic__tickets_);
 
+
+        getData();
         findViewById();
         initView();
 
@@ -83,6 +89,12 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
 
         requestEcsBrands(true);
 
+    }
+
+
+    /**获取上个界面传递的数据**/
+    private void getData() {
+        i_mark= getIntent().getExtras().getInt("zw_title");
     }
 
     @Override
@@ -98,7 +110,14 @@ public class Listen_ZhongWei_Activity extends BaseActivity {
 
     @Override
     protected void initView() {
-        titleText.setText(getResources().getString(R.string.listen_zhongwen));
+
+        if(i_mark==0){
+            titleText.setText(getResources().getString(R.string.listen_zhongwen));
+            Map_TAG=1001;
+        }else if(i_mark==1){
+            Map_TAG=1002;
+            titleText.setText(getString(R.string.look_zhongwei_text));
+        }
         backImage.setOnClickListener(backImageOnClickListener);
         backImage.setVisibility(View.VISIBLE);
 

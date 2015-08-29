@@ -196,6 +196,11 @@
             android:label="@string/title_activity_attractions_details_" >
         </activity>
 
+        <activity
+            android:name=".ui.activity.Play_Video_Activity"
+            android:label="@string/title_activity_play__video_" >
+        </activity>
+
         <!-- 友盟自动更新 -->
 
 

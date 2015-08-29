@@ -55,4 +55,18 @@
     <dimen name="mm_plugin_weather_otherday_image_size">60.0dip</dimen>
     <dimen name="mm_plugin_weather_otherday_temperature_textsize">15.0sp</dimen>
     <dimen name="mm_plugin_weather_otherday_climate_textsize">13.0sp</dimen>
+
+
+    <!-- realplay text size -->
+    <dimen name="realplay_text_size">12dp</dimen>
+    <dimen name="realplay_tip_text_size">16dp</dimen>
+    <dimen name="realplay_channel_text_size">9dp</dimen>
+    <dimen name="realplay_button_text_size">15dp</dimen>
+    <dimen name="realplay_ratio_text_size">24dp</dimen>
+    <dimen name="leavemessage_text_size">12dp</dimen>
+    <dimen name="remoteplayback_text_size">12dp</dimen>
+    <dimen name="remoteplayback_tip_text_size">16dp</dimen>
+    <dimen name="remoteplayback_channel_text_size">9dp</dimen>
+    <dimen name="remoteplayback_button_text_size">15dp</dimen>
+    <dimen name="remoteplayback_ratio_text_size">24dp</dimen>
 </resources>

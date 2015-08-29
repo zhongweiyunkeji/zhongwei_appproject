@@ -43,6 +43,8 @@ public class HomeActivity extends BaseActivity {
      * 听中卫*
      */
     private LinearLayout listen_zhongwei_layout;
+    /**看中卫**/
+    private LinearLayout  look_zhongwei_layout;
 
     /**
      * 今日特价
@@ -79,6 +81,7 @@ public class HomeActivity extends BaseActivity {
         mIndicator = (PageIndicator) findViewById(R.id.indicator);
         scenic_spot_layout = (LinearLayout) findViewById(R.id.scenic_spot_id);
         listen_zhongwei_layout = (LinearLayout) findViewById(R.id.listen_zhongwei_layout_id);
+        look_zhongwei_layout = (LinearLayout) findViewById(R.id.look_zhongwei_linearlayout);
         todaySpecial = (LinearLayout) findViewById(R.id.todaySpecial);
         around_play = (LinearLayout) findViewById(R.id.around_play);
     }
@@ -105,6 +108,7 @@ public class HomeActivity extends BaseActivity {
 
         scenic_spot_layout.setOnClickListener(senic_spot_layoutOnClickListener);
         listen_zhongwei_layout.setOnClickListener(listen_zhongweiOnClickListener);
+        look_zhongwei_layout.setOnClickListener(look_zhongweiOnClickListener);
 
 
         tourism_spot_id.setOnClickListener(tourism_spotOnClickListener);
@@ -155,6 +159,16 @@ public class HomeActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
+            intent.putExtra("zw_title",0);
+            intent.setClass(HomeActivity.this, Listen_ZhongWei_Activity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
+    private View.OnClickListener look_zhongweiOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.putExtra("zw_title",1);
             intent.setClass(HomeActivity.this, Listen_ZhongWei_Activity.class);
             startActivityForResult(intent, 0);
         }

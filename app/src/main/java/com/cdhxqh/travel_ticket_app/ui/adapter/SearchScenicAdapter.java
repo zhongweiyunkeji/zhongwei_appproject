@@ -12,12 +12,15 @@ import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
+import com.cdhxqh.travel_ticket_app.ui.activity.Play_Video_Activity;
 import com.cdhxqh.travel_ticket_app.ui.activity.ScenicMapActivity;
 import com.cdhxqh.travel_ticket_app.ui.activity.Tickets_Detail_Activity;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,7 +28,7 @@ import android.widget.ImageView;
 /**
  * Created by hexian on 2015/8/4.
  */
-public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapter.ViewHolder>  {
+public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapter.ViewHolder> {
     public static final String TAG = "SearchScenicAdapter";
     private ArrayList<Ecs_brand> list = new ArrayList(0);
     Context mContext;
@@ -47,9 +50,9 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
     public void onBindViewHolder(SearchScenicAdapter.ViewHolder paramViewHolder, int paramInt) {
         final Ecs_brand localEcs_brand = (Ecs_brand) this.list.get(paramInt);
 
-        Log.i(TAG,"mark="+mark);
+        Log.i(TAG, "mark=" + mark);
 
-        if(1000 == mark){ // 景区门票
+        if (1000 == mark) { // 景区门票
             ImageLoader.getInstance().displayImage(localEcs_brand.brand_logo, paramViewHolder.imageView);
             paramViewHolder.nameText.setText(localEcs_brand.brand_name);
             paramViewHolder.timeText.setText(localEcs_brand.valid_date);
@@ -70,8 +73,7 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
                 }
             });
 
-        } else
-        if(1001 == mark){ // 地图
+        } else if (1001 == mark) { // 地图
             ImageLoader.getInstance().displayImage(localEcs_brand.brand_logo, paramViewHolder.leftImageView);
             paramViewHolder.titleTextView.setText(localEcs_brand.brand_name);
             paramViewHolder.detailTextView.setText(localEcs_brand.brand_desc);
@@ -90,13 +92,29 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
                     mContext.startActivity(intent);
                 }
             });
+        } else if (1002 == mark) { //看中卫
+            ImageLoader.getInstance().displayImage(localEcs_brand.brand_logo, paramViewHolder.leftImageView);
+            paramViewHolder.titleTextView.setText(localEcs_brand.brand_name);
+            paramViewHolder.detailTextView.setText(localEcs_brand.brand_desc);
+
+            paramViewHolder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("brand_name", localEcs_brand.brand_name);
+                    intent.putExtras(bundle);
+                    intent.setClass(mContext, Play_Video_Activity.class);
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
     }
 
     public SearchScenicAdapter.ViewHolder onCreateViewHolder(ViewGroup paramViewGroup, int paramInt) {
         View v = null;
-        if(mark == 1000){//门票详情
+        if (mark == 1000) {//门票详情
             v = LayoutInflater.from(paramViewGroup.getContext()).inflate(R.layout.brand_adapter, paramViewGroup, false);
         } else {//地图详情
             v = LayoutInflater.from(paramViewGroup.getContext()).inflate(R.layout.activity_scenic_search_item, paramViewGroup, false);
@@ -127,7 +145,7 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
      * 价格去掉小数位*
      */
     private String getprice(double p) {
-        String newP="0";
+        String newP = "0";
         if (p != 0) {
             if (p % 1.0 == 0) {
                 newP = (long) p + "";
