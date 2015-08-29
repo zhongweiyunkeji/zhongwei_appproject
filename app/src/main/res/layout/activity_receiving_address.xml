@@ -12,7 +12,7 @@
         android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@android:color/transparent"
+        android:background="@color/write"
         android:hint="@string/address"
         android:textCursorDrawable="@drawable/color_cursor"
         android:cursorVisible="true"
