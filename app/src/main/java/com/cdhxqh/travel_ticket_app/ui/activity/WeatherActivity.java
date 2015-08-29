@@ -112,7 +112,7 @@ public class WeatherActivity extends FragmentActivity {
             Log.d(TAG, "init weather data");
 
         WeatherInfo info = mWeatherEngine.getCache(); //get weather info from cache
-        if (info == null) { //open a dialog to let user select their city
+        if (info != null) { //open a dialog to let user select their city
             if (DBG)
                 Log.d(TAG, "get cache fail, start the city input dialog");
             new WeatherUpdateTask(Preferences.isMetric(WeatherActivity.this.mContext)).execute();
