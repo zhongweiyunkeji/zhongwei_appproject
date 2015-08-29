@@ -16,7 +16,9 @@
 
     <color name="white">#ffffff</color>
 
-
+    <color name="list_title_color">#0f2747</color><!--List Title Color列表标题颜色-->
+    <color name="edit_color">#b2bac5</color><!--EditView Font Color Light Gary内容添写文本框提示字体颜色、浅灰色-->
+    <color name="text_color_code">#444b55</color><!--Context Title Font Color Dark Gary内容标题颜色、深灰色-->
     <!--红色-->
     <color name="red_color">#ec6f6f</color>
     <!--绿色-->
