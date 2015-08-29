@@ -14,15 +14,11 @@
             android:layout_weight="1"
             android:background="@color/yellow_color"
             android:gravity="center"
-            android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:paddingTop="20dp">
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_width="@dimen/dimens_40"
-                android:layout_height="@dimen/dimens_40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_travel_a" />
 
@@ -52,8 +48,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_40"
-                android:layout_height="@dimen/dimens_40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_sales_a" />
 
@@ -87,8 +83,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_40"
-                android:layout_height="@dimen/dimens_40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_ticket_a" />
 
@@ -118,8 +114,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_40"
-                android:layout_height="@dimen/dimens_40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_nearby_a" />
 
@@ -153,8 +149,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_40"
-                android:layout_height="@dimen/dimens_40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_listen_a" />
 
@@ -183,8 +179,8 @@
             android:paddingTop="20dp">
 
             <ImageView
-                android:layout_width="@dimen/dimens_40"
-                android:layout_height="@dimen/dimens_40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_look_a" />
 
