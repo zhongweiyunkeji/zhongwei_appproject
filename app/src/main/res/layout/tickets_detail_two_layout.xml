@@ -10,8 +10,8 @@
         android:id="@+id/address_relativelayout_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dimens_10"
-        android:paddingBottom="@dimen/dimens_10">
+        android:paddingTop="@dimen/dimens_5"
+        android:paddingBottom="@dimen/dimens_5">
 
         <ImageView
             android:id="@+id/tickets_detail_ic_address_id"
@@ -49,8 +49,8 @@
         android:id="@+id/spot_introduction_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dimens_10"
-        android:paddingBottom="@dimen/dimens_10">
+        android:paddingTop="@dimen/dimens_5"
+        android:paddingBottom="@dimen/dimens_5">
 
         <ImageView
             android:id="@+id/tickets_detail_ic_introduce_id"
@@ -88,8 +88,8 @@
         android:id="@+id/scenic_spot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dimens_10"
-        android:paddingBottom="@dimen/dimens_10">
+        android:paddingTop="@dimen/dimens_5"
+        android:paddingBottom="@dimen/dimens_5">
 
         <ImageView
             android:id="@+id/scenic_spot_image_id"
