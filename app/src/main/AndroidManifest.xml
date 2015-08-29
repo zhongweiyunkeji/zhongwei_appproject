@@ -108,6 +108,14 @@
             android:label="@string/title_activity_order"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.activity.Activity_company_introduce"
+            android:label="@string/title_activity_order"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AroundPlayActivity"
+            android:label="@string/title_activity_order"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.UserActivity"
             android:label="@string/title_activity_user"
             android:screenOrientation="portrait" />
@@ -136,7 +144,18 @@
             android:label="@string/title_activity_scenic__tickets_"
             android:screenOrientation="portrait" />
         <activity
+        android:name=".ui.activity.ReceivingAddressActivity"
+        android:label="@string/title_activity_scenic__tickets_"
+        android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.InvoiceTitleActivity"
+            android:label="@string/title_activity_scenic__tickets_"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.ScenicMapActivity"
+            android:label="@string/title_activity_scenic_map" />
+        <activity
+            android:name=".ui.activity.SettingActivity"
             android:label="@string/title_activity_scenic_map" />
         <activity
             android:name=".ui.activity.Attractions_List_Activty"

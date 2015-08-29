@@ -229,4 +229,13 @@
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
 
+    <!--收货地址-->
+    <string name="address">收货地址</string>
+
+    <!--设置-->
+    <string name="install_flow_title">省流量</string>
+    <string name="install_flow_describute">2G/3G下不显示图片</string>
+    <string name="cache_title">清除缓存</string>
+
+    <string name="back">退出</string>
 </resources>

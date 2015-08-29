@@ -34,16 +34,16 @@
     <dimen name="mm_plugin_weather_temperature_textsize">30.0sp</dimen>
     <dimen name="mm_plugin_weather_climate_textsize">20.0sp</dimen>
 
-    <!-- CirclePageIndicator start -->
-    <integer name="default_circle_indicator_orientation">0</integer>
-    <!-- 未选中时周围圈的宽度 -->
-    <dimen name="default_circle_indicator_stroke_width">0.5dip</dimen>
-    <!-- 圆点的半径大小 -->
-    <dimen name="default_circle_indicator_radius">2.5dip</dimen>
-    <!-- 是否居中显示 -->
-    <bool name="default_circle_indicator_centered">true</bool>
-    <!-- 选择false时会有滑动动画 -->
-    <bool name="default_circle_indicator_snap">false</bool>
+    <!--&lt;!&ndash; CirclePageIndicator start &ndash;&gt;-->
+    <!--<integer name="default_circle_indicator_orientation">0</integer>-->
+    <!--&lt;!&ndash; 未选中时周围圈的宽度 &ndash;&gt;-->
+    <!--<dimen name="default_circle_indicator_stroke_width">0.5dip</dimen>-->
+    <!--&lt;!&ndash; 圆点的半径大小 &ndash;&gt;-->
+    <!--<dimen name="default_circle_indicator_radius">2.5dip</dimen>-->
+    <!--&lt;!&ndash; 是否居中显示 &ndash;&gt;-->
+    <!--<bool name="default_circle_indicator_centered">true</bool>-->
+    <!--&lt;!&ndash; 选择false时会有滑动动画 &ndash;&gt;-->
+    <!--<bool name="default_circle_indicator_snap">false</bool>-->
 
     <!-- CirclePageIndicator end -->
 

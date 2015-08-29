@@ -52,7 +52,7 @@ public class OrderActivity extends BaseActivity {
      */
     OrderThreeInFragment orderThreeInFragment;
     /**
-     * 三个月外*
+     * 三个月前*
      */
     OrderThreeOutFragment orderThreeOutFragment;
     /**
@@ -76,7 +76,7 @@ public class OrderActivity extends BaseActivity {
     final static int showCountIn = 10;
     SwipeRefreshLayout swipeRefreshLayoutIn;
 
-    // 3个月钱
+    // 3个月前
     int currntPageOut = 1;
     final static int showCountOut = 10;
 

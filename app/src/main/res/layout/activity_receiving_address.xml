@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/activity_title"></include>
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@android:color/transparent"
+        android:hint="@string/address"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:cursorVisible="true"
+        android:inputType="phone"
+        android:textSize="@dimen/font18"
+        android:textColor="@color/balck_color"/>
+
+</LinearLayout>

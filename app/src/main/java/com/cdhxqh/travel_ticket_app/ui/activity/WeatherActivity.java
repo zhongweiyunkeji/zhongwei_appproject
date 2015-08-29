@@ -111,7 +111,8 @@ public class WeatherActivity extends FragmentActivity {
         if (DBG)
             Log.d(TAG, "init weather data");
 
-        WeatherInfo info = mWeatherEngine.getCache(); //get weather info from cache
+        WeatherInfo info = null;
+//        WeatherInfo info = mWeatherEngine.getCache(); //get weather info from cache
         if (info == null) { //open a dialog to let user select their city
             if (DBG)
                 Log.d(TAG, "get cache fail, start the city input dialog");
@@ -124,7 +125,7 @@ public class WeatherActivity extends FragmentActivity {
         //设置标签页显示方式
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
-        titleTextView.setText("景区实况");
+        titleTextView.setText("智慧旅游");
         chartPoint();
         progressBar();
 
