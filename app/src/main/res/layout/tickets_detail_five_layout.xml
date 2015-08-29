@@ -2,24 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/dimens_5"
+    android:layout_marginTop="@dimen/dimens_10"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/dimens_10"
-    android:paddingRight="@dimen/dimens_10"
-    android:layout_marginLeft="@dimen/dimens_10">
+    android:paddingLeft="@dimen/dimens_20"
+    android:paddingRight="@dimen/dimens_20">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/comment_bg">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/write"
-        android:padding="@dimen/dimens_10">
+        android:paddingTop="@dimen/dimens_5"
+        android:paddingBottom="@dimen/dimens_5">
 
         <ImageView
             android:id="@+id/tickets_detail_ic_address_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
             android:src="@drawable/ic_menu_comment2" />
 
         <TextView
@@ -27,16 +33,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dimens_10"
             android:layout_toRightOf="@+id/tickets_detail_ic_address_id"
-            android:text="点评(368)条" />
+            android:text="点评(368)条"
+            android:textSize="@dimen/font18"
+            android:textColor="@color/balck_color" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dimens_5"
+            android:layout_marginRight="5dp"
             android:src="@drawable/ic_list_view" />
 
     </RelativeLayout>
@@ -50,9 +57,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/review_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
 
-
+</LinearLayout>
 </LinearLayout>

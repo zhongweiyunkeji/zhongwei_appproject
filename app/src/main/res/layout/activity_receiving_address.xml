@@ -29,7 +29,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="30dp"
         style="@style/btnOrange"
-        android:text=""
+        android:text="完成"
         android:textColor="@color/write"
         android:textSize="20sp" />
 
