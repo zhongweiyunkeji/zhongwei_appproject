@@ -95,13 +95,19 @@ public class AroundPlayActivity extends BaseActivity{
 
         Bundle bundle = new Bundle();
         bundle = this.getIntent().getExtras();
-        text_introduction_tittle.setText("周边游");
+        text_introduction_tittle.setText("中卫市");
 //        ImageLoader.getInstance().displayImage(bundle.getString("spotLogo"), image_introduction_id);
-        text_introduction_desc.setText("杨纪淡淡道。他一点也不怕大阿修罗会掐断意识连接，论心情的急切程度，大阿修罗恐怕比自己都要厉害的多。\n" +
+        text_introduction_desc.setText("沙坡头区\n" +
                 "\n" +
-                "如果自己放弃的话，恐怕大阿修罗会是第一个不答应的。\n" +
+                "兴仁镇 蒿川乡 镇罗镇 永康镇 宣和镇 常乐镇 香山乡\n" +
                 "\n" +
-                "话是这么说，不过杨纪还是很快将精力集中到了突然℉℉，x.变化的视野出现的东西，就在万年红心桃木法器的底部核心，透过大阿修罗的能力，杨纪看到了完全截然不同的东西。");
+                "中宁县\n" +
+                "\n" +
+                "宁安镇 鸣沙镇 石空镇 新堡镇 恩和镇 舟塔乡 白马乡 余丁乡 大战场乡 喊叫水乡\n" +
+                "\n" +
+                "海原县\n" +
+                "\n" +
+                 "海城镇 李旺镇 西安镇 黑城镇 史店乡 树台乡 关桥乡 徐套乡 兴隆乡 高崖乡 郑旗乡 贾塘乡 曹洼乡 九彩乡 李俊乡 红羊乡 关庄乡 涵养林总场");
 
         //返回至登录界面事件
         backImageView.setOnClickListener(backImageViewOnClickListener);
