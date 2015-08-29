@@ -87,6 +87,14 @@
             android:label="@string/title_activity_base_activty"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.activity.AddContacterActivity"
+            android:label="@string/title_activity_base_activty"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.CommonContactActivity"
+            android:label="@string/title_activity_base_activty"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.HomeActivity"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait" />
