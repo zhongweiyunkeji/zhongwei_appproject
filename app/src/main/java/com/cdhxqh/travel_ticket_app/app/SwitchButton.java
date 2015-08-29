@@ -82,6 +82,10 @@ public class SwitchButton extends View implements android.view.View.OnClickListe
         setMeasuredDimension(mSwitchFrame.getWidth(), mSwitchFrame.getHeight());
     }
 
+    public void setState(boolean falg) {
+        mSwitchOn = falg;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         // TODO Auto-generated method stub
