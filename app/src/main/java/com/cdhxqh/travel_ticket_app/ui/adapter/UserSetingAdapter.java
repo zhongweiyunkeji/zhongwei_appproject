@@ -36,7 +36,7 @@ public class UserSetingAdapter extends RecyclerView.Adapter<UserSetingAdapter.Vi
 
     ArrayList<String> names=new ArrayList<String>();
 
-    int[] images = { R.drawable.ic_menu_logo, R.drawable.ic_menu_map,R.drawable.ic_menu_users, R.drawable.ic_menu_bill, R.drawable.ic_menu_seting, R.drawable.ic_menu_logo};
+    int[] images = { R.drawable.ic_menu_map,R.drawable.ic_menu_users, R.drawable.ic_menu_bill, R.drawable.ic_menu_seting, R.drawable.ic_menu_zy};
 
     public UserSetingAdapter(Context context,ArrayList<String> strings) {
         mContext = context;
@@ -46,15 +46,7 @@ public class UserSetingAdapter extends RecyclerView.Adapter<UserSetingAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_seting_item, viewGroup, false);
-        if("验票".equals(names.get(a))){
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, TicketCheckActivity.class);
-                    mContext.startActivity(intent);
-                }
-            });
-        }else if("关于我们".equals(names.get(a))){
+         if("关于我们".equals(names.get(a))){
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

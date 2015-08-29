@@ -40,7 +40,8 @@ public class CommonContactAdapter extends RecyclerView.Adapter<CommonContactAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int i) {
-        holder.contacts_name.setText(contacts.get(i).getName() + "\u3000(" + contacts.get(i).getType() + ")");
+        holder.contacts_name.setText(contacts.get(i).getName() + "\u3000\u3000\u3000\u3000\u3000");
+        holder.contacts_group.setText(contacts.get(i).getType());
         holder.contacts_phone.setText("手机号:" + contacts.get(i).getPhone());
         final int item = i;
         holder.edit.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +72,10 @@ public class CommonContactAdapter extends RecyclerView.Adapter<CommonContactAdap
          */
         private TextView contacts_name;
         /**
+         * 类别
+         */
+        private TextView contacts_group;
+        /**
          * 联系人电话
          */
         private TextView contacts_phone;
@@ -84,6 +89,7 @@ public class CommonContactAdapter extends RecyclerView.Adapter<CommonContactAdap
             super(view);
             contacts_name = (TextView) view.findViewById(R.id.contacts_name);
             contacts_phone = (TextView) view.findViewById(R.id.contacts_phone);
+            contacts_group = (TextView) view.findViewById(R.id.contacts_group);
             edit = (ImageView) view.findViewById(R.id.edit);
         }
     }
