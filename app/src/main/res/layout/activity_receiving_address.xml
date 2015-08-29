@@ -20,4 +20,17 @@
         android:textSize="@dimen/font18"
         android:textColor="@color/balck_color"/>
 
+    <Button
+        android:id="@+id/back_id"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        style="@style/btnOrange"
+        android:text=""
+        android:textColor="@color/write"
+        android:textSize="20sp" />
+
 </LinearLayout>
