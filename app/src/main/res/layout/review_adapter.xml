@@ -6,8 +6,8 @@
 
 
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="@dimen/dimens_5"
         android:src="@drawable/ic_face2" />
 
@@ -58,25 +58,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
             android:orientation="horizontal">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/comment1" />
 
             <ImageView
-                android:layout_width="80dip"
-                android:layout_height="80dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/image_1" />
+                android:src="@drawable/comment2" />
 
             <ImageView
-                android:layout_width="80dip"
-                android:layout_height="80dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/image_1" />
-
+                android:src="@drawable/comment3" />
             <ImageView
-                android:layout_width="80dip"
-                android:layout_height="80dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/image_1" />
+                android:src="@drawable/comment4" />
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/comment5" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
