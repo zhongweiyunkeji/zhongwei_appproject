@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
@@ -45,6 +47,19 @@ public class AddContacterActivity extends BaseActivity {
      */
     String judje;
 
+    /**
+     * 返回按钮*
+     */
+    private ImageView backImageView;
+    /**
+     * 标题*
+     */
+    private TextView titleTextView;
+    /**
+     * 搜索*
+     */
+    private ImageView seachImageView;
+
     CommonContactActivity commonContactFragment;
 
     private static final int PICK_CONTACT = 1;
@@ -78,10 +93,20 @@ public class AddContacterActivity extends BaseActivity {
          * 分组显示
          */
         role_group = (TextView) findViewById(R.id.role_group);
+        /**
+         * 标题标签相关id
+         */
+        backImageView = (ImageView) findViewById(R.id.back_imageview_id);
+        titleTextView = (TextView) findViewById(R.id.title_text_id);
+        seachImageView = (ImageView) findViewById(R.id.title_search_id);
     }
 
 
     protected void initView() {
+        //设置标签页显示方式
+        backImageView.setVisibility(View.VISIBLE);
+        seachImageView.setVisibility(View.GONE);
+        titleTextView.setText("编辑联系人");
         if (contacts != null) {
             name.setText(contacts.getName());
             phone.setText(contacts.getPhone());
@@ -89,7 +114,38 @@ public class AddContacterActivity extends BaseActivity {
         }
         role_group.setOnClickListener(selectGroupOnClickListener);
         commit_id.setOnClickListener(commitOnClickListener);
+
+        backImageView.setOnTouchListener(backImageViewOnTouchListener);
+        //返回至登录界面事件
+        backImageView.setOnClickListener(backImageViewOnClickListener);
     }
+
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
+
+    /**
+     * 返回事件的监听*
+     */
+    private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (contacts != null) {
+                Intent intent = new Intent();
+                intent.putExtra("contactList", (Serializable) contacts);
+                setResult(RESULT_OK, intent);
+            }
+            finish();
+        }
+    };
 
     /**
      * 分组
