@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.ui.activity.Activity_company_introduce;
+import com.cdhxqh.travel_ticket_app.ui.activity.CommonContactActivity;
 import com.cdhxqh.travel_ticket_app.ui.activity.InvoiceTitleActivity;
 import com.cdhxqh.travel_ticket_app.ui.activity.ReceivingAddressActivity;
 import com.cdhxqh.travel_ticket_app.ui.activity.SettingActivity;
@@ -84,6 +85,15 @@ public class UserSetingAdapter extends RecyclerView.Adapter<UserSetingAdapter.Vi
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, SettingActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
+        }
+        else if("常用旅客信息".equals(names.get(a))){
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, CommonContactActivity.class);
                     mContext.startActivity(intent);
                 }
             });

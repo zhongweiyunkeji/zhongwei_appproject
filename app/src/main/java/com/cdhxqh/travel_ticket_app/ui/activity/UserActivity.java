@@ -41,6 +41,11 @@ public class UserActivity extends BaseActivity {
 
     String[] names;
 
+    /**
+     * 待出游、待点评
+     */
+    private TextView user_not_pay_id,user_not_travel_id,user_not_review_id;
+
 
     /**
      * 请登录*
@@ -69,12 +74,16 @@ public class UserActivity extends BaseActivity {
         txt_member = (TextView) findViewById(R.id.txt_member);
         switch_account_text = (TextView) findViewById(R.id.switch_account_id);
 
+        user_not_pay_id = (TextView)findViewById(R.id.user_not_pay_id);
+        user_not_travel_id = (TextView) findViewById(R.id.user_not_travel_id);
+        user_not_review_id = (TextView) findViewById(R.id.user_not_review_id);
     }
 
     @Override
     protected void initView() {
-
-
+        user_not_pay_id.setOnClickListener(user_not_payOnClickListener);
+        user_not_travel_id.setOnClickListener(user_not_travelOnClickListener);
+        user_not_review_id.setOnClickListener(user_not_reviewOnClickListener);
 
         Log.i(TAG, "mIsLogin=" + mIsLogin);
         if (mIsLogin) {
@@ -104,7 +113,44 @@ public class UserActivity extends BaseActivity {
         recyclerView.setAdapter(userSetingAdapter);
 
     }
+    private View.OnClickListener user_not_payOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(UserActivity.this,MainActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putString("activity", "ORDER_ACTIVITY");
 
+            intent.putExtras(bundle);
+            UserActivity.this.startActivity(intent);
+            UserActivity.this.finish();
+        }
+    };
+
+    private View.OnClickListener user_not_travelOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(UserActivity.this,MainActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putString("activity", "ORDER_ACTIVITY");
+
+            intent.putExtras(bundle);
+            UserActivity.this.startActivity(intent);
+            UserActivity.this.finish();
+        }
+    };
+
+    private View.OnClickListener user_not_reviewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(UserActivity.this,MainActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putString("activity", "ORDER_ACTIVITY");
+
+            intent.putExtras(bundle);
+            UserActivity.this.startActivity(intent);
+            UserActivity.this.finish();
+        }
+    };
 
     private View.OnClickListener img_memberOnClickListener = new View.OnClickListener() {
         @Override
