@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:background="@color/green_color">
 
         <ImageView
@@ -23,12 +23,13 @@
         <com.cdhxqh.travel_ticket_app.ui.widget.XEditText
             android:id="@+id/title_text_id"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
-            android:background="#249174"
+            android:background="@drawable/search_bg"
+            android:paddingLeft="10dp"
             android:drawableLeft="@drawable/ic_tab_search"
             android:textColor="@color/white"
             android:textSize="@dimen/font20" />
@@ -37,7 +38,7 @@
             android:id="@+id/title_search_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="20dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_tab_close" />
