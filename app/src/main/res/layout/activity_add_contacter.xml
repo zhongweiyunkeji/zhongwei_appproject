@@ -113,15 +113,9 @@
 
     <Button
         android:id="@+id/commit_id"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/btn_lightblue"
+        style="@style/btnOrange"
         android:text="@string/commit"
-        android:textColor="@color/write"
-        android:textSize="20sp" />
+        android:layout_marginLeft="@dimen/dimens_20"
+        android:layout_marginRight="@dimen/dimens_20"/>
 
 </LinearLayout>
