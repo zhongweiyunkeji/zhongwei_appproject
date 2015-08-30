@@ -2,7 +2,6 @@
 <resources>
     <color name="rew">#ffff4444</color>
 
-
     <color name="green_color">#00c58e</color>
     <color name="balck_color">#484b4a</color>
 
@@ -116,9 +115,9 @@
     <!-- CirclePageIndicator -->
     <!-- 选中时的颜色 -->
     <!--<color name="default_circle_indicator_fill_color">#FFFFFF</color>-->
-    <!--&lt;!&ndash; 未选中时的颜色 &ndash;&gt;-->
+    <!-- 未选中时的颜色 -->
     <!--<color name="default_circle_indicator_page_color">#E93333</color>-->
-    <!--&lt;!&ndash; 未选中时周围圈的颜色 &ndash;&gt;-->
+    <!-- 未选中时周围圈的颜色 -->
     <!--<color name="default_circle_indicator_stroke_color">#FF0000</color>-->
 
     <color name="text_shadow">#dd000000</color>
