@@ -51,7 +51,7 @@
                 android:max="100"
                 android:progress="90"
                 android:background="#ffffff"
-                android:progressDrawable="@drawable/progressbg"
+                android:progressDrawable="@drawable/progressbg2"
                 android:id="@+id/progressBar" />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_height="8dp"
                 android:max="100"
                 android:progress="70"
-                android:progressDrawable="@drawable/progressbg"
+                android:progressDrawable="@drawable/progressbg1"
                 android:id="@+id/progressBar1" />
 
             <TextView
@@ -183,7 +183,7 @@
                 android:layout_height="8dp"
                 android:max="100"
                 android:progress="38"
-                android:progressDrawable="@drawable/progressbg"
+                android:progressDrawable="@drawable/progressbg1"
                 android:id="@+id/progressBar4" />
 
             <TextView
@@ -216,7 +216,7 @@
                 android:layout_height="8dp"
                 android:max="100"
                 android:progress="56"
-                android:progressDrawable="@drawable/progressbg"
+                android:progressDrawable="@drawable/progressbg1"
                 android:id="@+id/progressBar5" />
 
             <TextView
