@@ -40,7 +40,7 @@ public class CommonContactAdapter extends RecyclerView.Adapter<CommonContactAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int i) {
-        holder.contacts_name.setText(contacts.get(i).getName() + "\u3000\u3000\u3000");
+        holder.contacts_name.setText(contacts.get(i).getName() + "\u3000");
         holder.contacts_group.setText(contacts.get(i).getType());
         holder.contacts_phone.setText("手机号:" + contacts.get(i).getPhone());
         final int item = i;
