@@ -17,6 +17,7 @@ import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.DataCleanManager;
 import com.cdhxqh.travel_ticket_app.api.NetWorkUtil;
 import com.cdhxqh.travel_ticket_app.app.SwitchButton;
+import com.cdhxqh.travel_ticket_app.app.SwitchButtonIs;
 import com.cdhxqh.travel_ticket_app.utils.AccountUtils;
 
 /**
@@ -37,7 +38,7 @@ public class SettingActivity extends BaseActivity {
     /**
      * 是否的滑动开关
      */
-    SwitchButton wiperSwitch;
+    SwitchButtonIs wiperSwitch;
 
 //    /**
 //     *
@@ -75,7 +76,7 @@ public class SettingActivity extends BaseActivity {
     protected void findViewById() {
         install_flow = (RelativeLayout)findViewById(R.id.install_flow);
         catchs = (RelativeLayout) findViewById(R.id.catchs);
-        wiperSwitch = (SwitchButton) findViewById(R.id.wiperSwitch);
+        wiperSwitch = (SwitchButtonIs) findViewById(R.id.wiperSwitch);
         back_id = (Button) findViewById(R.id.back_id);
 
         /**
