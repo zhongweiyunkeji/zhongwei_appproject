@@ -37,11 +37,11 @@
             android:text="@string/install_flow_describute"
             android:layout_toRightOf="@+id/install_flow_title" />
 
-        <!--<com.cdhxqh.travel_ticket_app.app.SwitchButton-->
-            <!--android:id="@+id/wiperSwitch"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentRight="true"/>-->
+        <com.cdhxqh.travel_ticket_app.app.SwitchButtonIs
+            android:id="@+id/wiperSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
