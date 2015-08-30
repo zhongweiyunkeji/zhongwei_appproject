@@ -28,7 +28,7 @@
         android:layout_width="@dimen/mm_plugin_weather_otherday_image_size"
         android:layout_height="@dimen/mm_plugin_weather_otherday_image_size"
         android:layout_below="@id/weather_diviver"
-        android:background="#7b68ee"
+        android:background="#0066ff"
         android:layout_centerHorizontal="true"
         android:padding="5.0dip" />
 
