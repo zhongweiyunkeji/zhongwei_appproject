@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:drawableLeft="@drawable/ic_wait_pay"
+            android:drawableLeft="@drawable/ic_menu_wallet"
             android:gravity="center_vertical"
             android:text="@string/wait_pay_text"
             android:textStyle="bold" />
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:drawableLeft="@drawable/ic_wait_travel"
+            android:drawableLeft="@drawable/ic_menu_foot"
 
             android:gravity="center_vertical"
             android:text="@string/wait_travel_text"
@@ -115,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:drawableLeft="@drawable/ic_wait_review"
+            android:drawableLeft="@drawable/ic_menu_eidt"
             android:gravity="center_vertical"
             android:text="@string/wait_review_text"
             android:textStyle="bold" />
