@@ -71,7 +71,7 @@ public class BrokenLineChart {
 		render.setZoomButtonsVisible(false);// 是否显示放大缩小按钮
 //		render.setShowGrid(true);// 是否显示网格
 		render.setShowGridX(true);
-		render.setGridColor(Color.BLACK);// 设置网格颜色
+		render.setGridColor(Color.GRAY);// 设置网格颜色
 		render.setAxesColor(Color.BLACK);// 设置X.y轴颜色
 		render.setFitLegend(false);// 设置自动按比例缩放
 		render.setYAxisMax(3000.0); // 设置Y轴最大值
@@ -85,7 +85,7 @@ public class BrokenLineChart {
 		xyRender = new XYSeriesRenderer();
 		xyRender.setPointStyle(PointStyle.CIRCLE);
 		xyRender.setLineWidth(8);
-		xyRender.setColor(EntityColors);// 设置线图颜色
+		xyRender.setColor(EntityColors); //设置线图颜色
 		xyRender.setFillPoints(false);// 设置为实心点
 		xyRender.setPointStrokeWidth(15);
 		render.addSeriesRenderer(xyRender);// 添加到render中
