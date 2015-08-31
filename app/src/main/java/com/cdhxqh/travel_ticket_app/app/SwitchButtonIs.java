@@ -50,7 +50,7 @@ public class SwitchButtonIs extends View implements View.OnClickListener{
      */
     public void init() {
         mSwitchBottom = BitmapFactory.decodeResource(getResources(),
-                R.drawable.switch_bottom_b);
+                R.drawable.switch_bottom_ynb);
         mSwitchThumb = BitmapFactory.decodeResource(getResources(),
                 R.drawable.switch_btn_pressed);
         mSwitchFrame = BitmapFactory.decodeResource(getResources(),
