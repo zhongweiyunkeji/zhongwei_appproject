@@ -138,6 +138,11 @@ public class ReservationActivity extends BaseActivity{
      */
     private String goodsnum = "1";
 
+    /**
+     * 常用旅客信息
+     */
+    private TextView user;
+
     String tittle;
 
     @Override
@@ -170,6 +175,8 @@ public class ReservationActivity extends BaseActivity{
         ticket_user_a = (TextView) findViewById(R.id.ticket_user_a);
         id_card = (TextView) findViewById(R.id.id_card);
 
+        user = (TextView) findViewById(R.id.user);
+
         /**
          * 标题标签相关id
          */
@@ -180,6 +187,9 @@ public class ReservationActivity extends BaseActivity{
 
     @Override
     protected void initView() {
+        if(ec_user != null) {
+            ticket_user_a.setText(ec_user.getMobilePhone());
+        }
         //设置标签页显示方式
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
@@ -209,7 +219,20 @@ public class ReservationActivity extends BaseActivity{
         put_order.setOnClickListener(putOrderClickListener);
 
         backImageView.setOnTouchListener(backImageViewOnTouchListener);
+
+        user.setOnClickListener(userOnClickListener);
     }
+
+    /**
+     * 常用旅客信息
+     */
+    private View.OnClickListener userOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(ReservationActivity.this, CommonContactActivity.class);
+            ReservationActivity.this.startActivity(intent);
+        }
+    };
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
         @Override
@@ -281,7 +304,7 @@ public class ReservationActivity extends BaseActivity{
         }
     };
 
-/**
+    /**
      * 加票事件
      */
     private View.OnClickListener addOnClickListener = new View.OnClickListener() {
