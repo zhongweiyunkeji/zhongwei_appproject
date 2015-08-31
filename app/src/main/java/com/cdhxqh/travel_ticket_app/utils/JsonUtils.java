@@ -219,7 +219,7 @@ public class JsonUtils {
 
                 ecs_brand.setAddress(jsonObject.getString("address"));
                 ecs_brand.setPo_notice(jsonObject.getString("po_notice"));
-
+                Double a = jsonObject.getDouble("minprice");
                 ecs_brand.setMinprice(jsonObject.getDouble("minprice"));
                 models.add(ecs_brand);
             }
