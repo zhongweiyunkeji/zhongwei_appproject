@@ -98,6 +98,13 @@ public class MainActivity extends TabActivity {
             String activity =   bundle.getString("activity");
             home_tab_main.setChecked(false);
             home_tab_order.setChecked(true);
+            Intent intent = new Intent();
+            if(bundle.containsKey("userActivity")) {
+                if(bundle.getString("userActivity").equals("typeActivity")) {
+                    intent.putExtra("unPayMent", true);
+                }
+            }
+            this.setIntent(intent);
             mTabHost.setCurrentTabByTag(activity);
         }
 

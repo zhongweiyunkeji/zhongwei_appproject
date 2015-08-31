@@ -148,7 +148,7 @@ public class UserActivity extends BaseActivity {
             Intent intent=new Intent(UserActivity.this,MainActivity.class);
             Bundle bundle=new Bundle();
             bundle.putString("activity", "ORDER_ACTIVITY");
-
+            bundle.putString("userActivity", "typeActivity");
             intent.putExtras(bundle);
             UserActivity.this.startActivity(intent);
             UserActivity.this.finish();

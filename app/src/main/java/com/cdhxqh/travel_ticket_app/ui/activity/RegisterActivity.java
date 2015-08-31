@@ -65,6 +65,8 @@ public class RegisterActivity extends BaseActivity {
 
     TimeCountUtil timeCountUtil;
 
+    boolean check;
+
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -121,30 +123,17 @@ public class RegisterActivity extends BaseActivity {
 
         backImageviewId.setOnTouchListener(backImageViewOnTouchListener);
 
+
+
         // 填写手机号按钮事件
         regPhoneNextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phone = RegisterActivity.this.reg_phone_text.getText().toString();
-                boolean flag = RegisterActivity.this.isMobileNO(phone);
-                if (flag) {
-                    if (phone.length() == 11) {
-                        showLayout(RegisterActivity.this.regLayou2); // 显示regLayou2
-                        setTextViewBackground(writeWwd);              // 设置背景颜色
-                    } else {
-                        Toast toast = Toast.makeText(getApplicationContext(), "请输入11位的手机号", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                    }
-                } else {
-                    String msg = "手机号格式不正确";
-                    if (phone.length() == 0) {
-                        msg = "请输入手机号";
-                    }
-                    MessageUtils.showMiddleToast(RegisterActivity.this, msg);
-                }
+                checkPhone();
             }
         });
+
+
 
         // 设置密码按钮事件
         regPwdBtn.setOnClickListener(new View.OnClickListener() {
@@ -207,6 +196,57 @@ public class RegisterActivity extends BaseActivity {
 
             }
         });
+    }
+
+    public void phone(String phone, boolean flag) {
+        if (flag) {
+            if (phone.length() == 11) {
+                showLayout(RegisterActivity.this.regLayou2); // 显示regLayou2
+                setTextViewBackground(writeWwd);              // 设置背景颜色
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), "请输入11位的手机号", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+        } else {
+            if(!flag) {
+                String msg = "手机号格式不正确";
+                if (phone.length() == 0) {
+                    msg = "请输入手机号";
+                }
+                MessageUtils.showMiddleToast(RegisterActivity.this, msg);
+            }
+        }
+    }
+
+    /**
+     * 根据邮箱号获取密码
+     */
+    private void checkPhone () {
+        
+
+        HttpManager.checkPhone(this,
+                reg_phone_text.getText().toString(),
+                new HttpRequestHandler<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean data) {
+                        String phone = RegisterActivity.this.reg_phone_text.getText().toString();
+                        boolean flag = RegisterActivity.this.isMobileNO(phone);
+                        phone(phone, flag);
+                    }
+
+
+                    @Override
+                    public void onSuccess(Boolean data, int totalPages, int currentPage) {
+                        Log.i(TAG, "22222");
+                    }
+
+                    @Override
+                    public void onFailure(String error) {
+                        String msg = "该用户已注册";
+                        MessageUtils.showMiddleToast(RegisterActivity.this, msg);
+                    }
+                });
     }
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {

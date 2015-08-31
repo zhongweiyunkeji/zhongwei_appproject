@@ -3,6 +3,7 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -84,15 +85,28 @@ public class OrderActivity extends BaseActivity {
 
     ImageView searchIcon;
 
+    boolean flag = false;
+
     SimpleDateFormat formart = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+        getDate();
         findViewById();
         initView();
 
+    }
+
+    public void getDate() {
+        if(getParent().getIntent() != null) {
+            Intent intent = getParent().getIntent();
+            flag = intent.getBooleanExtra("unPayMent", false);
+            if(flag) {
+                unPayMent();
+            }
+        }
     }
 
     @Override
@@ -153,7 +167,10 @@ public class OrderActivity extends BaseActivity {
             outtextView.setBackgroundColor(getResources().getColor(R.color.white));
 
             if(1 == currntPageIn){
-                requestOrderList(true, "after");
+                if(!flag) {
+                    requestOrderList(true, "after");
+                }
+                flag = false;
             }
             if(orderThreeInFragment.getAdapter()!=null && orderThreeInFragment.getAdapter().getGroupList().size() == 0){
                 laout.setVisibility(View.VISIBLE);
@@ -239,6 +256,12 @@ public class OrderActivity extends BaseActivity {
         if("before".equals(type)){// 3个月前
             HttpManager.getOrder_list(myShared.getString(Constants.SESSIONIDTRUE, ""), this, Constants.OTDER_LIST_URL, type, showCountOut+"", currntPageOut+"", handlerOut);
         }
+    }
+
+    public void unPayMent() {
+        createProgressDialog();
+        SharedPreferences myShared = getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
+        HttpManager.unPayMent(myShared.getString(Constants.SESSIONIDTRUE, ""), this, Constants.OTDER_LIST_URL, "0", showCountOut + "", currntPageOut + "", handlerIn);
     }
 
     private HttpRequestHandler<String> handlerIn = new HttpRequestHandler<String>() {

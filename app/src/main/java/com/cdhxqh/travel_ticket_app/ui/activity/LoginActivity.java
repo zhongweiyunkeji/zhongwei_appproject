@@ -212,7 +212,7 @@ public class LoginActivity extends BaseActivity {
 
                         @Override
                         public void onFailure(String error) {
-                            MessageUtils.showErrorMessage(LoginActivity.this, error);
+                            MessageUtils.showMiddleToast(LoginActivity.this, error);
                             progressDialog.dismiss();
                         }
                     });
@@ -239,7 +239,7 @@ public class LoginActivity extends BaseActivity {
 
                         @Override
                         public void onFailure(String error) {
-                            MessageUtils.showErrorMessage(LoginActivity.this, error);
+                            MessageUtils.showMiddleToast(LoginActivity.this, error);
                             progressDialog.dismiss();
                         }
                     });
