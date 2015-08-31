@@ -170,7 +170,6 @@ public class OrderActivity extends BaseActivity {
         if (tabName == "three_in") {
             if (null == orderThreeInFragment) {
                 orderThreeInFragment = new OrderThreeInFragment();
-
             }
             if (!flag) {
                 backImageView.setVisibility(View.GONE);
