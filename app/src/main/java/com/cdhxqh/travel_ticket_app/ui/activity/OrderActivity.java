@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
@@ -25,10 +26,13 @@ import com.cdhxqh.travel_ticket_app.ui.adapter.OrderThreeAdapter;
 import com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeInFragment;
 import com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeOutFragment;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
+
 import android.support.v4.widget.SwipeRefreshLayout;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,6 +76,13 @@ public class OrderActivity extends BaseActivity {
 
     private ProgressDialog progressDialog;
 
+    LinearLayout order_title;
+
+    /**
+     * 返回按钮*
+     */
+    private ImageView backImageView;
+
     // 3个月内
     int currntPageIn = 1;
     final static int showCountIn = 10;
@@ -100,10 +111,10 @@ public class OrderActivity extends BaseActivity {
     }
 
     public void getDate() {
-        if(getParent().getIntent() != null) {
-            Intent intent = getParent().getIntent();
+        if (getIntent() != null) {
+            Intent intent =getIntent();
             flag = intent.getBooleanExtra("unPayMent", false);
-            if(flag) {
+            if (flag) {
                 unPayMent();
             }
         }
@@ -114,8 +125,10 @@ public class OrderActivity extends BaseActivity {
         titleTextView = (TextView) findViewById(R.id.title_text_id);
         inttextView = (TextView) findViewById(R.id.order_in_text);
         outtextView = (TextView) findViewById(R.id.order_out_text);
-        laout = (LinearLayout)findViewById(R.id.activity_order_hint_layout);
-        searchIcon = (ImageView)findViewById(R.id.title_search_id);
+        laout = (LinearLayout) findViewById(R.id.activity_order_hint_layout);
+        searchIcon = (ImageView) findViewById(R.id.title_search_id);
+        order_title = (LinearLayout) findViewById(R.id.order_title);
+        backImageView = (ImageView) findViewById(R.id.back_imageview_id);
     }
 
     @Override
@@ -125,6 +138,8 @@ public class OrderActivity extends BaseActivity {
         inttextView.setOnClickListener(inttextViewOnClickListener);
         outtextView.setOnClickListener(outtextViewOnClickListener);
         OnTabSelected("three_in");
+        //返回至登录界面事件
+        backImageView.setOnClickListener(backImageViewOnClickListener);
     }
 
     /**
@@ -157,26 +172,37 @@ public class OrderActivity extends BaseActivity {
                 orderThreeInFragment = new OrderThreeInFragment();
 
             }
-            inttextView.setTextColor(Color.rgb(255, 255, 255));  // 设置字体为白色
-            outtextView.setTextColor(Color.rgb(0, 0, 0));        // 设置字体为绿色
-            FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();  //
-            localFragmentTransaction.replace(R.id.container, orderThreeInFragment, "three_in");
-            localFragmentTransaction.commit();
+            if (!flag) {
+                backImageView.setVisibility(View.GONE);
+                inttextView.setTextColor(Color.rgb(255, 255, 255));  // 设置字体为白色
+                outtextView.setTextColor(Color.rgb(0, 0, 0));        // 设置字体为绿色
+                FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();  //
+                localFragmentTransaction.replace(R.id.container, orderThreeInFragment, "three_in");
+                localFragmentTransaction.commit();
 
-            inttextView.setBackgroundColor(getResources().getColor(R.color.green_color));
-            outtextView.setBackgroundColor(getResources().getColor(R.color.white));
+                inttextView.setBackgroundColor(getResources().getColor(R.color.green_color));
+                outtextView.setBackgroundColor(getResources().getColor(R.color.white));
 
-            if(1 == currntPageIn){
-                if(!flag) {
+                if (1 == currntPageIn) {
                     requestOrderList(true, "after");
                 }
-                flag = false;
+            }else {
+                backImageView.setVisibility(View.VISIBLE);
+                inttextView.setTextColor(Color.rgb(255, 255, 255));  // 设置字体为白色
+                outtextView.setTextColor(Color.rgb(0, 0, 0));        // 设置字体为绿色
+                FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();  //
+                localFragmentTransaction.replace(R.id.container, orderThreeInFragment, "three_in");
+                localFragmentTransaction.commit();
+
+                inttextView.setBackgroundColor(getResources().getColor(R.color.green_color));
+                outtextView.setBackgroundColor(getResources().getColor(R.color.white));
+                order_title.setVisibility(View.GONE);
             }
-            if(orderThreeInFragment.getAdapter()!=null && orderThreeInFragment.getAdapter().getGroupList().size() == 0){
+            if (orderThreeInFragment.getAdapter() != null && orderThreeInFragment.getAdapter().getGroupList().size() == 0) {
                 laout.setVisibility(View.VISIBLE);
             }
         } else if (tabName == "three_out") {
-            if(null == orderThreeOutFragment){
+            if (null == orderThreeOutFragment) {
                 orderThreeOutFragment = new OrderThreeOutFragment();
             }
 
@@ -189,10 +215,10 @@ public class OrderActivity extends BaseActivity {
             inttextView.setBackgroundColor(getResources().getColor(R.color.white));
             outtextView.setBackgroundColor(getResources().getColor(R.color.green_color));
 
-            if(1 == currntPageOut){
+            if (1 == currntPageOut) {
                 requestOrderList(true, "before");
             }
-            if(orderThreeOutFragment.getAdapter()!=null && orderThreeOutFragment.getAdapter().getGroupList().size() == 0){
+            if (orderThreeOutFragment.getAdapter() != null && orderThreeOutFragment.getAdapter().getGroupList().size() == 0) {
                 laout.setVisibility(View.VISIBLE);
             }
         }
@@ -228,11 +254,26 @@ public class OrderActivity extends BaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK
                 && event.getRepeatCount() == 0) {
             //do something...
-            exit(OrderActivity.this);
+            if(flag = false) {
+                exit(OrderActivity.this);
+            }else {
+                finish();
+            }
+            flag = false;
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    /**
+     * 返回事件的监听*
+     */
+    private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
 
     /**
      * 创建progressDialog*
@@ -242,19 +283,18 @@ public class OrderActivity extends BaseActivity {
     }
 
     public void requestOrderList(boolean refersh, String type) {
-        if(orderThreeInFragment!=null && orderThreeInFragment.getSwipeRefreshLayoutIn() != null){
+        if (orderThreeInFragment != null && orderThreeInFragment.getSwipeRefreshLayoutIn() != null) {
             orderThreeInFragment.getSwipeRefreshLayoutIn().setRefreshing(false);
         }
-        if(orderThreeOutFragment!=null && orderThreeOutFragment.getSwipeRefreshLayoutOut() != null){
+        if (orderThreeOutFragment != null && orderThreeOutFragment.getSwipeRefreshLayoutOut() != null) {
             orderThreeOutFragment.getSwipeRefreshLayoutOut().setRefreshing(false);
         }
         createProgressDialog();
         SharedPreferences myShared = getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
-        if("after".equals(type)){  // 3个月内
-            HttpManager.getOrder_list(myShared.getString(Constants.SESSIONIDTRUE, ""), this, Constants.OTDER_LIST_URL, type, showCountIn+"", currntPageIn+"", handlerIn);
-        } else
-        if("before".equals(type)){// 3个月前
-            HttpManager.getOrder_list(myShared.getString(Constants.SESSIONIDTRUE, ""), this, Constants.OTDER_LIST_URL, type, showCountOut+"", currntPageOut+"", handlerOut);
+        if ("after".equals(type)) {  // 3个月内
+            HttpManager.getOrder_list(myShared.getString(Constants.SESSIONIDTRUE, ""), this, Constants.OTDER_LIST_URL, type, showCountIn + "", currntPageIn + "", handlerIn);
+        } else if ("before".equals(type)) {// 3个月前
+            HttpManager.getOrder_list(myShared.getString(Constants.SESSIONIDTRUE, ""), this, Constants.OTDER_LIST_URL, type, showCountOut + "", currntPageOut + "", handlerOut);
         }
     }
 
@@ -271,51 +311,51 @@ public class OrderActivity extends BaseActivity {
             JSONObject jsonObject = null;
             try {
                 jsonObject = new JSONObject(data);
-                JSONObject result = ((JSONObject)jsonObject.get("result"));
+                JSONObject result = ((JSONObject) jsonObject.get("result"));
                 String serverurl = result.getString("serverurl");
                 int totalPage = result.getInt("totalPage");
                 JSONArray orderlist = result.getJSONArray("orderlist");
-                String qrcodeurl = result.getString("qrcodeurl")+"/"; // 二维码地址
+                String qrcodeurl = result.getString("qrcodeurl") + "/"; // 二维码地址
                 int length = orderlist.length();
 
                 List<OrderModel> groupList = new ArrayList<OrderModel>(0);
                 Map<String, List<OrderGoods>> itemList = new HashMap<String, List<OrderGoods>>(0);
 
-                for(int index=0; index<length; index++){
-                    JSONObject subObject = (JSONObject)orderlist.get(index);
+                for (int index = 0; index < length; index++) {
+                    JSONObject subObject = (JSONObject) orderlist.get(index);
                     String orderSn = subObject.getString("orderSn");           // 订单号
                     String orderStatus = subObject.getString("orderStatus");  // 订单状态
-                    Long addTime =       subObject.getLong("addTime");        // 购买时间
+                    Long addTime = subObject.getLong("addTime");        // 购买时间
                     double goodsAmount = subObject.getDouble("goodsAmount");// 总额
                     String consignee = subObject.getString("consignee"); // 出游人
                     String mobile = subObject.getString("mobile");       // 手机号
                     String createTimt = "";
                     try {
-                        createTimt = formart.format(new java.util.Date(addTime*1000));
+                        createTimt = formart.format(new java.util.Date(addTime * 1000));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
-                    OrderModel orderModel = new OrderModel(orderSn, 0,0,0,orderStatus, createTimt, goodsAmount);
+                    OrderModel orderModel = new OrderModel(orderSn, 0, 0, 0, orderStatus, createTimt, goodsAmount);
                     groupList.add(orderModel);
 
                     JSONArray subArray = subObject.getJSONArray("orderGoods");
                     // Log.e(TAG, " ----------------------------> "+subObject);
-                    if(subArray!=null){
+                    if (subArray != null) {
                         int size = subArray.length();
-                        if(size>0){
+                        if (size > 0) {
                             List<OrderGoods> goodList = new ArrayList<OrderGoods>(0);
                             itemList.put(orderModel.getOrderSn(), goodList);   // 注意此处不能使用orderSn!!!!!!
-                            for(int k=0; k<size; k++){
-                                JSONObject obj = (JSONObject)subArray.get(k);
+                            for (int k = 0; k < size; k++) {
+                                JSONObject obj = (JSONObject) subArray.get(k);
                                 int goodsId = obj.getInt("goodsId");    // id
                                 String goodsName = obj.getString("goodsName");  // 景点标题
                                 int goodsNumber = obj.getInt("goodsNumber");   // 总数量
                                 double goodsPrice = obj.getDouble("goodsPrice");     // 购买价格
                                 String status = obj.getString("status");        // 景点状态
                                 String imgurl = obj.getString("goodsAttr");    // 景点图片
-                                String cardSn = ((obj.getString("card_sn")==null) ? "" : obj.getString("card_sn"))+".png";      // 二维码名称
-                                OrderGoods goods = new OrderGoods(goodsId+"", goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status, consignee, mobile, qrcodeurl+cardSn);
+                                String cardSn = ((obj.getString("card_sn") == null) ? "" : obj.getString("card_sn")) + ".png";      // 二维码名称
+                                OrderGoods goods = new OrderGoods(goodsId + "", goodsName, goodsNumber, goodsPrice, orderSn, serverurl + imgurl, status, consignee, mobile, qrcodeurl + cardSn);
                                 goodList.add(goods);
                             }
                             OrderGoods other = new OrderGoods();
@@ -327,7 +367,7 @@ public class OrderActivity extends BaseActivity {
 
                 OrderThreeAdapter adapter = orderThreeInFragment.getAdapter();
                 adapter.update(groupList, itemList);
-                if(adapter.getGroupList().size() == 0){
+                if (adapter.getGroupList().size() == 0) {
                     laout.setVisibility(View.VISIBLE);
                 } else {
                     laout.setVisibility(View.GONE);
@@ -346,7 +386,7 @@ public class OrderActivity extends BaseActivity {
         @Override
         public void onFailure(String error) {
             OrderThreeAdapter adapter = orderThreeInFragment.getAdapter();
-            if(adapter.getGroupList().size() == 0){
+            if (adapter.getGroupList().size() == 0) {
                 laout.setVisibility(View.VISIBLE);
             }
             MessageUtils.showErrorMessage(OrderActivity.this, error);
@@ -361,41 +401,41 @@ public class OrderActivity extends BaseActivity {
             JSONObject jsonObject = null;
             try {
                 jsonObject = new JSONObject(data);
-                JSONObject result = ((JSONObject)jsonObject.get("result"));
+                JSONObject result = ((JSONObject) jsonObject.get("result"));
                 String serverurl = result.getString("serverurl");
                 int totalPage = result.getInt("totalPage");
                 JSONArray orderlist = result.getJSONArray("orderlist");
-                String qrcodeurl = result.getString("qrcodeurl")+"/"; // 二维码地址
+                String qrcodeurl = result.getString("qrcodeurl") + "/"; // 二维码地址
                 int length = orderlist.length();
 
                 List<OrderModel> groupList = new ArrayList<OrderModel>(0);
                 Map<String, List<OrderGoods>> itemList = new HashMap<String, List<OrderGoods>>(0);
 
-                for(int index=0; index<length; index++){
-                    JSONObject subObject = (JSONObject)orderlist.get(index);
+                for (int index = 0; index < length; index++) {
+                    JSONObject subObject = (JSONObject) orderlist.get(index);
                     String orderSn = subObject.getString("orderSn");           // 订单号
                     String orderStatus = subObject.getString("orderStatus");  // 订单状态
-                    Long addTime =       subObject.getLong("addTime");        // 购买时间
+                    Long addTime = subObject.getLong("addTime");        // 购买时间
                     double goodsAmount = subObject.getDouble("goodsAmount");// 总额
                     String createTimt = "";
                     try {
-                        createTimt = formart.format(new java.util.Date(addTime*1000));
+                        createTimt = formart.format(new java.util.Date(addTime * 1000));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
-                    OrderModel orderModel = new OrderModel(orderSn, 0,0,0,orderStatus, createTimt, goodsAmount);
+                    OrderModel orderModel = new OrderModel(orderSn, 0, 0, 0, orderStatus, createTimt, goodsAmount);
                     groupList.add(orderModel);
 
                     JSONArray subArray = subObject.getJSONArray("orderGoods");
                     // Log.e(TAG, " ----------------------------> "+subObject);
-                    if(subArray!=null){
+                    if (subArray != null) {
                         int size = subArray.length();
-                        if(size>0){
+                        if (size > 0) {
                             List<OrderGoods> goodList = new ArrayList<OrderGoods>(0);
                             itemList.put(orderModel.getOrderSn(), goodList);   // 注意此处不能使用orderSn!!!!!!
-                            for(int k=0; k<size; k++){
-                                JSONObject obj = (JSONObject)subArray.get(k);
+                            for (int k = 0; k < size; k++) {
+                                JSONObject obj = (JSONObject) subArray.get(k);
                                 int goodsId = obj.getInt("goodsId");    // id
                                 String goodsName = obj.getString("goodsName");  // 景点标题
                                 int goodsNumber = obj.getInt("goodsNumber");   // 总数量
@@ -404,8 +444,8 @@ public class OrderActivity extends BaseActivity {
                                 String imgurl = obj.getString("goodsAttr");    // 景点图片
                                 String consignee = obj.getString("consignee"); // 出游人
                                 String mobile = obj.getString("mobile");       // 手机号
-                                String cardSn = ((obj.getString("card_sn")==null) ? "" : obj.getString("card_sn"))+".png";      // 二维码名称
-                                OrderGoods goods = new OrderGoods(goodsId+"", goodsName, goodsNumber, goodsPrice, orderSn, serverurl+imgurl, status, consignee, mobile, qrcodeurl+cardSn);
+                                String cardSn = ((obj.getString("card_sn") == null) ? "" : obj.getString("card_sn")) + ".png";      // 二维码名称
+                                OrderGoods goods = new OrderGoods(goodsId + "", goodsName, goodsNumber, goodsPrice, orderSn, serverurl + imgurl, status, consignee, mobile, qrcodeurl + cardSn);
                                 goodList.add(goods);
                             }
                             OrderGoods other = new OrderGoods();
@@ -417,7 +457,7 @@ public class OrderActivity extends BaseActivity {
 
                 OrderThreeAdapter adapter = orderThreeOutFragment.getAdapter();
                 adapter.update(groupList, itemList);
-                if(adapter.getGroupList().size() == 0){
+                if (adapter.getGroupList().size() == 0) {
                     laout.setVisibility(View.VISIBLE);
                 } else {
                     laout.setVisibility(View.GONE);
@@ -436,7 +476,7 @@ public class OrderActivity extends BaseActivity {
         @Override
         public void onFailure(String error) {
             OrderThreeAdapter adapter = orderThreeOutFragment.getAdapter();
-            if(adapter.getGroupList().size() == 0){
+            if (adapter.getGroupList().size() == 0) {
                 laout.setVisibility(View.VISIBLE);
             }
             MessageUtils.showErrorMessage(OrderActivity.this, error);
