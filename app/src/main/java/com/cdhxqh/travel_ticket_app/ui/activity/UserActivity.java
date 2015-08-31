@@ -145,13 +145,9 @@ public class UserActivity extends BaseActivity {
     private View.OnClickListener user_not_payOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent=new Intent(UserActivity.this,MainActivity.class);
-            Bundle bundle=new Bundle();
-            bundle.putString("activity", "ORDER_ACTIVITY");
-            bundle.putString("userActivity", "typeActivity");
-            intent.putExtras(bundle);
+            Intent intent=new Intent(UserActivity.this,OrderActivity.class);
+            intent.putExtra("unPayMent", true);
             UserActivity.this.startActivity(intent);
-            UserActivity.this.finish();
         }
     };
 
