@@ -57,7 +57,7 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
             paramViewHolder.nameText.setText(localEcs_brand.brand_name);
             paramViewHolder.timeText.setText(localEcs_brand.valid_date);
             paramViewHolder.linearLayout.setVisibility(View.VISIBLE);
-            paramViewHolder.priceText.setText(getprice(localEcs_brand.minprice));
+            paramViewHolder.priceText.setText(String.valueOf(localEcs_brand.minprice));
 
             paramViewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
