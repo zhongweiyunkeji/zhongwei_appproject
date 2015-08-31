@@ -68,7 +68,8 @@ public class HttpManager {
         try {
             Integer curPage = Integer.parseInt(currentPage);
             threadLocal.set(curPage);
-        } catch (NumberFormatException e) { }
+        } catch (NumberFormatException e) {
+        }
         getEcs_Brands(cxt, urlString, refresh, handler);
     }
 
@@ -94,11 +95,9 @@ public class HttpManager {
     }
 
 
-
-
-
     /**
      * 不分页
+     *
      * @param cxt         上下文
      * @param title       景点标题
      * @param showCount   当前条数
@@ -107,11 +106,11 @@ public class HttpManager {
      * @param handler     handler
      */
     public static void getAttractions_lists(Context cxt, String title, String brandId, String showCount, String currentPage, boolean refresh,
-                                           HttpRequestHandler<ArrayList<Attractions>> handler) {
+                                            HttpRequestHandler<ArrayList<Attractions>> handler) {
         String urlString;
 
         if (title.equals("")) {
-            urlString = Constants.ATTRACTIONS_URL + "?" + "brandId=" + brandId ;
+            urlString = Constants.ATTRACTIONS_URL + "?" + "brandId=" + brandId;
         } else {
             urlString = Constants.ATTRACTIONS_URL + "?" + "title=" + title + "brandId=" + brandId;
         }
@@ -158,14 +157,15 @@ public class HttpManager {
     }
 
     /**
-     *创建订单
+     * 创建订单
+     *
      * @param cxt
      * @param handler
      */
-    public static void reservation(final String sessionId, final Context cxt, final String goodsAmount, String goodsIds, String payId, String payName, String consignee, String mobile, String postscript,final HttpRequestHandler<CategoryModel> handler) {
+    public static void reservation(final String sessionId, final Context cxt, final String goodsAmount, String goodsIds, String payId, String payName, String consignee, String mobile, String postscript, final HttpRequestHandler<CategoryModel> handler) {
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Cookie", "JSESSIONID="+sessionId);
+        client.addHeader("Cookie", "JSESSIONID=" + sessionId);
         client.setConnectTimeout(10000);
         RequestParams params = new RequestParams();
         params.put("goodsAmount", goodsAmount);
@@ -213,11 +213,12 @@ public class HttpManager {
     }
 
     /**
-     *判断订单库存
+     * 判断订单库存
+     *
      * @param cxt
      * @param handler
      */
-    public static void stockNum(final Context cxt, String goodsIds,final HttpRequestHandler<Integer> handler) {
+    public static void stockNum(final Context cxt, String goodsIds, final HttpRequestHandler<Integer> handler) {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.setConnectTimeout(10000);
@@ -250,9 +251,9 @@ public class HttpManager {
     }
 
 
-
     /**
-     *更新订单接口
+     * 更新订单接口
+     *
      * @param cxt
      * @param handler
      */
@@ -305,7 +306,7 @@ public class HttpManager {
      * @param handler  返回结果处理
      */
     public static <E> void loginWithUsername(final Context cxt, final String username, final String password,
-                                         final HttpRequestHandler<String> handler) {
+                                             final HttpRequestHandler<String> handler) {
         Map<String, String> mapparams = new HashMap<String, String>();
         mapparams.put("loginName", username);
         mapparams.put("password", password);
@@ -348,7 +349,7 @@ public class HttpManager {
      * @param handler  返回结果处理
      */
     public static void loginWithTicketCollector(final Context cxt, final String username, final String password,
-                                         final HttpRequestHandler<Integer> handler) {
+                                                final HttpRequestHandler<Integer> handler) {
         Map<String, String> mapparams = new HashMap<String, String>();
         mapparams.put("userName", username);
         mapparams.put("password", password);
@@ -397,11 +398,11 @@ public class HttpManager {
      * 景区分类
      *
      * @param cxt
-     * @param type 邮箱号
-     * @param handler  返回结果处理
+     * @param type    邮箱号
+     * @param handler 返回结果处理
      */
     public static void geType(final Context cxt, final String type,
-                                       final HttpRequestHandler<ArrayList<String>> handler) {
+                              final HttpRequestHandler<ArrayList<String>> handler) {
         RequestParams maps = new RequestParams();
         AsyncHttpClient client = new AsyncHttpClient();
         maps.put("type", type);
@@ -432,11 +433,11 @@ public class HttpManager {
      * 景区分类
      *
      * @param cxt
-     * @param type 邮箱号
-     * @param handler  返回结果处理
+     * @param type    邮箱号
+     * @param handler 返回结果处理
      */
     public static void geHot(final Context cxt, final String types, final String type,
-                              final HttpRequestHandler<ArrayList<Ec_goods>> handler) {
+                             final HttpRequestHandler<ArrayList<Ec_goods>> handler) {
         RequestParams maps = new RequestParams();
         AsyncHttpClient client = new AsyncHttpClient();
         maps.put(types, type);
@@ -591,6 +592,7 @@ public class HttpManager {
 
     /**
      * 订单
+     *
      * @param context
      * @param url
      * @param datenote
@@ -599,10 +601,10 @@ public class HttpManager {
      * @param handler
      */
 
-    public static void getOrder_list(final String sessionId, final Context context, String url, String datenote, String showCount, String currentPage,  final HttpRequestHandler<String> handler) {
+    public static void getOrder_list(final String sessionId, final Context context, String url, String datenote, String showCount, String currentPage, final HttpRequestHandler<String> handler) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        client.addHeader("Cookie", "JSESSIONID="+sessionId);  // 添加Header
+        client.addHeader("Cookie", "JSESSIONID=" + sessionId);  // 添加Header
         params.put("datenote", datenote);
         params.put("showCount", showCount);
         params.put("currentPage", currentPage);
@@ -638,10 +640,59 @@ public class HttpManager {
         });
     }
 
+    /**
+     * 订单
+     *
+     * @param context
+     * @param url
+     * @param payStatus
+     * @param showCount
+     * @param currentPage
+     * @param handler
+     */
+
+    public static void unPayMent(final String sessionId, final Context context, String url, String payStatus, String showCount, String currentPage, final HttpRequestHandler<String> handler) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        client.addHeader("Cookie", "JSESSIONID=" + sessionId);  // 添加Header
+        params.put("datenote", "");
+        params.put("orderStatus", payStatus);
+        params.put("showCount", showCount);
+        params.put("currentPage", currentPage);
+        client.get(url, params, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String errcode = jsonObject.getString("errcode");
+                    if (Constants.REQUEST_SUCCESS.equals(errcode)) {
+                        SafeHandler.onSuccess(handler, responseString);
+                        String result = jsonObject.getString("result");
+                        // ArrayList<SpotBookModel> spotBookModel = JsonUtils.parsingSpotBook(result);
+                        /*if (spotBookModel != null && spotBookModel.size() != 0) {
+                            SafeHandler.onSuccess(handler, spotBookModel);
+                        } else {
+                            SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+                        }*/
+                    } else if (Constants.LOGIN_TIMEOUT.equals(errcode)) {
+                        SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorLoginTimeOutFailure));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+                }
+            }
+        });
+    }
 
     /**
-     *
-     *景区门票测试
+     * 景区门票测试
      *
      * @param brandName
      * @param showCount
@@ -649,7 +700,7 @@ public class HttpManager {
      */
 
     public static void getSpotBooking(final Context context, String url, String brandName, String showCount, String currentPage,
-                                            final HttpRequestHandler<ArrayList<SpotBookModel>> handler) {
+                                      final HttpRequestHandler<ArrayList<SpotBookModel>> handler) {
 
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
@@ -690,6 +741,46 @@ public class HttpManager {
     }
 
     /**
+     * 获取门票信息
+     *
+     * @param context
+     * @param url
+     * @param handler
+     */
+    public static void checkPhone(final Context context, String text,
+                                  final HttpRequestHandler<Boolean> handler) {
+        final AsyncHttpClient client = getClient(context, false);
+//        client.addHeader("Referer", Constants.GOODSLIST_URL);
+//        client.addHeader("Content-Type", "application/x-www-form-urlencoded");
+        RequestParams params = new RequestParams();
+        params.put("mobile", text);
+        client.get(Constants.CHECK_PHONE, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.i(TAG, "zzzzzzz");
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Log.i(TAG, "responseString=" + responseString);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String errcode = jsonObject.getString("errcode");
+                    if (errcode.equals(Constants.CHECK_PHONE_FAIL)) {
+                        SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+                    } else {
+                        SafeHandler.onSuccess(handler, true);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
      * 景区列表
      *
      * @param ctx;
@@ -697,11 +788,11 @@ public class HttpManager {
      * @param handler; *
      */
 
-    public static void getEcs_Brands(final Context ctx, String url, boolean refresh,  final HttpRequestHandler<ArrayList<Ecs_brand>> handler) {
+    public static void getEcs_Brands(final Context ctx, String url, boolean refresh, final HttpRequestHandler<ArrayList<Ecs_brand>> handler) {
 
-       Log.i(TAG,"brand  url="+url);
+        Log.i(TAG, "brand  url=" + url);
 
-        final Integer currentPage = (Integer)threadLocal.get();  // 从当前线程中取出当前页
+        final Integer currentPage = (Integer) threadLocal.get();  // 从当前线程中取出当前页
         final String key = Uri.parse(url).getEncodedQuery();
         if (!refresh) {
             //尝试从缓存中加载
@@ -730,7 +821,7 @@ public class HttpManager {
                 try {
                     JSONObject jsonObject = new JSONObject(responseBody);
                     String errcode = jsonObject.getString("errcode");
-                    int totalPage = ((JSONObject)jsonObject.get("result")).getInt("totalPage");
+                    int totalPage = ((JSONObject) jsonObject.get("result")).getInt("totalPage");
                     if (errcode.equals(Constants.REQUEST_SUCCESS)) {
                         String errmsg = jsonObject.getString("errmsg");
 
@@ -739,8 +830,8 @@ public class HttpManager {
                         ArrayList<Ecs_brand> ecs_brands = JsonUtils.parsingBrandsInfo(result);
                         if (ecs_brands != null && ecs_brands.size() != 0) {
                             SafeHandler.onSuccess(handler, ecs_brands);
-                            if(currentPage!=null){
-                                if((currentPage>totalPage) && (totalPage>0)){
+                            if (currentPage != null) {
+                                if ((currentPage > totalPage) && (totalPage > 0)) {
                                     MessageUtils.showMiddleToast(ctx, "已没有数据可显示");
                                 }
                             }
@@ -759,28 +850,28 @@ public class HttpManager {
     }
 
     /**
-     *
      * 获取门票信息
+     *
      * @param context
      * @param url
      * @param handler
      */
     public static void getbrandlist(final Context context, String url,
-                                    final HttpRequestHandler<ArrayList<GoodsList>> handler){
+                                    final HttpRequestHandler<ArrayList<GoodsList>> handler) {
         final AsyncHttpClient client = getClient(context, false);
 //        client.addHeader("Referer", Constants.GOODSLIST_URL);
 //        client.addHeader("Content-Type", "application/x-www-form-urlencoded");
-        Log.i(TAG, "urlqqqq="+url);
+        Log.i(TAG, "urlqqqq=" + url);
         client.get(url, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.i(TAG,"zzzzzzz");
+                Log.i(TAG, "zzzzzzz");
                 SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.i(TAG,"responseString="+responseString);
+                Log.i(TAG, "responseString=" + responseString);
 
                 try {
                     JSONObject jsonObject = new JSONObject(responseString);
@@ -791,7 +882,7 @@ public class HttpManager {
                         String result = jsonObject.getString("result");
 
                         ArrayList<GoodsList> goodsLists = JsonUtils.parsingGoodsList(result);
-                        if (goodsLists!=null&&goodsLists.size()!=0){
+                        if (goodsLists != null && goodsLists.size() != 0) {
                             SafeHandler.onSuccess(handler, goodsLists);
                         } else {
                             SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
@@ -848,9 +939,9 @@ public class HttpManager {
                         String result = jsonObject.getString("result");
 
                         ArrayList<Attractions> attractionses = JsonUtils.parsingAttractions(result);
-                        if(attractionses!=null&&attractionses.size()!=0){
-                            SafeHandler.onSuccess(handler,attractionses);
-                        }else {
+                        if (attractionses != null && attractionses.size() != 0) {
+                            SafeHandler.onSuccess(handler, attractionses);
+                        } else {
                             SafeHandler.onFailure(handler, ErrorType.errorMessage(ctx, ErrorType.ErrorGetNotificationFailure));
                         }
                     }
@@ -905,10 +996,10 @@ public class HttpManager {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         for (Map.Entry<String, String> entry : mapparams.entrySet()) {
-            params.put(entry .getKey(), entry.getValue());
+            params.put(entry.getKey(), entry.getValue());
         }
-        if(null!=HttpManager.SESSIONID  && !"".equals(HttpManager.SESSIONID) && (-1 == Constants.LOGIN_URL.indexOf(url))){ // 登录后的所有URL自动添加Header
-            client.addHeader("Cookie", "JSESSIONID="+HttpManager.SESSIONID);
+        if (null != HttpManager.SESSIONID && !"".equals(HttpManager.SESSIONID) && (-1 == Constants.LOGIN_URL.indexOf(url))) { // 登录后的所有URL自动添加Header
+            client.addHeader("Cookie", "JSESSIONID=" + HttpManager.SESSIONID);
         }
         /*PersistentCookieStore myCookieStore = new PersistentCookieStore(cxt);
         client.setCookieStore(myCookieStore);*/
@@ -941,13 +1032,6 @@ public class HttpManager {
             }
         });
     }
-
-
-
-
-
-
-
 
 
 }

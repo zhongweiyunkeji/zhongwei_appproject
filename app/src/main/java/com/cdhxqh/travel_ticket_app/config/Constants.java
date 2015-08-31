@@ -40,6 +40,7 @@ public class Constants {
 
     public static final String USER_URL = BASE_URL+"ecsusers/info";
 
+    public static final String CHECK_PHONE = BASE_URL+"ecsusers/checkphone";
 
     /**获取景点门票**/
     public static final String Goods_URL = BASE_URL+"ecscategory/goodspage";
@@ -197,6 +198,9 @@ public class Constants {
 
     //请求成功
     public static final String REQUEST_SUCCESS = "ZWTICKET-GLOBAL-S-0";
+
+    //请求成功
+    public static final String CHECK_PHONE_FAIL = "ZWTICKET-GLOBAL-E-12";
 
     //库存充足
     public static final String STOCK_SUCCESS = "ZWTICKET-ORDER-S-303";
