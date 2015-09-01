@@ -250,4 +250,9 @@ public class Constants {
 
     public static final String REG_URL = BASE_URL+"ecsusers/doCheck";
 
+
+    /**视频播放地址--沙坡头**/
+
+    public static final String video_play_url = "rtmp://ws.jia.360.cn/qhwljia/36120000888";
+
 }

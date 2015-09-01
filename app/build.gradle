@@ -4,6 +4,7 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
+
     defaultConfig {
         applicationId "com.cdhxqh.travel_ticket_app"
         minSdkVersion 14
@@ -39,4 +40,7 @@ dependencies {
     compile files('libs/alipaySDK-20150724.jar')
     compile files('libs/achartengine-1.1.0.jar')
     compile files('libs/achartengine-1.1.0.jar')
+    compile files('libs/ezviz-openapi-android-sdk.jar')
+    compile project(':vitamio')
 }
+

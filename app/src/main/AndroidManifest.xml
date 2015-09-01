@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cdhxqh.travel_ticket_app" >
+    package="com.cdhxqh.travel_ticket_app">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -55,7 +56,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"  >
+        android:theme="@style/AppTheme"
+        >
 
         <!-- 百度地图key -->
         <meta-data
@@ -71,7 +73,7 @@
 
         <activity
             android:name=".ui.activity.StartActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -152,9 +154,9 @@
             android:label="@string/title_activity_scenic__tickets_"
             android:screenOrientation="portrait" />
         <activity
-        android:name=".ui.activity.ReceivingAddressActivity"
-        android:label="@string/title_activity_scenic__tickets_"
-        android:screenOrientation="portrait" />
+            android:name=".ui.activity.ReceivingAddressActivity"
+            android:label="@string/title_activity_scenic__tickets_"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.InvoiceTitleActivity"
             android:label="@string/title_activity_scenic__tickets_"
@@ -189,17 +191,14 @@
         <activity
             android:name=".ui.activity.Attractions_details_Activity"
             android:label="@string/title_activity_attractions_details_"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.activity.Order_Tracking_Activity"
-            android:label="@string/title_activity_attractions_details_" >
-        </activity>
+            android:label="@string/title_activity_attractions_details_"></activity>
 
         <activity
             android:name=".ui.activity.Play_Video_Activity"
-            android:label="@string/title_activity_play__video_" >
-        </activity>
+            android:label="@string/title_activity_play__video_"></activity>
 
         <!-- 友盟自动更新 -->
 
@@ -207,22 +206,18 @@
         <!-- umeng自动更新 -->
         <service
             android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService" >
-        </service>
+            android:process=":DownloadingService"></service>
 
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-        </activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
         <activity
             android:name=".ui.activity.Tickets_Detail_Activity"
-            android:label="@string/title_activity_tickets__detail_" >
-        </activity>
+            android:label="@string/title_activity_tickets__detail_"></activity>
 
         <activity
             android:name=".ui.activity.Brand_Address_Activity"
-            android:label="@string/title_activity_brand__address_" >
-        </activity>
+            android:label="@string/title_activity_brand__address_"></activity>
 
 
         <activity android:name=".ui.activity.SearchSecnicActivity" />
@@ -232,21 +227,24 @@
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
-        </activity>
+            android:screenOrientation="behind"></activity>
+
+        <activity android:name=".ui.activity.TicketCheckActivity"></activity>
+        <activity android:name=".zxing.activity.CaptureActivity"></activity>
+
 
         <activity
-            android:name=".ui.activity.TicketCheckActivity"  >
-        </activity>
-        <activity
-            android:name=".zxing.activity.CaptureActivity"  >
-        </activity>
+            android:name="io.vov.vitamio.activity.InitActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:launchMode="singleTop"
+            android:screenOrientation="unspecified"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
 
 
     </application>
