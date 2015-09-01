@@ -302,6 +302,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="150dp">
                     <TextView
+                        android:id="@+id/user"
                         android:layout_width="wrap_content"
                         android:layout_height="150dp"
                         android:background="@drawable/btn_choose_user"
