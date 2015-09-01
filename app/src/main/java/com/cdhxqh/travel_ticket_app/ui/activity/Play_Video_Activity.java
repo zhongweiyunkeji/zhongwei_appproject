@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -22,10 +19,6 @@ import android.widget.Toast;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.config.Constants;
-import com.videogo.realplay.RealPlayMsg;
-import com.videogo.util.Utils;
-
-import java.util.Random;
 
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
