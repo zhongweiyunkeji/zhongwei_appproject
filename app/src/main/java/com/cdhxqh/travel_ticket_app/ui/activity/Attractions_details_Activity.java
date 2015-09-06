@@ -202,7 +202,6 @@ public class Attractions_details_Activity extends BaseActivity {
                 if (playstaus == 0) { //未播放
                     //Log.i(TAG, "开始播放");
 //                    loadProgressDialog();
-
                     startA();
                     playstaus = 1;
                     player.playUrl(file_url);
