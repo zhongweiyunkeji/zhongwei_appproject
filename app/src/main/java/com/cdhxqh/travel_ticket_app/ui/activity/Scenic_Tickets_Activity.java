@@ -68,7 +68,7 @@ public class Scenic_Tickets_Activity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scenic__tickets_);
+        setContentView(R.layout.activity_scenic_tickets_);
         findViewById();
         initView();
 

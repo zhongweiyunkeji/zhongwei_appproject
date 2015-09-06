@@ -1,15 +1,19 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +23,7 @@ import android.widget.Toast;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.config.Constants;
+import com.videogo.util.Utils;
 
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
@@ -57,17 +62,6 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
 
     private Bundle extras;
 
-    private static final String MEDIA = "media";
-
-    private static final int LOCAL_AUDIO = 1;
-
-    private static final int STREAM_AUDIO = 2;
-
-    private static final int RESOURCES_AUDIO = 3;
-
-    private static final int LOCAL_VIDEO = 4;
-
-    private static final int STREAM_VIDEO = 5;
 
     private boolean mIsVideoSizeKnown = false;
 
@@ -101,6 +95,13 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
     /**声音按钮**/
     private ImageButton audioButton;
 
+    /** 屏幕当前方向 */
+    private int mOrientation = Configuration.ORIENTATION_PORTRAIT;
+    /**标题布局**/
+    private RelativeLayout r_Relativelayout;
+    /**视频控制布局**/
+    private RelativeLayout s_RelativeLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +109,7 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
         if (!LibsChecker.checkVitamioLibs(this))
             return;
 
-        setContentView(R.layout.activity_play__video_);
+        setContentView(R.layout.activity_play_video_);
 
         intent = getIntent();
 
@@ -120,6 +121,8 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
 
     private void getData() {
         title = getIntent().getExtras().getString("brand_name");
+        // 开启旋转传感器
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 
     }
 
@@ -127,6 +130,9 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
     protected void findViewById() {
         backImageView = (ImageView) findViewById(R.id.back_imageview_id);
         titleText = (TextView) findViewById(R.id.title_text_id);
+
+        r_Relativelayout=(RelativeLayout)findViewById(R.id.title_relativelayout_id);
+        s_RelativeLayout=(RelativeLayout)findViewById(R.id.realplay_play_rl);
 
         mPreview = (SurfaceView) findViewById(R.id.realplay_sv);
         holder = mPreview.getHolder();
@@ -403,4 +409,35 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
         }
     }
 
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        Log.i(TAG, "this is ConfigurationChanged");
+        mOrientation = newConfig.orientation;
+        setRealPlaySvLayout();
+        super.onConfigurationChanged(newConfig);
+    }
+
+    /**设置屏幕大小**/
+    private void setRealPlaySvLayout() {
+
+
+        if(mOrientation!=Configuration.ORIENTATION_PORTRAIT){
+            fullScreen(true);
+            RelativeLayout.LayoutParams svLp = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            svLp.addRule(RelativeLayout.CENTER_IN_PARENT);
+            mPreview.setLayoutParams(svLp);
+
+            r_Relativelayout.setVisibility(View.GONE);
+        }else{
+            fullScreen(false);
+            RelativeLayout.LayoutParams svLp = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    600);
+            svLp.addRule(RelativeLayout.CENTER_IN_PARENT);
+            mPreview.setLayoutParams(svLp);
+            r_Relativelayout.setVisibility(View.VISIBLE);
+        }
+
+    }
 }
