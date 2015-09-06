@@ -1,5 +1,6 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.app.ProgressDialog;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
@@ -76,6 +77,9 @@ public class Attractions_details_Activity extends BaseActivity {
      */
     private AnimationDrawable anim;
 
+
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,6 +142,30 @@ public class Attractions_details_Activity extends BaseActivity {
         anim = (AnimationDrawable) playImage.getBackground();
     }
 
+
+    /**加载音频动画**/
+    private void loadProgressDialog(){
+        progressDialog = ProgressDialog.show(Attractions_details_Activity.this, null,
+                "加载中...", true, true);
+    }
+
+    /**加载线程**/
+    private void loadThread(){
+        loadProgressDialog();
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    sleep(1000);
+                    progressDialog.dismiss();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+    }
+
     /**开始播放音频动画**/
     public void startA() {
         anim.start();
@@ -173,6 +201,7 @@ public class Attractions_details_Activity extends BaseActivity {
 
                 if (playstaus == 0) { //未播放
                     //Log.i(TAG, "开始播放");
+//                    loadProgressDialog();
                     startA();
                     playstaus = 1;
                     player.playUrl(file_url);
