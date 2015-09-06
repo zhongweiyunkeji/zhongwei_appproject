@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.config.Constants;
-import com.videogo.util.Utils;
+//import com.videogo.util.Utils;
 
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
