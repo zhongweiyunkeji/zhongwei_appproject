@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.ViewHolder> {
     private static final String TAG = "ReviewListAdapter";
     Context mContext;
+    ArrayList<View> viewList = new ArrayList<View>();
 
 
     ArrayList<String> list=new ArrayList<String>();
@@ -30,9 +31,19 @@ public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.Vi
         this.mContext = context;
     }
 
+    public void setView(View v) {
+        viewList.add(v);
+    }
+
+    public ArrayList<View> getView() {
+        return viewList;
+    }
+
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.review_adapter, parent, false);
+        setView(v);
         return new ViewHolder(v);
     }
 
@@ -41,7 +52,6 @@ public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.Vi
         final String s =list.get(position);
         holder.textView.setText(s);
     }
-
 
     @Override
     public int getItemCount() {

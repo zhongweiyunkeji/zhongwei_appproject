@@ -57,7 +57,7 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
             paramViewHolder.nameText.setText(localEcs_brand.brand_name);
             paramViewHolder.timeText.setText(localEcs_brand.valid_date);
             paramViewHolder.linearLayout.setVisibility(View.VISIBLE);
-            paramViewHolder.priceText.setText(String.valueOf(localEcs_brand.minprice));
+            paramViewHolder.priceText.setText(getPrice(localEcs_brand.minprice));
 
             paramViewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -124,10 +124,10 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
     }
 
     public void update(ArrayList<Ecs_brand> ecs_brands) {
-        for (int i = 0; i < ecs_brands.size(); i++) {
+        for (int i = ecs_brands.size()-1; i >= 0; i--) {
             Ecs_brand obj = ecs_brands.get(i);
             boolean exist = false;
-            for (int j = 0; j < list.size(); j++) {
+            for (int j = list.size()-1; j >= 0; j--) {
                 if (list.get(j).brand_id == obj.brand_id) {
                     exist = true;
                     break;
@@ -139,6 +139,17 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
         ecs_brands = list;
 
         notifyDataSetChanged();
+    }
+
+    /**
+     * 设置价格为无
+     */
+    private String getPrice(double p) {
+        if (p == 0.0) {
+            return "暂无";
+        }else {
+            return String.valueOf(p);
+        }
     }
 
     /**
