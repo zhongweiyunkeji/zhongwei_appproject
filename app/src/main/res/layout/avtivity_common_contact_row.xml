@@ -20,7 +20,6 @@
                     android:text="老婆" />
 
                 <TextView
-                    android:id="@+id/contacts_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -28,7 +27,7 @@
                     android:paddingTop="14dp"
                     android:textColor="@color/edit_color"
                     android:textSize="18sp"
-                    android:text="（家人）" />
+                    />
                 <ImageView
                     android:id="@+id/edit"
                     android:layout_width="wrap_content"
