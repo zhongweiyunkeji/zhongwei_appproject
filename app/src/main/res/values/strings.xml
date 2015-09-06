@@ -239,5 +239,7 @@
 
     <string name="back">退出</string>
 
+    <string name="ticket">票号</string>
+
     <string name="title_activity_play__video_">Play_Video_Activity</string>
 </resources>
