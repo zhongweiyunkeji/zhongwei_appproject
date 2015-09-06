@@ -2,13 +2,9 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,8 +27,6 @@ import com.baidu.mapapi.model.LatLng;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
-
-import java.util.ArrayList;
 
 public class Brand_Address_Activity extends BaseActivity {
 
@@ -91,7 +85,7 @@ public class Brand_Address_Activity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
-        setContentView(R.layout.activity_brand__address_);
+        setContentView(R.layout.activity_brand_address);
         initData();
 
         findViewById();

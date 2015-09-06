@@ -1,12 +1,9 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
-import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,7 +16,6 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
@@ -107,7 +103,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tickets_detail_);
+        setContentView(R.layout.activity_tickets_detail);
         if (ecs_brand == null) {
             getData();
         }

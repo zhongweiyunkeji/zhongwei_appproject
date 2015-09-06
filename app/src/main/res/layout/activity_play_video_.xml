@@ -6,6 +6,7 @@
     tools:context="com.cdhxqh.travel_ticket_app.ui.activity.Play_Video_Activity">
 
     <RelativeLayout
+        android:id="@+id/title_relativelayout_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/green_color"
@@ -38,6 +39,10 @@
 
     </RelativeLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <RelativeLayout
         android:id="@+id/realplay_play_rl"
         android:layout_width="match_parent"
@@ -47,7 +52,7 @@
 
         <io.vov.vitamio.widget.VideoView
             android:id="@+id/realplay_sv"
-            android:layout_width="600dp"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_centerInParent="true"
             android:background="@android:color/transparent" />
@@ -100,45 +105,42 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="0%"
-                    android:visibility="gone"
                     android:textColor="@color/gray_text"
-                    android:textSize="@dimen/realplay_button_text_size" />
+                    android:textSize="@dimen/realplay_button_text_size"
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
 
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/realplay_control_rl"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/realplay_sv"
+        android:layout_gravity="bottom"
+        android:background="@color/play_translucent_bg">
 
-        <RelativeLayout
-            android:id="@+id/realplay_control_rl"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_alignBottom="@+id/realplay_sv"
-            android:background="@color/play_translucent_bg">
+        <!-- 播放按钮 -->
 
-            <!-- 播放按钮 -->
+        <ImageButton
+            android:id="@+id/realplay_play_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/play_play_selector"
+            android:onClick="onClick" />
 
-            <ImageButton
-                android:id="@+id/realplay_play_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/play_play_selector"
-                android:onClick="onClick"/>
-
-            <ImageButton
-                android:id="@+id/realplay_sound_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/realplay_play_btn"
-                android:background="@drawable/remote_list_soundon_btn_selector" />
-
-        </RelativeLayout>
-
-
+        <ImageButton
+            android:id="@+id/realplay_sound_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/realplay_play_btn"
+            android:background="@drawable/remote_list_soundon_btn_selector" />
 
     </RelativeLayout>
 
-
+    </FrameLayout>
 </LinearLayout>
