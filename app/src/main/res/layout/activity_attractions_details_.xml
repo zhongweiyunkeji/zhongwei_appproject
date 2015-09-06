@@ -4,11 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/bj_color"
-    tools:context="com.cdhxqh.travel_ticket_app.ui.activity.Attractions_details_Activity"
-    >
+    tools:context="com.cdhxqh.travel_ticket_app.ui.activity.Attractions_details_Activity">
 
     <include layout="@layout/scenic_detail_title"></include>
-
 
     <FrameLayout
         android:layout_width="match_parent"
