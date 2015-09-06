@@ -213,7 +213,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Intent intent = getIntent();
-
+            intent.putExtra("spotTitle", "中卫所有景区游客人数");
             intent.setClass(Tickets_Detail_Activity.this, WeatherActivity.class);
             startActivityForResult(intent, 0);
         }

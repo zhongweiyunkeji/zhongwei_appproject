@@ -148,20 +148,13 @@ public class HotelContentActivity extends BaseActivity {
                     sb.append("<RequestBody xmlns:ns=\"http://www.opentravel.org/OTA/2003/05\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">");
                     sb.append("<OTA_HotelDescriptiveInfoRQ Version=\"1.0\" xsi:schemaLocation=\"http://www.opentravel.org/OTA/2003/05 OTA_HotelDescriptiveInfoRQ.xsd\" xmlns=\"http://www.opentravel.org/OTA/2003/05\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">");
                     sb.append("<HotelDescriptiveInfos>");
-                    sb.append("<HotelDescriptiveInfo HotelCode=\"" + hotelCode + "\" PositionTypeCode=\"502\">");
+                    sb.append("<HotelDescriptiveInfo HotelCode=\"" + "1327019" + "\" PositionTypeCode=\"502\">");
                     sb.append("<HotelInfo SendData=\"true\" />");
                     sb.append("<FacilityInfo SendGuestRooms=\"true\"/>");
                     sb.append("<AreaInfo SendAttractions=\"true\" SendRecreations=\"true\"/>");
                     sb.append("<ContactInfo SendData=\"true\"/>");
                     sb.append("<MultimediaObjects SendData=\"true\"/>");
                     sb.append("</HotelDescriptiveInfo>");
-
-//                sb.append("<HotelDescriptiveInfo HotelCode=\"671\">");
-//                sb.append("<HotelInfo SendData=\"true\"/>");
-//                sb.append("<FacilityInfo SendGuestRooms=\"true\"/>");
-//                sb.append("<AreaInfo SendAttractions=\"true\" SendRecreations=\"true\"/>");
-//                sb.append("<MultimediaObjects SendData=\"true\"/>");
-//                sb.append("</HotelDescriptiveInfo>");
 
                     sb.append("</HotelDescriptiveInfos>");
                     sb.append("</OTA_HotelDescriptiveInfoRQ>");

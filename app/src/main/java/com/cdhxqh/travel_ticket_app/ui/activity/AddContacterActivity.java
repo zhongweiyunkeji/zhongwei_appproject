@@ -103,6 +103,7 @@ public class AddContacterActivity extends BaseActivity {
 
 
     protected void initView() {
+        role_group.setVisibility(View.GONE);
         //设置标签页显示方式
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);

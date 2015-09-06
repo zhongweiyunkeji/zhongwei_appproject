@@ -133,6 +133,7 @@ public class HomeActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
+            intent.putExtra("spotTitle", "中卫所有景区游客人数");
             intent.setClass(HomeActivity.this, WeatherActivity.class);
             startActivity(intent);
         }

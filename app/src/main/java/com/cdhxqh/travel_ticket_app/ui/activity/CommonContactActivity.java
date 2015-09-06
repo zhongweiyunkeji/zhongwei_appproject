@@ -151,7 +151,6 @@ public class CommonContactActivity extends BaseActivity {
             for (int i = 0; i < 5; i++) {
                 Contacters c = new Contacters();
                 c.setName("张思");
-                c.setType("老师");
                 c.setPhone("15467656784");
                 c.setFlag(false);
                 contacts.add(c);

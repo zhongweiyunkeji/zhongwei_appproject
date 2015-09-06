@@ -117,7 +117,7 @@ public class AroundPlayActivity extends BaseActivity {
         //设置标签页显示方式
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
-        titleTextView.setText("酒店预订");
+        titleTextView.setText("酒店");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -156,7 +156,7 @@ public class AroundPlayActivity extends BaseActivity {
                     sb.append("<ns:Criterion>");
                     sb.append("<ns:HotelRef HotelCityCode=\"556\" />");
                     sb.append("<ns:Position PositionTypeCode=\"502\" />");
-                    sb.append("<ns:Award Provider=\"HotelStarRate\" Rating=\"3\"/>");
+                    sb.append("<ns:Award Provider=\"HotelStarRate\" Rating=\"4\" />");
                     sb.append("</ns:Criterion>");
                     sb.append("</ns:Criteria>");
                     sb.append("</ns:OTA_HotelSearchRQ>");
