@@ -3,6 +3,8 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 import android.app.ProgressDialog;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -143,35 +145,67 @@ public class Attractions_details_Activity extends BaseActivity {
     }
 
 
-    /**加载音频动画**/
-    private void loadProgressDialog(){
+    /**
+     * 加载音频动画*
+     */
+    private void loadProgressDialog() {
         progressDialog = ProgressDialog.show(Attractions_details_Activity.this, null,
                 "加载中...", true, true);
     }
 
-    /**加载线程**/
-    private void loadThread(){
+    /**
+     * 加载线程*
+     */
+    private void loadThread() {
         loadProgressDialog();
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 super.run();
                 try {
+
                     sleep(1000);
-                    progressDialog.dismiss();
+                    handleProgress.sendEmptyMessage(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-        };
+        }.start();
     }
 
-    /**开始播放音频动画**/
+
+    Handler handleProgress = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1000:
+                    progressDialog.dismiss();
+
+//                    player.prepare();//prepare之后自动播放
+                    startA();
+                    playstaus = 1;
+                    player.playUrl(attractions.file_url);
+                    player.play();
+
+
+                    break;
+            }
+
+        }
+
+        ;
+    };
+
+
+    /**
+     * 开始播放音频动画*
+     */
     public void startA() {
         anim.start();
     }
 
-    /**停止播放音频动画**/
+    /**
+     * 停止播放音频动画*
+     */
     public void stopA() {
         anim.stop();
     }
@@ -201,11 +235,8 @@ public class Attractions_details_Activity extends BaseActivity {
 
                 if (playstaus == 0) { //未播放
                     //Log.i(TAG, "开始播放");
-//                    loadProgressDialog();
-                    startA();
-                    playstaus = 1;
-                    player.playUrl(file_url);
-                    player.play();
+                    loadThread();
+
 //                    playImage.setImageResource(R.drawable.ic_play3);
                 } else if (playstaus == 1) { //暂停
                     //Log.i(TAG, "暂停");
