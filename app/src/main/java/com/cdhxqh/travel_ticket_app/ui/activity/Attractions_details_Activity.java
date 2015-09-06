@@ -1,5 +1,6 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -70,6 +71,11 @@ public class Attractions_details_Activity extends BaseActivity {
      */
     int playstaus = 0;
 
+    /**
+     * 音频动画*
+     */
+    private AnimationDrawable anim;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +102,6 @@ public class Attractions_details_Activity extends BaseActivity {
     private void getData() {
         attractions = getIntent().getParcelableExtra("attractions");
 
-        // Log.i(TAG, "attractions=" + attractions.file_url);
     }
 
     @Override
@@ -129,7 +134,20 @@ public class Attractions_details_Activity extends BaseActivity {
         }
 
         backImage.setOnTouchListener(backImageViewOnTouchListener);
+
+        anim = (AnimationDrawable) playImage.getBackground();
     }
+
+    /**开始播放音频动画**/
+    public void startA() {
+        anim.start();
+    }
+
+    /**停止播放音频动画**/
+    public void stopA() {
+        anim.stop();
+    }
+
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
         @Override
@@ -155,20 +173,25 @@ public class Attractions_details_Activity extends BaseActivity {
 
                 if (playstaus == 0) { //未播放
                     //Log.i(TAG, "开始播放");
+                    startA();
                     playstaus = 1;
                     player.playUrl(file_url);
                     player.play();
-                    playImage.setImageResource(R.drawable.ic_play3);
+//                    playImage.setImageResource(R.drawable.ic_play3);
                 } else if (playstaus == 1) { //暂停
                     //Log.i(TAG, "暂停");
+                    stopA();
                     playstaus = 2;
                     player.pause();
                     playImage.setImageResource(R.drawable.ic_play_stop);
                 } else if (playstaus == 2) { //暂停后再播放
+                    startA();
                     player.play();
                     playstaus = 1;
-                    playImage.setImageResource(R.drawable.ic_play3);
+                    playImage.setImageResource(R.color.transparent);
+//                    playImage.setImageResource(R.drawable.ic_play3);
                 } else {
+                    stopA();
                     playstaus = 0;
                 }
             }
