@@ -29,12 +29,12 @@ public class BrokenLineChart {
 	 * 传递参数，每一个曲线的标题，还有对应的曲线的颜色
 
 	 */
-	public BrokenLineChart(String Entity, int EntityColor,ChartPoint[] Datas,Context Context) {
+	public BrokenLineChart(String Entity, int EntityColor,ChartPoint[] Datas,Context Context, String title) {
 		this.entity = Entity;
 		this.EntityColors = EntityColor;
 		this.datas = Datas;
 		this.context = Context;
-		InitRender();
+		InitRender(title);
 		InitDataSet(datas);
 		gv = ChartFactory.getLineChartView(context, ds, render);
 	}
@@ -49,12 +49,12 @@ public class BrokenLineChart {
 		ds.addSeries(series);
 	}
 
-	private void InitRender() {
+	private void InitRender(String title) {
 		// TODO Auto-generated method stub
 		render = new XYMultipleSeriesRenderer();
 		render.setAxisTitleTextSize(16); // 设置坐标轴标题文本大小
 		render.setChartTitleTextSize(30); // 设置图表标题文本大小
-		render.setChartTitle("30天入园人数趋势图");
+		render.setChartTitle(title);
 		render.setLabelsTextSize(25); // 设置轴标签文本大小
 		render.setLegendTextSize(15); // 设置图例文本大小
 		render.setMargins(new int[]{20, 30, 15, 15}); // 设置4边留白

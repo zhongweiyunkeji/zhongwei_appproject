@@ -139,7 +139,6 @@ public class Tickets_Detail_Activity extends BaseActivity {
                 arrayList = data;
                 progressDialog.dismiss();
                 initexpandableView();
-
             }
 
         @Override
@@ -175,6 +174,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
         recyclerView.addItemDecoration(new ItemDivider(this, ItemDivider.VERTICAL_LIST));
         reviewadapter = new ReviewListAdapter(this);
         recyclerView.setAdapter(reviewadapter);
+
 
         tickets_detail_address = (RelativeLayout) findViewById(R.id.tickets_detail_address);
         scenic_spot = (RelativeLayout) findViewById(R.id.scenic_spot);
@@ -213,7 +213,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Intent intent = getIntent();
-
+            intent.putExtra("spotTitle", "中卫所有景区游客人数");
             intent.setClass(Tickets_Detail_Activity.this, WeatherActivity.class);
             startActivityForResult(intent, 0);
         }
@@ -282,6 +282,32 @@ public class Tickets_Detail_Activity extends BaseActivity {
         tickets_detail_introduce_text_id.setOnClickListener(ticketsIntroduceOnClickListener);
 
         setListViewHeight(expandableListView);
+    }
+
+    /**
+     * 重新计算ListView的高度，解决ScrollView和ListView两个View都有滚动的效果，在嵌套使用时起冲突的问题
+     * @param listView
+     */
+    public void setListViewHeight(RecyclerView listView) {
+
+        // 获取ListView对应的Adapter
+
+        ReviewListAdapter listAdapter = (ReviewListAdapter) listView.getAdapter();
+
+        if (listAdapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+        ArrayList<View> v = listAdapter.getView();
+        for (int i = 0; i < v.size(); i++) { // listAdapter.getCount()返回数据项的数目
+
+            v.get(i).measure(0, 0); // 计算子项View 的宽高
+            totalHeight += v.get(i).getMeasuredHeight(); // 统计所有子项的总高度
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getHeight() * (listAdapter.getItemCount() - 1));
+        listView.setLayoutParams(params);
     }
 
     /**
@@ -373,7 +399,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
      */
     private void addData() {
         ArrayList<String> list = new ArrayList<String>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             list.add("点评");
         }
         reviewadapter.update(list, true);

@@ -126,7 +126,8 @@ public class WeatherActivity extends FragmentActivity {
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
         titleTextView.setText("智慧旅游");
-        chartPoint();
+        String spotTitle = getIntent().getStringExtra("spotTitle");
+        chartPoint(spotTitle);
         progressBar();
 
         fragments = new ArrayList<Fragment>();
@@ -189,7 +190,7 @@ public class WeatherActivity extends FragmentActivity {
         }
     }
 
-    public void chartPoint() {
+    public void chartPoint(String spotTitle) {
         String title = new String();
         ChartPoint[] datas = new ChartPoint[13];
         datas[0] = new ChartPoint(1,1200);
@@ -207,7 +208,7 @@ public class WeatherActivity extends FragmentActivity {
         datas[11] = new ChartPoint(27,1100);
         datas[12] = new ChartPoint(30,2100);
 
-        BrokenLineChart chart = new BrokenLineChart(title, Color.GREEN,datas,WeatherActivity.this);
+        BrokenLineChart chart = new BrokenLineChart(title, Color.GREEN,datas,WeatherActivity.this , spotTitle);
         lin.addView(chart.GetView(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
     }
 

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,6 +49,11 @@ public class ClassActivity extends BaseActivity {
      */
     Class_adapter class_adapter;
 
+    /**
+     * 搜索*
+     */
+    private ImageView seachImageView;
+
 
     /**
      * mRecyclerView*
@@ -76,6 +82,7 @@ public class ClassActivity extends BaseActivity {
         titleTextView = (TextView) findViewById(R.id.title_text_id);
         searchImageView = (ImageView) findViewById(R.id.title_search_id);
         gridView = (GridView) findViewById(R.id.class_grid_text_id);
+        seachImageView = (ImageView) findViewById(R.id.title_search_id);
 //        mSwipeLayout=(SwipeRefreshLayout)findViewById(R.id.swipe_container);
         mRecyclerView = (RecyclerView) findViewById(R.id.list_topics);
 
@@ -85,6 +92,7 @@ public class ClassActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        seachImageView.setVisibility(View.GONE);
         titleTextView.setText(getString(R.string.class_title_text));
         class_adapter = new Class_adapter(ClassActivity.this);
         gridView.setAdapter(class_adapter);

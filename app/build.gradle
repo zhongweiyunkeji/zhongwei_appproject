@@ -24,9 +24,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.github.mrengineer13:snackbar:1.1.0'
-    compile 'com.android.support:cardview-v7:21.0.3'
+    compile 'com.android.support:cardview-v7:23.0.0'
     compile 'de.hdodenhof:circleimageview:1.3.0'
-    compile 'com.android.support:recyclerview-v7:21.0.3'
+    compile 'com.android.support:recyclerview-v7:23.0.0'
     compile 'com.loopj.android:android-async-http:1.4.6'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     compile files('libs/BaiduLBS_Android.jar')
@@ -42,5 +42,6 @@ dependencies {
     compile files('libs/achartengine-1.1.0.jar')
     compile files('libs/ezviz-openapi-android-sdk.jar')
     compile project(':vitamio')
+    compile 'org.apache.servicemix.bundles:org.apache.servicemix.bundles.jdom:2.0.6_1'
 }
 

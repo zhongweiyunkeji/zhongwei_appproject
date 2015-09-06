@@ -1,8 +1,10 @@
 package com.cdhxqh.travel_ticket_app.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -56,9 +58,9 @@ public class Class_adapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position,  View convertView, ViewGroup parent) {
         {
-            ViewHolder viewHolder = null;
+            final   ViewHolder viewHolder;
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.view_grid_item, null);
                 viewHolder = new ViewHolder();

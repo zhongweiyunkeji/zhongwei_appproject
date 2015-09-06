@@ -16,7 +16,7 @@ public class InvoiceTitleActivity extends BaseActivity{
     /**
      * 收货地址
      */
-    private EditText address;
+    private TextView address;
     /**
      * 返回按钮*
      */
@@ -40,7 +40,7 @@ public class InvoiceTitleActivity extends BaseActivity{
 
     @Override
     protected void findViewById() {
-        address = (EditText) findViewById(R.id.address);
+        address = (TextView) findViewById(R.id.address);
 
         /**
          * 标题标签相关id
@@ -56,6 +56,7 @@ public class InvoiceTitleActivity extends BaseActivity{
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
         titleTextView.setText("发票抬头");
+        address.setHint(R.string.ticket);
         backImageView.setOnTouchListener(backImageViewOnTouchListener);
     }
 

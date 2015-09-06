@@ -1,5 +1,6 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.model.AddressSelect;
+import com.cdhxqh.travel_ticket_app.ui.widget.DateTimePicker;
+import com.cdhxqh.travel_ticket_app.ui.widget.DateTimePickerDialog;
 
 /**
  * Created by Administrator on 2015/8/29.
@@ -17,7 +21,7 @@ public class ReceivingAddressActivity extends BaseActivity{
     /**
      * 收货地址
      */
-    private EditText address;
+    private TextView address;
     /**
      * 返回按钮*
      */
@@ -47,7 +51,7 @@ public class ReceivingAddressActivity extends BaseActivity{
 
     @Override
     protected void findViewById() {
-        address = (EditText) findViewById(R.id.address);
+        address = (TextView) findViewById(R.id.address);
         back_id = (Button) findViewById(R.id.back_id);
 
         /**
@@ -68,6 +72,10 @@ public class ReceivingAddressActivity extends BaseActivity{
         backImageView.setOnTouchListener(backImageViewOnTouchListener);
         //返回至登录界面事件
         backImageView.setOnClickListener(backImageViewOnClickListener);
+        //完成
+        back_id.setOnClickListener(backOnClickListener);
+
+        address.setOnClickListener(addressOnClickListener);
     }
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
@@ -79,6 +87,26 @@ public class ReceivingAddressActivity extends BaseActivity{
                 v.setBackgroundColor(getResources().getColor(R.color.clarity));
             }
             return false;
+        }
+    };
+
+    private View.OnClickListener addressOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            DateTimePickerDialog dialog = new DateTimePickerDialog(ReceivingAddressActivity.this);
+            dialog.setOnDateTimeSetListener(new DateTimePickerDialog.OnDateTimeSetListener() {
+                public void OnDateTimeSet(AddressSelect provinces, AddressSelect citys, AddressSelect towns) {
+                    address.setText(provinces.getName() + citys.getName() + towns.getName());
+                }
+            });
+            dialog.show();
+        }
+    };
+
+    private View.OnClickListener backOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
         }
     };
 

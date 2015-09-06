@@ -1,18 +1,32 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.api.NetWorkUtil;
+import com.cdhxqh.travel_ticket_app.model.hotel.HotelModel;
+import com.cdhxqh.travel_ticket_app.ui.adapter.HotelAdapter;
+import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
+import com.cdhxqh.travel_ticket_app.ui.widget.hotelWineShop.base.HttpAccessAdapter;
+import com.cdhxqh.travel_ticket_app.ui.widget.hotelWineShop.utils.XMLSplit;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2015/8/28.
  */
-public class AroundPlayActivity extends BaseActivity{
+public class AroundPlayActivity extends BaseActivity {
     /**
      * 景区简介标题
      */
@@ -39,10 +53,20 @@ public class AroundPlayActivity extends BaseActivity{
      * 搜索*
      */
     private ImageView seachImageView;
+    /**
+     * 酒店列表
+     */
+    ArrayList<HotelModel> hotelModelArrayList;
+    /**
+     *list
+     */
+    RecyclerView hotel;
+    /**
+     * 适配器
+     */
+    private HotelAdapter hotelAdapter;
 
-//    private ProgressDialog progressDialog;
-//
-//    ArrayList<SpotBookModel> datas = new ArrayList<SpotBookModel>();
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +84,9 @@ public class AroundPlayActivity extends BaseActivity{
     protected void findViewById() {
         text_introduction_tittle = (TextView) findViewById(R.id.text_introduction_tittle);
         image_introduction_id = (ImageView) findViewById(R.id.image_introduction_id);
-        text_introduction_desc= (TextView) findViewById(R.id.text_introduction_desc);
+        text_introduction_desc = (TextView) findViewById(R.id.text_introduction_desc);
+        hotel = (RecyclerView) findViewById(R.id.hotel);
+
 
         /**
          * 标题标签相关id
@@ -91,26 +117,59 @@ public class AroundPlayActivity extends BaseActivity{
         //设置标签页显示方式
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
-        titleTextView.setText("周边游");
+        titleTextView.setText("酒店");
 
-        Bundle bundle = new Bundle();
-        bundle = this.getIntent().getExtras();
-        text_introduction_tittle.setText("中卫市");
-//        ImageLoader.getInstance().displayImage(bundle.getString("spotLogo"), image_introduction_id);
-        text_introduction_desc.setText("沙坡头区\n" +
-                "\n" +
-                "兴仁镇 蒿川乡 镇罗镇 永康镇 宣和镇 常乐镇 香山乡\n" +
-                "\n" +
-                "中宁县\n" +
-                "\n" +
-                "宁安镇 鸣沙镇 石空镇 新堡镇 恩和镇 舟塔乡 白马乡 余丁乡 大战场乡 喊叫水乡\n" +
-                "\n" +
-                "海原县\n" +
-                "\n" +
-                 "海城镇 李旺镇 西安镇 黑城镇 史店乡 树台乡 关桥乡 徐套乡 兴隆乡 高崖乡 郑旗乡 贾塘乡 曹洼乡 九彩乡 李俊乡 红羊乡 关庄乡 涵养林总场");
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.scrollToPosition(0);
+        //添加分割线
+        hotel.addItemDecoration(new ItemDivider(this, ItemDivider.VERTICAL_LIST));
+        hotel.setLayoutManager(layoutManager);
+        hotel.setItemAnimator(new DefaultItemAnimator());
+
+        hotelAdapter = new HotelAdapter(this);
+
+        hotel.setAdapter(hotelAdapter);
+
+
 
         //返回至登录界面事件
         backImageView.setOnClickListener(backImageViewOnClickListener);
+
+        if(NetWorkUtil.IsNetWorkEnable(AroundPlayActivity.this)) {
+            /**
+             * 加载中
+             */
+            progressDialog = ProgressDialog.show(AroundPlayActivity.this, null,
+                    getString(R.string.loading), true, true);
+
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    // TODO Auto-generated method stub
+                    Message message = new Message();
+
+                    StringBuilder sb = new StringBuilder("<HotelRequest>");
+                    sb.append("<RequestBody xmlns:ns=\"http://www.opentravel.org/OTA/2003/05\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">");
+                    sb.append("<ns:OTA_HotelSearchRQ Version=\"1.0\" PrimaryLangID=\"zh\" xsi:schemaLocation=\"http://www.opentravel.org/OTA/2003/05 OTA_HotelSearchRQ.xsd\" xmlns=\"http://www.opentravel.org/OTA/2003/05\">");
+                    sb.append("<ns:Criteria AvailableOnlyIndicator=\"false\">");
+                    sb.append("<ns:Criterion>");
+                    sb.append("<ns:HotelRef HotelCityCode=\"556\" />");
+                    sb.append("<ns:Position PositionTypeCode=\"502\" />");
+                    sb.append("<ns:Award Provider=\"HotelStarRate\" Rating=\"4\" />");
+                    sb.append("</ns:Criterion>");
+                    sb.append("</ns:Criteria>");
+                    sb.append("</ns:OTA_HotelSearchRQ>");
+                    sb.append("</RequestBody>");
+                    sb.append("</HotelRequest>");
+
+                    String xml = HttpAccessAdapter.getData("OTA_HotelSearch", sb.toString(), "http://openapi.ctrip.com/Hotel/OTA_HotelSearch.asmx?wsdl", AroundPlayActivity.this);
+                    message.obj = xml;
+                    mHandler.sendMessage(message);
+                }
+            });
+            thread.start();
+        }
     }
 
     /**
@@ -120,6 +179,20 @@ public class AroundPlayActivity extends BaseActivity{
         @Override
         public void onClick(View v) {
             finish();
+        }
+    };
+
+    public Handler mHandler=new Handler()
+    {
+        public void handleMessage(Message msg)
+        {
+            String a=(String)msg.obj;
+//            String[] hotel = SplitString.getHotels(a);
+            hotelModelArrayList = XMLSplit.xmlSplit(a);
+            progressDialog.dismiss();
+            hotelAdapter.update(hotelModelArrayList);
+            hotelAdapter.dataChanged();
+            super.handleMessage(msg);
         }
     };
 

@@ -145,6 +145,8 @@ public class ReservationActivity extends BaseActivity{
 
     String tittle;
 
+    ImageView backImg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,6 +158,7 @@ public class ReservationActivity extends BaseActivity{
 
     @Override
     protected void findViewById() {
+        backImg = (ImageView)findViewById(R.id.back_imageview_id);
         reservation_add_button = (Button) findViewById(R.id.reservation_add_button);
         reservation_reduce_button = (Button) findViewById(R.id.reservation_reduce_button);
         reservation_display_num = (EditText)findViewById(R.id.reservation_display_num);
@@ -221,6 +224,12 @@ public class ReservationActivity extends BaseActivity{
         backImageView.setOnTouchListener(backImageViewOnTouchListener);
 
         user.setOnClickListener(userOnClickListener);
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     /**
