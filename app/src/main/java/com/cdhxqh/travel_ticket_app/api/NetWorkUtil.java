@@ -5,6 +5,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
+import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
+
 import java.text.DecimalFormat;
 
 public class NetWorkUtil {
@@ -116,35 +118,35 @@ public class NetWorkUtil {
 //        return result;
 //    }
 //
-//    /**
-//     * 网络是否可用
-//     *
-//     * @param context
-//     * @return
-//     */
-//    public static boolean IsNetWorkEnable(Context context) {
-//        try {
-//            ConnectivityManager connectivity = (ConnectivityManager) context
-//                    .getSystemService(Context.CONNECTIVITY_SERVICE);
-//            if (connectivity == null) {
-//                ToastUtil.showMessage(context, "无法连接网络");
-//                return false;
-//            }
-//
-//            NetworkInfo info = connectivity.getActiveNetworkInfo();
-//            if (info != null && info.isConnected()) {
-//                // 判断当前网络是否已经连接
-//                if (info.getState() == NetworkInfo.State.CONNECTED) {
-//                    return true;
-//                }
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        ToastUtil.showMessage(context, "无法连接网络");
-//        return false;
-//    }
+    /**
+     * 网络是否可用
+     *
+     * @param context
+     * @return
+     */
+    public static boolean IsNetWorkEnable(Context context) {
+        try {
+            ConnectivityManager connectivity = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivity == null) {
+                MessageUtils.showErrorMessage(context, "无法连接网络");
+                return false;
+            }
+
+            NetworkInfo info = connectivity.getActiveNetworkInfo();
+            if (info != null && info.isConnected()) {
+                // 判断当前网络是否已经连接
+                if (info.getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        MessageUtils.showErrorMessage(context, "无法连接网络");
+        return false;
+    }
 //
     private static final int NETWORK_TYPE_UNAVAILABLE = -1;
     // private static final int NETWORK_TYPE_MOBILE = -100;
