@@ -42,5 +42,6 @@ dependencies {
     compile files('libs/achartengine-1.1.0.jar')
     compile files('libs/ezviz-openapi-android-sdk.jar')
     compile project(':vitamio')
+    compile 'org.apache.servicemix.bundles:org.apache.servicemix.bundles.jdom:2.0.6_1'
 }
 
