@@ -6,14 +6,14 @@
 
     <include layout="@layout/activity_title"></include>
 
-    <EditText
+    <TextView
         android:id="@+id/address"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:paddingLeft="10dp"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/edit_text_bg"
         android:hint="@string/address"
         android:textCursorDrawable="@drawable/color_cursor"
