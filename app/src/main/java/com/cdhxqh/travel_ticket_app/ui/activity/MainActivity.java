@@ -16,11 +16,12 @@ import android.widget.Toast;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.app.AppManager;
 import com.cdhxqh.travel_ticket_app.ui.activity.BaseActivity;
+import com.cdhxqh.travel_ticket_app.ui.widget.DataBase;
 import com.umeng.update.UmengUpdateAgent;
 
 
 public class MainActivity extends TabActivity {
-    private static final String TAG="MainActivity";
+    private static final String TAG = "MainActivity";
 
     private RadioGroup mTabButtonGroup;
     private TabHost mTabHost;
@@ -73,6 +74,17 @@ public class MainActivity extends TabActivity {
      */
     private void initView() {
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // tvMessage.setText("...");
+                // 以上操作会报错，无法再子线程中访问UI组件，UI组件的属性必须在UI线程中访问
+                // 使用post方式修改UI组件tvMessage的Text属性
+                DataBase dataBase = new DataBase();
+                dataBase.init(MainActivity.this);
+            }
+        }).start();
+
         mTabHost = getTabHost();
 
         Intent i_home = new Intent(this, HomeActivity.class);
@@ -91,16 +103,16 @@ public class MainActivity extends TabActivity {
 
         Bundle bundle = new Bundle();
 
-            mTabHost.setCurrentTabByTag(TAB_HOME);
+        mTabHost.setCurrentTabByTag(TAB_HOME);
 
-        if(this.getIntent().getExtras() != null) {
+        if (this.getIntent().getExtras() != null) {
             bundle = this.getIntent().getExtras();
-            String activity =   bundle.getString("activity");
+            String activity = bundle.getString("activity");
             home_tab_main.setChecked(false);
             home_tab_order.setChecked(true);
             Intent intent = new Intent();
-            if(bundle.containsKey("userActivity")) {
-                if(bundle.getString("userActivity").equals("typeActivity")) {
+            if (bundle.containsKey("userActivity")) {
+                if (bundle.getString("userActivity").equals("typeActivity")) {
                     intent.putExtra("unPayMent", true);
                 }
             }
@@ -143,7 +155,6 @@ public class MainActivity extends TabActivity {
         exit();
 
     }
-
 
 
     /**
