@@ -52,25 +52,14 @@ public class RoomContentAdapter extends RecyclerView.Adapter<RoomContentAdapter.
             }
         }
         holder.RoomTypeName.setText(hotelList.get(i).getRoomTypeName());
-        holder.Floor.setText("楼层:" + hotelList.get(i).getFloor());
-        if(hotelList.get(i).getNonSmoking().equals("false")) {
-            holder.NonSmoking.setVisibility(View.GONE);
-        }else if(hotelList.get(i).getNonSmoking().equals("true")) {
-            holder.NonSmoking.setText("禁止吸烟");
-        }
         if(hotelList.get(i).getQuantity().equals("0")) {
-            holder.Quantity.setText("房间数量:" + "暂无空房");
+            holder.Quantity.setVisibility(View.GONE);
         }else {
-            holder.Quantity.setText("房间数量:" + hotelList.get(i).getQuantity());
+            holder.Quantity.setVisibility(View.GONE);
         }
 
-        holder.RoomSize.setText("房间大小:" + hotelList.get(i).getRoomSize());
-        if(hotelList.get(i).getSize() == null) {
-            holder.Size.setVisibility(View.GONE);
-        }else {
-            holder.Size.setText("床的尺寸" + hotelList.get(i).getSize());
-        }
-        holder.StandardOccupancy.setText("标准入住人数" + hotelList.get(i).getStandardOccupancy());
+        holder.RoomSize.setText("房间大小：" + hotelList.get(i).getRoomSize() + "平米");
+        holder.StandardOccupancy.setText("标准入住人数：" + hotelList.get(i).getStandardOccupancy());
 
 //        holder.hotel_id.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -143,15 +132,17 @@ public class RoomContentAdapter extends RecyclerView.Adapter<RoomContentAdapter.
          */
         TextView InvBlockCode;
 
+        /**
+         *预订图片
+         */
+        ImageView order;
+
         public ViewHolder(View view) {
             super(view);
             roomPic = (ImageView) view.findViewById(R.id.roomPic);
             RoomTypeName = (TextView) view.findViewById(R.id.RoomTypeName);
-            Floor = (TextView) view.findViewById(R.id.Floor);
-            NonSmoking = (TextView) view.findViewById(R.id.NonSmoking);
             Quantity = (TextView) view.findViewById(R.id.Quantity);
             RoomSize = (TextView) view.findViewById(R.id.RoomSize);
-            Size = (TextView) view.findViewById(R.id.Size);
             StandardOccupancy = (TextView) view.findViewById(R.id.StandardOccupancy);
         }
     }
