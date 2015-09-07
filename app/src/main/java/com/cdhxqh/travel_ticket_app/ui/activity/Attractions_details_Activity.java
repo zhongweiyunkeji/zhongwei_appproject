@@ -1,6 +1,10 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.app.ProgressDialog;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -70,13 +74,21 @@ public class Attractions_details_Activity extends BaseActivity {
      */
     int playstaus = 0;
 
+    /**
+     * 音频动画*
+     */
+    private AnimationDrawable anim;
+
+
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attractions_details_);
 
         getData();
-        initAudio();
+
         findViewById();
         initView();
     }
@@ -85,7 +97,7 @@ public class Attractions_details_Activity extends BaseActivity {
      * 初始化播放音频*
      */
     private void initAudio() {
-        player = new Player_Music();
+        player = new Player_Music(progressDialog);
 
     }
 
@@ -96,7 +108,6 @@ public class Attractions_details_Activity extends BaseActivity {
     private void getData() {
         attractions = getIntent().getParcelableExtra("attractions");
 
-        // Log.i(TAG, "attractions=" + attractions.file_url);
     }
 
     @Override
@@ -129,7 +140,36 @@ public class Attractions_details_Activity extends BaseActivity {
         }
 
         backImage.setOnTouchListener(backImageViewOnTouchListener);
+
+        anim = (AnimationDrawable) playImage.getBackground();
     }
+
+
+    /**
+     * 加载音频动画*
+     */
+    private void loadProgressDialog() {
+        progressDialog = ProgressDialog.show(Attractions_details_Activity.this, null,
+                "加载中...", true, true);
+    }
+
+
+
+
+    /**
+     * 开始播放音频动画*
+     */
+    public void startA() {
+        anim.start();
+    }
+
+    /**
+     * 停止播放音频动画*
+     */
+    public void stopA() {
+        anim.stop();
+    }
+
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
         @Override
@@ -146,29 +186,30 @@ public class Attractions_details_Activity extends BaseActivity {
     private View.OnClickListener playImageOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //Log.i(TAG, "play....");
+
             String file_url = attractions.file_url;
             if (file_url == null) {
-                //Log.i(TAG, "mei_you");
                 MessageUtils.showMiddleToast(Attractions_details_Activity.this, getString(R.string.not_music_file_text));
             } else {
 
                 if (playstaus == 0) { //未播放
-                    //Log.i(TAG, "开始播放");
+                    loadProgressDialog();
+                    initAudio();
+                    startA();
                     playstaus = 1;
-                    player.playUrl(file_url);
-                    player.play();
-                    playImage.setImageResource(R.drawable.ic_play3);
+                    player.playUrl(attractions.file_url);
                 } else if (playstaus == 1) { //暂停
-                    //Log.i(TAG, "暂停");
+                    stopA();
                     playstaus = 2;
                     player.pause();
                     playImage.setImageResource(R.drawable.ic_play_stop);
                 } else if (playstaus == 2) { //暂停后再播放
+                    startA();
                     player.play();
                     playstaus = 1;
-                    playImage.setImageResource(R.drawable.ic_play3);
+                    playImage.setImageResource(R.color.transparent);
                 } else {
+                    stopA();
                     playstaus = 0;
                 }
             }

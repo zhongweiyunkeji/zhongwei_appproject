@@ -1,5 +1,6 @@
 package com.cdhxqh.travel_ticket_app.utils;
 
+import android.app.ProgressDialog;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
@@ -16,70 +17,61 @@ import java.util.TimerTask;
  */
 public class Player_Music implements MediaPlayer.OnBufferingUpdateListener,
         MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener {
+    private static final String TAG="Player";
     public MediaPlayer mediaPlayer;
+    private ProgressDialog progressDialog;
     private Timer mTimer = new Timer();
 
-    public Player_Music() {
-
+    public Player_Music(ProgressDialog progressDialog) {
+        super();
+        this.progressDialog = progressDialog;
         try {
             mediaPlayer = new MediaPlayer();
-            mediaPlayer.setAudioStreamType(AudioManager.ADJUST_LOWER);
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setOnBufferingUpdateListener(this);
             mediaPlayer.setOnPreparedListener(this);
         } catch (Exception e) {
-            Log.e("mediaPlayer", "error", e);
+            e.printStackTrace();
         }
-
-        mTimer.schedule(mTimerTask, 0, 1000);
+        mTimer.schedule(timerTask, 0, 1000);
     }
 
-    /**
-     * ****************************************************
-     * 通过定时器和Handler来更新进度条
-     * ****************************************************
-     */
-    TimerTask mTimerTask = new TimerTask() {
+    TimerTask timerTask = new TimerTask() {
+
         @Override
         public void run() {
             if (mediaPlayer == null)
                 return;
-            if (mediaPlayer.isPlaying()) {
-                handleProgress.sendEmptyMessage(0);
+            if (mediaPlayer.isPlaying() && progressDialog!=null) {
+                handler.sendEmptyMessage(0);
             }
         }
     };
 
-    Handler handleProgress = new Handler() {
-        public void handleMessage(Message msg) {
-
+    Handler handler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
             int position = mediaPlayer.getCurrentPosition();
             int duration = mediaPlayer.getDuration();
-
-        }
-
-        ;
+            Log.i(TAG, "duration="+duration);
+            if (duration > 0) {
+                progressDialog.cancel();
+                progressDialog.dismiss();
+            }
+        };
     };
-    //*****************************************************
 
     public void play() {
         mediaPlayer.start();
     }
-    public void prepare() {
-        try {
-            mediaPlayer.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-
-
-    public void playUrl(String videoUrl) {
+    public void playUrl(String url) {
         try {
             mediaPlayer.reset();
-            mediaPlayer.setDataSource(videoUrl);
-            mediaPlayer.prepare();//prepare之后自动播放
+            mediaPlayer.setDataSource(url);
+            mediaPlayer.prepare();
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
             e.printStackTrace();
         } catch (IllegalStateException e) {
             e.printStackTrace();
@@ -88,11 +80,11 @@ public class Player_Music implements MediaPlayer.OnBufferingUpdateListener,
         }
     }
 
-
     public void pause() {
         mediaPlayer.pause();
     }
 
+    // ֹͣ
     public void stop() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
@@ -102,20 +94,18 @@ public class Player_Music implements MediaPlayer.OnBufferingUpdateListener,
     }
 
     @Override
-    /**
-     * 通过onPrepared播放
-     */
-    public void onPrepared(MediaPlayer arg0) {
-        arg0.start();
-        Log.e("mediaPlayer", "onPrepared");
+    public void onPrepared(MediaPlayer mp) {
+        mp.start();
+        Log.i(TAG, "onPrepared");
     }
 
     @Override
-    public void onCompletion(MediaPlayer arg0) {
-        Log.e("mediaPlayer", "onCompletion");
+    public void onCompletion(MediaPlayer mp) {
+        Log.i(TAG, "onCompletion");
     }
 
     @Override
-    public void onBufferingUpdate(MediaPlayer arg0, int bufferingProgress) {
+    public void onBufferingUpdate(MediaPlayer mp, int percent) {
+        Log.i(TAG, "percent="+percent+",mp="+mp);
     }
 }

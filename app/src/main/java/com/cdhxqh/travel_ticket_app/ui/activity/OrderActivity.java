@@ -173,28 +173,32 @@ public class OrderActivity extends BaseActivity {
             }
             if (!flag) {
                 backImageView.setVisibility(View.GONE);
-                inttextView.setTextColor(Color.rgb(255, 255, 255));  // 设置字体为白色
-                outtextView.setTextColor(Color.rgb(0, 0, 0));        // 设置字体为绿色
+                inttextView.setTextColor(getResources().getColor(R.color.white));  // 设置字体为白色
+                outtextView.setTextColor(getResources().getColor(R.color.green_color));        // 设置字体为绿色
                 FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();  //
                 localFragmentTransaction.replace(R.id.container, orderThreeInFragment, "three_in");
                 localFragmentTransaction.commit();
 
-                inttextView.setBackgroundColor(getResources().getColor(R.color.green_color));
-                outtextView.setBackgroundColor(getResources().getColor(R.color.white));
+                //inttextView.setBackgroundColor(getResources().getColor(R.color.green_color));
+                //outtextView.setBackgroundColor(getResources().getColor(R.color.white));
+                inttextView.setBackgroundResource(R.drawable.tabs_left_sel);
+                outtextView.setBackgroundResource(R.drawable.tabs_right_nol);
 
                 if (1 == currntPageIn) {
                     requestOrderList(true, "after");
                 }
             }else {
                 backImageView.setVisibility(View.VISIBLE);
-                inttextView.setTextColor(Color.rgb(255, 255, 255));  // 设置字体为白色
-                outtextView.setTextColor(Color.rgb(0, 0, 0));        // 设置字体为绿色
+                inttextView.setTextColor(getResources().getColor(R.color.white));  // 设置字体为白色
+                outtextView.setTextColor(getResources().getColor(R.color.green_color));        // 设置字体为绿色
                 FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();  //
                 localFragmentTransaction.replace(R.id.container, orderThreeInFragment, "three_in");
                 localFragmentTransaction.commit();
 
-                inttextView.setBackgroundColor(getResources().getColor(R.color.green_color));
-                outtextView.setBackgroundColor(getResources().getColor(R.color.white));
+                //inttextView.setBackgroundColor(getResources().getColor(R.color.green_color));
+                //outtextView.setBackgroundColor(getResources().getColor(R.color.white));
+                inttextView.setBackgroundResource(R.drawable.tabs_left_sel);
+                outtextView.setBackgroundResource(R.drawable.tabs_right_nol);
                 order_title.setVisibility(View.GONE);
             }
             if (orderThreeInFragment.getAdapter() != null && orderThreeInFragment.getAdapter().getGroupList().size() == 0) {
@@ -205,14 +209,17 @@ public class OrderActivity extends BaseActivity {
                 orderThreeOutFragment = new OrderThreeOutFragment();
             }
 
-            outtextView.setTextColor(Color.rgb(255, 255, 255));  // 设置字体为白色
-            inttextView.setTextColor(Color.rgb(0, 0, 0));        // 设置字体为绿色
+            outtextView.setTextColor(getResources().getColor(R.color.white));  // 设置字体为白色
+            inttextView.setTextColor(getResources().getColor(R.color.green_color));        // 设置字体为绿色
             FragmentTransaction localFragmentTransaction = getFragmentManager().beginTransaction();
             localFragmentTransaction.replace(R.id.container, orderThreeOutFragment, "three_out");
             localFragmentTransaction.commit();
 
-            inttextView.setBackgroundColor(getResources().getColor(R.color.white));
-            outtextView.setBackgroundColor(getResources().getColor(R.color.green_color));
+            //inttextView.setBackgroundColor(getResources().getColor(R.color.white));
+            //outtextView.setBackgroundColor(getResources().getColor(R.color.green_color));
+            inttextView.setBackgroundResource(R.drawable.tabs_left_nol);
+            outtextView.setBackgroundResource(R.drawable.tabs_right_sel
+            );
 
             if (1 == currntPageOut) {
                 requestOrderList(true, "before");
