@@ -88,7 +88,7 @@ public class Attractions_details_Activity extends BaseActivity {
         setContentView(R.layout.activity_attractions_details_);
 
         getData();
-        initAudio();
+
         findViewById();
         initView();
     }
@@ -97,7 +97,7 @@ public class Attractions_details_Activity extends BaseActivity {
      * 初始化播放音频*
      */
     private void initAudio() {
-        player = new Player_Music();
+        player = new Player_Music(progressDialog);
 
     }
 
@@ -153,47 +153,7 @@ public class Attractions_details_Activity extends BaseActivity {
                 "加载中...", true, true);
     }
 
-    /**
-     * 加载线程*
-     */
-    private void loadThread() {
-        loadProgressDialog();
-        new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                try {
 
-                    sleep(1000);
-                    handleProgress.sendEmptyMessage(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-    }
-
-
-    Handler handleProgress = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1000:
-                    progressDialog.dismiss();
-
-//                    player.prepare();//prepare之后自动播放
-                    startA();
-                    playstaus = 1;
-                    player.playUrl(attractions.file_url);
-                    player.play();
-
-
-                    break;
-            }
-
-        }
-
-        ;
-    };
 
 
     /**
@@ -226,20 +186,19 @@ public class Attractions_details_Activity extends BaseActivity {
     private View.OnClickListener playImageOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //Log.i(TAG, "play....");
+
             String file_url = attractions.file_url;
             if (file_url == null) {
-                //Log.i(TAG, "mei_you");
                 MessageUtils.showMiddleToast(Attractions_details_Activity.this, getString(R.string.not_music_file_text));
             } else {
 
                 if (playstaus == 0) { //未播放
-                    //Log.i(TAG, "开始播放");
-                    loadThread();
-
-//                    playImage.setImageResource(R.drawable.ic_play3);
+                    loadProgressDialog();
+                    initAudio();
+                    startA();
+                    playstaus = 1;
+                    player.playUrl(attractions.file_url);
                 } else if (playstaus == 1) { //暂停
-                    //Log.i(TAG, "暂停");
                     stopA();
                     playstaus = 2;
                     player.pause();
@@ -249,7 +208,6 @@ public class Attractions_details_Activity extends BaseActivity {
                     player.play();
                     playstaus = 1;
                     playImage.setImageResource(R.color.transparent);
-//                    playImage.setImageResource(R.drawable.ic_play3);
                 } else {
                     stopA();
                     playstaus = 0;
