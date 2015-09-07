@@ -114,10 +114,16 @@ public class AroundPlayActivity extends BaseActivity {
      */
     @Override
     protected void initView() {
+        String title = "酒店";
+        if(getIntent() != null) {
+            title = getIntent().getStringExtra("spotTitle");
+        }
+        titleTextView.setText(title);
+
         //设置标签页显示方式
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
-        titleTextView.setText("酒店");
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
