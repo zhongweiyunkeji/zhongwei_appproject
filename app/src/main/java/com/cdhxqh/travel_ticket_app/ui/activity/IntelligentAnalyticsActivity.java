@@ -72,6 +72,7 @@ public class IntelligentAnalyticsActivity extends BaseActivity{
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
         titleTextView.setText(tittle);
+        titleTextView.setTextSize(20);
 
         map.put(0, R.drawable.number0);
         map.put(1, R.drawable.number1);
