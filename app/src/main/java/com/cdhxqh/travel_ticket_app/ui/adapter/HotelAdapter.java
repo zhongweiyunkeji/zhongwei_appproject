@@ -70,7 +70,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, final int i) {
         holder.hotelName.setText(hotelList.get(i).getHotelName());
         holder.hotelAddress.setText(hotelList.get(i).getAddress());
-        holder.hotelRate.setText("酒店星级：" + hotelList.get(i).getHotelStarRate());
+        holder.hotelRate.setText(hotelList.get(i).getHotelStarRate()+" 星" );
         ImageLoader.getInstance().displayImage(img.get(hotelList.get(i).getHotelCode()), holder.hotelPic);
 
         if(hotelList.get(i).getLatitude() != null && hotelList.get(i).getLongitude()!= null) {
@@ -81,7 +81,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
             double a = getDistance(Latitude_a, Longitude_a, Latitude_b, Longitude_b);
             DecimalFormat df = new DecimalFormat("0.00");
             String db = df.format(a / 1000);
-            holder.hotelSpace.setText(db + "km");
+            holder.hotelSpace.setText("距您"+db + "km");
         }
 
 
