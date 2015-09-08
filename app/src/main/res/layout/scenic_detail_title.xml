@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="48dp"
         android:background="@color/green_color">
 
         <ImageView
@@ -27,7 +27,7 @@
             android:layout_centerVertical="true"
             android:text="标题"
             android:textColor="@color/white"
-            android:textSize="@dimen/font28"/>
+            android:textSize="@dimen/font26"/>
 
         <ImageView
             android:id="@+id/title_search_id"

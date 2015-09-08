@@ -187,8 +187,6 @@ public class Attractions_details_Activity extends BaseActivity {
     }
 
 
-
-
     /**
      * 开始播放音频动画*
      */

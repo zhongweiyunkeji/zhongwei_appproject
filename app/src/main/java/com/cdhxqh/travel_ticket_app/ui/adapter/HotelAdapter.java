@@ -1,5 +1,7 @@
 package com.cdhxqh.travel_ticket_app.ui.adapter;
 
+import android.app.Activity;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -39,17 +41,12 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
     int absent;
 
 
-
-
-    public HotelAdapter(Context paramContext, Map<String, String> imgs) {
+    public HotelAdapter(Context paramContext, Map<String, String> imgs, boolean a) {
         img = imgs;
-        absent = TelephonyManager.SIM_STATE_ABSENT;
-        if (1 == absent)
-        {
-            MessageUtils.showMiddleToast(paramContext, "请确认sim卡是否插入或者sim卡暂时不可用！");
-        }else {
-            gps = Gps.getGps(paramContext);
-        }
+
+
+        gps = Gps.getGps(paramContext);
+
         this.mContext = paramContext;
     }
 
@@ -79,7 +76,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
                 double a = getDistance(Latitude_a, Longitude_a, Latitude_b, Longitude_b);
                 DecimalFormat df = new DecimalFormat("0.00");
                 String db = df.format(a / 1000);
-                holder.hotelSpace.setText("距您" + db + "km");
+                holder.hotelSpace.setText("距您" + db + "公里");
             }
         }else {
             holder.hotelSpace.setText("获取不到您当前位置");
