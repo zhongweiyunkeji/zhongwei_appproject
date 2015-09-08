@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/dimens_10"
+    android:layout_marginLeft="@dimen/dimens_10"
+    android:layout_marginRight="@dimen/dimens_10"
     android:orientation="vertical"
-    android:layout_marginLeft="@dimen/dimens_20"
-    android:layout_marginRight="@dimen/dimens_20"
     android:background="@drawable/comment_bg">
 
     <RelativeLayout

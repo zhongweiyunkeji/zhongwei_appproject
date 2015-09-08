@@ -130,7 +130,7 @@ public class Attractions_details_Activity extends BaseActivity {
         titleText.setText(attractions.title);
         backImage.setOnClickListener(backImageOnClickListener);
         backImage.setVisibility(View.VISIBLE);
-
+        searchImageView.setVisibility(View.GONE);
         ImageLoader.getInstance().displayImage(attractions.image, imageView);
         playImage.setOnClickListener(playImageOnClickListener);
 

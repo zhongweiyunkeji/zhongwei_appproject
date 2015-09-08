@@ -7,9 +7,7 @@
     android:orientation="vertical"
     tools:context="com.cdhxqh.travel_ticket_app.ui.activity.Tickets_Detail_Activity">
 
-
     <include layout="@layout/tickets_detail_top_text"></include>
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,7 +22,6 @@
             <include layout="@layout/tickets_detail_two_layout"></include>
 
             <include layout="@layout/tickets_detail_three_layout"></include>
-
 
             <include layout="@layout/tickets_detail_four_layout"></include>
 
