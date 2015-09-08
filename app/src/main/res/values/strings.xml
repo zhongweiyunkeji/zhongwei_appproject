@@ -24,8 +24,8 @@
     <string name="red_package_text">红包:</string>
     <string name="integral_text">积分:</string>
     <string name="notice_title_text">公告信息</string>
-    <string name="user_collection_text">我的收藏\u3000</string>
-    <string name="user_review_text">我的点评\u3000</string>
+    <string name="user_collection_text">我的收藏</string>
+    <string name="user_review_text">我的点评</string>
     <string name="phone_send_number">秒后可重新发送</string>
     <string name="phone_get_number">重新获取验证码</string>
     <string name="class_title_text">分类</string>
@@ -87,7 +87,7 @@
     <string name="error_obtain_once">无法获取ONCE</string>
     <string name="get_info_mation_text">获取信息失败</string>
     <string name="title_activity_scenic__tickets_">Scenic_Tickets_Activity</string>
-    <string name="reg_loaing">正在努力加载...</string>
+    <string name="reg_loaing">正在加载...</string>
     <string name="please_loading_hint">请稍后...</string>
     <string name="title_activity_scenic_map">ScenicMapActivity</string>
     <string name="fill_in_the_phone_number_text">1.填写手机号</string>
