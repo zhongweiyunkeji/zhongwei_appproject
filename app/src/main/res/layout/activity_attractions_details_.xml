@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/bj_color"
+    android:orientation="vertical"
     tools:context="com.cdhxqh.travel_ticket_app.ui.activity.Attractions_details_Activity">
 
     <include layout="@layout/scenic_detail_title"></include>
@@ -12,22 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginLeft="@dimen/dimens_20"
-        android:layout_marginRight="@dimen/dimens_20">
+        android:layout_marginRight="@dimen/dimens_20"
+        android:layout_marginTop="@dimen/dimens_10">
 
         <ImageView
             android:id="@+id/att_image_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
-             />
+            android:scaleType="fitXY" />
 
         <ImageView
             android:id="@+id/music_play_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_play1"
-            />
+            android:background="@anim/play_song" />
 
 
     </FrameLayout>
@@ -35,27 +34,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimens_10"
         android:layout_marginLeft="@dimen/dimens_20"
         android:layout_marginRight="@dimen/dimens_20"
+        android:layout_marginTop="@dimen/dimens_10"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/attr_title_id"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="@dimen/font20"
+            android:text="沙坡头博物馆"
             android:textColor="@color/text_color_1"
-            android:text="沙坡头博物馆" />
+            android:textSize="@dimen/font20" />
 
         <TextView
             android:id="@+id/attr_content_id"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/dimens_10"
-            android:textSize="@dimen/font18"
             android:scrollbars="vertical"
-            android:text="沙坡头博物馆" />
+            android:text="沙坡头博物馆"
+            android:textSize="@dimen/font18" />
 
 
     </LinearLayout>

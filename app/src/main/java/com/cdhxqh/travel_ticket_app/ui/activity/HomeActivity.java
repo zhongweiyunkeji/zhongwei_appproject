@@ -124,6 +124,7 @@ public class HomeActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent();
+            intent.putExtra("spotTitle", "酒店");
             intent.setClass(HomeActivity.this, AroundPlayActivity.class);
             startActivity(intent);
         }

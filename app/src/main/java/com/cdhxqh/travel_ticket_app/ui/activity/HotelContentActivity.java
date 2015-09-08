@@ -148,7 +148,7 @@ public class HotelContentActivity extends BaseActivity {
                     sb.append("<RequestBody xmlns:ns=\"http://www.opentravel.org/OTA/2003/05\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">");
                     sb.append("<OTA_HotelDescriptiveInfoRQ Version=\"1.0\" xsi:schemaLocation=\"http://www.opentravel.org/OTA/2003/05 OTA_HotelDescriptiveInfoRQ.xsd\" xmlns=\"http://www.opentravel.org/OTA/2003/05\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">");
                     sb.append("<HotelDescriptiveInfos>");
-                    sb.append("<HotelDescriptiveInfo HotelCode=\"" + "1327019" + "\" PositionTypeCode=\"502\">");
+                    sb.append("<HotelDescriptiveInfo HotelCode=\"" + hotelCode + "\" PositionTypeCode=\"502\">");
                     sb.append("<HotelInfo SendData=\"true\" />");
                     sb.append("<FacilityInfo SendGuestRooms=\"true\"/>");
                     sb.append("<AreaInfo SendAttractions=\"true\" SendRecreations=\"true\"/>");
@@ -178,7 +178,7 @@ public class HotelContentActivity extends BaseActivity {
 
             ArrivalAndDeparture.setText(hotelOneModel.getArrivalAndDeparture());
             Cancel.setText(hotelOneModel.getCancel());
-            DepositAndPrepaid.setText(hotelOneModel.getArrivalAndDeparture());
+            DepositAndPrepaid.setText(hotelOneModel.getDepositAndPrepaid());
             Pet.setText(hotelOneModel.getPet());
             Requirements.setText(hotelOneModel.getRequirements());
 

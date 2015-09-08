@@ -1,5 +1,6 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -20,8 +21,11 @@ import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -145,6 +149,8 @@ public class ReservationActivity extends BaseActivity{
 
     String tittle;
 
+    ImageView backImg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,6 +162,7 @@ public class ReservationActivity extends BaseActivity{
 
     @Override
     protected void findViewById() {
+        backImg = (ImageView)findViewById(R.id.back_imageview_id);
         reservation_add_button = (Button) findViewById(R.id.reservation_add_button);
         reservation_reduce_button = (Button) findViewById(R.id.reservation_reduce_button);
         reservation_display_num = (EditText)findViewById(R.id.reservation_display_num);
@@ -221,6 +228,12 @@ public class ReservationActivity extends BaseActivity{
         backImageView.setOnTouchListener(backImageViewOnTouchListener);
 
         user.setOnClickListener(userOnClickListener);
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     /**
@@ -230,9 +243,22 @@ public class ReservationActivity extends BaseActivity{
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(ReservationActivity.this, CommonContactActivity.class);
-            ReservationActivity.this.startActivity(intent);
+            ReservationActivity.this.startActivityForResult(intent, 1);
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                String name = data.getStringExtra("name");
+                String phone = data.getStringExtra("phone");
+                ticket_user.setText(name);
+                ticket_user_a.setText(phone);
+            }
+        }
+    }
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
         @Override
@@ -299,8 +325,21 @@ public class ReservationActivity extends BaseActivity{
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-
-            out_date_id.setText(year + "-" + (monthOfYear+1) + "-" + dayOfMonth);
+            long time = System.currentTimeMillis();
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+            String times = year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
+            long timeStart = 0;
+            try {
+                timeStart=sdf.parse(times).getTime();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if(time - timeStart < 0) {
+                out_date_id.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+            }else {
+                new  AlertDialog.Builder(ReservationActivity.this).setTitle("警告").setMessage("出行时间小于当前时间").setPositiveButton("确定", null).show();
+                out_date_id.setText("");
+            }
         }
     };
 

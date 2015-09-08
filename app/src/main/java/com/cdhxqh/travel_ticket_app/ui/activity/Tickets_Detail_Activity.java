@@ -89,6 +89,8 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
     private RelativeLayout scenic_spot;
 
+    private RelativeLayout hotel_spot;
+
 
 
     Tickets_ExpandableListAdapter tickets_expandableListAdapter;
@@ -156,6 +158,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
     protected void findViewById() {
         backImageView = (ImageView) findViewById(R.id.ticket_detail_back_id);
         titleTextView = (TextView) findViewById(R.id.ticket_detail_title_id);
+        hotel_spot = (RelativeLayout) findViewById(R.id.hotel_spot);
 
         addrelativeLayout = (RelativeLayout) findViewById(R.id.address_relativelayout_id);
         addTextView=(TextView)findViewById(R.id.tickets_detail_address_text_id);
@@ -203,7 +206,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
         tickets_detail_introduce_text_id.setOnClickListener(ticketsIntroduceOnClickListener);
 
         tickets_detail_address.setOnClickListener(ticketsdetailOnClickListener);
-
+        hotel_spot.setOnClickListener(hotelOnClickListener);
     }
 
     /**
@@ -213,11 +216,26 @@ public class Tickets_Detail_Activity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Intent intent = getIntent();
-            intent.putExtra("spotTitle", "中卫所有景区游客人数");
-            intent.setClass(Tickets_Detail_Activity.this, WeatherActivity.class);
+            intent.putExtra("spotTitle", ecs_brand.brand_name  + "出行分析");
+            intent.setClass(Tickets_Detail_Activity.this, IntelligentAnalyticsActivity.class);
             startActivityForResult(intent, 0);
         }
     };
+
+    /**
+     * 景区实况*
+     */
+    private View.OnClickListener hotelOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = getIntent();
+            intent.putExtra("spotTitle", "周边酒店");
+            intent.setClass(Tickets_Detail_Activity.this, AroundPlayActivity.class);
+            startActivity(intent);
+        }
+    };
+
+
 
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {

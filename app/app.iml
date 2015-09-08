@@ -91,14 +91,16 @@
     <orderEntry type="library" exported="" name="BaiduLBS_Android" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.6" level="project" />
     <orderEntry type="library" exported="" name="locSDK_5.2" level="project" />
+    <orderEntry type="library" exported="" name="org.apache.servicemix.bundles.jdom-2.0.6_1" level="project" />
     <orderEntry type="library" exported="" name="alipaySDK-20150724" level="project" />
     <orderEntry type="library" exported="" name="ezviz-openapi-android-sdk" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.1.1" level="project" />
+    <orderEntry type="library" exported="" name="extzxing" level="project" />
     <orderEntry type="library" exported="" name="achartengine-1.1.0" level="project" />
     <orderEntry type="library" exported="" name="zxing" level="project" />
     <orderEntry type="library" exported="" name="snackbar-1.1.0" level="project" />
-    <orderEntry type="library" exported="" name="umeng-update-v2.6.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.1.1" level="project" />
+    <orderEntry type="library" exported="" name="umeng-update-v2.6.0.1" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.3" level="project" />
     <orderEntry type="module" module-name="vitamio" exported="" />
   </component>
