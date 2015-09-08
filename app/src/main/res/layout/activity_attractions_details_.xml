@@ -27,7 +27,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@anim/play_song" />
+            android:background="@drawable/ic_play1" />
+
+        <ImageView
+            android:id="@+id/music_play_anim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@anim/play_song"
+            android:visibility="gone" />
 
 
     </FrameLayout>

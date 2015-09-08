@@ -1,6 +1,7 @@
 package com.cdhxqh.travel_ticket_app.utils;
 
 import android.app.ProgressDialog;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
@@ -16,17 +17,19 @@ import java.util.TimerTask;
  * 播放音乐
  */
 public class Player_Music implements MediaPlayer.OnBufferingUpdateListener,
-        MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener {
-    private static final String TAG="Player";
+         MediaPlayer.OnPreparedListener{
+    private static final String TAG = "Player";
     public MediaPlayer mediaPlayer;
     private ProgressDialog progressDialog;
     private Timer mTimer = new Timer();
 
-    public Player_Music(ProgressDialog progressDialog) {
+
+    public Player_Music(ProgressDialog progressDialog, MediaPlayer mediaPlayer) {
         super();
         this.progressDialog = progressDialog;
+        this.mediaPlayer = mediaPlayer;
         try {
-            mediaPlayer = new MediaPlayer();
+//            mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setOnBufferingUpdateListener(this);
             mediaPlayer.setOnPreparedListener(this);
@@ -34,6 +37,8 @@ public class Player_Music implements MediaPlayer.OnBufferingUpdateListener,
             e.printStackTrace();
         }
         mTimer.schedule(timerTask, 0, 1000);
+
+
     }
 
     TimerTask timerTask = new TimerTask() {
@@ -42,7 +47,7 @@ public class Player_Music implements MediaPlayer.OnBufferingUpdateListener,
         public void run() {
             if (mediaPlayer == null)
                 return;
-            if (mediaPlayer.isPlaying() && progressDialog!=null) {
+            if (mediaPlayer.isPlaying() && progressDialog != null) {
                 handler.sendEmptyMessage(0);
             }
         }
@@ -52,12 +57,14 @@ public class Player_Music implements MediaPlayer.OnBufferingUpdateListener,
         public void handleMessage(android.os.Message msg) {
             int position = mediaPlayer.getCurrentPosition();
             int duration = mediaPlayer.getDuration();
-            Log.i(TAG, "duration="+duration);
+            Log.i(TAG, "duration=" + duration);
             if (duration > 0) {
                 progressDialog.cancel();
                 progressDialog.dismiss();
             }
-        };
+        }
+
+        ;
     };
 
     public void play() {
@@ -99,13 +106,15 @@ public class Player_Music implements MediaPlayer.OnBufferingUpdateListener,
         Log.i(TAG, "onPrepared");
     }
 
-    @Override
-    public void onCompletion(MediaPlayer mp) {
-        Log.i(TAG, "onCompletion");
-    }
+
 
     @Override
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
-        Log.i(TAG, "percent="+percent+",mp="+mp);
+
     }
+
+
+
+
+
 }

@@ -1,8 +1,11 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,6 +60,8 @@ public class Attractions_details_Activity extends BaseActivity {
      * 播放按钮*
      */
     ImageView playImage;
+    /**播放动画**/
+    ImageView playAnimImage;
     /**
      * 标题*
      */
@@ -66,6 +72,7 @@ public class Attractions_details_Activity extends BaseActivity {
     TextView contentText;
 
     private Player_Music player;
+    public MediaPlayer mediaPlayer;
 
     ImageView settingsImg;
 
@@ -82,6 +89,8 @@ public class Attractions_details_Activity extends BaseActivity {
 
     private ProgressDialog progressDialog;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,8 +106,9 @@ public class Attractions_details_Activity extends BaseActivity {
      * 初始化播放音频*
      */
     private void initAudio() {
-        player = new Player_Music(progressDialog);
-
+        mediaPlayer=new MediaPlayer();
+        player = new Player_Music(progressDialog,mediaPlayer);
+        mediaPlayer.setOnCompletionListener(mediaPlayerOnCompletionListener);
     }
 
 
@@ -119,11 +129,28 @@ public class Attractions_details_Activity extends BaseActivity {
 
         imageView = (ImageView) findViewById(R.id.att_image_id);
         playImage = (ImageView) findViewById(R.id.music_play_id);
+        playAnimImage = (ImageView) findViewById(R.id.music_play_anim);
+
+
         atitleText = (TextView) findViewById(R.id.attr_title_id);
         contentText = (TextView) findViewById(R.id.attr_content_id);
 
 
     }
+
+    private MediaPlayer.OnCompletionListener mediaPlayerOnCompletionListener=new MediaPlayer.OnCompletionListener(){
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            stopA();
+            playstaus = 0;
+            playImage.setVisibility(View.VISIBLE);
+            playAnimImage.setVisibility(View.GONE);
+            playImage.setImageResource(R.drawable.ic_play1);
+        }
+    };
+
+
+
 
     @Override
     protected void initView() {
@@ -133,6 +160,7 @@ public class Attractions_details_Activity extends BaseActivity {
         searchImageView.setVisibility(View.GONE);
         ImageLoader.getInstance().displayImage(attractions.image, imageView);
         playImage.setOnClickListener(playImageOnClickListener);
+        playAnimImage.setOnClickListener(playImageOnClickListener);
 
         if (attractions != null) {
             atitleText.setText(attractions.title);
@@ -141,8 +169,10 @@ public class Attractions_details_Activity extends BaseActivity {
 
         backImage.setOnTouchListener(backImageViewOnTouchListener);
 
-        anim = (AnimationDrawable) playImage.getBackground();
+        anim = (AnimationDrawable) playAnimImage.getBackground();
+
     }
+
 
 
     /**
@@ -184,6 +214,7 @@ public class Attractions_details_Activity extends BaseActivity {
     };
 
     private View.OnClickListener playImageOnClickListener = new View.OnClickListener() {
+        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
         @Override
         public void onClick(View v) {
 
@@ -192,29 +223,48 @@ public class Attractions_details_Activity extends BaseActivity {
                 MessageUtils.showMiddleToast(Attractions_details_Activity.this, getString(R.string.not_music_file_text));
             } else {
 
-                if (playstaus == 0) { //未播放
-                    loadProgressDialog();
-                    initAudio();
-                    startA();
-                    playstaus = 1;
-                    player.playUrl(attractions.file_url);
-                } else if (playstaus == 1) { //暂停
-                    stopA();
-                    playstaus = 2;
-                    player.pause();
-                    playImage.setImageResource(R.drawable.ic_play_stop);
-                } else if (playstaus == 2) { //暂停后再播放
-                    startA();
-                    player.play();
-                    playstaus = 1;
-                    playImage.setImageResource(R.color.transparent);
-                } else {
-                    stopA();
-                    playstaus = 0;
-                }
+                playStaus();
             }
         }
     };
+
+
+
+
+    /**切换播放状态**/
+    private void playStaus(){
+        if (playstaus == 0) { //未播放
+            loadProgressDialog();
+            initAudio();
+            startA();
+            playstaus = 1;
+            player.playUrl(attractions.file_url);
+            playImage.setVisibility(View.GONE);
+            playAnimImage.setVisibility(View.VISIBLE);
+        } else if (playstaus == 1) { //暂停
+            stopA();
+            playstaus = 2;
+            player.pause();
+            playImage.setVisibility(View.VISIBLE);
+            playAnimImage.setVisibility(View.GONE);
+            playImage.setImageResource(R.drawable.ic_play_stop);
+        } else if (playstaus == 2) { //暂停后再播放
+            startA();
+            player.play();
+            playstaus = 1;
+            playImage.setVisibility(View.GONE);
+            playAnimImage.setVisibility(View.VISIBLE);
+        } else {
+            stopA();
+            playstaus = 0;
+            playImage.setVisibility(View.VISIBLE);
+            playAnimImage.setVisibility(View.GONE);
+            playImage.setImageResource(R.drawable.ic_play1);
+        }
+    }
+
+
+
 
 
     /**
