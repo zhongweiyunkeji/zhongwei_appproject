@@ -59,7 +59,7 @@ public class RoomContentAdapter extends RecyclerView.Adapter<RoomContentAdapter.
         }
 
         holder.RoomSize.setText("房间大小：" + hotelList.get(i).getRoomSize() + "平米");
-        holder.StandardOccupancy.setText("标准入住人数：" + hotelList.get(i).getStandardOccupancy());
+        holder.StandardOccupancy.setText("可入住人数：" + hotelList.get(i).getStandardOccupancy()+"人");
 
 //        holder.hotel_id.setOnClickListener(new View.OnClickListener() {
 //            @Override
