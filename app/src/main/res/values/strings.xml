@@ -23,7 +23,7 @@
     <string name="user_balance_text">余额:</string>
     <string name="red_package_text">红包:</string>
     <string name="integral_text">积分:</string>
-    <string name="notice_title_text">公告栏信息</string>
+    <string name="notice_title_text">公告信息</string>
     <string name="user_collection_text">我的收藏\u3000</string>
     <string name="user_review_text">我的点评\u3000</string>
     <string name="phone_send_number">秒后可重新发送</string>
