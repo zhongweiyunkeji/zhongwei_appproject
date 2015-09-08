@@ -29,6 +29,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 public class Attractions_details_Activity extends BaseActivity {
 
 
+
     private static final String TAG = "Attractions_details_Activity";
 
     /**
