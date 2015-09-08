@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/roomPic"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="114dp"
         android:layout_gravity="center|center_horizontal"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"

@@ -8,34 +8,68 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"
-        android:text="酒店政策"/>
+        android:text="酒店政策"
+        android:textSize="@dimen/font20"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/text_color_1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
         <TextView
             android:id="@+id/ArrivalAndDeparture"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font16"
+            android:textColor="@color/gray"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
         <TextView
             android:id="@+id/Cancel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font16"
+            android:textColor="@color/gray"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" />
         <TextView
             android:id="@+id/DepositAndPrepaid"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font16"
+            android:textColor="@color/gray"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" />
         <TextView
             android:id="@+id/Pet"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font16"
+            android:textColor="@color/gray"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" />
         <TextView
             android:id="@+id/Requirements"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font16"
+            android:textColor="@color/gray"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dimens_20"
+        android:layout_marginBottom="@dimen/dimens_20"
+        android:background="@drawable/list_line_x"></View>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/hotel_content"

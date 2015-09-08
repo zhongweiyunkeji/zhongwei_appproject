@@ -39,7 +39,7 @@ public class CommonContactAdapter extends RecyclerView.Adapter<CommonContactAdap
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int i) {
+    public void onBindViewHolder(ViewHolder holder, final  int i) {
         holder.contacts_name.setText(contacts.get(i).getName() + "\u3000");
         holder.contacts_phone.setText("手机号:" + contacts.get(i).getPhone());
         final int item = i;
@@ -53,6 +53,17 @@ public class CommonContactAdapter extends RecyclerView.Adapter<CommonContactAdap
                 contacts.remove(contacts.get(item));
                 ((Activity) mContext).startActivityForResult(intent, EDIT_CONTACT);
 
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("name", contacts.get(i).getName());
+                intent.putExtra("phone", contacts.get(i).getPhone());
+                ((Activity)mContext).setResult(((Activity) mContext).RESULT_OK, intent);
+                ((Activity)mContext).finish();
             }
         });
     }
