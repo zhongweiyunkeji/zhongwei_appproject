@@ -131,8 +131,6 @@
         android:layout_below="@+id/user_re_layout_id"
         android:background="@drawable/list_line_x"/>
 
-
-
     <include layout="@layout/user_middle_linearlayout"></include>
 
     <android.support.v7.widget.RecyclerView
@@ -140,7 +138,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/user_layout_bj"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:fadingEdge="none" />
 
     </LinearLayout>
