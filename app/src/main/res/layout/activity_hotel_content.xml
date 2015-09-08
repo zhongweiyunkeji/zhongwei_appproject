@@ -7,7 +7,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"
         android:text="酒店政策"
@@ -26,24 +26,24 @@
             android:id="@+id/ArrivalAndDeparture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font16"
-            android:textColor="@color/gray"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"/>
+            android:textSize="@dimen/font14"
+            android:textColor="@color/balck_color"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"/>
         <TextView
             android:id="@+id/Cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font16"
-            android:textColor="@color/gray"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp" />
+            android:textColor="@color/balck_color"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp" />
         <TextView
             android:id="@+id/DepositAndPrepaid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font16"
-            android:textColor="@color/gray"
+            android:textSize="@dimen/font14"
+            android:textColor="@color/balck_color"
             android:paddingTop="5dp"
             android:paddingBottom="5dp" />
         <TextView
@@ -51,31 +51,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font16"
-            android:textColor="@color/gray"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp" />
+            android:textColor="@color/balck_color"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp" />
         <TextView
             android:id="@+id/Requirements"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font16"
-            android:textColor="@color/gray"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp" />
+            android:textSize="@dimen/font14"
+            android:textColor="@color/balck_color"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="@dimen/dimens_20"
-        android:layout_marginBottom="@dimen/dimens_20"
+        android:layout_marginTop="@dimen/dimens_10"
         android:background="@drawable/list_line_x"></View>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/hotel_content"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

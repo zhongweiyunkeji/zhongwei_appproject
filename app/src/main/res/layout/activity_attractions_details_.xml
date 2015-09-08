@@ -31,7 +31,10 @@
 
 
     </FrameLayout>
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/include_title">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,7 +50,14 @@
             android:text="沙坡头博物馆"
             android:textColor="@color/text_color_1"
             android:textSize="@dimen/font20" />
-
+        <TextView
+            android:id="@+id/localhost_id"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:text="距离：1公里"
+            android:textColor="@color/balck_color"
+            android:textSize="@dimen/font16" />
         <TextView
             android:id="@+id/attr_content_id"
             android:layout_width="wrap_content"
@@ -59,5 +69,5 @@
 
 
     </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>
