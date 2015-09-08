@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/dimens_10"
-    android:paddingLeft="@dimen/dimens_20"
-    android:paddingRight="@dimen/dimens_20">
+    android:layout_marginLeft="@dimen/dimens_10"
+    android:layout_marginRight="@dimen/dimens_10">
 
 
     <com.cdhxqh.travel_ticket_app.ui.widget.CustomExpandableListView
