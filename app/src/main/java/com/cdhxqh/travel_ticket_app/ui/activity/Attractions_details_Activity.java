@@ -30,6 +30,7 @@ public class Attractions_details_Activity extends BaseActivity {
 
 
 
+
     private static final String TAG = "Attractions_details_Activity";
 
     /**
