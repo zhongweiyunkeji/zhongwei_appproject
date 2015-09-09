@@ -125,7 +125,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="微信支付5元以上，100%得现金，限一次"
+                        android:text="微信支付，返现金5元，限一次"
                         android:textSize="11sp"/>
                 </LinearLayout>
 
@@ -175,7 +175,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="支付宝支付5元以上，100%得现金，限一次"
+                        android:text="推荐有支付宝账号的用户使用"
                         android:textSize="11sp"/>
                 </LinearLayout>
 
