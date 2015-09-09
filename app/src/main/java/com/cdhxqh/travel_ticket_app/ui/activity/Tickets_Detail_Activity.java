@@ -91,7 +91,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
     private RelativeLayout hotel_spot;
 
-
+    private RelativeLayout video;
 
     Tickets_ExpandableListAdapter tickets_expandableListAdapter;
 
@@ -181,6 +181,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
         tickets_detail_address = (RelativeLayout) findViewById(R.id.tickets_detail_address);
         scenic_spot = (RelativeLayout) findViewById(R.id.scenic_spot);
+        video = (RelativeLayout) findViewById(R.id.video);
 
         addData();
     }
@@ -207,6 +208,8 @@ public class Tickets_Detail_Activity extends BaseActivity {
 
         tickets_detail_address.setOnClickListener(ticketsdetailOnClickListener);
         hotel_spot.setOnClickListener(hotelOnClickListener);
+
+        video.setOnClickListener(videoOnClickListener);
     }
 
     /**
@@ -218,6 +221,19 @@ public class Tickets_Detail_Activity extends BaseActivity {
             Intent intent = getIntent();
             intent.putExtra("spotTitle", ecs_brand.brand_name  + "出行分析");
             intent.setClass(Tickets_Detail_Activity.this, IntelligentAnalyticsActivity.class);
+            startActivityForResult(intent, 0);
+        }
+    };
+
+    /**
+     * 景区视频
+     */
+    private View.OnClickListener videoOnClickListener  = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = getIntent();
+            intent.putExtra("brandid", String.valueOf(ecs_brand.brand_id));
+            intent.setClass(Tickets_Detail_Activity.this, VideoListActivity.class);
             startActivityForResult(intent, 0);
         }
     };

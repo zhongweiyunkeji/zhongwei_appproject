@@ -3,7 +3,9 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,7 +21,16 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONArray;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
+import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
+import com.cdhxqh.travel_ticket_app.config.Constants;
+import com.cdhxqh.travel_ticket_app.model.OrderGoods;
+import com.cdhxqh.travel_ticket_app.model.OrderModel;
+import com.cdhxqh.travel_ticket_app.ui.adapter.OrderThreeAdapter;
+import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -158,7 +169,32 @@ public class ReservationActivity extends BaseActivity{
         findViewById();
         getdate();
         initView();
+        SharedPreferences myShared = getSharedPreferences(Constants.USER_INFO, Context.MODE_PRIVATE);
+        HttpManager.getOrder(myShared.getString(Constants.SESSIONIDTRUE, ""), this, Constants.OTDER_LIST_URL, "before", 10 + "", 1 + "", handlerIn);
     }
+
+    private HttpRequestHandler<String> handlerIn = new HttpRequestHandler<String>() {
+        @Override
+        public void onSuccess(String data) {
+
+        }
+
+        @Override
+        public void onSuccess(String data, int totalPages, int currentPage) {
+
+        }
+
+        @Override
+        public void onFailure(String error) {
+            if(error.equals("false")) {
+                Intent intent = new Intent();
+                intent.putExtra("check", false);
+                intent.setClass(ReservationActivity.this, LoginActivity.class);
+                ReservationActivity.this.startActivity(intent);
+                ReservationActivity.this.finish();
+            }
+        }
+    };
 
     @Override
     protected void findViewById() {

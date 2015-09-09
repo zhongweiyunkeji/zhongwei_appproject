@@ -92,6 +92,10 @@
             android:label="@string/title_activity_start"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.activity.VideoListActivity"
+            android:label="@string/title_activity_start"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.HotelContentActivity"
             android:label="@string/title_activity_start"
             android:screenOrientation="portrait" />

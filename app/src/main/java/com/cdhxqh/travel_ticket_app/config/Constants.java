@@ -36,6 +36,8 @@ public class Constants {
     /**验证码密码接口**/
     public static final String PHONELINE_URL = BASE_URL+"ecsusers/doReset";
 
+    public static final String VIDEO_URL = BASE_URL+ "ecsbrand/vedios";
+
     /**获取游客中心**/
 
     public static final String USER_URL = BASE_URL+"ecsusers/info";

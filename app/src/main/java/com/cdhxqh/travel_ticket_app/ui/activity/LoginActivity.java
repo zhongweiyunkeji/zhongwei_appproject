@@ -84,6 +84,12 @@ public class LoginActivity extends BaseActivity {
         findViewById();
         initView();
 
+        if(getIntent() != null) {
+            if(!getIntent().getBooleanExtra("check", true)) {
+                MessageUtils.showErrorMessage(LoginActivity.this, "回话过期，请重新登录");
+            }
+        }
+
         SwitchButton sb = (SwitchButton) findViewById(R.id.wiperSwitch1);
         sb.setOnChangeListener(new OnChangeListener() {
 

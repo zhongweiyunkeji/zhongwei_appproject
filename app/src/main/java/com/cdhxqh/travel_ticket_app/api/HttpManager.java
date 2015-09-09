@@ -510,6 +510,52 @@ public class HttpManager {
      * 使用手机号获取验证码
      *
      * @param cxt
+     * @param handler 返回结果处理
+     */
+    public static void getVideo(final Context cxt, final String brandid, String showCount, String currentPage,
+                                final HttpRequestHandler<Integer> handler) {
+        RequestParams mapparams = new RequestParams();
+        AsyncHttpClient client = new AsyncHttpClient();
+        mapparams.put("brandid", brandid);
+        mapparams.put("showCount", showCount);
+        mapparams.put("currentPage", currentPage);
+
+        client.get(Constants.VIDEO_URL, mapparams, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String errcode = jsonObject.getString("errcode");
+                    if (Constants.REQUEST_SUCCESS.equals(errcode)) {
+                        SafeHandler.onSuccess(handler, 1);
+                        String result = jsonObject.getString("result");
+                        // ArrayList<SpotBookModel> spotBookModel = JsonUtils.parsingSpotBook(result);
+                        /*if (spotBookModel != null && spotBookModel.size() != 0) {
+                            SafeHandler.onSuccess(handler, spotBookModel);
+                        } else {
+                            SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+                        }*/
+                    } else if (Constants.LOGIN_TIMEOUT.equals(errcode)) {
+                        SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorLoginTimeOutFailure));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    SafeHandler.onFailure(handler, ErrorType.errorMessage(cxt, ErrorType.ErrorGetNotificationFailure));
+                }
+            }
+        });
+    }
+
+    /**
+     * 使用手机号获取验证码
+     *
+     * @param cxt
      * @param phoneNumber 手机号
      * @param handler     返回结果处理
      */
@@ -517,6 +563,7 @@ public class HttpManager {
                                     final HttpRequestHandler<Integer> handler) {
         Map<String, String> mapparams = new HashMap<String, String>();
         mapparams.put("mobilePhone", phoneNumber);
+
 
         requestOnceWithURLString(cxt, Constants.PHONEPASS_URL, mapparams, new HttpRequestHandler<String>() {
             @Override
@@ -586,6 +633,35 @@ public class HttpManager {
             @Override
             public void onFailure(String error) {
                 SafeHandler.onFailure(handler, error);
+            }
+        });
+    }
+
+    public static void getOrder(final String sessionId, final Context context, String url, String datenote, String showCount, String currentPage, final HttpRequestHandler<String> handler) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        client.addHeader("Cookie", "JSESSIONID=" + sessionId);  // 添加Header
+        params.put("datenote", datenote);
+        params.put("showCount", showCount);
+        params.put("currentPage", currentPage);
+        client.get(url, params, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                SafeHandler.onFailure(handler, ErrorType.errorMessage(context, ErrorType.ErrorGetNotificationFailure));
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    String errcode = jsonObject.getString("errcode");
+                    if ("ZWTICKET-GLOBAL-E-4".equals(errcode)) {
+                        SafeHandler.onFailure(handler, "false");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
