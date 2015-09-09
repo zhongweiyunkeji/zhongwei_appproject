@@ -2,6 +2,11 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +14,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -71,6 +77,10 @@ public class AroundPlayActivity extends BaseActivity {
     private HotelAdapter hotelAdapter;
 
     private ProgressDialog progressDialog;
+
+    Location location;
+
+    double[] gps = new double[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +168,7 @@ public class AroundPlayActivity extends BaseActivity {
         hotel.setLayoutManager(layoutManager);
         hotel.setItemAnimator(new DefaultItemAnimator());
 
-        boolean a = checkPhoneNet();
+        double[] a = checkPhoneNet();
 
         hotelAdapter = new HotelAdapter(this, img, a);
 
@@ -205,16 +215,37 @@ public class AroundPlayActivity extends BaseActivity {
         }
     }
 
-    private boolean checkPhoneNet(){
+    private double[] checkPhoneNet(){
 
-        TelephonyManager mTelephonyManager=(TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
-        int a = mTelephonyManager.getSimState();
-        if(mTelephonyManager.getSimState()==TelephonyManager.SIM_STATE_READY || mTelephonyManager.getSimState()==TelephonyManager.SIM_STATE_ABSENT) //SIM卡没有就绪
+        LocationManager mTelephonyManager=(LocationManager)getSystemService(LOCATION_SERVICE);
+        try
         {
-            return false;
-        }else{
-            return true;
+            WifiManager wifiManager=(WifiManager)getSystemService(Context.WIFI_SERVICE);
+            if(wifiManager.isWifiEnabled())
+            {
+                location = mTelephonyManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            }
         }
+        catch(Exception e)
+        {
+        }
+
+        double[] a = updateView(location);
+        return a;
+    }
+
+    public double[]  updateView(Location location)
+    {
+        StringBuffer buffer=new StringBuffer();
+        if(location==null)
+        {
+            gps[0] = 0.0;
+            gps[1] = 0.0;
+            return gps;
+        }
+        gps[1] = location.getLongitude();;
+        gps[0] = location.getLatitude();;
+        return gps;
     }
 
     /**
