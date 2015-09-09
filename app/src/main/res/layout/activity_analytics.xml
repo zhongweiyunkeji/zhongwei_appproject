@@ -33,10 +33,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:text="今日客流人数"
+                            android:text="目前入园人数"
                             android:textColor="@color/text_color_1"
                             android:layout_marginRight="10dp"
-                            android:textSize="19sp"/>
+                            android:textSize="18sp"/>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
                             android:text="7日客流人数"
                             android:textColor="@color/text_color_1"
                             android:layout_marginRight="10dp"
-                            android:textSize="19sp"/>
+                            android:textSize="18sp"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -122,46 +122,61 @@
                 </TableLayout>
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="@dimen/dimens_10"></View>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="营业时间客流量趋势图"
+                android:text="昨日客流量趋势图"
                 android:textColor="@color/text_color_1"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:textSize="19sp"/>
+                android:textSize="18sp"/>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/img13" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="@dimen/dimens_10"></View>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="热门景点客流量"
+                android:text="七日内热门景点客流量"
                 android:textColor="@color/text_color_1"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:textSize="19sp"/>
+                android:textSize="18sp"/>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/img14" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/list_line_x"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="@dimen/dimens_10"></View>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="周边景区客流量"
+                android:text="周边景区客流量对比"
                 android:textColor="@color/text_color_1"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:textSize="19sp"/>
+                android:textSize="18sp"/>
 
             <ImageView
                 android:layout_width="match_parent"
