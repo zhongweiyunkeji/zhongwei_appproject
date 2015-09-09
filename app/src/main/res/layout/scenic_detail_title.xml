@@ -27,7 +27,7 @@
             android:layout_centerVertical="true"
             android:text="标题"
             android:textColor="@color/white"
-            android:textSize="@dimen/font26"/>
+            android:textSize="@dimen/font24"/>
 
         <ImageView
             android:id="@+id/title_search_id"

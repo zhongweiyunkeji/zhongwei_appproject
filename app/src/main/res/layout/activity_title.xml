@@ -25,7 +25,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:textColor="@color/white"
-            android:textSize="@dimen/font26"
+            android:textSize="@dimen/font24"
             android:text="标题"/>
 
         <ImageView
