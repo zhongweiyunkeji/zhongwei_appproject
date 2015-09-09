@@ -41,11 +41,12 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
     int absent;
 
 
-    public HotelAdapter(Context paramContext, Map<String, String> imgs, boolean a) {
+    public HotelAdapter(Context paramContext, Map<String, String> imgs, double[] a) {
         img = imgs;
 
+        gps = a;
 
-        gps = Gps.getGps(paramContext);
+//        gps = Gps.getGps(paramContext);
 
         this.mContext = paramContext;
     }
@@ -68,7 +69,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         ImageLoader.getInstance().displayImage(img.get(hotelList.get(i).getHotelCode()), holder.hotelPic);
 
         if(absent != 1) {
-            if (hotelList.get(i).getLatitude() != null && hotelList.get(i).getLongitude() != null) {
+            if (hotelList.get(i).getLatitude() != null && hotelList.get(i).getLongitude() != null && gps[0] != 0.0 && gps[1]!= 0.0) {
                 double Latitude_a = Double.parseDouble(hotelList.get(i).getLatitude());
                 double Longitude_a = Double.parseDouble(hotelList.get(i).getLongitude());
                 double Latitude_b = gps[0];
@@ -79,7 +80,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
                 holder.hotelSpace.setText("距您" + db + "公里");
             }
         }else {
-            holder.hotelSpace.setText("获取不到您当前位置");
+            holder.hotelSpace.setVisibility(View.GONE);
         }
 
 
