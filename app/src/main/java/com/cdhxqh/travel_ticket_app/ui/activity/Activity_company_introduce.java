@@ -60,6 +60,7 @@ public class Activity_company_introduce extends BaseActivity{
     public void initView(){
         titleTextView.setText("公司介绍");
         seachImageView.setVisibility(View.GONE);
+        backImageView.setVisibility(View.VISIBLE);
         //返回至登录界面事件
         backImageView.setOnClickListener(backImageViewOnClickListener);
     }
