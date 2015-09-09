@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
@@ -30,6 +31,10 @@ public class InvoiceTitleActivity extends BaseActivity{
      */
     private ImageView seachImageView;
 
+    private EditText ticket;
+
+    private TableLayout person;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,8 @@ public class InvoiceTitleActivity extends BaseActivity{
     @Override
     protected void findViewById() {
         address = (TextView) findViewById(R.id.address);
+        ticket = (EditText) findViewById(R.id.ticket);
+        person = (TableLayout) findViewById(R.id.person);
 
         /**
          * 标题标签相关id
@@ -57,6 +64,9 @@ public class InvoiceTitleActivity extends BaseActivity{
         seachImageView.setVisibility(View.GONE);
         titleTextView.setText("发票抬头");
         address.setHint(R.string.ticket);
+
+        ticket.setVisibility(View.VISIBLE);
+        person.setVisibility(View.GONE);
         backImageView.setOnTouchListener(backImageViewOnTouchListener);
     }
 
