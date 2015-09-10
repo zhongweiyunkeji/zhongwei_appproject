@@ -102,10 +102,11 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
             holder.hotelName.setText(hotelList.get(i).getHotelName());
             holder.hotelAddress.setText(hotelList.get(i).getAddress());
             holder.hotelRate.setText(hotelList.get(i).getHotelStarRate() + " 星");
-            ImageLoader.getInstance().displayImage(hotelList.get(i).getHotelCode(), holder.hotelPic);
+            ImageLoader.getInstance().displayImage(img.get(hotelList.get(i).getHotelCode()), holder.hotelPic);
 
             if (absent != 1) {
                 if (hotelList.get(i).getLatitude() != null && hotelList.get(i).getLongitude() != null && gps[0] != 0.0 && gps[1] != 0.0) {
+                    holder.hotelSpace.setVisibility(View.VISIBLE);
                     double Latitude_a = Double.parseDouble(hotelList.get(i).getLatitude());
                     double Longitude_a = Double.parseDouble(hotelList.get(i).getLongitude());
                     double Latitude_b = gps[0];
@@ -131,7 +132,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
             });
         }else {
 
-            holder.hotelName.setText(video.get(i).getDescription());
+            holder.hotelName.setText(video.get(i).getDescription().trim());
             holder.hotelAddress.setText(video.get(i).getAddress());
             holder.hotelRate.setVisibility(View.GONE);
             ImageLoader.getInstance().displayImage(video.get(i).getImg(), holder.hotelPic);

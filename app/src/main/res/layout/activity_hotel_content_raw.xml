@@ -1,58 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/hotel_id"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    android:orientation="horizontal">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffffff"
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/roomPic"
-        android:layout_width="0dp"
-        android:layout_height="96dp"
-        android:paddingRight="10dp"
-        android:layout_weight="2" />
-
-    <LinearLayout
-        android:layout_width="0dp"
+    <TableLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical">
+        android:shrinkColumns="1"
+        android:stretchColumns="1">
 
-        <TextView
-            android:id="@+id/RoomTypeName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TableRow>
 
-        <TextView
-            android:id="@+id/Quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/roomPic"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center|left"
+                android:layout_marginLeft="10dp" />
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="4"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/RoomTypeName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="20"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/Quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:maxLength="35" />
+
 
                 <TextView
                     android:id="@+id/RoomSize"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:maxLength="35" />
 
                 <TextView
                     android:id="@+id/StandardOccupancy"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:maxLength="35" />
+
             </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:paddingRight="15dp"
+                android:src="@drawable/ic_tab_arrow_right" />
+
+        </TableRow>
+    </TableLayout>
 
 </LinearLayout>
