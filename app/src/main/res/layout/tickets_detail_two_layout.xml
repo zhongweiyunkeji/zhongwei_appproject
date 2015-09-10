@@ -187,7 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_list_view" />
+            android:src="@drawable/ic_look" />
     </RelativeLayout>
 
     <View
