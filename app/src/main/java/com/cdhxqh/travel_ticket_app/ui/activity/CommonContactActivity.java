@@ -138,7 +138,7 @@ public class CommonContactActivity extends BaseActivity {
         //设置标签页显示方式
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
-        titleTextView.setText("联系人");
+        titleTextView.setText("常用旅客信息");
         LinearLayoutManager layoutManager = new LinearLayoutManager(CommonContactActivity.this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);

@@ -58,7 +58,7 @@ public class Activity_company_introduce extends BaseActivity{
     };
 
     public void initView(){
-        titleTextView.setText("公司介绍");
+        titleTextView.setText("关于我们");
         seachImageView.setVisibility(View.GONE);
         backImageView.setVisibility(View.VISIBLE);
         //返回至登录界面事件
