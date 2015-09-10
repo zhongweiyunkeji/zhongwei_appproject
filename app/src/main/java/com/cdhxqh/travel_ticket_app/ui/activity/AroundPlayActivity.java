@@ -223,7 +223,7 @@ public class AroundPlayActivity extends BaseActivity {
             WifiManager wifiManager=(WifiManager)getSystemService(Context.WIFI_SERVICE);
             if(wifiManager.isWifiEnabled())
             {
-                location = mTelephonyManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    location = mTelephonyManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             }
         }
         catch(Exception e)
