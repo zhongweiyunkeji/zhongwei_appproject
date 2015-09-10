@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,6 +76,11 @@ public class LoginActivity extends BaseActivity {
      */
     private boolean type = false;
 
+    /**
+     * 返回按钮*
+     */
+    ImageView backImageView;
+
 
 
     @Override
@@ -132,6 +138,9 @@ public class LoginActivity extends BaseActivity {
         loginBtn = (Button) findViewById(R.id.login_btn_id);
         forgetPwd = (TextView) findViewById(R.id.TextViewPassWord);
         linearLayout_id = (LinearLayout) findViewById(R.id.linearLayout_id);
+        backImageView = (ImageView) findViewById(R.id.ticket_detail_back_id);
+
+
     }
 
     ;
@@ -141,7 +150,9 @@ public class LoginActivity extends BaseActivity {
      */
     protected void initView() {
         loginBtn.setOnClickListener(loginBtnOnClickListener);
+        backImageView.setOnClickListener(backImageViewOnClickListener);
 
+        backImageView.setOnTouchListener(backImageViewOnTouchListener);
 
         forgetPwd.setOnClickListener(forgetPwdOnClickListener);
         linearLayout_id.setOnClickListener(linearLayout_idOnClickListener);
@@ -186,7 +197,24 @@ public class LoginActivity extends BaseActivity {
         }
     };
 
+    private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
 
+    private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                v.setBackgroundColor(getResources().getColor(R.color.list_item_read));
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                v.setBackgroundColor(getResources().getColor(R.color.clarity));
+            }
+            return false;
+        }
+    };
     /**
      * 登录方法*
      */
