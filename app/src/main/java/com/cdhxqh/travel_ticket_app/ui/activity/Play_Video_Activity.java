@@ -157,12 +157,16 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
     protected void initView() {
         titleText.setText("景点在线直播");
         backImageView.setOnClickListener(backImageViewOnClickListener);
-//        fullScreen(true);
         mPreview.setOnTouchListener(mPreviewOnTouchListener);
 
         playButton.setOnClickListener(playButtonOnClickListener);
         playImageView.setOnClickListener(playButtonOnClickListener);
         audioButton.setOnClickListener(audioButtonOnClickListener);
+
+        RelativeLayout.LayoutParams svLp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                600);
+        svLp.addRule(RelativeLayout.CENTER_IN_PARENT);
+        mPreview.setLayoutParams(svLp);
 
 
     }
