@@ -6,41 +6,25 @@
 
     <include layout="@layout/activity_title"></include>
 
-
-    <TableLayout
+    <EditText
+        android:id="@+id/ticket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:visibility="gone">
-        <TableRow>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_gravity="center_vertical"
-                android:layout_height="wrap_content"
-                android:text="发票抬头"
-                android:textSize="18sp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"/>
-            <EditText
-                android:id="@+id/ticket"
-                android:layout_width="0dp"
-                android:layout_weight="6"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:background="@android:color/transparent"
-                android:hint="开票单位名或个人名"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"/>
-        </TableRow>
+        android:layout_gravity="center_vertical"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:background="@android:color/transparent"
+        android:hint="开票单位或个人名"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:visibility="gone"/>
+
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="@drawable/list_line_x"/>
-    </TableLayout>
 
     <TableLayout
         android:id="@+id/person"
