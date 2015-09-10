@@ -6,15 +6,41 @@
 
     <include layout="@layout/activity_title"></include>
 
-    <EditText
-        android:id="@+id/ticket"
+
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_gravity="center_vertical"
-        android:background="@android:color/transparent"
-        android:hint="请输入发票号"
-        android:layout_margin="20dp" />
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="gone">
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:text="发票抬头"
+                android:textSize="18sp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+            <EditText
+                android:id="@+id/ticket"
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:background="@android:color/transparent"
+                android:hint="开票单位名或个人名"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+        </TableRow>
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/list_line_x"/>
+    </TableLayout>
 
     <TableLayout
         android:id="@+id/person"
@@ -40,6 +66,7 @@
                 android:layout_weight="6"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@android:color/transparent"
                 android:hint="请输入姓名"
                 android:paddingTop="10dp"
@@ -66,6 +93,7 @@
                 android:layout_weight="6"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@android:color/transparent"
                 android:hint="请输入手机号"
                 android:paddingTop="10dp"
@@ -125,6 +153,7 @@
                 android:layout_weight="6"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:background="@android:color/transparent"
                 android:hint="不必重复填写省市区信息"
                 android:paddingTop="10dp"
