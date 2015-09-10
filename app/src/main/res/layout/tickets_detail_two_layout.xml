@@ -170,7 +170,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_hotel" />
+            android:src="@drawable/ic_look" />
 
         <TextView
             android:id="@+id/video_spot_text_id"
