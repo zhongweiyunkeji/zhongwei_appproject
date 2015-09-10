@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
+    android:background="@drawable/order_three_in_group_backgroundb"
     android:paddingBottom="10dp"
     tools:context="com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeInFragment">
 
