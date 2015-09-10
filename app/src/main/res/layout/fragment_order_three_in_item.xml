@@ -4,15 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FFFFFF"
-    android:paddingBottom="20dp"
+    android:paddingBottom="10dp"
     tools:context="com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeInFragment">
 
         <ImageView
             android:id="@+id/order_three_in_item_img"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_margin="10dp"
             android:layout_alignParentLeft="true"
             android:layout_width="90dp"
             android:layout_height="50dp"
@@ -20,7 +17,7 @@
             android:background="@drawable/not_image_bj"/>
 
         <TableLayout
-            android:layout_marginTop="20dp"
+            android:paddingTop="10dp"
             android:layout_toRightOf="@+id/order_three_in_item_img"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
@@ -94,7 +91,7 @@
         <!-- android:text="待出游"-->
         <TextView
             android:id="@+id/order_three_in_item_status"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
