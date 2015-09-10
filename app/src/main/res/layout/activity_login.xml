@@ -5,10 +5,9 @@
     android:background="@color/bj_color"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:gravity="center"
         android:background="@drawable/login_bg">
         <ImageView
             android:id="@+id/top_image_view_id"
@@ -16,7 +15,14 @@
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:src="@drawable/login_font" />
-    </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ticket_detail_back_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_menu_back2" />
+    </RelativeLayout>
 
 
     <LinearLayout
