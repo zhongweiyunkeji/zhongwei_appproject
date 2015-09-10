@@ -68,6 +68,8 @@ public class InvoiceTitleActivity extends BaseActivity{
         ticket.setVisibility(View.VISIBLE);
         person.setVisibility(View.GONE);
         backImageView.setOnTouchListener(backImageViewOnTouchListener);
+        //返回至登录界面事件
+        backImageView.setOnClickListener(backImageViewOnClickListener);
     }
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
