@@ -56,6 +56,8 @@ public class VideoListActivity extends BaseActivity {
 
     private ProgressDialog progressDialog;
 
+    String brandid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +92,7 @@ public class VideoListActivity extends BaseActivity {
         //设置标签页显示方式
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
-        String brandid = getIntent().getStringExtra("brandid");
+        brandid = getIntent().getStringExtra("brandid");
         String brandName = getIntent().getStringExtra("brandName");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -138,7 +140,11 @@ public class VideoListActivity extends BaseActivity {
         if (NetWorkHelper.isNetAvailable(this)) {
             swipeRefreshLayout.setRefreshing(false);
             createProgressDialog();
-            HttpManager.getEcs_Brands_list(VideoListActivity.this, "", showCount + "", currentPage + "", true, handerle);
+            HttpManager.getVideo(this,
+                    brandid,
+                    String.valueOf(showCount),
+                    String.valueOf(currentPage),
+                    handerle);
         } else {
             MessageUtils.showErrorMessage(this, getResources().getString(R.string.error_network_exception));
         }
@@ -162,13 +168,16 @@ public class VideoListActivity extends BaseActivity {
     HttpRequestHandler handerle = new HttpRequestHandler<Integer>() {
         @Override
         public void onSuccess(Integer data) {
+            currentPage++;
+//            hotelAdapter.update(data);
             progressDialog.dismiss();
         }
 
         @Override
         public void onSuccess(Integer data, int totalPages, int currentPage) {
-            Log.i(TAG, "22222");
+            VideoListActivity.this.currentPage++;
             progressDialog.dismiss();
+            Log.i(TAG, "222222");
         }
 
         @Override
