@@ -43,7 +43,7 @@ public class OrderModel implements Parcelable {
     }
 
     public String getOrderSn() {
-        return "订单号:"+orderSn;
+        return "订单号："+orderSn;
     }
 
     public void setOrderSn(String orderSn) {

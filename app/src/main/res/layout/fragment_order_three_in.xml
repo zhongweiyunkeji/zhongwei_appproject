@@ -2,7 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeInFragment">
+    tools:context="com.cdhxqh.travel_ticket_app.ui.fragment.OrderThreeInFragment"
+    android:paddingLeft="@dimen/dimens_10"
+    android:paddingRight="@dimen/dimens_10">
 
     <!--<android.support.v4.widget.SwipeRefreshLayout-->
     <!--android:id="@+id/swipe_container"-->

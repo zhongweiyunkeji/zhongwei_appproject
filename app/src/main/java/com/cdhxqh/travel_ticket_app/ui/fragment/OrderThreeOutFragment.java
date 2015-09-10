@@ -128,7 +128,7 @@ public class OrderThreeOutFragment extends BaseFragment {
             List<OrderModel> moduleList = new ArrayList<OrderModel>(0);
             Map<String, List<OrderGoods>> itemMap = new HashMap<String, List<OrderGoods>>(0);
             for(int i=0; i<10; i++){
-                String sn = "订单号"+i+" :PM-LY0123456KKK";
+                String sn = "订单号："+i+"PM-LY0123456KKK";
                 OrderModel module = new OrderModel(sn, 0, 0, 0, "已支付", "2015-08-10 11:30", 500.0D);
                 moduleList.add(module);
 
