@@ -3,8 +3,6 @@
     android:id="@+id/content_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/dimens_5"
-    android:layout_marginRight="@dimen/dimens_5"
     android:padding="10dp">
 
     <ImageView
@@ -76,6 +74,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/dimens_5"
         android:src="@drawable/ic_list_view" />
 </RelativeLayout>
