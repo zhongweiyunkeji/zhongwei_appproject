@@ -42,7 +42,7 @@ public class VideoListActivity extends BaseActivity {
     private ImageView seachImageView;
 
 
-    private static int showCount = 5;
+    private static int showCount = 10;
     private static int currentPage = 1;
 
     /**

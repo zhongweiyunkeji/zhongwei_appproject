@@ -142,6 +142,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
                     Intent intent = new Intent();
                     intent.putExtra("brand_name", video.get(i).getDescription());
                     intent.putExtra("PATH", video.get(i).getUrl());
+                    intent.putExtra("PATH", video.get(i).getRemark());
                     intent.setClass(mContext, Play_Video_Activity.class);
                     mContext.startActivity(intent);
                 }

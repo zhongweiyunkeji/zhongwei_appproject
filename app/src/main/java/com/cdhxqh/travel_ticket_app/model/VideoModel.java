@@ -12,6 +12,15 @@ public class VideoModel {
     private String url;
     private String longitude;
     private String latitude;
+    private String remark;
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public String getId() {
         return id;
