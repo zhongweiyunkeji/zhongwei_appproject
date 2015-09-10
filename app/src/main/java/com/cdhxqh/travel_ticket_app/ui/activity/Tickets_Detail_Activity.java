@@ -233,6 +233,7 @@ public class Tickets_Detail_Activity extends BaseActivity {
         public void onClick(View v) {
             Intent intent = getIntent();
             intent.putExtra("brandid", String.valueOf(ecs_brand.brand_id));
+            intent.putExtra("brandName", ecs_brand.brand_name);
             intent.setClass(Tickets_Detail_Activity.this, VideoListActivity.class);
             startActivityForResult(intent, 0);
         }

@@ -15,6 +15,7 @@ import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.ui.activity.Play_Video_Activity;
 import com.cdhxqh.travel_ticket_app.ui.activity.ScenicMapActivity;
 import com.cdhxqh.travel_ticket_app.ui.activity.Tickets_Detail_Activity;
+import com.cdhxqh.travel_ticket_app.ui.activity.VideoListActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -102,9 +103,10 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
                 public void onClick(View v) {
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
-                    bundle.putString("brand_name", localEcs_brand.brand_name);
+                    bundle.putString("brandid", String.valueOf(localEcs_brand.brand_id));
+                    bundle.putString("brandName", localEcs_brand.brand_name);
                     intent.putExtras(bundle);
-                    intent.setClass(mContext, Play_Video_Activity.class);
+                    intent.setClass(mContext, VideoListActivity.class);
                     mContext.startActivity(intent);
                 }
             });

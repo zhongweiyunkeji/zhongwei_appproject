@@ -2,6 +2,7 @@ package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
 import com.cdhxqh.travel_ticket_app.ui.adapter.HotelAdapter;
 import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
+import com.cdhxqh.travel_ticket_app.utils.NetWorkHelper;
 import com.cdhxqh.travel_ticket_app.utils.TimeCountUtil;
 
 /**
@@ -36,7 +38,6 @@ public class VideoListActivity extends BaseActivity {
      */
     private ImageView seachImageView;
 
-    private ProgressDialog progressDialog;
 
     private static int showCount = 5;
     private static int currentPage = 1;
@@ -51,6 +52,10 @@ public class VideoListActivity extends BaseActivity {
      */
     private HotelAdapter hotelAdapter;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,8 @@ public class VideoListActivity extends BaseActivity {
         setContentView(R.layout.activity_around_play);
         findViewById();
         initView();
+
+        requestEcsBrands(true);
     }
 
     @Override
@@ -69,6 +76,7 @@ public class VideoListActivity extends BaseActivity {
         titleTextView = (TextView) findViewById(R.id.title_text_id);
         seachImageView = (ImageView) findViewById(R.id.title_search_id);
         hotel = (RecyclerView) findViewById(R.id.hotel);
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
     }
 
     @Override
@@ -83,6 +91,7 @@ public class VideoListActivity extends BaseActivity {
         backImageView.setVisibility(View.VISIBLE);
         seachImageView.setVisibility(View.GONE);
         String brandid = getIntent().getStringExtra("brandid");
+        String brandName = getIntent().getStringExtra("brandName");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -92,10 +101,18 @@ public class VideoListActivity extends BaseActivity {
         hotel.setLayoutManager(layoutManager);
         hotel.setItemAnimator(new DefaultItemAnimator());
 
+        hotelAdapter = new HotelAdapter(this, brandName);
 
-
+        hotel.setAdapter(hotelAdapter);
 
         getVideo(brandid);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                requestEcsBrands(true);
+            }
+        });
     }
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
@@ -110,6 +127,23 @@ public class VideoListActivity extends BaseActivity {
         }
     };
 
+    /**
+     * 创建progressDialog*
+     */
+    private void createProgressDialog() {
+        progressDialog = ProgressDialog.show(VideoListActivity.this, null, getString(R.string.please_loading_hint), true, true);
+    }
+
+    private void requestEcsBrands(boolean refresh) {
+        if (NetWorkHelper.isNetAvailable(this)) {
+            swipeRefreshLayout.setRefreshing(false);
+            createProgressDialog();
+            HttpManager.getEcs_Brands_list(VideoListActivity.this, "", showCount + "", currentPage + "", true, handerle);
+        } else {
+            MessageUtils.showErrorMessage(this, getResources().getString(R.string.error_network_exception));
+        }
+    }
+
 
     private void getVideo (String brandid) {
         /**
@@ -122,24 +156,27 @@ public class VideoListActivity extends BaseActivity {
                 brandid,
                 String.valueOf(showCount),
                 String.valueOf(currentPage),
-                new HttpRequestHandler<Integer>() {
-                    @Override
-                    public void onSuccess(Integer data) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(Integer data, int totalPages, int currentPage) {
-                        Log.i(TAG, "22222");
-                    }
-
-                    @Override
-                    public void onFailure(String error) {
-                        MessageUtils.showErrorMessage(VideoListActivity.this, error);
-                        progressDialog.dismiss();
-                    }
-                });
+                handerle);
     }
+
+    HttpRequestHandler handerle = new HttpRequestHandler<Integer>() {
+        @Override
+        public void onSuccess(Integer data) {
+            progressDialog.dismiss();
+        }
+
+        @Override
+        public void onSuccess(Integer data, int totalPages, int currentPage) {
+            Log.i(TAG, "22222");
+            progressDialog.dismiss();
+        }
+
+        @Override
+        public void onFailure(String error) {
+            MessageUtils.showErrorMessage(VideoListActivity.this, error);
+            progressDialog.dismiss();
+        }
+    };
 
     /**
      * 返回事件的监听*

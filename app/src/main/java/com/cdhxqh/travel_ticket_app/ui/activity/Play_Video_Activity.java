@@ -121,6 +121,7 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
 
     private void getData() {
         title = getIntent().getExtras().getString("brand_name");
+        path = getIntent().getStringExtra("PATH");
         // 开启旋转传感器
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 
@@ -317,7 +318,6 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
         doCleanUp();
         try {
 
-            path = Constants.video_play_url;
             if (path == "") {
                 // Tell the user to provide a media file URL.
                 Toast.makeText(Play_Video_Activity.this, "Please edit MediaPlayerDemo_Video Activity," + " and set the path variable to your media file URL.", Toast.LENGTH_LONG).show();
