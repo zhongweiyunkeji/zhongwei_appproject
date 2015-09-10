@@ -17,7 +17,10 @@ import android.widget.TextView;
 
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.model.hotel.HotelModel;
+import com.cdhxqh.travel_ticket_app.ui.activity.AroundPlayActivity;
 import com.cdhxqh.travel_ticket_app.ui.activity.HotelContentActivity;
+import com.cdhxqh.travel_ticket_app.ui.activity.Tickets_Detail_Activity;
+import com.cdhxqh.travel_ticket_app.ui.activity.VideoListActivity;
 import com.cdhxqh.travel_ticket_app.ui.widget.hotelWineShop.utils.Gps;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -39,6 +42,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
     private static final double EARTH_RADIUS = 6378137.0;
     Map<String, String> img = new HashMap<String, String>();
     int absent;
+    String brindNames;
 
 
     public HotelAdapter(Context paramContext, Map<String, String> imgs, double[] a) {
@@ -48,6 +52,11 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
 
 //        gps = Gps.getGps(paramContext);
 
+        this.mContext = paramContext;
+    }
+
+    public HotelAdapter(Context paramContext, String brindName) {
+        brindNames = brindName;
         this.mContext = paramContext;
     }
 
@@ -63,36 +72,50 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int i) {
-        holder.hotelName.setText(hotelList.get(i).getHotelName());
-        holder.hotelAddress.setText(hotelList.get(i).getAddress());
-        holder.hotelRate.setText(hotelList.get(i).getHotelStarRate() + " 星");
-        ImageLoader.getInstance().displayImage(img.get(hotelList.get(i).getHotelCode()), holder.hotelPic);
+        if (mContext instanceof AroundPlayActivity) {
+            holder.hotelName.setText(hotelList.get(i).getHotelName());
+            holder.hotelAddress.setText(hotelList.get(i).getAddress());
+            holder.hotelRate.setText(hotelList.get(i).getHotelStarRate() + " 星");
+            ImageLoader.getInstance().displayImage(img.get(hotelList.get(i).getHotelCode()), holder.hotelPic);
 
-        if(absent != 1) {
-            if (hotelList.get(i).getLatitude() != null && hotelList.get(i).getLongitude() != null && gps[0] != 0.0 && gps[1]!= 0.0) {
-                double Latitude_a = Double.parseDouble(hotelList.get(i).getLatitude());
-                double Longitude_a = Double.parseDouble(hotelList.get(i).getLongitude());
-                double Latitude_b = gps[0];
-                double Longitude_b = gps[1];
-                double a = getDistance(Latitude_a, Longitude_a, Latitude_b, Longitude_b);
-                DecimalFormat df = new DecimalFormat("0.00");
-                String db = df.format(a / 1000);
-                holder.hotelSpace.setText("距您" + db + "公里");
+            if (absent != 1) {
+                if (hotelList.get(i).getLatitude() != null && hotelList.get(i).getLongitude() != null && gps[0] != 0.0 && gps[1] != 0.0) {
+                    double Latitude_a = Double.parseDouble(hotelList.get(i).getLatitude());
+                    double Longitude_a = Double.parseDouble(hotelList.get(i).getLongitude());
+                    double Latitude_b = gps[0];
+                    double Longitude_b = gps[1];
+                    double a = getDistance(Latitude_a, Longitude_a, Latitude_b, Longitude_b);
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    String db = df.format(a / 1000);
+                    holder.hotelSpace.setText("距您" + db + "公里");
+                }
+            } else {
+                holder.hotelSpace.setVisibility(View.GONE);
             }
-        }else {
-            holder.hotelSpace.setVisibility(View.GONE);
+
+
+            holder.hotel_id.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra("hotelCode", hotelList.get(i).getHotelCode());
+                    intent.setClass(mContext, HotelContentActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
+        }else if(mContext instanceof VideoListActivity){
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra("brand_name", brindNames);
+                    intent.putExtra("PATH", "A");
+                    intent.setClass(mContext, Tickets_Detail_Activity.class);
+                    mContext.startActivity(intent);
+                }
+            });
         }
-
-
-        holder.hotel_id.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra("hotelCode", hotelList.get(i).getHotelCode());
-                intent.setClass(mContext, HotelContentActivity.class);
-                mContext.startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -121,18 +144,18 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         private TextView hotelAddress;
 
         /**
-         *酒店星级
+         * 酒店星级
          */
         private TextView hotelRate;
 
         /**
-         *酒店距离
+         * 酒店距离
          */
         private TextView hotelSpace;
 
         public ViewHolder(View view) {
             super(view);
-            hotelPic = (ImageView)view.findViewById(R.id.hotelPic);
+            hotelPic = (ImageView) view.findViewById(R.id.hotelPic);
             hotelName = (TextView) view.findViewById(R.id.hotelName);
             hotelAddress = (TextView) view.findViewById(R.id.hotelAddress);
             hotelRate = (TextView) view.findViewById(R.id.hotelRate);
@@ -161,6 +184,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         s = Math.round(s * 10000) / 10000;
         return s;
     }
+
     private static double rad(double d) {
         return d * Math.PI / 180.0;
     }
