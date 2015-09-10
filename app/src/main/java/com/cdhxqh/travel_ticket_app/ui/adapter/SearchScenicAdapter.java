@@ -106,7 +106,7 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
                     bundle.putString("brandid", String.valueOf(localEcs_brand.brand_id));
                     bundle.putString("brandName", localEcs_brand.brand_name);
                     intent.putExtras(bundle);
-                    intent.setClass(mContext, VideoListActivity.class);
+                    intent.setClass(mContext, Play_Video_Activity.class);
                     mContext.startActivity(intent);
                 }
             });

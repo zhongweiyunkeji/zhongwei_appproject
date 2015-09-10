@@ -316,6 +316,7 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
 
     private void playVideo(Integer Media) {
         doCleanUp();
+        path = Constants.video_play_url;
         try {
 
             if (path == "") {
