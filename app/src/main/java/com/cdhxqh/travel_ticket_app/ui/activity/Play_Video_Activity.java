@@ -155,7 +155,7 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
 
     @Override
     protected void initView() {
-        titleText.setText(title);
+        titleText.setText("景点在线直播");
         backImageView.setOnClickListener(backImageViewOnClickListener);
 //        fullScreen(true);
         mPreview.setOnTouchListener(mPreviewOnTouchListener);
@@ -316,7 +316,6 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
 
     private void playVideo(Integer Media) {
         doCleanUp();
-        path = Constants.video_play_url;
         try {
 
             if (path == "") {

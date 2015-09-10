@@ -16,9 +16,12 @@ import android.widget.TextView;
 
 
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
+import com.cdhxqh.travel_ticket_app.model.VideoModel;
 import com.cdhxqh.travel_ticket_app.model.hotel.HotelModel;
 import com.cdhxqh.travel_ticket_app.ui.activity.AroundPlayActivity;
 import com.cdhxqh.travel_ticket_app.ui.activity.HotelContentActivity;
+import com.cdhxqh.travel_ticket_app.ui.activity.Play_Video_Activity;
 import com.cdhxqh.travel_ticket_app.ui.activity.Tickets_Detail_Activity;
 import com.cdhxqh.travel_ticket_app.ui.activity.VideoListActivity;
 import com.cdhxqh.travel_ticket_app.ui.widget.hotelWineShop.utils.Gps;
@@ -43,6 +46,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
     Map<String, String> img = new HashMap<String, String>();
     int absent;
     String brindNames;
+    ArrayList<VideoModel> video = new ArrayList<VideoModel>();
 
 
     public HotelAdapter(Context paramContext, Map<String, String> imgs, double[] a) {
@@ -60,12 +64,34 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         this.mContext = paramContext;
     }
 
-    public void update(ArrayList<HotelModel> hotel) {
-        hotelList = hotel;
+    public void updates(ArrayList<HotelModel> hotels) {
+        hotelList = hotels;
     }
 
+    public void update(ArrayList<VideoModel> videos) {
+        video = videos;
+    }
+
+//    public void update(ArrayList<Ecs_brand> ecs_brands, int a) {
+//        for (int i = ecs_brands.size()-1; i >= 0; i--) {
+//            Ecs_brand obj = ecs_brands.get(i);
+//            boolean exist = false;
+//            for (int j = list.size()-1; j >= 0; j--) {
+//                if (list.get(j).brand_id == obj.brand_id) {
+//                    exist = true;
+//                    break;
+//                }
+//            }
+//            if (exist) continue;
+//            list.add(0, obj);
+//        }
+//        ecs_brands = list;
+//
+//        notifyDataSetChanged();
+//    }
+
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, final int i) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_type_of_hotel_row, parent, false);
         return new ViewHolder(v);
     }
@@ -76,7 +102,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
             holder.hotelName.setText(hotelList.get(i).getHotelName());
             holder.hotelAddress.setText(hotelList.get(i).getAddress());
             holder.hotelRate.setText(hotelList.get(i).getHotelStarRate() + " 星");
-            ImageLoader.getInstance().displayImage(img.get(hotelList.get(i).getHotelCode()), holder.hotelPic);
+            ImageLoader.getInstance().displayImage(hotelList.get(i).getHotelCode(), holder.hotelPic);
 
             if (absent != 1) {
                 if (hotelList.get(i).getLatitude() != null && hotelList.get(i).getLongitude() != null && gps[0] != 0.0 && gps[1] != 0.0) {
@@ -103,15 +129,20 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
                     mContext.startActivity(intent);
                 }
             });
-        }else if(mContext instanceof VideoListActivity){
+        }else {
+
+            holder.hotelName.setText(video.get(i).getDescription());
+            holder.hotelAddress.setText(video.get(i).getAddress());
+            holder.hotelRate.setVisibility(View.GONE);
+            ImageLoader.getInstance().displayImage(video.get(i).getImg(), holder.hotelPic);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.putExtra("brand_name", brindNames);
-                    intent.putExtra("PATH", "A");
-                    intent.setClass(mContext, Tickets_Detail_Activity.class);
+                    intent.putExtra("brand_name", video.get(i).getDescription());
+                    intent.putExtra("PATH", video.get(i).getUrl());
+                    intent.setClass(mContext, Play_Video_Activity.class);
                     mContext.startActivity(intent);
                 }
             });
@@ -120,7 +151,13 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return hotelList.size();
+        int a = 0;
+        if(video.size() != 0) {
+             a = video.size();
+        }else  {
+            a = hotelList.size();
+        }
+        return a;
     }
 
 

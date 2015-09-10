@@ -13,6 +13,7 @@ import com.cdhxqh.travel_ticket_app.model.GoodsList;
 import com.cdhxqh.travel_ticket_app.model.OrderModel;
 import com.cdhxqh.travel_ticket_app.model.PersistenceHelper;
 import com.cdhxqh.travel_ticket_app.model.SpotBookModel;
+import com.cdhxqh.travel_ticket_app.model.VideoModel;
 import com.cdhxqh.travel_ticket_app.ui.activity.Listen_ZhongWei_Activity;
 import com.cdhxqh.travel_ticket_app.utils.JsonUtils;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
@@ -23,6 +24,7 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -513,7 +515,7 @@ public class HttpManager {
      * @param handler 返回结果处理
      */
     public static void getVideo(final Context cxt, final String brandid, String showCount, String currentPage,
-                                final HttpRequestHandler<Integer> handler) {
+                                final HttpRequestHandler<ArrayList<VideoModel>> handler) {
         RequestParams mapparams = new RequestParams();
         AsyncHttpClient client = new AsyncHttpClient();
         mapparams.put("brandid", brandid);
@@ -533,8 +535,14 @@ public class HttpManager {
                     JSONObject jsonObject = new JSONObject(responseString);
                     String errcode = jsonObject.getString("errcode");
                     if (Constants.REQUEST_SUCCESS.equals(errcode)) {
-                        SafeHandler.onSuccess(handler, 1);
+
                         String result = jsonObject.getString("result");
+                        JSONObject jsonObjects = new JSONObject(result);
+                        ArrayList<VideoModel> videoModel = JsonUtils.getVideoList(jsonObjects);
+
+                        String currentPage = jsonObjects.getString("currentPage");
+                        String totalPage = jsonObjects.getString("totalPage");
+                        SafeHandler.onSuccess(handler, videoModel, Integer.parseInt(totalPage), Integer.parseInt(currentPage));
                         // ArrayList<SpotBookModel> spotBookModel = JsonUtils.parsingSpotBook(result);
                         /*if (spotBookModel != null && spotBookModel.size() != 0) {
                             SafeHandler.onSuccess(handler, spotBookModel);

@@ -266,7 +266,7 @@ public class AroundPlayActivity extends BaseActivity {
 //            String[] hotel = SplitString.getHotels(a);
             hotelModelArrayList = XMLSplit.xmlSplit(a);
             progressDialog.dismiss();
-            hotelAdapter.update(hotelModelArrayList);
+            hotelAdapter.updates(hotelModelArrayList);
             hotelAdapter.dataChanged();
             super.handleMessage(msg);
         }

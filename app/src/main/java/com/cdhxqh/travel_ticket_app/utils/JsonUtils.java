@@ -12,6 +12,7 @@ import com.cdhxqh.travel_ticket_app.model.Ecs_brand;
 import com.cdhxqh.travel_ticket_app.model.GoodsList;
 import com.cdhxqh.travel_ticket_app.model.PersistenceHelper;
 import com.cdhxqh.travel_ticket_app.model.SpotBookModel;
+import com.cdhxqh.travel_ticket_app.model.VideoModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,6 +85,8 @@ public class JsonUtils {
         }
     }
 
+
+
     /**
      * 创建订单*
      */
@@ -100,6 +103,38 @@ public class JsonUtils {
             return null;
         }
         return categoryModel;
+    }
+
+    /**
+     * 创建订单*
+     */
+    public static ArrayList<VideoModel> getVideoList(JSONObject data) {
+
+        ArrayList<VideoModel> videoModel = null;
+        try {
+
+            JSONArray list = data.getJSONArray("videolist");
+
+            videoModel = new ArrayList<VideoModel>();
+            for(int i = 0; i < list.length(); i++) {
+                JSONObject video = list.getJSONObject(i);
+                VideoModel videoModel1 = new VideoModel();
+                videoModel1.setId(video.getString("id"));
+                videoModel1.setAddress(video.getString("address"));
+                videoModel1.setDescription(video.getString("description"));
+                videoModel1.setImg(video.getString("img"));
+                videoModel1.setLongitude(video.getString("longitude"));
+                videoModel1.setLatitude(video.getString("latitude"));
+                videoModel1.setBrand_name(video.getString("brand_name"));
+                videoModel1.setUrl(video.getString("url"));
+
+                videoModel.add(videoModel1);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return videoModel;
     }
 
     /**

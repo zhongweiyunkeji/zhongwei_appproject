@@ -15,11 +15,14 @@ import android.widget.TextView;
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.api.HttpManager;
 import com.cdhxqh.travel_ticket_app.api.HttpRequestHandler;
+import com.cdhxqh.travel_ticket_app.model.VideoModel;
 import com.cdhxqh.travel_ticket_app.ui.adapter.HotelAdapter;
 import com.cdhxqh.travel_ticket_app.ui.widget.ItemDivider;
 import com.cdhxqh.travel_ticket_app.utils.MessageUtils;
 import com.cdhxqh.travel_ticket_app.utils.NetWorkHelper;
 import com.cdhxqh.travel_ticket_app.utils.TimeCountUtil;
+
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2015/9/9.
@@ -66,7 +69,7 @@ public class VideoListActivity extends BaseActivity {
         findViewById();
         initView();
 
-        requestEcsBrands(true);
+//        requestEcsBrands(true);
     }
 
     @Override
@@ -78,11 +81,12 @@ public class VideoListActivity extends BaseActivity {
         titleTextView = (TextView) findViewById(R.id.title_text_id);
         seachImageView = (ImageView) findViewById(R.id.title_search_id);
         hotel = (RecyclerView) findViewById(R.id.hotel);
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
+//        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
     }
 
     @Override
     protected void initView() {
+//        swipeRefreshLayout.setVisibility(View.VISIBLE);
         backImageView.setOnTouchListener(backImageViewOnTouchListener);
         //返回至登录界面事件
         backImageView.setOnClickListener(backImageViewOnClickListener);
@@ -106,15 +110,13 @@ public class VideoListActivity extends BaseActivity {
         hotelAdapter = new HotelAdapter(this, brandName);
 
         hotel.setAdapter(hotelAdapter);
-
         getVideo(brandid);
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                requestEcsBrands(true);
-            }
-        });
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                requestEcsBrands(true);
+//            }
+//        });
     }
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
@@ -155,8 +157,7 @@ public class VideoListActivity extends BaseActivity {
         /**
          * 加载中
          */
-        progressDialog = ProgressDialog.show(VideoListActivity.this, null,
-                getString(R.string.loading), true, true);
+        progressDialog = ProgressDialog.show(VideoListActivity.this, null, getString(R.string.please_loading_hint), true, true);
 
         HttpManager.getVideo(this,
                 brandid,
@@ -165,18 +166,20 @@ public class VideoListActivity extends BaseActivity {
                 handerle);
     }
 
-    HttpRequestHandler handerle = new HttpRequestHandler<Integer>() {
+    HttpRequestHandler handerle = new HttpRequestHandler<ArrayList<VideoModel>>() {
         @Override
-        public void onSuccess(Integer data) {
+        public void onSuccess(ArrayList<VideoModel> data) {
             currentPage++;
 //            hotelAdapter.update(data);
             progressDialog.dismiss();
         }
 
         @Override
-        public void onSuccess(Integer data, int totalPages, int currentPage) {
+        public void onSuccess(ArrayList<VideoModel> data, int totalPages, int currentPage) {
             VideoListActivity.this.currentPage++;
             progressDialog.dismiss();
+            hotelAdapter.update(data);
+            hotelAdapter.dataChanged();
             Log.i(TAG, "222222");
         }
 
