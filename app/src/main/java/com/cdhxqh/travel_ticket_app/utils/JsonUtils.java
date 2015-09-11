@@ -127,6 +127,7 @@ public class JsonUtils {
                 videoModel1.setLatitude(video.getString("latitude"));
                 videoModel1.setBrand_name(video.getString("brand_name"));
                 videoModel1.setUrl(video.getString("url"));
+                videoModel1.setRemark(video.getString("remark"));
 
                 videoModel.add(videoModel1);
             }

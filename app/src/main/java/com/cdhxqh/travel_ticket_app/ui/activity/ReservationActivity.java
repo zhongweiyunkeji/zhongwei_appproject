@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -187,11 +188,19 @@ public class ReservationActivity extends BaseActivity{
         @Override
         public void onFailure(String error) {
             if(error.equals("false")) {
-                Intent intent = new Intent();
-                intent.putExtra("check", false);
-                intent.setClass(ReservationActivity.this, LoginActivity.class);
-                ReservationActivity.this.startActivity(intent);
-                ReservationActivity.this.finish();
+                AlertDialog a = new  AlertDialog.Builder(ReservationActivity.this).setTitle("提示").setMessage("您尚未登录，请先登录再购票！").
+                setNegativeButton("确定", new DialogInterface.OnClickListener()  //设置一个“取消”button
+                {
+                    public void onClick(DialogInterface d, int which) {
+                        Intent intent = new Intent();
+                        intent.putExtra("check", false);
+                        intent.setClass(ReservationActivity.this, LoginActivity.class);
+                        ReservationActivity.this.startActivity(intent);
+                        ReservationActivity.this.finish();
+                    }
+                }).show();
+
+
             }
         }
     };

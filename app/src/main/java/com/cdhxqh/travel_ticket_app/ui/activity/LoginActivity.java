@@ -92,7 +92,7 @@ public class LoginActivity extends BaseActivity {
 
         if(getIntent() != null) {
             if(!getIntent().getBooleanExtra("check", true)) {
-                MessageUtils.showErrorMessage(LoginActivity.this, "回话过期，请重新登录");
+
             }
         }
 
