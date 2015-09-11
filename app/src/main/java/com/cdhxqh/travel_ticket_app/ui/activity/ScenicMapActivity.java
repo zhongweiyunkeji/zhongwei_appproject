@@ -146,6 +146,7 @@ public class ScenicMapActivity extends BaseActivity {
         menuTextView = (ImageView) findViewById(R.id.title_search_id);
         //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.bmapView);
+
     }
 
     @Override
@@ -180,7 +181,7 @@ public class ScenicMapActivity extends BaseActivity {
 
         mBaiduMap = mMapView.getMap();
         initLocation();
-
+        mMapView.removeViewAt(1); //去掉听中卫地图左下角图标
 
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {// 注册覆盖物监听事件
             public boolean onMarkerClick(final Marker marker) {
