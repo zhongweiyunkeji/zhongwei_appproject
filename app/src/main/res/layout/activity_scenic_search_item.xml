@@ -16,13 +16,35 @@
 
         <TableRow>
 
-            <ImageView
-                android:id="@+id/scenic_item_left"
+            <RelativeLayout
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                android:layout_gravity="center|left"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/not_image_bj" />
+                android:layout_marginLeft="10dp">
+                <!-- 景区图片 -->
+                <ImageView
+                    android:id="@+id/scenic_item_left"
+                    android:visibility="gone"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center|left"
+                    android:src="@drawable/not_image_bj" />
+                <!--  听中卫  -->
+                <ImageView
+                    android:id="@+id/listen_icon"
+                    android:visibility="gone"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_play3"/>
+                <!--  看中卫  -->
+                <ImageView
+                    android:id="@+id/look_icon"
+                    android:visibility="gone"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_look_a"/>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
