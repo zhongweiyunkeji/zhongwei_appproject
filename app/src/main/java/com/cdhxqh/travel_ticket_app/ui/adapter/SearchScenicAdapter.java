@@ -74,10 +74,13 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
                 }
             });
 
-        } else if (1001 == mark) { // 地图
+        } else if (1001 == mark) { // 听中卫(地图)
             ImageLoader.getInstance().displayImage(localEcs_brand.brand_logo, paramViewHolder.leftImageView);
             paramViewHolder.titleTextView.setText(localEcs_brand.brand_name);
             paramViewHolder.detailTextView.setText(localEcs_brand.brand_desc);
+            if(localEcs_brand.showIcon){
+                paramViewHolder.listen_icon.setVisibility(View.VISIBLE);
+            }
 
             paramViewHolder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -93,10 +96,13 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
                     mContext.startActivity(intent);
                 }
             });
-        } else if (1002 == mark) { //看中卫
+        } else if (1002 == mark) { // 看中卫
             ImageLoader.getInstance().displayImage(localEcs_brand.brand_logo, paramViewHolder.leftImageView);
             paramViewHolder.titleTextView.setText(localEcs_brand.brand_name);
             paramViewHolder.detailTextView.setText(localEcs_brand.brand_desc);
+            if(localEcs_brand.showIcon){
+                paramViewHolder.look_icon.setVisibility(View.VISIBLE);
+            }
 
             paramViewHolder.layout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -185,6 +191,9 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
         ImageView rightImageView;
         TextView titleTextView;
 
+        ImageView listen_icon;  // 听中卫
+        ImageView look_icon;    // 看中卫
+
 
         public ViewHolder(View paramView) {
             super(paramView);
@@ -203,6 +212,9 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
             this.rightImageView = ((ImageView) paramView.findViewById(R.id.scenic_item_right));
             this.titleTextView = ((TextView) paramView.findViewById(R.id.scenic_search_title));
             this.detailTextView = ((TextView) paramView.findViewById(R.id.scenic_search_detail));
+
+            listen_icon = (ImageView) paramView.findViewById(R.id.listen_icon);
+            look_icon = (ImageView) paramView.findViewById(R.id.look_icon);
         }
     }
 

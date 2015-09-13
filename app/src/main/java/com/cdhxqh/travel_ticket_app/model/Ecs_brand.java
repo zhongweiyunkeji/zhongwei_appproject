@@ -58,6 +58,8 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
     /**最低票价**/
     public double minprice;
 
+    // 是否显示看中卫、听中卫右上角图标
+    public boolean showIcon = false;
 
 
     public void parse(JSONObject jsonObject) throws JSONException {
