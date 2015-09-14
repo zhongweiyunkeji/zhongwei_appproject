@@ -257,6 +257,8 @@ public class JsonUtils {
                 ecs_brand.setPo_notice(jsonObject.getString("po_notice"));
                 Double a = jsonObject.getDouble("minprice");
                 ecs_brand.setMinprice(jsonObject.getDouble("minprice"));
+                ecs_brand.setVideocount(jsonObject.getInt("videocount"));
+                ecs_brand.setVoicecount(jsonObject.getInt("voicecount"));
                 models.add(ecs_brand);
             }
 
