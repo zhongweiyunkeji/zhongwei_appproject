@@ -78,7 +78,7 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
             ImageLoader.getInstance().displayImage(localEcs_brand.brand_logo, paramViewHolder.leftImageView);
             paramViewHolder.titleTextView.setText(localEcs_brand.brand_name);
             paramViewHolder.detailTextView.setText(localEcs_brand.brand_desc);
-            if(localEcs_brand.showIcon){
+            if(localEcs_brand.getVoicecount()>0){
                 paramViewHolder.listen_icon.setVisibility(View.VISIBLE);
             }
 
@@ -100,7 +100,7 @@ public class SearchScenicAdapter extends RecyclerView.Adapter<SearchScenicAdapte
             ImageLoader.getInstance().displayImage(localEcs_brand.brand_logo, paramViewHolder.leftImageView);
             paramViewHolder.titleTextView.setText(localEcs_brand.brand_name);
             paramViewHolder.detailTextView.setText(localEcs_brand.brand_desc);
-            if(localEcs_brand.showIcon){
+            if(localEcs_brand.getVideocount()>0){
                 paramViewHolder.look_icon.setVisibility(View.VISIBLE);
             }
 
