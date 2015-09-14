@@ -61,6 +61,9 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
     // 是否显示看中卫、听中卫右上角图标
     public boolean showIcon = false;
 
+    public int videocount; // 视频总数
+    public int voicecount; // 音频总数
+
 
     public void parse(JSONObject jsonObject) throws JSONException {
         Log.i(TAG, "jsonObject=" + jsonObject.toString());
@@ -77,7 +80,8 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
         address = jsonObject.getString("address");
         po_notice = jsonObject.getString("po_notice");
         minprice = jsonObject.getDouble("minprice");
-
+        videocount = jsonObject.getInt("videocount");
+        voicecount = jsonObject.getInt("voicecount");
     }
 
     public Ecs_brand() {
@@ -97,6 +101,8 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
         address = in.readString();
         po_notice = in.readString();
         minprice = in.readDouble();
+        videocount = in.readInt();
+        voicecount = in.readInt();
     }
 
     @Override
@@ -119,7 +125,8 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
         dest.writeString(address);
         dest.writeString(po_notice);
         dest.writeDouble(minprice);
-
+        dest.writeInt(videocount);
+        dest.writeInt(voicecount);
     }
 
     public static final Creator<Ecs_brand> CREATOR = new Creator<Ecs_brand>() {
@@ -237,5 +244,21 @@ public class Ecs_brand extends Zw_Model implements Parcelable {
 
     public void setMinprice(double minprice) {
         this.minprice = minprice;
+    }
+
+    public int getVideocount() {
+        return videocount;
+    }
+
+    public int getVoicecount() {
+        return voicecount;
+    }
+
+    public void setVideocount(int videocount) {
+        this.videocount = videocount;
+    }
+
+    public void setVoicecount(int voicecount) {
+        this.voicecount = voicecount;
     }
 }
