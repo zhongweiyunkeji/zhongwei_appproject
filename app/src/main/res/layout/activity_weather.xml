@@ -1,547 +1,80 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/bj_color">
 
     <include layout="@layout/activity_title"
         android:id="@+id/weather"></include>
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/weather">
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/l1"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_below="@+id/weather"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="10dp">
-            </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:text="部分数据截止更新至6月份"
+                    android:textSize="24sp"
+                    android:textColor="@color/green_color"/>
 
-            <TableLayout
+            <ImageView
                 android:id="@+id/hot"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/l1"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
-                <View
+                android:layout_height="220dp"
+                android:scaleType="fitCenter"
+                android:fillViewport="true"
+                android:background="@color/clarity"
+                android:src="@drawable/player_number"/>
+
+                <ImageView
+                    android:id="@+id/map"
+                    android:layout_below="@+id/hot"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/list_line_x"></View>
-                <TableRow>
+                    android:layout_height="250dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/player_from"/>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="机票热度"/>
-
-                    <TextView
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:text="0%"/>
-
-                    <com.cdhxqh.travel_ticket_app.weather.MyProgress
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
-                        android:layout_weight="2.6"
-                        android:layout_height="8dp"
-                        android:max="100"
-                        android:progress="90"
-                        android:background="#ffffff"
-                        android:progressDrawable="@drawable/progressbg2"
-                        android:id="@+id/progressBar" />
-
-                    <TextView
-                        android:layout_width="35dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:text="100%"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_marginTop="20dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="火车票热度"/>
-
-                    <TextView
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:text="0%"/>
-
-                    <com.cdhxqh.travel_ticket_app.weather.MyProgress
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
-                        android:layout_weight="2.6"
-                        android:layout_height="8dp"
-                        android:max="100"
-                        android:progress="70"
-                        android:progressDrawable="@drawable/progressbg1"
-                        android:id="@+id/progressBar1" />
-
-                    <TextView
-                        android:layout_width="35dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:text="100%"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_marginTop="20dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="汽车票热度"/>
-
-                    <TextView
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:text="0%"/>
-
-                    <com.cdhxqh.travel_ticket_app.weather.MyProgress
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="0dp"
-                        android:layout_weight="2.6"
-                        android:layout_height="8dp"
-                        android:max="100"
-                        android:progress="20"
-                        android:progressDrawable="@drawable/progressbg"
-                        android:id="@+id/progressBar2" />
-
-                    <TextView
-                        android:layout_width="35dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:text="100%"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_marginTop="20dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="停车位热度"/>
-
-                    <TextView
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:text="0%"/>
-
-                    <com.cdhxqh.travel_ticket_app.weather.MyProgress
-                        android:layout_gravity="center_vertical"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_weight="2.6"
-                        android:layout_height="8dp"
-                        android:max="100"
-                        android:progress="25"
-                        android:progressDrawable="@drawable/progressbg"
-                        android:id="@+id/progressBar3" />
-
-                    <TextView
-                        android:layout_width="35dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:text="100%"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_marginTop="20dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="酒店热度"/>
-
-                    <TextView
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:text="0%"/>
-
-                    <com.cdhxqh.travel_ticket_app.weather.MyProgress
-                        android:layout_gravity="center_vertical"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_weight="2.6"
-                        android:layout_height="8dp"
-                        android:max="100"
-                        android:progress="38"
-                        android:progressDrawable="@drawable/progressbg1"
-                        android:id="@+id/progressBar4" />
-
-                    <TextView
-                        android:layout_width="35dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:text="100%"/>
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_marginTop="20dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="餐饮热度"/>
-
-                    <TextView
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
-                        android:text="0%"/>
-
-                    <com.cdhxqh.travel_ticket_app.weather.MyProgress
-                        android:layout_gravity="center_vertical"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_weight="2.6"
-                        android:layout_height="8dp"
-                        android:max="100"
-                        android:progress="56"
-                        android:progressDrawable="@drawable/progressbg1"
-                        android:id="@+id/progressBar5" />
-
-                    <TextView
-                        android:layout_width="35dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:text="100%"/>
-
-                </TableRow>
-                <View
+                <ImageView
+                    android:id="@+id/old"
+                    android:layout_below="@+id/map"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/list_line_x"></View>
-            </TableLayout>
+                    android:layout_height="250dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/player_old"/>
+
+                <ImageView
+                    android:id="@+id/sex"
+                    android:layout_below="@+id/map"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/player_sex"/>
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="fill_parent"
                 android:layout_height="165.0dip"
-                android:layout_below="@+id/hot"
+                android:layout_below="@+id/old"
                 android:overScrollMode="never"
                 android:paddingTop="@dimen/dimens_10"
                 android:paddingBottom="10dp" />
 
-            <LinearLayout
-                android:layout_below="@+id/viewpager"
-                android:id="@+id/hotelpager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/list_line_x"></View>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font20"
-                    android:layout_marginBottom="@dimen/dimens_20"
-                    android:textColor="@color/text_color_1"
-                    android:text="推荐酒店"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="@dimen/font18"
-                    android:textColor="@color/gray"
-                    android:text="高档型"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:textSize="@dimen/font16"
-                    android:textColor="@color/balck_color"
-                    android:text="【雷迪森国际饭店】【优派莱斯酒店】"/>
-                </LinearLayout>
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="1dp"-->
+                    <!--android:layout_marginTop="@dimen/dimens_20"-->
+                    <!--android:layout_marginBottom="@dimen/dimens_20"-->
+                    <!--android:background="@drawable/list_line_x"></View>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/font18"
-                        android:textColor="@color/gray"
-                        android:text="舒适型"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:textSize="@dimen/font16"
-                        android:textColor="@color/balck_color"
-                        android:text="【沙坡头沙漠酒店】【逸兴大酒店】"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/font18"
-                        android:textColor="@color/gray"
-                        android:text="经济型"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:textSize="@dimen/font16"
-                        android:textColor="@color/balck_color"
-                        android:text="【中卫西北偏北国际青年旅舍】"/>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/dimens_20"
-                    android:layout_marginBottom="@dimen/dimens_20"
-                    android:background="@drawable/list_line_x"></View>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_below="@+id/hotelpager"
-                android:id="@+id/specialtypager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font20"
-                    android:layout_marginBottom="@dimen/dimens_20"
-                    android:textColor="@color/text_color_1"
-                    android:text="推荐特产"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font16"
-                    android:textColor="@color/balck_color"
-                    android:text="【西砂瓜】【中宁枸杞】【中宁圆枣】【凉拌沙葱】【海原马铃薯】【宁夏黄河石】【贺兰山兰色石砚】"/>
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/dimens_20"
-                    android:layout_marginBottom="@dimen/dimens_20"
-                    android:background="@drawable/list_line_x"></View>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_below="@+id/specialtypager"
-                android:id="@+id/restaurantpager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font20"
-                    android:layout_marginBottom="@dimen/dimens_20"
-                    android:textColor="@color/text_color_1"
-                    android:text="推荐餐厅"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/font18"
-                        android:textColor="@color/gray"
-                        android:text="本地特色餐厅"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:textSize="@dimen/font16"
-                        android:textColor="@color/balck_color"
-                        android:text="【中卫印象】【香山羊羔肉】"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/font18"
-                        android:textColor="@color/gray"
-                        android:text="正宗川湘菜"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:textSize="@dimen/font16"
-                        android:textColor="@color/balck_color"
-                        android:text="【悠蜀老字号】【蜀湘苑】"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/font18"
-                        android:textColor="@color/gray"
-                        android:text="正宗粤菜"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:textSize="@dimen/font16"
-                        android:textColor="@color/balck_color"
-                        android:text="【悠蜀餐厅】【悠蜀餐厅】"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/font18"
-                        android:textColor="@color/gray"
-                        android:text="正宗西餐"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:textSize="@dimen/font16"
-                        android:textColor="@color/balck_color"
-                        android:text="【爱必胜西餐厅】【西餐厅通德骑士酒庄】"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/font18"
-                        android:textColor="@color/gray"
-                        android:text="快餐"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:textSize="@dimen/font16"
-                        android:textColor="@color/balck_color"
-                        android:text="【永和大王】【肯德基】"/>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/dimens_20"
-                    android:layout_marginBottom="@dimen/dimens_20"
-                    android:background="@drawable/list_line_x"></View>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_below="@+id/restaurantpager"
-                android:id="@+id/promptpager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:layout_marginBottom="@dimen/dimens_20">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font20"
-                    android:layout_marginBottom="@dimen/dimens_20"
-                    android:textColor="@color/text_color_1"
-                    android:text="温馨提示"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font16"
-                    android:textColor="@color/balck_color"
-                    android:text="中卫大部份商场酒店餐厅支持带有银联标志的信用卡储蓄卡暂不支持维萨(VISA）万事达卡(MasterCard）美国运通(AMEX)等卡支付，出行前请携带银联卡或现金，外币可在当地银行兑换！"/>
-
-            </LinearLayout>
             </LinearLayout>
     </ScrollView>
 </RelativeLayout>

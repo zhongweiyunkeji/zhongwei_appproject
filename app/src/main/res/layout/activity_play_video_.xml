@@ -141,4 +141,39 @@
     </RelativeLayout>
 
     </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/include_title">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimens_20"
+            android:layout_marginRight="@dimen/dimens_20"
+            android:layout_marginTop="@dimen/dimens_10"
+            android:orientation="vertical">
+
+            <!--<TextView-->
+            <!--android:id="@+id/localhost_id"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:paddingTop="5dp"-->
+            <!--android:text="距离：1公里"-->
+            <!--android:textColor="@color/balck_color"-->
+            <!--android:textSize="@dimen/font16" />-->
+
+            <TextView
+                android:id="@+id/remark_id"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimens_10"
+                android:scrollbars="vertical"
+                android:text=""
+                android:textSize="@dimen/font18" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

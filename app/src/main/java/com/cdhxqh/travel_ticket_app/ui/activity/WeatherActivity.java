@@ -49,8 +49,8 @@ public class WeatherActivity extends FragmentActivity {
      * 搜索*
      */
     private ImageView seachImageView;
-    LinearLayout lin;
-    MyProgress progressHorizontal;
+//    LinearLayout lin;
+//    MyProgress progressHorizontal;
     private ViewPager mViewPager;
     private NextDaysWeatherPagerAdapter mWeatherPagerAdapter;
     private List<Fragment> fragments;
@@ -81,8 +81,8 @@ public class WeatherActivity extends FragmentActivity {
         seachImageView = (ImageView) findViewById(R.id.title_search_id);
         backImageView.setOnTouchListener(backImageViewOnTouchListener);
 
-        lin = (LinearLayout) findViewById(R.id.l1);
-        progressHorizontal = (MyProgress) findViewById(R.id.progressBar);
+//        lin = (LinearLayout) findViewById(R.id.l1);
+//        progressHorizontal = (MyProgress) findViewById(R.id.progressBar);
     }
 
     private View.OnTouchListener backImageViewOnTouchListener = new View.OnTouchListener() {
@@ -127,8 +127,8 @@ public class WeatherActivity extends FragmentActivity {
         seachImageView.setVisibility(View.GONE);
         titleTextView.setText("智慧旅游");
         String spotTitle = getIntent().getStringExtra("spotTitle");
-        chartPoint(spotTitle);
-        progressBar();
+//        chartPoint(spotTitle);
+//        progressBar();
 
         fragments = new ArrayList<Fragment>();
         fragments.add(new NextDaysFirstWeatherFragment(mContext, mWeatherEngine.getCache(),
@@ -190,34 +190,34 @@ public class WeatherActivity extends FragmentActivity {
         }
     }
 
-    public void chartPoint(String spotTitle) {
-        String title = new String();
-        ChartPoint[] datas = new ChartPoint[13];
-        datas[0] = new ChartPoint(1,1200);
-        datas[1] = new ChartPoint(2,200);
-        datas[2] = new ChartPoint(3,500);
-        datas[3] = new ChartPoint(5,2500);
-        datas[4] = new ChartPoint(7,1200);
-        datas[5] = new ChartPoint(10,400);
+//    public void chartPoint(String spotTitle) {
+//        String title = new String();
+//        ChartPoint[] datas = new ChartPoint[13];
+//        datas[0] = new ChartPoint(1,1200);
+//        datas[1] = new ChartPoint(2,200);
+//        datas[2] = new ChartPoint(3,500);
+//        datas[3] = new ChartPoint(5,2500);
+//        datas[4] = new ChartPoint(7,1200);
+//        datas[5] = new ChartPoint(10,400);
+//
+//        datas[6] = new ChartPoint(13,2400);
+//        datas[7] = new ChartPoint(15,2200);
+//        datas[8] = new ChartPoint(17,1800);
+//        datas[9] = new ChartPoint(20,1000);
+//        datas[10] = new ChartPoint(23,100);
+//        datas[11] = new ChartPoint(27,1100);
+//        datas[12] = new ChartPoint(30,2100);
+//
+//        BrokenLineChart chart = new BrokenLineChart(title, Color.GREEN,datas,WeatherActivity.this , spotTitle);
+//        lin.addView(chart.GetView(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
+//    }
 
-        datas[6] = new ChartPoint(13,2400);
-        datas[7] = new ChartPoint(15,2200);
-        datas[8] = new ChartPoint(17,1800);
-        datas[9] = new ChartPoint(20,1000);
-        datas[10] = new ChartPoint(23,100);
-        datas[11] = new ChartPoint(27,1100);
-        datas[12] = new ChartPoint(30,2100);
-
-        BrokenLineChart chart = new BrokenLineChart(title, Color.GREEN,datas,WeatherActivity.this , spotTitle);
-        lin.addView(chart.GetView(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-    }
-
-    public void progressBar() {
-        setProgressBarVisibility(true);
-        setProgress(progressHorizontal.getProgress() * 100);
-        setSecondaryProgress(progressHorizontal.getSecondaryProgress() * 100);
+//    public void progressBar() {
+//        setProgressBarVisibility(true);
+//        setProgress(progressHorizontal.getProgress() * 100);
+//        setSecondaryProgress(progressHorizontal.getSecondaryProgress() * 100);
 //		setText(progressHorizontal.getProgress());
-    }
+//    }
 
 //	//设置文字内容
 //	private void setText(int progress){

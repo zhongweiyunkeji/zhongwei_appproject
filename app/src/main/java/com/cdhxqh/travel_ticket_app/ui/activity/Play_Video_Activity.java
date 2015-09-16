@@ -102,6 +102,10 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
     /**视频控制布局**/
     private RelativeLayout s_RelativeLayout;
 
+    private TextView remark_id;
+
+    private String remark;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,9 +126,9 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
     private void getData() {
         title = getIntent().getExtras().getString("brand_name");
         path = getIntent().getStringExtra("PATH");
+        remark = getIntent().getStringExtra("mark");
         // 开启旋转传感器
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-
     }
 
     @Override
@@ -151,6 +155,7 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
         playButton=(ImageButton)findViewById(R.id.realplay_play_btn);
         audioButton=(ImageButton)findViewById(R.id.realplay_sound_btn);
 
+        remark_id = (TextView) findViewById(R.id.remark_id);
     }
 
     @Override
@@ -168,7 +173,11 @@ public class Play_Video_Activity extends BaseActivity implements MediaPlayer.OnB
         svLp.addRule(RelativeLayout.CENTER_IN_PARENT);
         mPreview.setLayoutParams(svLp);
 
-
+        if(!remark.trim().equals("") && !(remark == null) && !remark.trim().equals("null") ) {
+            remark_id.setText(remark);
+        }else {
+            remark_id.setText("暂无介绍");
+        }
     }
 
 

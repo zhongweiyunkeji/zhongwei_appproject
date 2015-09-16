@@ -26,6 +26,12 @@
             android:text="@string/install_flow_title"
             android:textSize="16sp" />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/list_line_x"/>
+
         <TextView
             android:id="@+id/install_flow_describute"
             android:layout_width="wrap_content"
