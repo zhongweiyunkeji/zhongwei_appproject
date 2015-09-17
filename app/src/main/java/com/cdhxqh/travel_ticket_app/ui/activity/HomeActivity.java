@@ -313,6 +313,9 @@ public class HomeActivity extends BaseActivity {
         super.onStop();
     }
 
+    /**
+     * 如果所以到达2个端点则默认将其所以修正为Integer.MAX_VALUE的中间位置处
+     */
     private int repairIndex(int index){
         if(index == 0){
             index = Integer.MAX_VALUE/2 - Integer.MAX_VALUE/2%images.length;
