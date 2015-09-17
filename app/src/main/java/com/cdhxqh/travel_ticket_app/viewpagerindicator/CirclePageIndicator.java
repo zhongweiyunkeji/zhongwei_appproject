@@ -34,6 +34,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 
 import com.cdhxqh.travel_ticket_app.R;
+import com.cdhxqh.travel_ticket_app.ui.adapter.Bee_PageAdapter;
 
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.widget.LinearLayout.HORIZONTAL;
@@ -204,12 +205,18 @@ public class CirclePageIndicator extends View implements PageIndicator {
         if (mViewPager == null) {
             return;
         }
-        final int count = mViewPager.getAdapter().getCount();
+        int length = mViewPager.getAdapter().getCount();
+        if(mViewPager.getAdapter() instanceof Bee_PageAdapter){
+            length = ((Bee_PageAdapter)mViewPager.getAdapter()).getRealCount(); // 获取实际适配器长度
+        }
+
+        final int count = length;
         if (count == 0) {
             return;
         }
 
-        if (mCurrentPage >= count) {
+        int curSelectPage = mCurrentPage%count;
+        if (curSelectPage >= count) {
             setCurrentItem(count - 1);
             return;
         }
@@ -267,7 +274,7 @@ public class CirclePageIndicator extends View implements PageIndicator {
         }
 
         //Draw the filled circle according to the current scroll
-        float cx = (mSnap ? mSnapPage : mCurrentPage) * threeRadius;
+        float cx = (mSnap ? mSnapPage : curSelectPage) * threeRadius;
         if (!mSnap) {
             cx += mPageOffset * threeRadius;
         }
