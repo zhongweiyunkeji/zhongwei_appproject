@@ -33,7 +33,6 @@ public class HomeActivity extends BaseActivity {
 
     private int[] images = {R.drawable.image_1, R.drawable.image_2, R.drawable.image_3, R.drawable.image_4};
 
-
     /**
      * 景区门票*
      */
@@ -124,7 +123,6 @@ public class HomeActivity extends BaseActivity {
         scenic_spot_layout.setOnClickListener(senic_spot_layoutOnClickListener);
         listen_zhongwei_layout.setOnClickListener(listen_zhongweiOnClickListener);
         look_zhongwei_layout.setOnClickListener(look_zhongweiOnClickListener);
-
 
         tourism_spot_id.setOnClickListener(tourism_spotOnClickListener);
 
@@ -266,16 +264,12 @@ public class HomeActivity extends BaseActivity {
             ImageView viewOne = (ImageView) LayoutInflater.from(this).inflate(R.layout.index_banner_cell, null);
             viewOne.setImageResource(images[i]);
             bannerListView.add(viewOne);
-
-
         }
         mIndicator.setViewPager(bannerViewPager);
         mIndicator.notifyDataSetChanged();
         int index = Integer.MAX_VALUE/2 - (Integer.MAX_VALUE/2%images.length);
         mIndicator.setCurrentItem(0);
         bannerPageAdapter.mListViews = bannerListView;
-
-
     }
 
 
