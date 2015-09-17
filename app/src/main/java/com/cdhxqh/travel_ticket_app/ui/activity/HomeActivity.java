@@ -59,7 +59,7 @@ public class HomeActivity extends BaseActivity {
      */
     LinearLayout around_play;
     boolean flag = true;   // 图片轮播停止标识
-    private static final long timeSpace = 2000L;  // 图片轮播器时间间隔
+    private static final long timeSpace = 3500L;  // 图片轮播器时间间隔
     Handler handler = new Handler(){ // 图片轮播器
         @Override
         public void dispatchMessage(Message msg) {
@@ -104,7 +104,7 @@ public class HomeActivity extends BaseActivity {
         LayoutParams params1 = bannerViewPager.getLayoutParams();
         params1.width = getDisplayMetricsWidth();
         params1.height = (int) (params1.width * 1.0 / 484 * 250);
-
+        flag = true;
 
         bannerViewPager.setLayoutParams(params1);
 
@@ -130,6 +130,7 @@ public class HomeActivity extends BaseActivity {
 
         around_play.setOnClickListener(around_playOnClickListener);
 
+        handler.sendEmptyMessageDelayed(1, timeSpace + 1);
     }
 
     private View.OnClickListener around_playOnClickListener = new View.OnClickListener() {
@@ -292,7 +293,7 @@ public class HomeActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
+    /*@Override
     protected void onResume() {
         flag = true;
         if(bannerViewPager!=null && bannerViewPager.getAdapter()!=null){
@@ -305,6 +306,12 @@ public class HomeActivity extends BaseActivity {
     protected void onStop() {
         flag = false;
         super.onStop();
+    }*/
+
+    @Override
+    protected void onDestroy() {
+        flag = false;
+        super.onDestroy();
     }
 
     /**
