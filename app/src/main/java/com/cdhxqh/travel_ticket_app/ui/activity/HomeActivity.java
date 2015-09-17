@@ -1,8 +1,9 @@
 package com.cdhxqh.travel_ticket_app.ui.activity;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
-
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -13,12 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.cdhxqh.travel_ticket_app.R;
 import com.cdhxqh.travel_ticket_app.ui.adapter.Bee_PageAdapter;
 import com.cdhxqh.travel_ticket_app.viewpagerindicator.PageIndicator;
 import com.umeng.update.UmengUpdateAgent;
-
 import java.util.ArrayList;
 
 public class HomeActivity extends BaseActivity {
@@ -60,10 +59,25 @@ public class HomeActivity extends BaseActivity {
      * 周边游
      */
     LinearLayout around_play;
+    boolean flag = true;   // 图片轮播停止标识
+    private static final long timeSpace = 2000L;  // 图片轮播器时间间隔
+    Handler handler = new Handler(){ // 图片轮播器
+        @Override
+        public void dispatchMessage(Message msg) {
+            super.dispatchMessage(msg);
+            if(flag){
+                int currentItem = bannerViewPager.getCurrentItem();
+                int nextIndex =  repairIndex(currentItem) + 1;
+                bannerViewPager.setCurrentItem(nextIndex);
+                handler.sendEmptyMessageDelayed(1, timeSpace);
+            }
+        }
+    };
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        flag = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -102,7 +116,8 @@ public class HomeActivity extends BaseActivity {
 
 
         bannerViewPager.setAdapter(bannerPageAdapter);
-        bannerViewPager.setCurrentItem(0);
+        int index = Integer.MAX_VALUE/2 - (Integer.MAX_VALUE/2%images.length);
+        bannerViewPager.setCurrentItem(index);
 
         bannerViewPager.setOnPageChangeListener(bannerViewPagerOnPageChangeListener);
 
@@ -116,7 +131,6 @@ public class HomeActivity extends BaseActivity {
         todaySpecial.setOnClickListener(todaySpecialOnClickListener);
 
         around_play.setOnClickListener(around_playOnClickListener);
-
 
     }
 
@@ -189,7 +203,8 @@ public class HomeActivity extends BaseActivity {
         @Override
         public void onPageSelected(int position) {
             Log.i(TAG, "**position=" + position);
-            mIndicator.setCurrentItem(position);
+            int nextIndex =  repairIndex(position);
+            mIndicator.setCurrentItem(nextIndex);
 
         }
 
@@ -256,6 +271,7 @@ public class HomeActivity extends BaseActivity {
         }
         mIndicator.setViewPager(bannerViewPager);
         mIndicator.notifyDataSetChanged();
+        int index = Integer.MAX_VALUE/2 - (Integer.MAX_VALUE/2%images.length);
         mIndicator.setCurrentItem(0);
         bannerPageAdapter.mListViews = bannerListView;
 
@@ -280,5 +296,33 @@ public class HomeActivity extends BaseActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onResume() {
+        flag = true;
+        if(bannerViewPager!=null && bannerViewPager.getAdapter()!=null){
+            handler.sendEmptyMessageDelayed(1, timeSpace + 1);
+        }
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        flag = false;
+        super.onStop();
+    }
+
+    private int repairIndex(int index){
+        if(index == 0){
+            index = Integer.MAX_VALUE/2 - Integer.MAX_VALUE/2%images.length;
+        } else
+        if(index == Integer.MAX_VALUE){
+            int centerIndex = Integer.MAX_VALUE/2 - Integer.MAX_VALUE/2%images.length;
+            int tempIndex = Integer.MAX_VALUE%images.length;
+            index = centerIndex + tempIndex;
+        }
+
+        return index;
     }
 }
